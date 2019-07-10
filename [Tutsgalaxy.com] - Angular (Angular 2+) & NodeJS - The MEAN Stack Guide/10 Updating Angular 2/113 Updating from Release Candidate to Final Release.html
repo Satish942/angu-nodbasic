@@ -1,0 +1,354 @@
+<html>
+                        <head>
+                        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                        <title>113 Updating from Release Candidate to Final Release</title>
+                        </head>
+                        <body>
+                        <div class="container">
+                        <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="lead"><div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p>The updated Version of the Course uses Angular 2.0 Final instead of the Beta or RC version. It also uses <strong>Webpack as a Build Tool instead of the SystemJSModule Loader.</strong><br></p>
+
+<p>To successfully update, you can <strong>copy your Angular 2 Code Files</strong> (in assets/app) <strong>into the new Seed Project</strong> (in the assets/app folder as well). Make sure that you're using the app.component.ts - if your Root Component (filename) is named differently, make sure to copy all its code into the app.component.ts file. The same is true for the app.component.html.</p>
+
+
+
+
+
+<p>That should allow you to use the new Folder Structure, but you're still using the old Angular 2 Code.</p>
+
+
+
+
+
+<p>There are threemajor Differences between RC and Angular 2.0 Final:</p>
+
+
+
+
+
+<p>1)<strong>Angular 2 now uses "Modules"</strong>. You'll see the app.module.ts file in your assets/app folder (in the new seed project). In this AppModule, register ALLComponents, Directives and Pipes you may use in the declarations[] array.</p>
+
+
+
+
+
+<p>Register all Services you may provide in the bootstrap()method in the providers[] array of the AppModule.</p>
+
+
+
+
+
+<p>Don't use bootstrap() anymore to provide services. Don't use directives[] or pipes[] in @Component anymore - follow the above approach instead.</p>
+
+
+
+
+
+<p>Learn more about that change here:<a href="https://www.barbarianmeetscoding.com/blog/2016/08/13/updating-your-angular-2-app-from-rc4-to-rc5-a-practical-guide/" rel="nofollow">https://www.barbarianmeetscoding.com/blog/2016/08/13/updating-your-angular-2-app-from-rc4-to-rc5-a-practical-guide/</a></p>
+
+
+
+
+
+<p>2)In the above Article you can already read about it:<strong>The Router also needs updating.</strong></p>
+
+
+
+
+
+<p>You can follow the steps outline in the Article. Generally, you don't use @Routes anymore. Instead, create a new file (e.g. app.routing.ts)in your root (assets/app) folder and store your Routes there. Make sure to watch the videos where I set up Routing in the updated course sections to learn more about setting up Routes with the new Router.</p>
+
+
+
+
+
+<p>3)<strong>Forms now also changed</strong>. Here I also strongly advise to have a look at the updated Videos to understand how you now use the Template-Driven or Data-Driven (Reactive)Approach.</p>
+
+<p>4)Also make sure to use <strong>HttpModule</strong> (add it to your imports[] in AppModule)instead of HTTP_PROVIDERS</p>
+
+
+
+
+
+<p>With that, your Project should be updated. Make sure to also use my updated Source Code to trace any Errors you may encounter.</p><p>-------</p><p>Required Code Updates in Detail:</p><p>Angular 2.0 Final was released and with it, a couple of changes have to implemented in this course's project.</p><p>Definitely check out the updated source code to understand all these changes.</p>
+
+<p><strong>1) NgModule</strong></p>
+
+<p>RC5 introduced the concept of "Application Modules"(learn more<a href="https://angular.io/docs/ts/latest/guide/ngmodule.html" rel="nofollow">here</a>- no worries, it's not that complicated ;-)). For many applications, one module will suffice. This is the case for this course's project for example.</p>
+
+<p>An App Module basically bundles a couple of Components,Directives, Services and Pipes together. In the case of one single module (as in this course), the whole app is bundled together.</p>
+
+<p>Learn more about App Modules in the article linked above.</p>
+
+<p><strong>Getting Started with NgModule</strong></p>
+
+<p>In order to update your app from RCx to 2.0 Final, you have to put ALLcomponents you used to add in the directives field of the<code>@Component</code> decorator into the declarations field in the<code>@NgModule</code> decorator on your AppModule.</p>
+
+<p>Previously, you would have added<code>MessageComponent</code> to the directives array in the<code>@Component</code> decorator like this:</p>
+
+<pre class="prettyprint linenums">@Component({
+    ...
+    directives: [MessageComponent]
+})
+</pre>
+
+<p>This is no longer correct!</p>
+
+<p>Instead, you would use the<code>AppModule</code> in the<code>app.module.ts</code> file like this:</p>
+
+<pre class="prettyprint linenums">import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppComponent } from "./app.component";
+import { MessageComponent } from "./messages/message.component";
+
+@NgModule({
+    declarations: [AppComponent, MessageComponent],
+    imports: [BrowserModule],
+    bootstrap: [AppComponent]
+})
+export class AppModule {
+
+}</pre>
+
+
+
+
+
+<p><strong>Providing Application-Wide Services</strong></p>
+
+<p>A similar change has to be applied to application-wide provided services.
+</p>
+
+<p>Previously, you would add them in the<code>bootstrap()</code> method like this:</p>
+
+<pre class="prettyprint linenums">///&lt;reference path="../../typings/index.d.ts"/&gt;
+import { bootstrap } from '@angular/platform-browser-dynamic';
+
+import { AppComponent } from "./app.component";
+import { MessageService } from "./messages/message.service";
+
+bootstrap(AppComponent, [MessageService]);</pre>
+
+
+
+<p>This is no longer correct, instead you provide this service in the<code>AppModule</code> as well:</p>
+
+<pre class="prettyprint linenums">import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppComponent } from "./app.component";
+import { MessageComponent } from "./messages/message.component";
+import { MessageService } from "./messages/message.service";
+
+@NgModule({
+    declarations: [AppComponent, MessageComponent],
+    imports: [BrowserModule],
+    bootstrap: [AppComponent],
+    providers: [MessageService]
+})
+export class AppModule {
+
+}</pre>
+
+
+
+<p><strong>
+</strong></p>
+
+<p><strong>How to bootstrap the Application with NgModule</strong></p>
+
+<p>Lastly, since we have this<code>AppModule</code>, the way the application gets bootstrapped also changed.</p>
+
+<p>You see the<code>boot.ts</code> file as it looked previously in the example above.</p>
+
+<p>Now it looks like this:</p>
+
+<pre class="prettyprint linenums">///&lt;reference path="../../typings/index.d.ts"/&gt;
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from "./app.module";
+
+platformBrowserDynamic().bootstrapModule(AppModule);</pre>
+
+
+
+<p>The AppModule gets bootstrapped since it holds all the information about our application.</p>
+
+<p><strong>2)New Forms - Template Driven (in this course:create/edit message)</strong></p>
+
+<p>Forms also got changed. Learn more about them<a href="https://angular.io/docs/ts/latest/guide/forms.html" rel="nofollow">here</a>.</p>
+
+<p>Template-driven Forms now use a different syntax - it's best to simply have a look at the source code attached to this lecture. Basically, you don't use<code>ngControl</code> anymore - instead you use<code>ngModel</code>.</p>
+
+<p>You can now also reset forms with<code>form.reset()</code>.</p>
+
+<p>Forms also have to be enabled by importing a specific module in the AppModule.</p>
+
+<p>For template-driven forms, you have to import the<code>FormsModule</code>.</p>
+
+<pre class="prettyprint linenums">import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppComponent } from "./app.component";
+import { MessageService } from "./messages/message.service";
+import { MessageComponent } from "./messages/message.component";
+import { MessageInputComponent } from "./messages/message-input.component";
+import { FormsModule } from "@angular/forms";
+
+@NgModule({
+    declarations: [
+        AppComponent,
+        MessageComponent,
+        MessageInputComponent
+    ],
+    imports: [BrowserModule, FormsModule],
+    bootstrap: [AppComponent],
+    providers: [MessageService]
+})
+export class AppModule {
+
+}</pre>
+
+
+
+
+
+<p><strong>3)New Forms - Data Driven (in this course:Sign Up &amp;Sign In)</strong></p>
+
+<p>Forms also got changed. Learn more about them<a href="https://angular.io/docs/ts/latest/guide/forms.html" rel="nofollow">here</a>.
+</p>
+
+<p>The general approach hasn't changed but the directives you use in your template were changed /renamed. Consult the attached source code to learn more.<br></p><p><br></p>
+
+
+
+
+
+<p>Forms also have to be enabled by importing a specific module in the AppModule.</p>
+
+<p>For data-driven (=reactive)forms, you have to import the<code>ReactiveFormsModule</code>.</p>
+
+<pre class="prettyprint linenums">import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppComponent } from "./app.component";
+import { MessageService } from "./messages/message.service";
+import { MessageComponent } from "./messages/message.component";
+import { MessageInputComponent } from "./messages/message-input.component";
+import { ReactiveFormsModule } from "@angular/forms";
+
+@NgModule({
+    declarations: [
+        AppComponent,
+        MessageComponent,
+        MessageInputComponent
+    ],
+    imports: [BrowserModule, ReactiveFormsModule],
+    bootstrap: [AppComponent],
+    providers: [MessageService]
+})
+export class AppModule {
+
+}</pre>
+
+
+
+
+
+<p><strong>4)New Router</strong></p>
+
+<p>Angular 2 received yet another new Router. Thesyntax is very different to the old syntax but fortunately not that difficult to get into.</p><p>You define your routes in separate files - again, check the attached code to see it in action. Basically, you provide an array of JSobjects, where each object defines one route. For that, you define the path (i.e. part of the URL), the component which should get loaded and possible children of that route.</p>
+
+<p><br></p>
+
+
+
+<p>You then have to use RouterModule to provide the root routes for your application. An example<code>app.routing.ts</code> file could look like this:</p>
+
+<pre class="prettyprint linenums">import { Routes, RouterModule } from "@angular/router";
+
+import { AUTH_ROUTES } from "./auth/auth.routes";
+import { MessagesComponent } from "./messages/messages.component";
+import { AuthenticationComponent } from "./auth/authentication.component";
+
+const APP_ROUTES: Routes = [
+    { path: '', component: MessagesComponent},
+    { path: 'auth', component: AuthenticationComponent, children: [
+        ...AUTH_ROUTES
+    ] }
+];
+
+export const ROUTING = RouterModule.forRoot(APP_ROUTES);</pre>
+
+
+
+<p>Note that<code>AUTH_ROUTES</code>is just another array of routes, stored in another file (there, you don't need the<code>RouterModule</code> - it's just an array of objects).</p>
+
+<p>The exported constant<code>ROUTING</code> then has to be imported in your AppModule:</p>
+
+<pre class="prettyprint linenums">import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppComponent } from "./app.component";
+import { ROUTING } from "./app.routing";
+
+@NgModule({
+    declarations: [
+        AppComponent
+    ],
+    imports: [BrowserModule, ROUTING],
+    bootstrap: [AppComponent]
+})
+export class AppModule {
+
+}</pre>
+
+
+
+<p>That's all - this defines your routes and you may then use them.</p>
+
+<p>In order to use them, you can create links or navigate directly from code. For both concepts, the syntax hasn't changed that much. Again, have a look at the attached code to learn more.</p>
+
+<p>You don't need to import<code>ROUTER_DIRECTIVES</code> anymore! At no place in your app!</p>
+
+<p><strong>5)HttpModule</strong></p>
+
+<p>In order to use Http, you no longer provide<code>HTTP_PROVIDERS</code> in the<code>bootstrap()</code> method. Remember, the<code>bootstrap()</code> method isn't used anymore when using NgModule.</p>
+
+<p>Instead, you have to import the HttpModule in your<code>AppModule</code>.</p>
+
+<pre class="prettyprint linenums">import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppComponent } from "./app.component";
+import { HttpModule } from "@angular/http";
+
+@NgModule({
+    declarations: [
+        AppComponent
+    ],
+    imports: [BrowserModule, HttpModule],
+    bootstrap: [AppComponent]
+})
+export class AppModule {
+
+}</pre>
+
+
+
+<p><br></p>
+        </div>
+    </div>
+</div>
+</p>
+                        </div>
+                        </div>
+                        </div>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        </body>
+                        </html>

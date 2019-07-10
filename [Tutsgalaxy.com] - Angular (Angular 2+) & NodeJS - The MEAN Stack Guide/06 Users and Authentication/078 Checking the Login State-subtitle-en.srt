@@ -1,0 +1,264 @@
+1
+00:00:01,611 --> 00:00:03,038
+<v Instructor>To show or hide these tabs,</v>
+
+2
+00:00:03,038 --> 00:00:06,451
+I need to determine if the user is logged in or not.
+
+3
+00:00:06,451 --> 00:00:09,475
+Now, I could store a variable in my auth service,
+
+4
+00:00:09,475 --> 00:00:13,672
+which says is logged in and is true or false.
+
+5
+00:00:13,672 --> 00:00:16,941
+But keep in mind, our token persists
+
+6
+00:00:16,941 --> 00:00:19,940
+even if we refresh the browser page.
+
+7
+00:00:19,940 --> 00:00:22,323
+So in this case, we would then also need to
+
+8
+00:00:22,323 --> 00:00:25,093
+on each startup of our Angular 2 application,
+
+9
+00:00:25,093 --> 00:00:28,773
+check if we do have a token, and if we do have a token,
+
+10
+00:00:28,773 --> 00:00:31,323
+we need to set this to is logged in.
+
+11
+00:00:31,323 --> 00:00:33,572
+That's not really how I wanna do it.
+
+12
+00:00:33,572 --> 00:00:36,097
+So, I will do it differently, and then it is actually
+
+13
+00:00:36,097 --> 00:00:40,018
+really easy to find out if the user is logged in.
+
+14
+00:00:40,018 --> 00:00:43,087
+I will add a new method, is logged in,
+
+15
+00:00:43,087 --> 00:00:45,239
+which should return true or false,
+
+16
+00:00:45,239 --> 00:00:48,519
+and now how can I determine if the user is logged in?
+
+17
+00:00:48,519 --> 00:00:50,458
+Well, I can simply check if the token exists
+
+18
+00:00:50,458 --> 00:00:54,016
+because I do clear my local storage on logout.
+
+19
+00:00:54,016 --> 00:00:56,479
+If I don't have a token, I'm not logged in.
+
+20
+00:00:56,479 --> 00:00:57,767
+It's as simple as this.
+
+21
+00:00:57,767 --> 00:01:01,736
+So here, I can simply return local storage,
+
+22
+00:01:01,736 --> 00:01:03,399
+get item,
+
+23
+00:01:03,399 --> 00:01:04,232
+token,
+
+24
+00:01:06,378 --> 00:01:10,805
+not equal to null, so if it's not equal to null,
+
+25
+00:01:10,805 --> 00:01:14,738
+it means we have a token, in which case I would return true
+
+26
+00:01:14,738 --> 00:01:17,554
+which is what I wanna return for the question
+
+27
+00:01:17,554 --> 00:01:20,786
+is logged in, but if it is null, we will return false,
+
+28
+00:01:20,786 --> 00:01:22,666
+so we are not logged in.
+
+29
+00:01:22,666 --> 00:01:25,567
+With this set up, I can go to my authentication component
+
+30
+00:01:25,567 --> 00:01:28,007
+here, which holds my navigation,
+
+31
+00:01:28,007 --> 00:01:31,367
+and here I of course will inject my auth service
+
+32
+00:01:31,367 --> 00:01:34,538
+to get access to this newly created method,
+
+33
+00:01:34,538 --> 00:01:37,726
+so add auth service here, of course, make sure to add
+
+34
+00:01:37,726 --> 00:01:41,908
+the import at the top, and then here, I will also add
+
+35
+00:01:41,908 --> 00:01:45,575
+another method, which I will also simply name
+
+36
+00:01:45,575 --> 00:01:48,967
+is logged in, just to make this really clear
+
+37
+00:01:48,967 --> 00:01:50,666
+what's happening.
+
+38
+00:01:50,666 --> 00:01:53,006
+And here, we will reach out to the auth service
+
+39
+00:01:53,006 --> 00:01:54,626
+called is logged in,
+
+40
+00:01:54,626 --> 00:01:58,454
+and return the result of this call, is simply pass it along,
+
+41
+00:01:58,454 --> 00:02:01,287
+so that here, all I have to do is,
+
+42
+00:02:02,186 --> 00:02:05,103
+I have to add some ngIf directives.
+
+43
+00:02:06,334 --> 00:02:09,501
+Mainly, I will check on this list item
+
+44
+00:02:10,335 --> 00:02:12,585
+if ngIf will only attach it
+
+45
+00:02:13,723 --> 00:02:17,232
+if it is not, if the user is not logged in
+
+46
+00:02:17,232 --> 00:02:19,280
+because only if the user is not logged in
+
+47
+00:02:19,280 --> 00:02:21,881
+we'll want to show this sign-in page.
+
+48
+00:02:21,881 --> 00:02:24,342
+On the other hand, the logout button should only be shown
+
+49
+00:02:24,342 --> 00:02:26,672
+if the user is logged in, so here,
+
+50
+00:02:26,672 --> 00:02:30,131
+I don't have an exclamation mark at the beginning.
+
+51
+00:02:30,131 --> 00:02:31,808
+With this setup, I can save this
+
+52
+00:02:31,808 --> 00:02:34,225
+to recompile the application.
+
+53
+00:02:35,168 --> 00:02:38,928
+And I can then head over to the application and reload it.
+
+54
+00:02:38,928 --> 00:02:42,576
+And we see the logout ribbon is not available,
+
+55
+00:02:42,576 --> 00:02:46,116
+but as soon as I do log in, we are redirected,
+
+56
+00:02:46,116 --> 00:02:50,107
+and now we only got the logout tab and not the sign-in tab.
+
+57
+00:02:50,107 --> 00:02:52,187
+Signing up is always possible, of course, you could
+
+58
+00:02:52,187 --> 00:02:54,486
+disable this, but I'm find with this.
+
+59
+00:02:54,486 --> 00:02:57,947
+So now, we're only showing the options I wanna show.
+
+60
+00:02:57,947 --> 00:03:00,216
+And as soon as I click logout, we switch to sign in,
+
+61
+00:03:00,216 --> 00:03:02,126
+and the logout tab is gone.
+
+62
+00:03:02,126 --> 00:03:04,442
+So now we're showing these tabs depending
+
+63
+00:03:04,442 --> 00:03:07,315
+on the user log-in state, which is great.
+
+64
+00:03:07,315 --> 00:03:11,135
+The next step is to secure our content and use the token
+
+65
+00:03:11,135 --> 00:03:14,434
+we are issuing to make sure only authenticated users
+
+66
+00:03:14,434 --> 00:03:17,351
+are able to create posts and so on.
+

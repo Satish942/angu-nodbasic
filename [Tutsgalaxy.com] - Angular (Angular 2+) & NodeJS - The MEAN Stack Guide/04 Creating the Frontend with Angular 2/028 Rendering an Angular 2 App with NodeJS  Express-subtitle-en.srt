@@ -1,0 +1,300 @@
+1
+00:00:02,114 --> 00:00:03,448
+<v Instructor>The first thing I'm going to do</v>
+
+2
+00:00:03,448 --> 00:00:04,715
+is, in the views folder, I'll
+
+3
+00:00:04,715 --> 00:00:06,875
+get rid of the node.hbs folder.
+
+4
+00:00:06,875 --> 00:00:08,510
+I don't need that anymore.
+
+5
+00:00:08,510 --> 00:00:11,413
+And in the route folder in the app.js file,
+
+6
+00:00:11,413 --> 00:00:14,087
+I also need to tune this, this set up here
+
+7
+00:00:14,087 --> 00:00:16,377
+is not the one I'll use throughout
+
+8
+00:00:16,377 --> 00:00:18,117
+the rest of the course.
+
+9
+00:00:18,117 --> 00:00:19,379
+Instead, what I want to do here
+
+10
+00:00:19,379 --> 00:00:20,943
+and this is an important part
+
+11
+00:00:20,943 --> 00:00:23,342
+because this explains how our Angular 2 application
+
+12
+00:00:23,342 --> 00:00:27,484
+gets started through express or through Node.js.
+
+13
+00:00:27,484 --> 00:00:31,234
+We will only return one view through Node.js,
+
+14
+00:00:32,868 --> 00:00:35,096
+because Angular 2 allows us to
+
+15
+00:00:35,096 --> 00:00:37,316
+create single page applications.
+
+16
+00:00:37,316 --> 00:00:40,173
+And as this says, a single page application
+
+17
+00:00:40,173 --> 00:00:42,341
+only uses a single page.
+
+18
+00:00:42,341 --> 00:00:45,450
+Therefore, the job our Node.js back end here
+
+19
+00:00:45,450 --> 00:00:48,450
+is first, to render this single page
+
+20
+00:00:49,432 --> 00:00:51,259
+and then Angular 2 takes over.
+
+21
+00:00:51,259 --> 00:00:54,304
+And second, it needs to provide certain hooks
+
+22
+00:00:54,304 --> 00:00:57,506
+or routes for Angular 2 to which Angular 2
+
+23
+00:00:57,506 --> 00:00:59,829
+later is able to reach out to store
+
+24
+00:00:59,829 --> 00:01:02,443
+messages, fetch messages, because all these
+
+25
+00:01:02,443 --> 00:01:05,050
+are tasks done by our back end.
+
+26
+00:01:05,050 --> 00:01:06,584
+Now in this module, we'll not
+
+27
+00:01:06,584 --> 00:01:08,591
+work on these routes, we'll not
+
+28
+00:01:08,591 --> 00:01:10,298
+work on the back end again.
+
+29
+00:01:10,298 --> 00:01:12,739
+Let's only render the Angular 2 application for now.
+
+30
+00:01:12,739 --> 00:01:16,445
+I'll do this here in my get method,
+
+31
+00:01:16,445 --> 00:01:20,830
+the router get method here, in the routes app.js file.
+
+32
+00:01:20,830 --> 00:01:23,151
+And I will get rid of everything besides
+
+33
+00:01:23,151 --> 00:01:26,257
+the res.render function here.
+
+34
+00:01:26,257 --> 00:01:28,575
+Here, I will still render something,
+
+35
+00:01:28,575 --> 00:01:31,451
+but I will render the index hbs file
+
+36
+00:01:31,451 --> 00:01:33,833
+and I won't pass any arguments to it.
+
+37
+00:01:33,833 --> 00:01:35,348
+Just like this.
+
+38
+00:01:35,348 --> 00:01:37,684
+This will be the single page I want to render.
+
+39
+00:01:37,684 --> 00:01:40,950
+Therefore I can also delete this post route here.
+
+40
+00:01:40,950 --> 00:01:43,574
+And we don't need the user model here anymore.
+
+41
+00:01:43,574 --> 00:01:46,206
+So this is how we'll set up the routes
+
+42
+00:01:46,206 --> 00:01:48,328
+on our back end for now.
+
+43
+00:01:48,328 --> 00:01:51,325
+Now with that route being rendered to our front end
+
+44
+00:01:51,325 --> 00:01:53,380
+or to our client, let's have a look
+
+45
+00:01:53,380 --> 00:01:55,325
+at the index hps file.
+
+46
+00:01:55,325 --> 00:01:57,616
+It's very lean as you can see.
+
+47
+00:01:57,616 --> 00:02:00,116
+It's a basic HTML5 skeleton.
+
+48
+00:02:00,116 --> 00:02:02,251
+I'm importing bootstrap here to get
+
+49
+00:02:02,251 --> 00:02:04,249
+some basic styling, and then here
+
+50
+00:02:04,249 --> 00:02:05,846
+my own style sheet which lives
+
+51
+00:02:05,846 --> 00:02:08,048
+in the public style sheets folder,
+
+52
+00:02:08,048 --> 00:02:11,015
+just to have some global styling for the application.
+
+53
+00:02:11,015 --> 00:02:13,639
+I prepared this before starting this course,
+
+54
+00:02:13,639 --> 00:02:15,875
+and it'll hold some styling which
+
+55
+00:02:15,875 --> 00:02:17,805
+we'll use throughout the course.
+
+56
+00:02:17,805 --> 00:02:20,477
+Besides that, all we have is this
+
+57
+00:02:20,477 --> 00:02:23,097
+strange my app thing here, and then
+
+58
+00:02:23,097 --> 00:02:25,610
+our script here where I import
+
+59
+00:02:25,610 --> 00:02:30,203
+a bundle.js file from js/app/bundle.
+
+60
+00:02:30,203 --> 00:02:32,107
+We can see this here.
+
+61
+00:02:32,107 --> 00:02:35,063
+This will be our bundle Angular 2 application,
+
+62
+00:02:35,063 --> 00:02:37,545
+and responsible for the bundling is webpack
+
+63
+00:02:37,545 --> 00:02:40,017
+which I'll use as a, well, builder here
+
+64
+00:02:40,017 --> 00:02:42,939
+to monitor changes and to rebuilt
+
+65
+00:02:42,939 --> 00:02:45,024
+our application and so on.
+
+66
+00:02:45,024 --> 00:02:47,977
+So this is what will, in the end,
+
+67
+00:02:47,977 --> 00:02:51,060
+hold our application, and my app here
+
+68
+00:02:52,550 --> 00:02:54,977
+this seems to be related to our application.
+
+69
+00:02:54,977 --> 00:02:57,253
+But I'll come back to this in the next video
+
+70
+00:02:57,253 --> 00:03:00,055
+when I explain how the Angular 2 application starts.
+
+71
+00:03:00,055 --> 00:03:03,190
+For now, I just wanted to highlight how it gets served,
+
+72
+00:03:03,190 --> 00:03:04,931
+and this is how it gets served.
+
+73
+00:03:04,931 --> 00:03:06,675
+This single file, which holds everything
+
+74
+00:03:06,675 --> 00:03:08,744
+our Angular 2 application needs to start,
+
+75
+00:03:08,744 --> 00:03:11,744
+and then take over on the front end.
+

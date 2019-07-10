@@ -1,0 +1,604 @@
+1
+00:00:02,046 --> 00:00:03,629
+<v Instructor>Let's create this modal</v>
+
+2
+00:00:03,629 --> 00:00:06,165
+I want to show in case of an error.
+
+3
+00:00:06,165 --> 00:00:09,395
+Here in my component.ts file,
+
+4
+00:00:09,395 --> 00:00:12,978
+I will export a class named ErrorComponent.
+
+5
+00:00:13,963 --> 00:00:17,315
+Now this class here, of course, needs to get
+
+6
+00:00:17,315 --> 00:00:21,482
+the ComponentDecorator imported from @angular/core.
+
+7
+00:00:24,081 --> 00:00:25,816
+Now how should this look like?
+
+8
+00:00:25,816 --> 00:00:29,568
+It needs a selector, I'll name it app-error.
+
+9
+00:00:29,568 --> 00:00:32,648
+You, of course, can choose any selector you want.
+
+10
+00:00:32,648 --> 00:00:34,446
+It also needs a template,
+
+11
+00:00:34,446 --> 00:00:37,060
+and I will create a new file for this:
+
+12
+00:00:37,060 --> 00:00:39,477
+the error.component.html file
+
+13
+00:00:40,490 --> 00:00:42,695
+to outsource this template.
+
+14
+00:00:42,695 --> 00:00:44,833
+So let's reference this template here
+
+15
+00:00:44,833 --> 00:00:46,666
+by adding templateUrl,
+
+16
+00:00:47,957 --> 00:00:49,398
+which should point
+
+17
+00:00:49,398 --> 00:00:52,981
+to the error.component.html file like this.
+
+18
+00:00:54,803 --> 00:00:56,933
+Now how should the component
+
+19
+00:00:56,933 --> 00:00:59,600
+or the html code here look like?
+
+20
+00:01:01,093 --> 00:01:04,363
+Well, I need a backdrop in the back
+
+21
+00:01:04,363 --> 00:01:07,573
+which greys out the background, and then the actual modal,
+
+22
+00:01:07,573 --> 00:01:10,552
+and I will use the Bootstrap modal for this.
+
+23
+00:01:10,552 --> 00:01:13,632
+Now you can basically just copy that code
+
+24
+00:01:13,632 --> 00:01:17,083
+from the Bootstrap webpage, so let's head over
+
+25
+00:01:17,083 --> 00:01:20,923
+to getbootstrap.com, and under JavaScript here,
+
+26
+00:01:20,923 --> 00:01:22,893
+you will find the modal.
+
+27
+00:01:22,893 --> 00:01:26,173
+Now we won't use the JavaScript Bootstrap offers us,
+
+28
+00:01:26,173 --> 00:01:30,292
+I'm only interested in the HTML and CSS code here.
+
+29
+00:01:30,292 --> 00:01:32,403
+We will hook up the rest on our own.
+
+30
+00:01:32,403 --> 00:01:34,755
+So let's copy this in here.
+
+31
+00:01:34,755 --> 00:01:37,005
+This generally is all fine.
+
+32
+00:01:37,853 --> 00:01:40,965
+Though, I also need to add the backdrop,
+
+33
+00:01:40,965 --> 00:01:43,835
+so let's add a class named backdrop.
+
+34
+00:01:43,835 --> 00:01:46,093
+I will create this class on my own.
+
+35
+00:01:46,093 --> 00:01:47,835
+It's not a Bootstrap class.
+
+36
+00:01:47,835 --> 00:01:50,595
+This is the backdrop I conditionally want to show or hide,
+
+37
+00:01:50,595 --> 00:01:54,413
+as well as the modal, so that the background is grey.
+
+38
+00:01:54,413 --> 00:01:56,984
+Now this setup here is fine for now.
+
+39
+00:01:56,984 --> 00:02:01,493
+I will, of course, remove these data-dismiss things
+
+40
+00:02:01,493 --> 00:02:04,544
+because I won't let Bootstrap handle this.
+
+41
+00:02:04,544 --> 00:02:07,045
+I don't even have the Bootstrap JavaScript code
+
+42
+00:02:07,045 --> 00:02:08,793
+to handle this, so I will need to add
+
+43
+00:02:08,793 --> 00:02:12,024
+my own on-click listeners here.
+
+44
+00:02:12,024 --> 00:02:13,622
+And now let's think about
+
+45
+00:02:13,622 --> 00:02:17,603
+which data I want to output in this modal.
+
+46
+00:02:17,603 --> 00:02:20,173
+And I also want to delete the save changes button.
+
+47
+00:02:20,173 --> 00:02:22,373
+There are no changes to be saved.
+
+48
+00:02:22,373 --> 00:02:25,933
+But this is the general setup of this modal.
+
+49
+00:02:25,933 --> 00:02:27,923
+The two things I want to do now is,
+
+50
+00:02:27,923 --> 00:02:30,032
+I want to configure my own backdrop,
+
+51
+00:02:30,032 --> 00:02:32,123
+this custom class here, and then I want
+
+52
+00:02:32,123 --> 00:02:34,523
+to output some data here, which of course,
+
+53
+00:02:34,523 --> 00:02:38,690
+first I need to create as a property in my TypeScript file.
+
+54
+00:02:39,933 --> 00:02:41,892
+So let's do this here.
+
+55
+00:02:41,892 --> 00:02:45,952
+I will create a new property named error,
+
+56
+00:02:45,952 --> 00:02:48,480
+which is of type error, so my error
+
+57
+00:02:48,480 --> 00:02:52,291
+I created here from the error.model file.
+
+58
+00:02:52,291 --> 00:02:54,671
+This initially is undefined.
+
+59
+00:02:54,671 --> 00:02:56,901
+I also will setup another property,
+
+60
+00:02:56,901 --> 00:03:01,181
+which decides on whether this should be displayed or not.
+
+61
+00:03:01,181 --> 00:03:04,203
+So I will name it displayed, and set it
+
+62
+00:03:04,203 --> 00:03:07,741
+to a string named none, or the value of none.
+
+63
+00:03:07,741 --> 00:03:11,061
+I will then use this with the ng-style directive later on
+
+64
+00:03:11,061 --> 00:03:13,590
+to change the display of the modal
+
+65
+00:03:13,590 --> 00:03:18,030
+from block to none, and the other way around.
+
+66
+00:03:18,030 --> 00:03:22,197
+So now this gives me these two valuable properties.
+
+67
+00:03:23,043 --> 00:03:26,051
+As I just said, I also need to define the styles.
+
+68
+00:03:26,051 --> 00:03:30,814
+I could outsource them, but I will write them inline here
+
+69
+00:03:30,814 --> 00:03:32,799
+with back ticks,
+
+70
+00:03:32,799 --> 00:03:36,389
+I can write a multi-line string here, of course,
+
+71
+00:03:36,389 --> 00:03:38,619
+and then I already prepared this class,
+
+72
+00:03:38,619 --> 00:03:41,131
+which I'm copying in here.
+
+73
+00:03:41,131 --> 00:03:45,259
+So this class simply gives it a nice grey background,
+
+74
+00:03:45,259 --> 00:03:48,811
+a bit transparent, and then fixed position
+
+75
+00:03:48,811 --> 00:03:53,099
+and spans it over the full window width and height.
+
+76
+00:03:53,099 --> 00:03:55,932
+This will be the modal background.
+
+77
+00:03:56,958 --> 00:04:00,579
+With this setup here, we're not yet getting the error,
+
+78
+00:04:00,579 --> 00:04:03,029
+but we're able to finish this component.
+
+79
+00:04:03,029 --> 00:04:05,131
+We've got the style of the backdrop,
+
+80
+00:04:05,131 --> 00:04:07,520
+and we've got the displayed property,
+
+81
+00:04:07,520 --> 00:04:09,909
+which we can use together with ng-style
+
+82
+00:04:09,909 --> 00:04:12,899
+to change the display style of the modal,
+
+83
+00:04:12,899 --> 00:04:15,579
+and the error to output data.
+
+84
+00:04:15,579 --> 00:04:19,821
+So back in the html code, let's use this.
+
+85
+00:04:19,821 --> 00:04:22,341
+First, here on the backdrop,
+
+86
+00:04:22,341 --> 00:04:26,508
+I will add the ng-style directive with property binding,
+
+87
+00:04:27,858 --> 00:04:28,691
+like this.
+
+88
+00:04:30,477 --> 00:04:34,477
+And here, the style I want to change is display.
+
+89
+00:04:36,697 --> 00:04:38,618
+This is a normal CSS style, of course,
+
+90
+00:04:38,618 --> 00:04:42,072
+and I want to set it to display.
+
+91
+00:04:42,072 --> 00:04:44,359
+And let's change this property name to display
+
+92
+00:04:44,359 --> 00:04:47,925
+to be in line here, so to display.
+
+93
+00:04:47,925 --> 00:04:51,835
+I can now copy this and also add this to my modal,
+
+94
+00:04:51,835 --> 00:04:56,024
+which I also only want to show while it should be shown.
+
+95
+00:04:56,024 --> 00:04:57,773
+And with that in place,
+
+96
+00:04:57,773 --> 00:05:00,654
+I can now output the error title here
+
+97
+00:05:00,654 --> 00:05:03,466
+and the modal title with string interpolation.
+
+98
+00:05:03,466 --> 00:05:06,554
+So let's access error, and then ?.title
+
+99
+00:05:06,554 --> 00:05:09,056
+because I don't know if the error is set.
+
+100
+00:05:09,056 --> 00:05:11,296
+It is undefined at the beginning.
+
+101
+00:05:11,296 --> 00:05:13,896
+And since I will place this modal
+
+102
+00:05:13,896 --> 00:05:16,736
+in my code right from the start,
+
+103
+00:05:16,736 --> 00:05:20,117
+because remember I'm not attaching or detaching it
+
+104
+00:05:20,117 --> 00:05:23,546
+with ng-if, I'm showing or hiding it with ng-style,
+
+105
+00:05:23,546 --> 00:05:25,357
+so it will always be there.
+
+106
+00:05:25,357 --> 00:05:27,986
+Since this is the case, I need this question mark
+
+107
+00:05:27,986 --> 00:05:30,506
+because we might simply not have gotten an error yet,
+
+108
+00:05:30,506 --> 00:05:32,997
+in which case, I certainly want to get an error
+
+109
+00:05:32,997 --> 00:05:35,986
+from the error model because we don't have an error,
+
+110
+00:05:35,986 --> 00:05:38,296
+that is really kind of stupid.
+
+111
+00:05:38,296 --> 00:05:42,225
+So this the error title, and then here in the body,
+
+112
+00:05:42,225 --> 00:05:45,296
+of course, I want to output the error message
+
+113
+00:05:45,296 --> 00:05:49,463
+also with a question mark to avoid any nasty errors.
+
+114
+00:05:50,718 --> 00:05:53,537
+The last thing I want to configure here
+
+115
+00:05:53,537 --> 00:05:55,901
+is this close button,
+
+116
+00:05:55,901 --> 00:05:58,411
+so either the X, if that has been clicked,
+
+117
+00:05:58,411 --> 00:06:00,325
+or the close button itself.
+
+118
+00:06:00,325 --> 00:06:04,896
+Here I'll have a click-listener and execute onErrorHandled,
+
+119
+00:06:04,896 --> 00:06:07,677
+a method I have yet to create.
+
+120
+00:06:07,677 --> 00:06:11,256
+So let me copy it here and also add it to this button.
+
+121
+00:06:11,256 --> 00:06:14,356
+This sets up the template of my modal.
+
+122
+00:06:14,356 --> 00:06:17,014
+The last step for me is to,
+
+123
+00:06:17,014 --> 00:06:19,113
+for now, to add this
+
+124
+00:06:19,113 --> 00:06:21,363
+onErrorHandled method here,
+
+125
+00:06:22,921 --> 00:06:24,358
+and in here,
+
+126
+00:06:24,358 --> 00:06:28,907
+I simply want to switch display back to none.
+
+127
+00:06:28,907 --> 00:06:31,907
+We don't have code to switch to anything else right now.
+
+128
+00:06:31,907 --> 00:06:34,587
+This will follow soon, but with this I make sure
+
+129
+00:06:34,587 --> 00:06:37,747
+that the modal disappears once we close it.
+
+130
+00:06:37,747 --> 00:06:40,078
+Now to prepare this for usage,
+
+131
+00:06:40,078 --> 00:06:42,266
+I will add it to my app component,
+
+132
+00:06:42,266 --> 00:06:44,867
+because again, I will always have it here.
+
+133
+00:06:44,867 --> 00:06:47,358
+I will always have my error component around,
+
+134
+00:06:47,358 --> 00:06:49,918
+I just switch its display style.
+
+135
+00:06:49,918 --> 00:06:51,867
+So I will append it here:
+
+136
+00:06:51,867 --> 00:06:56,718
+app-error is the selector of my error component here,
+
+137
+00:06:56,718 --> 00:06:59,257
+and for this to work, I also need to add it
+
+138
+00:06:59,257 --> 00:07:02,340
+to my app module, the ErrorComponent.
+
+139
+00:07:04,166 --> 00:07:08,078
+Also make sure to add the import up here.
+
+140
+00:07:08,078 --> 00:07:11,726
+With this setup, the error component is added.
+
+141
+00:07:11,726 --> 00:07:14,643
+If I save it and recompile my code,
+
+142
+00:07:15,638 --> 00:07:20,566
+we can see this kind of, if I reload the application.
+
+143
+00:07:20,566 --> 00:07:24,483
+We can see it if we inspect the HTML code here,
+
+144
+00:07:25,747 --> 00:07:29,137
+that at the very end we get this app-error element,
+
+145
+00:07:29,137 --> 00:07:30,926
+though of course, we don't see it
+
+146
+00:07:30,926 --> 00:07:33,177
+because the display is set to none.
+
+147
+00:07:33,177 --> 00:07:35,617
+I can switch this to block though,
+
+148
+00:07:35,617 --> 00:07:38,387
+so now we see the backdrop, at least.
+
+149
+00:07:38,387 --> 00:07:41,017
+But this is not really how it should work, right?
+
+150
+00:07:41,017 --> 00:07:44,318
+So let's make sure to setup the error service next,
+
+151
+00:07:44,318 --> 00:07:48,485
+so that we're actually able to emit errors and handle them.
+

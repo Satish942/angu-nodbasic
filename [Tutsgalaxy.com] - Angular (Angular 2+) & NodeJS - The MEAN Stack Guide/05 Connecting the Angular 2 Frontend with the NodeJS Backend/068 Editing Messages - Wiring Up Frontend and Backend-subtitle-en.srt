@@ -1,0 +1,448 @@
+1
+00:00:02,438 --> 00:00:05,409
+<v Instructor>Let's hook up our front end to the back end.</v>
+
+2
+00:00:05,409 --> 00:00:08,504
+Here in the message.service, I get the updateMessage method,
+
+3
+00:00:08,504 --> 00:00:12,366
+which is called when we, well, actually do update a message
+
+4
+00:00:12,366 --> 00:00:15,114
+or which we want to call, in this case.
+
+5
+00:00:15,114 --> 00:00:17,830
+Well, right now, I'm not doing anything here,
+
+6
+00:00:17,830 --> 00:00:22,075
+so let's copy the code from the addMessage method,
+
+7
+00:00:22,075 --> 00:00:25,786
+since a lot of that is actually the same code.
+
+8
+00:00:25,786 --> 00:00:29,082
+We do want to create a body which contains the message,
+
+9
+00:00:29,082 --> 00:00:30,918
+the updated one that is,
+
+10
+00:00:30,918 --> 00:00:33,366
+and we do want to set these headers,
+
+11
+00:00:33,366 --> 00:00:35,336
+but the method is patch.
+
+12
+00:00:35,336 --> 00:00:39,688
+Of course, here in the path, we need to pass this ID,
+
+13
+00:00:39,688 --> 00:00:43,188
+so add a slash and then message.messageId.
+
+14
+00:00:44,434 --> 00:00:46,314
+This is why we're fetching it.
+
+15
+00:00:46,314 --> 00:00:49,019
+Now we're passing this message ID to the path,
+
+16
+00:00:49,019 --> 00:00:51,318
+because remember, on the back end,
+
+17
+00:00:51,318 --> 00:00:55,342
+we're expecting to get an ID in the path here.
+
+18
+00:00:55,342 --> 00:00:59,714
+So with this set up, we're sending this patch request.
+
+19
+00:00:59,714 --> 00:01:02,702
+The transformation I'm doing here is fine.
+
+20
+00:01:02,702 --> 00:01:05,286
+Now we can hook up our input component
+
+21
+00:01:05,286 --> 00:01:09,384
+to actually trigger this updateMessage method.
+
+22
+00:01:09,384 --> 00:01:11,967
+So here in the onSubmit method,
+
+23
+00:01:13,128 --> 00:01:16,342
+where I currently only set this message to null,
+
+24
+00:01:16,342 --> 00:01:19,298
+well, before I do this, I want to call
+
+25
+00:01:19,298 --> 00:01:22,407
+my messageService.updateMessage
+
+26
+00:01:22,407 --> 00:01:25,240
+and pass my updated message to it.
+
+27
+00:01:26,542 --> 00:01:29,412
+Thereafter, it's time to subscribe to it
+
+28
+00:01:29,412 --> 00:01:31,792
+to actually send the request.
+
+29
+00:01:31,792 --> 00:01:36,334
+Now, here, I will only print the result to the console,
+
+30
+00:01:36,334 --> 00:01:39,773
+so console.log .
+
+31
+00:01:39,773 --> 00:01:42,462
+You could also log the error if you want.
+
+32
+00:01:42,462 --> 00:01:44,992
+Now, in order to see this in action,
+
+33
+00:01:44,992 --> 00:01:47,934
+I need to make sure that the messageId
+
+34
+00:01:47,934 --> 00:01:50,282
+is actually stored in my message models
+
+35
+00:01:50,282 --> 00:01:52,063
+here on the front end.
+
+36
+00:01:52,063 --> 00:01:55,328
+I'm doing this here when I'm getting my messages,
+
+37
+00:01:55,328 --> 00:01:59,491
+here when I store messageId in the message.id field.
+
+38
+00:01:59,491 --> 00:02:00,940
+This is key.
+
+39
+00:02:00,940 --> 00:02:05,248
+Otherwise, this messageId field here won't be populated
+
+40
+00:02:05,248 --> 00:02:08,356
+and I'm not able to access it and pass it.
+
+41
+00:02:08,356 --> 00:02:10,704
+Now, to populate it correctly, though,
+
+42
+00:02:10,704 --> 00:02:15,155
+I need to change this to _id, small mistake,
+
+43
+00:02:15,155 --> 00:02:18,066
+because, of course, on the back end, in the server,
+
+44
+00:02:18,066 --> 00:02:19,816
+it has this _id name.
+
+45
+00:02:21,126 --> 00:02:24,558
+You can see this here in the Mongo DB Shell client.
+
+46
+00:02:24,558 --> 00:02:26,752
+The field name is _id.
+
+47
+00:02:26,752 --> 00:02:30,334
+So this allows me to retrieve it here when I fetch messages.
+
+48
+00:02:30,334 --> 00:02:33,756
+Of course, I also want to do this
+
+49
+00:02:33,756 --> 00:02:35,963
+when I add a new message, though.
+
+50
+00:02:35,963 --> 00:02:37,950
+Otherwise, a message which I added
+
+51
+00:02:37,950 --> 00:02:40,128
+won't have the messageId.
+
+52
+00:02:40,128 --> 00:02:42,627
+Therefore, if I edit it instantly
+
+53
+00:02:42,627 --> 00:02:45,230
+before reloading the application in-between,
+
+54
+00:02:45,230 --> 00:02:47,183
+I would get an error.
+
+55
+00:02:47,183 --> 00:02:50,366
+So let's do this, too, and I will do this here
+
+56
+00:02:50,366 --> 00:02:55,176
+in the map function, where I return my messages.
+
+57
+00:02:55,176 --> 00:02:58,343
+So I'll extend the function body here.
+
+58
+00:02:59,414 --> 00:03:02,920
+I'll store this in the result constant.
+
+59
+00:03:02,920 --> 00:03:05,128
+This is what I'll get back from the server.
+
+60
+00:03:05,128 --> 00:03:08,032
+Then, here, I want to return a new Message,
+
+61
+00:03:08,032 --> 00:03:11,768
+and here, the content should be my result.object.
+
+62
+00:03:11,768 --> 00:03:15,414
+Remember, on the back end here, Message is service,
+
+63
+00:03:15,414 --> 00:03:18,778
+on the post route, I do store the created message
+
+64
+00:03:18,778 --> 00:03:21,089
+in this object field.
+
+65
+00:03:21,089 --> 00:03:24,272
+So this will be the new message I retrieve.
+
+66
+00:03:24,272 --> 00:03:26,548
+And there, of course, the content field.
+
+67
+00:03:26,548 --> 00:03:30,152
+Now, for the username, I'll set this to Dummy for now.
+
+68
+00:03:30,152 --> 00:03:33,416
+The messageId should, again, be result.obj
+
+69
+00:03:33,416 --> 00:03:36,999
+and then _id, like we changed it down here.
+
+70
+00:03:37,990 --> 00:03:41,323
+Here, I want to set the user ID to null.
+
+71
+00:03:42,525 --> 00:03:44,604
+I'll add the real user ID
+
+72
+00:03:44,604 --> 00:03:47,422
+in the next section of this course.
+
+73
+00:03:47,422 --> 00:03:50,165
+Now, do you think this would work?
+
+74
+00:03:50,165 --> 00:03:53,293
+It wouldn't, because on the front end,
+
+75
+00:03:53,293 --> 00:03:56,456
+we still push a new message, like this here,
+
+76
+00:03:56,456 --> 00:03:58,855
+right before reaching out to the server.
+
+77
+00:03:58,855 --> 00:04:01,675
+The fact that I return a new message here
+
+78
+00:04:01,675 --> 00:04:04,531
+and store the ID doesn't influence
+
+79
+00:04:04,531 --> 00:04:08,525
+the message which actually gets stored in the array,
+
+80
+00:04:08,525 --> 00:04:10,415
+so if I don't reload the application,
+
+81
+00:04:10,415 --> 00:04:13,711
+we still have, well, no ID stored there.
+
+82
+00:04:13,711 --> 00:04:17,569
+So this.messages.push has to go away here.
+
+83
+00:04:17,569 --> 00:04:20,819
+Now, we could implement it in two ways.
+
+84
+00:04:20,819 --> 00:04:24,015
+I could implement the push method here somehow
+
+85
+00:04:24,015 --> 00:04:28,182
+in the input component or here in the map method, as well.
+
+86
+00:04:29,505 --> 00:04:31,635
+So here, where I return the new message,
+
+87
+00:04:31,635 --> 00:04:36,628
+I could instead store it here in, let's say, message
+
+88
+00:04:36,628 --> 00:04:37,940
+like this.
+
+89
+00:04:37,940 --> 00:04:40,357
+Then, in the next line, I can
+
+90
+00:04:42,476 --> 00:04:45,042
+push it on my messages array
+
+91
+00:04:45,042 --> 00:04:47,997
+like this before I then ...
+
+92
+00:04:47,997 --> 00:04:49,580
+Whoops, only one A.
+
+93
+00:04:50,445 --> 00:04:53,968
+Before I then return my message, like this.
+
+94
+00:04:53,968 --> 00:04:55,292
+Now, with this in place,
+
+95
+00:04:55,292 --> 00:04:57,435
+if I now save this, let it recompile,
+
+96
+00:04:57,435 --> 00:04:59,185
+and also restart the server,
+
+97
+00:04:59,185 --> 00:05:01,156
+since we changed something there,
+
+98
+00:05:01,156 --> 00:05:03,741
+if we now head over to the running application,
+
+99
+00:05:03,741 --> 00:05:07,679
+we can click edit on an existing message, save it here.
+
+100
+00:05:07,679 --> 00:05:11,540
+We get the Updated message message, which looks great.
+
+101
+00:05:11,540 --> 00:05:14,388
+If I reload, let's see if that persisted.
+
+102
+00:05:14,388 --> 00:05:15,730
+Yes, it did.
+
+103
+00:05:15,730 --> 00:05:19,670
+If I add a new message, without the W, let's say,
+
+104
+00:05:19,670 --> 00:05:23,958
+and I now want to change this without reloading the app,
+
+105
+00:05:23,958 --> 00:05:26,946
+if I now hit save, this all looks good.
+
+106
+00:05:26,946 --> 00:05:29,416
+I got the Updated message message here.
+
+107
+00:05:29,416 --> 00:05:32,779
+Once I reload, we see it was, indeed, updated.
+
+108
+00:05:32,779 --> 00:05:36,442
+Now we got the edit and update methods in place,
+
+109
+00:05:36,442 --> 00:05:39,842
+we're able to create new messages to fetch our messages
+
+110
+00:05:39,842 --> 00:05:41,338
+and to update them.
+
+111
+00:05:41,338 --> 00:05:43,649
+The missing piece, of course, is to delete them,
+
+112
+00:05:43,649 --> 00:05:47,816
+and you will see this is really easy to implement.
+

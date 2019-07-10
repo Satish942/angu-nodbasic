@@ -1,0 +1,288 @@
+1
+00:00:01,681 --> 00:00:02,892
+<v ->In one of the last lectures,</v>
+
+2
+00:00:02,892 --> 00:00:05,229
+you saw me encode data in the URL
+
+3
+00:00:05,229 --> 00:00:08,241
+and send data with a post request.
+
+4
+00:00:08,241 --> 00:00:10,464
+Let's better understand which ways
+
+5
+00:00:10,464 --> 00:00:12,577
+of accessing data we have, and we will
+
+6
+00:00:12,577 --> 00:00:14,778
+use them all throughout this course.
+
+7
+00:00:14,778 --> 00:00:17,401
+On the request, we typically have
+
+8
+00:00:17,401 --> 00:00:19,015
+a header and a content type,
+
+9
+00:00:19,015 --> 00:00:21,017
+and the same is true for the response.
+
+10
+00:00:21,017 --> 00:00:23,804
+We've also got a body, which might hold our data.
+
+11
+00:00:23,804 --> 00:00:26,199
+Now, on a request, we might access
+
+12
+00:00:26,199 --> 00:00:28,625
+a URL, which looks like this.
+
+13
+00:00:28,625 --> 00:00:30,776
+Let's have a look at what we do have
+
+14
+00:00:30,776 --> 00:00:32,344
+inside of this data, or how we can
+
+15
+00:00:32,344 --> 00:00:34,612
+attach some data to that request.
+
+16
+00:00:34,612 --> 00:00:37,043
+Well, what we don't see in the URL is,
+
+17
+00:00:37,043 --> 00:00:38,954
+with a post request, for example,
+
+18
+00:00:38,954 --> 00:00:40,924
+we can store data in the body,
+
+19
+00:00:40,924 --> 00:00:42,933
+which is also part of the request.
+
+20
+00:00:42,933 --> 00:00:44,876
+The body is not visible in the URL,
+
+21
+00:00:44,876 --> 00:00:47,787
+but is something which is sent behind the scenes.
+
+22
+00:00:47,787 --> 00:00:49,866
+And we already retrieved data from the body
+
+23
+00:00:49,866 --> 00:00:53,738
+in the post request we handled two lectures ago.
+
+24
+00:00:53,738 --> 00:00:56,666
+We also got things we can see in the URL,
+
+25
+00:00:56,666 --> 00:00:58,802
+like the request params here.
+
+26
+00:00:58,802 --> 00:01:00,834
+Remember we already also used params
+
+27
+00:01:00,834 --> 00:01:02,817
+to retrieve data from the URL.
+
+28
+00:01:02,817 --> 00:01:06,153
+And then we get this part which we haven't seen yet,
+
+29
+00:01:06,153 --> 00:01:07,947
+after the question mark here.
+
+30
+00:01:07,947 --> 00:01:09,985
+This is the request query,
+
+31
+00:01:09,985 --> 00:01:11,924
+or the so-called query parameters.
+
+32
+00:01:11,924 --> 00:01:13,862
+We can attach them to any request.
+
+33
+00:01:13,862 --> 00:01:15,727
+They always come in the end, and the difference
+
+34
+00:01:15,727 --> 00:01:18,432
+to the request params is, they're not encoded
+
+35
+00:01:18,432 --> 00:01:20,645
+in a specific place in the URL,
+
+36
+00:01:20,645 --> 00:01:22,923
+so, five here, if that were some ID,
+
+37
+00:01:22,923 --> 00:01:26,092
+could only go after /user, because
+
+38
+00:01:26,092 --> 00:01:29,700
+we hard-encoded with this colon in the URL.
+
+39
+00:01:29,700 --> 00:01:32,568
+Question mark anything equals anything
+
+40
+00:01:32,568 --> 00:01:34,917
+always comes on the end, and allows us
+
+41
+00:01:34,917 --> 00:01:36,963
+to pass some additional data, kind of
+
+42
+00:01:36,963 --> 00:01:39,489
+optional data, to each request.
+
+43
+00:01:39,489 --> 00:01:41,711
+In this course, you will see when we use that
+
+44
+00:01:41,711 --> 00:01:44,920
+and how we use it to extract some data
+
+45
+00:01:44,920 --> 00:01:47,799
+which might be present, but we're not sure if it is,
+
+46
+00:01:47,799 --> 00:01:49,730
+and which also should be attached
+
+47
+00:01:49,730 --> 00:01:51,397
+to multiple requests, and therefore,
+
+48
+00:01:51,397 --> 00:01:54,007
+isn't hard-coded into the URL.
+
+49
+00:01:54,007 --> 00:01:57,125
+Regarding data formats we can use,
+
+50
+00:01:57,125 --> 00:02:01,233
+the typical format we will use in this course is JSON.
+
+51
+00:02:01,233 --> 00:02:03,552
+JSON is a very lightweight format.
+
+52
+00:02:03,552 --> 00:02:06,110
+It's basically a JavaScript object
+
+53
+00:02:06,110 --> 00:02:08,298
+as a string, if you wanna put it like that,
+
+54
+00:02:08,298 --> 00:02:10,349
+and therefore, it's able to encode
+
+55
+00:02:10,349 --> 00:02:12,861
+a lot of data with a very little
+
+56
+00:02:12,861 --> 00:02:15,426
+amount of characters, keeping it small.
+
+57
+00:02:15,426 --> 00:02:17,412
+And, since we used Node.js anyway,
+
+58
+00:02:17,412 --> 00:02:19,285
+it's easy to be parsed.
+
+59
+00:02:19,285 --> 00:02:21,108
+We used JavaScript objects all over the place,
+
+60
+00:02:21,108 --> 00:02:23,470
+so why not send our data as one?
+
+61
+00:02:23,470 --> 00:02:26,671
+You could also send plain text, or a file,
+
+62
+00:02:26,671 --> 00:02:29,477
+or, of course, URL encoded data,
+
+63
+00:02:29,477 --> 00:02:31,862
+And for example of you, HTML code.
+
+64
+00:02:31,862 --> 00:02:34,973
+But we won't do this in a Angular 2 and Node.js
+
+65
+00:02:34,973 --> 00:02:38,466
+application, here we will stick to JSON
+
+66
+00:02:38,466 --> 00:02:41,238
+to exchange data behind the scenes
+
+67
+00:02:41,238 --> 00:02:42,908
+because always keep that in mind,
+
+68
+00:02:42,908 --> 00:02:44,739
+we will never send a request and
+
+69
+00:02:44,739 --> 00:02:46,654
+get back a response which leads to
+
+70
+00:02:46,654 --> 00:02:48,153
+a reload of the page.
+
+71
+00:02:48,153 --> 00:02:50,275
+We won't send HTML code from the server
+
+72
+00:02:50,275 --> 00:02:54,442
+besides that initial loading of our index hps file.
+

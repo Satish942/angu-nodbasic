@@ -1,0 +1,88 @@
+1
+00:00:01,509 --> 00:00:02,899
+<v Instructor>Now all the things you are seeing here,</v>
+
+2
+00:00:02,899 --> 00:00:04,837
+are contained in an object,
+
+3
+00:00:04,837 --> 00:00:06,435
+or are properties of an object,
+
+4
+00:00:06,435 --> 00:00:11,115
+which is passed as an argument to @NgModule thing here.
+
+5
+00:00:11,115 --> 00:00:13,085
+Now this thing is a decorator,
+
+6
+00:00:13,085 --> 00:00:15,416
+decorator is a types group feature,
+
+7
+00:00:15,416 --> 00:00:18,296
+which allows us to attach some additional information
+
+8
+00:00:18,296 --> 00:00:19,804
+to a class.
+
+9
+00:00:19,804 --> 00:00:21,583
+As you can see, the class is totally empty,
+
+10
+00:00:21,583 --> 00:00:23,976
+there are no properties or methods inside of it.
+
+11
+00:00:23,976 --> 00:00:28,064
+So this class becomes more than just an empty class,
+
+12
+00:00:28,064 --> 00:00:29,856
+by adding this decorator.
+
+13
+00:00:29,856 --> 00:00:32,195
+You'll see this same concept throughout angular2 ,
+
+14
+00:00:32,195 --> 00:00:33,904
+for example when we use components,
+
+15
+00:00:33,904 --> 00:00:36,104
+which you'll learn about in a second.
+
+16
+00:00:36,104 --> 00:00:40,664
+We pass arguments to this NgModule decorator,
+
+17
+00:00:40,664 --> 00:00:43,325
+and in the background angular2 will use these arguments,
+
+18
+00:00:43,325 --> 00:00:45,776
+to store it, you could think of,
+
+19
+00:00:45,776 --> 00:00:49,153
+and then know that whenever we use the AppModule class,
+
+20
+00:00:49,153 --> 00:00:51,382
+it is more than an empty class.
+
+21
+00:00:51,382 --> 00:00:53,875
+It is configured with the info we set up here
+
+22
+00:00:53,875 --> 00:00:56,125
+in the @NgModule decorator.
+

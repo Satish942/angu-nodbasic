@@ -1,0 +1,212 @@
+1
+00:00:01,696 --> 00:00:04,252
+<v Instructor>In order to only conditionally</v>
+
+2
+00:00:04,252 --> 00:00:07,281
+show these buttons and show the right user name here.
+
+3
+00:00:07,281 --> 00:00:10,150
+It's important for me that, when fetching
+
+4
+00:00:10,150 --> 00:00:12,907
+my messages on the back-end here in this
+
+5
+00:00:12,907 --> 00:00:16,258
+get route, I not only pass my message
+
+6
+00:00:16,258 --> 00:00:18,635
+but also the complete user object
+
+7
+00:00:18,635 --> 00:00:22,306
+because I need the user ID and the user first name.
+
+8
+00:00:22,306 --> 00:00:24,233
+So, this is some additional information
+
+9
+00:00:24,233 --> 00:00:26,825
+I need which right now I'm not getting.
+
+10
+00:00:26,825 --> 00:00:28,995
+I do get the user ID since it is stored
+
+11
+00:00:28,995 --> 00:00:31,750
+in this message model in the user field
+
+12
+00:00:31,750 --> 00:00:33,950
+but I don't get the whole user object
+
+13
+00:00:33,950 --> 00:00:36,297
+so that I don't have access to user first name
+
+14
+00:00:36,297 --> 00:00:38,010
+but I want this access to be able
+
+15
+00:00:38,010 --> 00:00:41,904
+to correctly display this username below the message.
+
+16
+00:00:41,904 --> 00:00:46,865
+Therefore, this get route here needs some adjustment.
+
+17
+00:00:46,865 --> 00:00:49,303
+I mentioned earlier that I want to chain
+
+18
+00:00:49,303 --> 00:00:51,232
+multiple methods here, which is why
+
+19
+00:00:51,232 --> 00:00:54,288
+I use this syntax using .exec here.
+
+20
+00:00:54,288 --> 00:00:58,371
+Now, the one method I want to chain is .populate.
+
+21
+00:00:59,631 --> 00:01:02,697
+Populate is a Mongoose method which allows me
+
+22
+00:01:02,697 --> 00:01:05,888
+to expand the data I am retrieving.
+
+23
+00:01:05,888 --> 00:01:10,590
+By default, it would only give me the message object
+
+24
+00:01:10,590 --> 00:01:13,049
+but now I can tell it, hey there is this reference
+
+25
+00:01:13,049 --> 00:01:16,298
+to the user model and it is aware of this reference
+
+26
+00:01:16,298 --> 00:01:19,987
+since, in the model, we set this up with the ref key here.
+
+27
+00:01:19,987 --> 00:01:24,025
+So it knows, well, this is not an ID, not just a string.
+
+28
+00:01:24,025 --> 00:01:28,014
+It really is a connexion to another object in my database.
+
+29
+00:01:28,014 --> 00:01:32,762
+So, I can tell Mongoose to now expand this object
+
+30
+00:01:32,762 --> 00:01:35,508
+so that this user field actually not only
+
+31
+00:01:35,508 --> 00:01:37,759
+holds the user ID but the complete
+
+32
+00:01:37,759 --> 00:01:40,689
+user object with these fields possibly.
+
+33
+00:01:40,689 --> 00:01:41,789
+Though, I'm not interested in all
+
+34
+00:01:41,789 --> 00:01:44,372
+these fields I will only need the first name.
+
+35
+00:01:44,372 --> 00:01:46,603
+To get this as a first argument,
+
+36
+00:01:46,603 --> 00:01:48,823
+I pass the name of the field which I want
+
+37
+00:01:48,823 --> 00:01:52,162
+to expand, which is user as a string.
+
+38
+00:01:52,162 --> 00:01:55,429
+So, this field here and then the second argument
+
+39
+00:01:55,429 --> 00:01:56,262
+is the
+
+40
+00:01:57,372 --> 00:01:59,193
+data I want to have.
+
+41
+00:01:59,193 --> 00:02:01,542
+So, here I'm only interested in the first name.
+
+42
+00:02:01,542 --> 00:02:04,708
+So, I will pass firstName to now get an object
+
+43
+00:02:04,708 --> 00:02:07,645
+which not only has the ID but also
+
+44
+00:02:07,645 --> 00:02:10,091
+the first name of the user and I don't want email
+
+45
+00:02:10,091 --> 00:02:12,477
+or password or anything like that.
+
+46
+00:02:12,477 --> 00:02:14,013
+So, with that I can leave the other code
+
+47
+00:02:14,013 --> 00:02:17,448
+as it is, but now each message will not only
+
+48
+00:02:17,448 --> 00:02:20,738
+have the user ID but instead the complete
+
+49
+00:02:20,738 --> 00:02:24,368
+user object or, at least, user ID plus first name.
+
+50
+00:02:24,368 --> 00:02:26,648
+This, of course, means that I can now work
+
+51
+00:02:26,648 --> 00:02:30,451
+on my front-end to fetch the complete user
+
+52
+00:02:30,451 --> 00:02:32,464
+or use this additional information.
+
+53
+00:02:32,464 --> 00:02:33,964
+I'll do this next.
+

@@ -1,0 +1,101 @@
+<html>
+                        <head>
+                        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                        <title>080 Fixing a Mongoose Bug</title>
+                        </head>
+                        <body>
+                        <div class="container">
+                        <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="lead"><div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p>Depending on the Mongoose version you installed, you may encounter a "RangeError:Maximum Call Stack Size Exceeded"error in the next lecture(s). If you don't everything is fine and you don't need to adjust anything.</p><p>If you do, it seems that the solution shared by a fellow student - Hector - fixes the issue (see below). You can find the full Q&amp;Athread where the issue is discussed here:<a href="https://www.udemy.com/angular-2-and-nodejs-the-practical-guide/learn/v4/questions/2813134" rel="nofollow">https://www.udemy.com/angular-2-and-nodejs-the-practical-guide/learn/v4/questions/2813134</a></p><p>The solution is to adjust the code in the places marked with "<em>Change here</em>":</p><p><strong>Solution by Student Hector</strong></p><p>-------</p><p>Hi all, I got stuck at this same part as well -- however, I think I got something working now!</p>
+
+<p>I made the following minor changes, in the routes/messages.js when the message is created I reference the userId instead of user object.in the model/message.js pull the message._id, instead of the message. I checked the database and the user is correctly referenced via the ObjectID. Below is the code:</p>
+
+<p>In the models/message.js:</p>
+
+<pre class="prettyprint linenums">var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var User = require('./user');
+
+var schema = new Schema({
+    content: {type: String, required: true},
+    user: {type: Schema.Types.ObjectId, ref: 'User'}
+});
+
+schema.post('remove', function(message) {
+    User.findById(message.user, function (err, user) {
+        user.messages.pull(message._id); //CHANGEHERE
+        user.save();
+    });
+});
+
+module.exports = mongoose.model('Message', schema);
+</pre>
+
+<p>In the route/messages.js:</p>
+
+<pre class="prettyprint linenums">router.post('/', function (req, res, next) {
+    const decoded = jwt.decode(req.query.token);
+    User.findById(decoded.user._id, (err, user) =&gt; {
+        if(err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        const message = new Message({
+            content: req.body.content,
+            user: user._id //CHANGEHERE
+        });
+
+        message.save(function(err, result) {
+            if(err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+
+            user.messages.push(result);
+
+            res.status(201).json({
+                message: 'Saved message',
+                obj: result
+            });
+            user.save();
+
+        });
+    });
+});
+</pre>
+
+
+
+<p>I hope this works for others, cheers!</p>
+
+<p>Hector</p>
+
+<p>Code above reflects the edits mentioned below.
+</p>
+
+<p>***An edit</p>
+
+<p>To get the delete function to properly update the messages array in the User model, you will need to update schema.post call in models/message.js,see above. Make sure to drop all messages before trying this out.</p>
+
+<p>***Another edit</p>
+
+<p>Keep the ref in the messages model.</p><p><br></p>
+        </div>
+    </div>
+</div>
+</p>
+                        </div>
+                        </div>
+                        </div>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        </body>
+                        </html>

@@ -1,0 +1,172 @@
+1
+00:00:01,861 --> 00:00:05,592
+<v ->In this course, and in probably any real application,</v>
+
+2
+00:00:05,592 --> 00:00:07,964
+we not only want to send data to the server
+
+3
+00:00:07,964 --> 00:00:09,478
+to then do nothing there.
+
+4
+00:00:09,478 --> 00:00:11,033
+We want to store it in a database,
+
+5
+00:00:11,033 --> 00:00:13,942
+we want to be able to retrieve it from a database.
+
+6
+00:00:13,942 --> 00:00:16,552
+As a database, in this course we will use MongoDB,
+
+7
+00:00:16,552 --> 00:00:19,458
+which is a very popular choice for Angular2
+
+8
+00:00:19,458 --> 00:00:21,715
+and Node.js as applications.
+
+9
+00:00:21,715 --> 00:00:23,119
+You're not limited to MongoDB,
+
+10
+00:00:23,119 --> 00:00:26,842
+you may chose any database of your choice, or preference.
+
+11
+00:00:26,842 --> 00:00:30,120
+But again, in this course, I will go with MongoDB.
+
+12
+00:00:30,120 --> 00:00:33,224
+Now for developing, we will all need to set it up
+
+13
+00:00:33,224 --> 00:00:35,638
+on our local machines so that we can test it
+
+14
+00:00:35,638 --> 00:00:37,022
+and work with it.
+
+15
+00:00:37,022 --> 00:00:38,633
+How do we set it up?
+
+16
+00:00:38,633 --> 00:00:42,492
+Well, first we need to download MongoDB and extract it.
+
+17
+00:00:42,492 --> 00:00:44,535
+And then we also need to move a folder.
+
+18
+00:00:44,535 --> 00:00:46,827
+I will walk you though these steps.
+
+19
+00:00:46,827 --> 00:00:49,733
+Thereafter, we need to launch our MongoDB server.
+
+20
+00:00:49,733 --> 00:00:51,493
+This is important to be able to
+
+21
+00:00:51,493 --> 00:00:54,528
+perform database operations and here it's always important
+
+22
+00:00:54,528 --> 00:00:57,277
+to then keep this server running because you will only
+
+23
+00:00:57,277 --> 00:01:00,713
+be able to connect to it and to perform database operations
+
+24
+00:01:00,713 --> 00:01:02,353
+if the server is running.
+
+25
+00:01:02,353 --> 00:01:03,852
+So if you throughout the course,
+
+26
+00:01:03,852 --> 00:01:06,512
+gets some error when starting your node server,
+
+27
+00:01:06,512 --> 00:01:09,793
+and the errors says something about MongoDB,
+
+28
+00:01:09,793 --> 00:01:11,956
+maybe your MongoDB server is not running,
+
+29
+00:01:11,956 --> 00:01:14,990
+and therefore Node.js is not able to connect to it.
+
+30
+00:01:14,990 --> 00:01:17,601
+Finally, we also need to launch a client.
+
+31
+00:01:17,601 --> 00:01:19,686
+So we have the MongoDB server,
+
+32
+00:01:19,686 --> 00:01:21,975
+to be able to, well, interact with it.
+
+33
+00:01:21,975 --> 00:01:24,267
+But the client is where we issue commands like,
+
+34
+00:01:24,267 --> 00:01:26,561
+save something, get something.
+
+35
+00:01:26,561 --> 00:01:29,262
+We got a shelled client installed with MongoDB,
+
+36
+00:01:29,262 --> 00:01:31,308
+when we do instal it,
+
+37
+00:01:31,308 --> 00:01:33,721
+but we also typically will not use that,
+
+38
+00:01:33,721 --> 00:01:35,649
+most of the time the client will be
+
+39
+00:01:35,649 --> 00:01:38,856
+our Node.js application connecting to the server.
+
+40
+00:01:38,856 --> 00:01:41,187
+In this module, I will walk you through all these steps,
+
+41
+00:01:41,187 --> 00:01:44,534
+setting up MongoDB, setting up Node.js to use it,
+
+42
+00:01:44,534 --> 00:01:47,147
+and then how to interact with MongoDB.
+
+43
+00:01:47,147 --> 00:01:51,314
+So let's get started with the set up in the next video.
+

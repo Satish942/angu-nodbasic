@@ -1,0 +1,652 @@
+1
+00:00:01,675 --> 00:00:03,488
+<v Instructor>Our application is taking shape.</v>
+
+2
+00:00:03,488 --> 00:00:05,933
+We already output multiple messages.
+
+3
+00:00:05,933 --> 00:00:09,295
+We're not far away from creating them on our own,
+
+4
+00:00:09,295 --> 00:00:11,459
+but before implementing the logic
+
+5
+00:00:11,459 --> 00:00:14,816
+to create them on our own, I want to restructure it,
+
+6
+00:00:14,816 --> 00:00:17,991
+or add new components which we'll soon need.
+
+7
+00:00:17,991 --> 00:00:21,568
+I'll add two new files to my messages folder.
+
+8
+00:00:21,568 --> 00:00:24,303
+I'll add a message-input.component
+
+9
+00:00:24,303 --> 00:00:27,566
+which is later on, responsible for creating new messages
+
+10
+00:00:27,566 --> 00:00:29,649
+or editing existing ones.
+
+11
+00:00:31,794 --> 00:00:34,415
+And the second file I'll add should hold my list
+
+12
+00:00:34,415 --> 00:00:35,799
+of messages.
+
+13
+00:00:35,799 --> 00:00:37,705
+Right now this list is held here,
+
+14
+00:00:37,705 --> 00:00:40,766
+in my app component where I loop through the messages.
+
+15
+00:00:40,766 --> 00:00:44,409
+But remember we'll soon also have the authentication part
+
+16
+00:00:44,409 --> 00:00:47,059
+which then also needs to be somehow contained
+
+17
+00:00:47,059 --> 00:00:48,887
+in my app component.
+
+18
+00:00:48,887 --> 00:00:51,703
+So the list of messages is not really something
+
+19
+00:00:51,703 --> 00:00:54,322
+the app component should be responsible for.
+
+20
+00:00:54,322 --> 00:00:57,999
+Instead I should have a new file, a new component for this,
+
+21
+00:00:57,999 --> 00:01:02,787
+the message-list.component here in the messages folder
+
+22
+00:01:02,787 --> 00:01:04,577
+of course, like this.
+
+23
+00:01:04,577 --> 00:01:06,539
+Let's start with the message list component.
+
+24
+00:01:06,539 --> 00:01:10,706
+Here I'll again create a new class MessageListComponent
+
+25
+00:01:11,540 --> 00:01:14,303
+named like this which follows the naming convention
+
+26
+00:01:14,303 --> 00:01:17,027
+of describing what we have in this file.
+
+27
+00:01:17,027 --> 00:01:20,574
+I don't have anything in the class itself,
+
+28
+00:01:20,574 --> 00:01:23,016
+but I will add the component selector again
+
+29
+00:01:23,016 --> 00:01:25,392
+or component decorator, excuse me.
+
+30
+00:01:25,392 --> 00:01:28,834
+Also add the import and then here,
+
+31
+00:01:28,834 --> 00:01:31,156
+I need to pass something as an argument,
+
+32
+00:01:31,156 --> 00:01:33,772
+the Chalice script object, with my selector,
+
+33
+00:01:33,772 --> 00:01:36,855
+where I want to have app-message-list
+
+34
+00:01:38,468 --> 00:01:40,775
+to follow this naming convention of my selectors.
+
+35
+00:01:40,775 --> 00:01:44,037
+Of course you may choose whichever selector you want to use,
+
+36
+00:01:44,037 --> 00:01:46,104
+and then here, I'll use an inline template
+
+37
+00:01:46,104 --> 00:01:48,501
+which means I'm not using an external file,
+
+38
+00:01:48,501 --> 00:01:51,887
+but instead I want to store the template in this file.
+
+39
+00:01:51,887 --> 00:01:54,317
+I can do this by using backticks here
+
+40
+00:01:54,317 --> 00:01:56,388
+to write a multi-line string,
+
+41
+00:01:56,388 --> 00:01:58,117
+and since it is a short template,
+
+42
+00:01:58,117 --> 00:02:00,709
+I will choose to write my HTML code in here
+
+43
+00:02:00,709 --> 00:02:02,622
+and not use an external file.
+
+44
+00:02:02,622 --> 00:02:05,757
+Here I want to create a div with a class
+
+45
+00:02:05,757 --> 00:02:09,132
+of .col-md-8, bootstrap class it is,
+
+46
+00:02:09,132 --> 00:02:11,446
+also give it some centering so,
+
+47
+00:02:11,446 --> 00:02:15,074
+really nothing we haven't seen before.
+
+48
+00:02:15,074 --> 00:02:17,221
+And here my ID doesn't like this.
+
+49
+00:02:17,221 --> 00:02:20,451
+And then in here, I want to loop from my messages,
+
+50
+00:02:20,451 --> 00:02:23,711
+so I will copy the code from my app component
+
+51
+00:02:23,711 --> 00:02:26,236
+where I insert my own message,
+
+52
+00:02:26,236 --> 00:02:29,404
+and I will now simply add it here
+
+53
+00:02:29,404 --> 00:02:31,878
+in the MessageListComponent.
+
+54
+00:02:31,878 --> 00:02:34,102
+Of course this also means that for now,
+
+55
+00:02:34,102 --> 00:02:38,070
+I will copy my messages' array from my app component.
+
+56
+00:02:38,070 --> 00:02:41,448
+I can remove the import of the message class therefore,
+
+57
+00:02:41,448 --> 00:02:43,503
+to my MessageListComponent
+
+58
+00:02:43,503 --> 00:02:47,308
+where I now need to add this message import
+
+59
+00:02:47,308 --> 00:02:48,141
+from
+
+60
+00:02:49,395 --> 00:02:52,119
+./message.model
+
+61
+00:02:52,119 --> 00:02:54,395
+So this is my MessageListComponent,
+
+62
+00:02:54,395 --> 00:02:55,852
+and I will now use this list
+
+63
+00:02:55,852 --> 00:02:58,943
+in my app component HTML file here
+
+64
+00:02:58,943 --> 00:03:02,189
+where I will replace this div since I added the column class
+
+65
+00:03:02,189 --> 00:03:05,856
+as my self and import app-message-list here.
+
+66
+00:03:07,550 --> 00:03:09,158
+Like that.
+
+67
+00:03:09,158 --> 00:03:11,513
+So that's the new component I created
+
+68
+00:03:11,513 --> 00:03:15,085
+and which I'll now also have to register in my app module,
+
+69
+00:03:15,085 --> 00:03:16,958
+so match it, MessageListComponent
+
+70
+00:03:16,958 --> 00:03:19,311
+and also add this import.
+
+71
+00:03:19,311 --> 00:03:21,495
+With this, if I save this and then go back
+
+72
+00:03:21,495 --> 00:03:23,258
+to the application,
+
+73
+00:03:23,258 --> 00:03:27,267
+we should see the same as before, but now it's restructured.
+
+74
+00:03:27,267 --> 00:03:30,034
+Again because later on, I will use other things
+
+75
+00:03:30,034 --> 00:03:32,395
+like authentication in the app component,
+
+76
+00:03:32,395 --> 00:03:36,311
+and therefore I want to make the message part here,
+
+77
+00:03:36,311 --> 00:03:38,886
+the feature here responsible for itself,
+
+78
+00:03:38,886 --> 00:03:40,981
+with its own components.
+
+79
+00:03:40,981 --> 00:03:42,783
+Now for the message-input-component,
+
+80
+00:03:42,783 --> 00:03:44,693
+I'll do pretty much the same.
+
+81
+00:03:44,693 --> 00:03:48,861
+I'll create a new class, MessageInputComponent
+
+82
+00:03:48,861 --> 00:03:50,899
+in this file I just created,
+
+83
+00:03:50,899 --> 00:03:53,498
+then add the component decorator again
+
+84
+00:03:53,498 --> 00:03:57,268
+which needs to be imported from @Angular/core
+
+85
+00:03:57,268 --> 00:03:59,214
+and pass the Chalice script object.
+
+86
+00:03:59,214 --> 00:04:03,023
+Let's set up a selector named app-message-input
+
+87
+00:04:03,023 --> 00:04:06,283
+I think you're seeing which naming convention I'm following.
+
+88
+00:04:06,283 --> 00:04:09,842
+And then here we can also use a template URL again
+
+89
+00:04:09,842 --> 00:04:12,880
+since this will be a little bit of a longer template.
+
+90
+00:04:12,880 --> 00:04:16,797
+I want to point to message-input.component.html
+
+91
+00:04:19,385 --> 00:04:21,904
+Let's also create this external file
+
+92
+00:04:21,904 --> 00:04:25,154
+message-input.component.html like this.
+
+93
+00:04:27,965 --> 00:04:30,049
+And now how should this look like?
+
+94
+00:04:30,049 --> 00:04:33,009
+Here I also want to have my bootstrap classes
+
+95
+00:04:33,009 --> 00:04:37,050
+for a grid to position it in the middle like before.
+
+96
+00:04:37,050 --> 00:04:39,755
+Of course you can always adjust this to your needs.
+
+97
+00:04:39,755 --> 00:04:41,988
+And then here let's create a form group,
+
+98
+00:04:41,988 --> 00:04:44,576
+all the bootstrap with a label
+
+99
+00:04:44,576 --> 00:04:47,540
+for the content of the message.
+
+100
+00:04:47,540 --> 00:04:50,924
+So Content and then of course the input
+
+101
+00:04:50,924 --> 00:04:54,970
+with an ID of content and a class of form-control
+
+102
+00:04:54,970 --> 00:04:58,980
+which the bootstrap class TypeText is okay.
+
+103
+00:04:58,980 --> 00:05:01,707
+And this should hold my input,
+
+104
+00:05:01,707 --> 00:05:04,868
+and then I will have a button to submit it,
+
+105
+00:05:04,868 --> 00:05:08,405
+so here I want to have classes button and button primary,
+
+106
+00:05:08,405 --> 00:05:10,585
+all the bootstrap classes.
+
+107
+00:05:10,585 --> 00:05:12,577
+Type should be submit
+
+108
+00:05:12,577 --> 00:05:15,994
+and I'll name it Save to save my message.
+
+109
+00:05:17,794 --> 00:05:21,044
+With that I'm able to show it at least.
+
+110
+00:05:22,620 --> 00:05:25,372
+So I can now register this in the app module,
+
+111
+00:05:25,372 --> 00:05:28,341
+the MessageInputComponent that is.
+
+112
+00:05:28,341 --> 00:05:29,174
+Like this.
+
+113
+00:05:29,174 --> 00:05:30,602
+Also add the import again.
+
+114
+00:05:30,602 --> 00:05:32,167
+Don't forget this.
+
+115
+00:05:32,167 --> 00:05:35,542
+And then in my app component, I can simply duplicate this,
+
+116
+00:05:35,542 --> 00:05:39,625
+add another row, and here have app-message-input.
+
+117
+00:05:40,980 --> 00:05:43,832
+With this in place, if I now reload the application
+
+118
+00:05:43,832 --> 00:05:48,251
+one more time, we see this new input component,
+
+119
+00:05:48,251 --> 00:05:51,119
+and maybe let's throw in a horizontal line here
+
+120
+00:05:51,119 --> 00:05:53,036
+as a divider like this.
+
+121
+00:05:53,938 --> 00:05:55,434
+So now we get this set up.
+
+122
+00:05:55,434 --> 00:05:57,087
+Now the last thing I wanna do for now,
+
+123
+00:05:57,087 --> 00:06:01,948
+is I want to pass the value, the user inputs here,
+
+124
+00:06:01,948 --> 00:06:04,243
+to the console for now.
+
+125
+00:06:04,243 --> 00:06:07,859
+I'll soon also hook it up to my array to really add it.
+
+126
+00:06:07,859 --> 00:06:10,233
+For now let's just do this.
+
+127
+00:06:10,233 --> 00:06:13,767
+So here I want to hook up a click listener on this button,
+
+128
+00:06:13,767 --> 00:06:17,212
+and I want to execute onSave here,
+
+129
+00:06:17,212 --> 00:06:19,962
+so onSave in my TypeScript class.
+
+130
+00:06:22,038 --> 00:06:26,502
+Now how do I get the value passed into the input here
+
+131
+00:06:26,502 --> 00:06:28,748
+to my TypeScript class?
+
+132
+00:06:28,748 --> 00:06:31,779
+I could use two-way data binding for this,
+
+133
+00:06:31,779 --> 00:06:36,368
+and I will do so soon, or I will use a form to be precise,
+
+134
+00:06:36,368 --> 00:06:39,453
+but here I will show a different approach.
+
+135
+00:06:39,453 --> 00:06:41,234
+We can assign a local reference
+
+136
+00:06:41,234 --> 00:06:43,855
+to any HTML element in our template
+
+137
+00:06:43,855 --> 00:06:47,155
+by using a hashtag and then the name of the reference.
+
+138
+00:06:47,155 --> 00:06:50,151
+Let's name it input, but it's totally up to you.
+
+139
+00:06:50,151 --> 00:06:53,046
+This will store a reference to this input
+
+140
+00:06:53,046 --> 00:06:57,925
+which we then can use everywhere in our template.
+
+141
+00:06:57,925 --> 00:07:00,676
+So in the onSave method, I could pass input
+
+142
+00:07:00,676 --> 00:07:03,484
+to pass the reference to this input element,
+
+143
+00:07:03,484 --> 00:07:06,036
+or I could directly pass input value.
+
+144
+00:07:06,036 --> 00:07:08,638
+Remember, value's a done property available
+
+145
+00:07:08,638 --> 00:07:12,330
+on input elements, so can easily access this like this.
+
+146
+00:07:12,330 --> 00:07:15,505
+This passes the value of this input
+
+147
+00:07:15,505 --> 00:07:18,734
+to the onSave method whenever I click it.
+
+148
+00:07:18,734 --> 00:07:23,038
+So here in the TypeScript class, I can expect this value
+
+149
+00:07:23,038 --> 00:07:24,629
+which will be of type string,
+
+150
+00:07:24,629 --> 00:07:28,712
+and I can simply log it to the console like this.
+
+151
+00:07:29,818 --> 00:07:32,136
+So if I now save this and let it recompile
+
+152
+00:07:32,136 --> 00:07:34,079
+and reload my application.
+
+153
+00:07:34,079 --> 00:07:37,261
+Let's open up the Chalice script console here,
+
+154
+00:07:37,261 --> 00:07:41,213
+and let's enter something and hit save.
+
+155
+00:07:41,213 --> 00:07:42,941
+You see something over there,
+
+156
+00:07:42,941 --> 00:07:45,454
+can increase this in size here.
+
+157
+00:07:45,454 --> 00:07:47,748
+And this is how easy we can hook this up,
+
+158
+00:07:47,748 --> 00:07:49,013
+and again, as a next step,
+
+159
+00:07:49,013 --> 00:07:52,899
+we will make sure that we really fetched this value
+
+160
+00:07:52,899 --> 00:07:56,989
+and then pass it on to a kind of a storage
+
+161
+00:07:56,989 --> 00:07:58,665
+so that we not only save it here
+
+162
+00:07:58,665 --> 00:08:00,510
+in parenthesis to the console,
+
+163
+00:08:00,510 --> 00:08:03,510
+but add a new message to our array.
+

@@ -1,0 +1,968 @@
+1
+00:00:01,903 --> 00:00:03,434
+<v Instructor>In the last lecture,</v>
+
+2
+00:00:03,434 --> 00:00:06,073
+we wired up our sign-up form with the backend,
+
+3
+00:00:06,073 --> 00:00:07,938
+so we're able to create users.
+
+4
+00:00:07,938 --> 00:00:11,248
+Now, I want to make sure that I'm able to sign in users.
+
+5
+00:00:11,248 --> 00:00:13,972
+As before, I'll start with the backend before I then
+
+6
+00:00:13,972 --> 00:00:16,153
+wire it up on the front end.
+
+7
+00:00:16,153 --> 00:00:18,676
+So, in the user.js file in the routes folder,
+
+8
+00:00:18,676 --> 00:00:21,483
+where I currently have my signup route,
+
+9
+00:00:21,483 --> 00:00:24,901
+I will add a new route, which will be a post route,
+
+10
+00:00:24,901 --> 00:00:27,488
+and here the path should be /signin.
+
+11
+00:00:27,488 --> 00:00:31,655
+So, in the end, of course, it will be user/signin.
+
+12
+00:00:32,985 --> 00:00:37,140
+Here again, we get the callback you already know and love.
+
+13
+00:00:37,140 --> 00:00:40,817
+And, in here, how do we sign a user in?
+
+14
+00:00:40,817 --> 00:00:44,332
+Well, the goal will be to find the user first,
+
+15
+00:00:44,332 --> 00:00:48,339
+to identify the user by the email the user
+
+16
+00:00:48,339 --> 00:00:50,849
+who wants to log in to the browser provided here
+
+17
+00:00:50,849 --> 00:00:52,780
+in our sign in form.
+
+18
+00:00:52,780 --> 00:00:55,748
+And, once we've found a user who fits this email
+
+19
+00:00:55,748 --> 00:00:58,900
+in our database, we need to compare the password
+
+20
+00:00:58,900 --> 00:01:01,024
+of that user in our database
+
+21
+00:01:01,024 --> 00:01:04,925
+with the password the user entered in our sign in form.
+
+22
+00:01:04,925 --> 00:01:08,685
+So, let's start by retrieving a user by email.
+
+23
+00:01:08,685 --> 00:01:10,896
+I can use my Mongoose model for this.
+
+24
+00:01:10,896 --> 00:01:13,205
+And, here we get the findOne method,
+
+25
+00:01:13,205 --> 00:01:15,033
+which does what the name implies.
+
+26
+00:01:15,033 --> 00:01:18,167
+It finds all fitting entries,
+
+27
+00:01:18,167 --> 00:01:20,161
+but then it only takes the first one.
+
+28
+00:01:20,161 --> 00:01:24,011
+And, this is fine, since I know that for each email address,
+
+29
+00:01:24,011 --> 00:01:26,000
+I will only have one record,
+
+30
+00:01:26,000 --> 00:01:29,120
+since email is configured to be unique here.
+
+31
+00:01:29,120 --> 00:01:33,468
+And, therefore, there is no need to fetch an array of users,
+
+32
+00:01:33,468 --> 00:01:35,469
+which I then have to, well, extract,
+
+33
+00:01:35,469 --> 00:01:38,208
+or where I then have to extract the first and only element,
+
+34
+00:01:38,208 --> 00:01:39,904
+if I know it will only be one.
+
+35
+00:01:39,904 --> 00:01:42,788
+This is why I use findOne.
+
+36
+00:01:42,788 --> 00:01:44,206
+What I want to do here then is
+
+37
+00:01:44,206 --> 00:01:46,882
+I pass a javascript object as an argument.
+
+38
+00:01:46,882 --> 00:01:51,049
+Here, I define the criteria by which I want to find a entry.
+
+39
+00:01:51,919 --> 00:01:55,946
+The criteria, of course, is the email field in the database.
+
+40
+00:01:55,946 --> 00:01:59,970
+And, here I want to find all entries, or the single entry,
+
+41
+00:01:59,970 --> 00:02:02,423
+where the email is the same email
+
+42
+00:02:02,423 --> 00:02:05,079
+as passed in my request body here.
+
+43
+00:02:05,079 --> 00:02:08,525
+So, I will pass the email from the form in the request body,
+
+44
+00:02:08,525 --> 00:02:10,268
+since it is a post request,
+
+45
+00:02:10,268 --> 00:02:13,110
+and then I retrieve it here to match any email address
+
+46
+00:02:13,110 --> 00:02:14,360
+in my database.
+
+47
+00:02:15,915 --> 00:02:19,709
+Now, here in the callback, we'll see if we were successful
+
+48
+00:02:19,709 --> 00:02:21,459
+in retrieving a user.
+
+49
+00:02:22,319 --> 00:02:24,604
+Let's first check if we get an error,
+
+50
+00:02:24,604 --> 00:02:28,555
+in which case, I use my standard error function
+
+51
+00:02:28,555 --> 00:02:30,321
+or if statement here.
+
+52
+00:02:30,321 --> 00:02:32,767
+But, thereafter, I want to check if we, well,
+
+53
+00:02:32,767 --> 00:02:36,275
+didn't have an error, but maybe we didn't find a user.
+
+54
+00:02:36,275 --> 00:02:40,360
+So, here I will check if user is, well, not existent,
+
+55
+00:02:40,360 --> 00:02:42,348
+so if it basically is null,
+
+56
+00:02:42,348 --> 00:02:45,139
+in which case, I also want to return a response
+
+57
+00:02:45,139 --> 00:02:47,556
+where the status is also 500,
+
+58
+00:02:48,910 --> 00:02:52,160
+but I will issue another error message.
+
+59
+00:02:53,075 --> 00:02:56,075
+I will say, "title: 'No user found'"
+
+60
+00:02:59,148 --> 00:03:02,731
+and then issue an error, which is an object
+
+61
+00:03:04,523 --> 00:03:08,690
+where I have a message which says,"User could not be found".
+
+62
+00:03:09,851 --> 00:03:11,626
+Now, here's an important thing.
+
+63
+00:03:11,626 --> 00:03:16,612
+If you do it like this, this might create a security issue
+
+64
+00:03:16,612 --> 00:03:20,349
+because people are able to simply try out email addresses
+
+65
+00:03:20,349 --> 00:03:22,124
+and you tell them no user found
+
+66
+00:03:22,124 --> 00:03:23,943
+if the email address is wrong,
+
+67
+00:03:23,943 --> 00:03:26,752
+whereas in the case of invalid password,
+
+68
+00:03:26,752 --> 00:03:29,313
+you would probably, well,
+
+69
+00:03:29,313 --> 00:03:32,073
+give a message like password invalid.
+
+70
+00:03:32,073 --> 00:03:34,454
+This way, people are able to figure out
+
+71
+00:03:34,454 --> 00:03:38,538
+if they have the right email, but wrong password, or not.
+
+72
+00:03:38,538 --> 00:03:42,720
+Now, to prevent this, a better message here is login failed.
+
+73
+00:03:42,720 --> 00:03:44,721
+Something like this, a generic message
+
+74
+00:03:44,721 --> 00:03:47,854
+where you can't tell if the email or the password,
+
+75
+00:03:47,854 --> 00:03:49,432
+or both, was wrong.
+
+76
+00:03:49,432 --> 00:03:53,432
+So, you can here issue invalid login credentials
+
+77
+00:03:54,965 --> 00:03:57,433
+as a message, for example.
+
+78
+00:03:57,433 --> 00:04:00,952
+So, after checking for errors, and if we don't have a user,
+
+79
+00:04:00,952 --> 00:04:01,785
+we're now at the point
+
+80
+00:04:01,785 --> 00:04:05,486
+where we know we do have a user fitting this email address.
+
+81
+00:04:05,486 --> 00:04:07,792
+Now, we have to make sure, or to check,
+
+82
+00:04:07,792 --> 00:04:09,542
+if this user actually
+
+83
+00:04:10,387 --> 00:04:13,998
+has the password the user on the client, on the browser,
+
+84
+00:04:13,998 --> 00:04:16,535
+entered into the sign in form.
+
+85
+00:04:16,535 --> 00:04:19,024
+For that, we need to compare passwords,
+
+86
+00:04:19,024 --> 00:04:21,308
+and that is where we face a problem
+
+87
+00:04:21,308 --> 00:04:23,354
+because we do encrypt the password here
+
+88
+00:04:23,354 --> 00:04:25,474
+when we create a new user.
+
+89
+00:04:25,474 --> 00:04:27,507
+As you saw in the Mongo shell,
+
+90
+00:04:27,507 --> 00:04:29,673
+it's a really complicated string,
+
+91
+00:04:29,673 --> 00:04:33,939
+and as I mentioned in the user signup video,
+
+92
+00:04:33,939 --> 00:04:36,286
+we can't decrypt this password.
+
+93
+00:04:36,286 --> 00:04:39,276
+We can't get the plain text password
+
+94
+00:04:39,276 --> 00:04:41,447
+from this encrypted string.
+
+95
+00:04:41,447 --> 00:04:43,173
+This, on one hand, makes it secure.
+
+96
+00:04:43,173 --> 00:04:44,006
+But, on the other hand,
+
+97
+00:04:44,006 --> 00:04:48,464
+how can we figure out if the correct password was entered?
+
+98
+00:04:48,464 --> 00:04:52,560
+Well, the bcrypt package we used for encrypting,
+
+99
+00:04:52,560 --> 00:04:56,290
+also is able to check if the password entered here,
+
+100
+00:04:56,290 --> 00:04:59,623
+in the login form, would give us a hash,
+
+101
+00:05:01,025 --> 00:05:05,223
+not similar to the other one, but comparable
+
+102
+00:05:05,223 --> 00:05:07,862
+to the one in the signup method.
+
+103
+00:05:07,862 --> 00:05:09,821
+Since it is the same algorithm,
+
+104
+00:05:09,821 --> 00:05:12,599
+we can basically see if the hash,
+
+105
+00:05:12,599 --> 00:05:15,190
+while it is not the exact same,
+
+106
+00:05:15,190 --> 00:05:18,120
+does have the same similarities, kind of.
+
+107
+00:05:18,120 --> 00:05:21,838
+So, if we do have a valid password.
+
+108
+00:05:21,838 --> 00:05:23,775
+And, while this might sound strange,
+
+109
+00:05:23,775 --> 00:05:26,849
+it basically comes down to this encryption algorithm,
+
+110
+00:05:26,849 --> 00:05:30,302
+where we can check if the same algorithm,
+
+111
+00:05:30,302 --> 00:05:32,758
+on the same password,
+
+112
+00:05:32,758 --> 00:05:35,558
+whilst not giving us the same encrypted string,
+
+113
+00:05:35,558 --> 00:05:37,733
+would lead to a comparable result.
+
+114
+00:05:37,733 --> 00:05:41,694
+So, this package, bcrypt, can check this for us.
+
+115
+00:05:41,694 --> 00:05:44,363
+The usage is to, again, use bcrypt here,
+
+116
+00:05:44,363 --> 00:05:47,446
+and then call the compareSync method.
+
+117
+00:05:48,871 --> 00:05:51,177
+Here, as a first argument,
+
+118
+00:05:51,177 --> 00:05:54,345
+we pass the string we want to compare.
+
+119
+00:05:54,345 --> 00:05:57,956
+So, this password entered into the login form,
+
+120
+00:05:57,956 --> 00:06:00,678
+which we can retrieve from our request,
+
+121
+00:06:00,678 --> 00:06:02,428
+so req.body.password,
+
+122
+00:06:03,778 --> 00:06:06,871
+and then the hash to which you want to compare it.
+
+123
+00:06:06,871 --> 00:06:10,301
+That, of course, is the password stored in the database,
+
+124
+00:06:10,301 --> 00:06:14,887
+so on the user we retrieved here, the password field.
+
+125
+00:06:14,887 --> 00:06:17,678
+Now, this will return true or false,
+
+126
+00:06:17,678 --> 00:06:19,700
+and then we can go from there.
+
+127
+00:06:19,700 --> 00:06:22,809
+So, here I will check if this is true,
+
+128
+00:06:22,809 --> 00:06:26,226
+so if it is valid, or if it is not valid.
+
+129
+00:06:27,277 --> 00:06:30,444
+I will first check if it is not valid,
+
+130
+00:06:31,424 --> 00:06:34,899
+so if not bcrypt.comparSync, so if this returns false,
+
+131
+00:06:34,899 --> 00:06:37,673
+if the password is not the same as in the database.
+
+132
+00:06:37,673 --> 00:06:41,840
+In this case, I want to return the same status as up here,
+
+133
+00:06:43,489 --> 00:06:47,555
+though I just recognised we should return 401
+
+134
+00:06:47,555 --> 00:06:50,430
+as a status code for an authorised here,
+
+135
+00:06:50,430 --> 00:06:52,489
+and I will return the same error message
+
+136
+00:06:52,489 --> 00:06:54,180
+for the reason I just explained,
+
+137
+00:06:54,180 --> 00:06:57,457
+to not give a clue on whether the email was wrong
+
+138
+00:06:57,457 --> 00:06:59,953
+or the password, or both.
+
+139
+00:06:59,953 --> 00:07:02,392
+So this is the case that we're not
+
+140
+00:07:02,392 --> 00:07:06,353
+passing the right password, we're returning this error.
+
+141
+00:07:06,353 --> 00:07:08,454
+Now, if we made it to this point,
+
+142
+00:07:08,454 --> 00:07:11,076
+we know that the user does exist
+
+143
+00:07:11,076 --> 00:07:13,341
+and that the right password was entered,
+
+144
+00:07:13,341 --> 00:07:16,885
+so now we should create this token I was talking about
+
+145
+00:07:16,885 --> 00:07:19,521
+in one of the first lectures in this section.
+
+146
+00:07:19,521 --> 00:07:21,374
+This token, which our client
+
+147
+00:07:21,374 --> 00:07:25,019
+then can use for future requests to tell us,
+
+148
+00:07:25,019 --> 00:07:28,439
+"Hey, I already logged in, I am authenticated.
+
+149
+00:07:28,439 --> 00:07:30,232
+Please, let me in."
+
+150
+00:07:30,232 --> 00:07:32,578
+So, this token needs to be created.
+
+151
+00:07:32,578 --> 00:07:36,241
+And, as with creating the password and comparing it,
+
+152
+00:07:36,241 --> 00:07:37,684
+we won't do this on our own
+
+153
+00:07:37,684 --> 00:07:41,073
+since we need a kind of complex algorithm behind that.
+
+154
+00:07:41,073 --> 00:07:43,396
+There are packages to do this.
+
+155
+00:07:43,396 --> 00:07:45,503
+The question in the first place is,
+
+156
+00:07:45,503 --> 00:07:47,937
+how does such a token look like?
+
+157
+00:07:47,937 --> 00:07:52,528
+And, I will use a JSON web token, short form: JWT.
+
+158
+00:07:52,528 --> 00:07:56,695
+You can learn more about JWT, about JSON web tokens,
+
+159
+00:07:57,648 --> 00:08:00,415
+by, as dumb as it sounds, simply googling it.
+
+160
+00:08:00,415 --> 00:08:04,542
+There are plenty of resources diving deeper into it.
+
+161
+00:08:04,542 --> 00:08:07,366
+Basically, the first link here is a great resource,
+
+162
+00:08:07,366 --> 00:08:10,357
+it is a token which looks like this, for example,
+
+163
+00:08:10,357 --> 00:08:14,277
+which encodes a couple of information pieces in this token.
+
+164
+00:08:14,277 --> 00:08:17,132
+Some header date, then the payload.
+
+165
+00:08:17,132 --> 00:08:21,017
+Here, for example, we can store the locked in user
+
+166
+00:08:21,017 --> 00:08:24,213
+and then a signature we need to verify this token,
+
+167
+00:08:24,213 --> 00:08:27,038
+including this secret you see down here.
+
+168
+00:08:27,038 --> 00:08:29,014
+We will set this on our own.
+
+169
+00:08:29,014 --> 00:08:32,783
+This verification signature here allows us to, later on,
+
+170
+00:08:32,783 --> 00:08:35,549
+verify if the token passed by the client,
+
+171
+00:08:35,549 --> 00:08:38,880
+is a valid token, or is an arbitrary token
+
+172
+00:08:38,880 --> 00:08:42,030
+passed by malicious code, for example.
+
+173
+00:08:42,030 --> 00:08:44,639
+So, this is how that token looks like
+
+174
+00:08:44,639 --> 00:08:49,009
+and again, we will use a package to create this token.
+
+175
+00:08:49,009 --> 00:08:51,788
+So, which package do I want to user here?
+
+176
+00:08:51,788 --> 00:08:55,233
+I'll quit out of my build process
+
+177
+00:08:55,233 --> 00:08:56,939
+and then I will instal a new package
+
+178
+00:08:56,939 --> 00:08:59,878
+by running npm instal --save,
+
+179
+00:08:59,878 --> 00:09:02,201
+to store it as a protection dependency,
+
+180
+00:09:02,201 --> 00:09:03,956
+and then the name of the package I will use
+
+181
+00:09:03,956 --> 00:09:06,206
+is jsonwebtoken, like this.
+
+182
+00:09:08,019 --> 00:09:09,751
+This will pull down the package
+
+183
+00:09:09,751 --> 00:09:12,634
+and instal it in my project.
+
+184
+00:09:12,634 --> 00:09:14,464
+And, once it is installed,
+
+185
+00:09:14,464 --> 00:09:17,797
+I can pull it into my user.js file here.
+
+186
+00:09:19,042 --> 00:09:22,273
+I'll store it in a variable named jwt.
+
+187
+00:09:22,273 --> 00:09:24,440
+Require jsonwebtoken here,
+
+188
+00:09:25,848 --> 00:09:30,433
+and then down here at the bottom, I can create a new token,
+
+189
+00:09:30,433 --> 00:09:34,016
+store it in a variable by running jwt.sign.
+
+190
+00:09:35,016 --> 00:09:37,930
+This creates a new token, it signs it for us.
+
+191
+00:09:37,930 --> 00:09:40,302
+Generates it and signs it.
+
+192
+00:09:40,302 --> 00:09:41,982
+Now, the arguments we pass here
+
+193
+00:09:41,982 --> 00:09:44,641
+is the payload we want to store in the token,
+
+194
+00:09:44,641 --> 00:09:48,904
+then the secret we need for verifying the token,
+
+195
+00:09:48,904 --> 00:09:51,512
+and then some possible options.
+
+196
+00:09:51,512 --> 00:09:54,406
+Now, let's start with the payload.
+
+197
+00:09:54,406 --> 00:09:56,256
+The payload is a javascript object
+
+198
+00:09:56,256 --> 00:09:58,965
+that allows us to store any data we want.
+
+199
+00:09:58,965 --> 00:10:02,548
+Here, I want to store the user in the token
+
+200
+00:10:03,681 --> 00:10:07,219
+so that I'm later able to retrieve the locked in user
+
+201
+00:10:07,219 --> 00:10:10,392
+from the token being sent to the server.
+
+202
+00:10:10,392 --> 00:10:12,560
+So, here I will set up user field.
+
+203
+00:10:12,560 --> 00:10:14,181
+This name is totally up to you,
+
+204
+00:10:14,181 --> 00:10:17,261
+but you will need to use this same field name later
+
+205
+00:10:17,261 --> 00:10:19,795
+when accessing data in the token.
+
+206
+00:10:19,795 --> 00:10:22,262
+And, then the value I want to store here
+
+207
+00:10:22,262 --> 00:10:25,179
+is the user object I retrieved here
+
+208
+00:10:26,852 --> 00:10:29,854
+which I found in the database of which I now know
+
+209
+00:10:29,854 --> 00:10:33,705
+that it is valid, that the password is right, and so on.
+
+210
+00:10:33,705 --> 00:10:35,980
+The second argument is your secret key
+
+211
+00:10:35,980 --> 00:10:37,488
+and this should probably be a bit
+
+212
+00:10:37,488 --> 00:10:38,973
+of a more complicated string,
+
+213
+00:10:38,973 --> 00:10:43,299
+but I will simply use secret here for simplicity reasons.
+
+214
+00:10:43,299 --> 00:10:45,771
+And, then you can configure this token.
+
+215
+00:10:45,771 --> 00:10:49,104
+Now, I will configure the expiresIn key,
+
+216
+00:10:50,169 --> 00:10:52,201
+which allows me to specify
+
+217
+00:10:52,201 --> 00:10:55,042
+how long this token will be valid.
+
+218
+00:10:55,042 --> 00:10:58,709
+I will set this 7200, which means two hours,
+
+219
+00:10:59,845 --> 00:11:02,397
+since this is measured in seconds.
+
+220
+00:11:02,397 --> 00:11:04,229
+With this, the token is created.
+
+221
+00:11:04,229 --> 00:11:07,807
+The final step is to now pass this token to the client.
+
+222
+00:11:07,807 --> 00:11:11,974
+So, I will set up a response with this status 200 here
+
+223
+00:11:14,040 --> 00:11:18,066
+and then some data to be passed with the response.
+
+224
+00:11:18,066 --> 00:11:22,121
+And, in this javascript object, I do pass a message,
+
+225
+00:11:22,121 --> 00:11:26,653
+like successfully logged in, whatever you want.
+
+226
+00:11:26,653 --> 00:11:31,192
+Then, I will pass the token in a field named token.
+
+227
+00:11:31,192 --> 00:11:35,359
+And, I will also pass the ID of the user, the userId, why?
+
+228
+00:11:36,906 --> 00:11:38,590
+Well, you will see this in a second
+
+229
+00:11:38,590 --> 00:11:40,647
+when I hook this up to the front end.
+
+230
+00:11:40,647 --> 00:11:41,985
+Well, this will basically allow me
+
+231
+00:11:41,985 --> 00:11:44,816
+to find out the ID of the current logged in user
+
+232
+00:11:44,816 --> 00:11:46,274
+and therefore, on the front end,
+
+233
+00:11:46,274 --> 00:11:50,079
+to show if a user should be able to delete and edit a post
+
+234
+00:11:50,079 --> 00:11:52,106
+because I want to restrict this to posts
+
+235
+00:11:52,106 --> 00:11:53,861
+of the user who is logged in.
+
+236
+00:11:53,861 --> 00:11:56,055
+But, you will see this in action soon.
+
+237
+00:11:56,055 --> 00:11:58,555
+So, here I will pass user._id.
+
+238
+00:12:01,404 --> 00:12:03,654
+With this, we're set to go.
+
+239
+00:12:04,503 --> 00:12:07,335
+We're ready to wire this up to the front end.
+
+240
+00:12:07,335 --> 00:12:08,691
+The back end is prepared.
+
+241
+00:12:08,691 --> 00:12:11,880
+Time to now, also, go to the front end
+
+242
+00:12:11,880 --> 00:12:14,547
+and submit our login form there.
+

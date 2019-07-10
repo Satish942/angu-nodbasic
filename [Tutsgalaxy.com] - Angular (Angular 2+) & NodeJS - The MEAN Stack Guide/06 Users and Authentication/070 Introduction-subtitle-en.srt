@@ -1,0 +1,112 @@
+1
+00:00:02,366 --> 00:00:03,302
+<v Instructor>So welcome back</v>
+
+2
+00:00:03,302 --> 00:00:05,496
+to another section in this course.
+
+3
+00:00:05,496 --> 00:00:08,315
+We left with a working Messenger part,
+
+4
+00:00:08,315 --> 00:00:12,797
+so we're able to save messages to our database,
+
+5
+00:00:12,797 --> 00:00:14,797
+to edit them, like this,
+
+6
+00:00:15,672 --> 00:00:19,045
+to save this and have these changes persist in our database.
+
+7
+00:00:19,045 --> 00:00:21,544
+Of course, we're also able to delete them.
+
+8
+00:00:21,544 --> 00:00:22,536
+That is great,
+
+9
+00:00:22,536 --> 00:00:25,204
+but there is a missing piece in this application.
+
+10
+00:00:25,204 --> 00:00:27,424
+The Authentication part here is not working,
+
+11
+00:00:27,424 --> 00:00:30,481
+so we're not able to sign up users, to sign in users,
+
+12
+00:00:30,481 --> 00:00:33,246
+and therefore we're also not able
+
+13
+00:00:33,246 --> 00:00:36,038
+to map our messages to users.
+
+14
+00:00:36,038 --> 00:00:37,038
+This is why,
+
+15
+00:00:38,328 --> 00:00:40,579
+if I create a new message here,
+
+16
+00:00:40,579 --> 00:00:42,418
+we always see Dummy here.
+
+17
+00:00:42,418 --> 00:00:43,619
+We just don't have a user
+
+18
+00:00:43,619 --> 00:00:45,916
+to whom we could attach this message.
+
+19
+00:00:45,916 --> 00:00:48,467
+So this is something we'll have to change,
+
+20
+00:00:48,467 --> 00:00:50,184
+and in this module,
+
+21
+00:00:50,184 --> 00:00:53,917
+I will show you how to implement user features,
+
+22
+00:00:53,917 --> 00:00:56,888
+and that of course, not only includes creating a user,
+
+23
+00:00:56,888 --> 00:00:58,761
+but also signing in a user,
+
+24
+00:00:58,761 --> 00:01:01,641
+and learning what the signing in a user
+
+25
+00:01:01,641 --> 00:01:05,943
+in a Angular 2, NodeJS application actually mean.
+
+26
+00:01:05,943 --> 00:01:08,001
+Because, as you will learn, it's different
+
+27
+00:01:08,001 --> 00:01:12,441
+from your normal NodeJS and Express only application.
+
+28
+00:01:12,441 --> 00:01:14,441
+So let's dive into this.
+

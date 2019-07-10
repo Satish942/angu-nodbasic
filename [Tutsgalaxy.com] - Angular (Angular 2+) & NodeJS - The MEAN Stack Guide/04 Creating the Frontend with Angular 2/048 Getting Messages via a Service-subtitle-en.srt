@@ -1,0 +1,400 @@
+1
+00:00:01,727 --> 00:00:03,138
+<v Instructor>We already unchecked</v>
+
+2
+00:00:03,138 --> 00:00:06,458
+the message service and the message input component.
+
+3
+00:00:06,458 --> 00:00:09,218
+Now in order to get this list of messages,
+
+4
+00:00:09,218 --> 00:00:11,885
+the logical place to alt unchecked would be
+
+5
+00:00:11,885 --> 00:00:14,545
+the master list component here,
+
+6
+00:00:14,545 --> 00:00:16,840
+where we have the array of messages.
+
+7
+00:00:16,840 --> 00:00:19,042
+So let's do that, let's add a constructor
+
+8
+00:00:19,042 --> 00:00:21,423
+here too, where I then also set up
+
+9
+00:00:21,423 --> 00:00:25,173
+a message service property and tell Angular 2
+
+10
+00:00:26,084 --> 00:00:28,393
+that this should be of type message service.
+
+11
+00:00:28,393 --> 00:00:30,117
+Which also needs to be imported here
+
+12
+00:00:30,117 --> 00:00:31,540
+at the top, of course.
+
+13
+00:00:31,540 --> 00:00:34,174
+Remember that alone won't do the trick.
+
+14
+00:00:34,174 --> 00:00:36,917
+We also have to add the providers array here
+
+15
+00:00:36,917 --> 00:00:40,289
+to provide the message service like this.
+
+16
+00:00:40,289 --> 00:00:43,083
+With that, we get access to the message service
+
+17
+00:00:43,083 --> 00:00:46,334
+here too, and we could call this get messages,
+
+18
+00:00:46,334 --> 00:00:50,334
+by the way, method here to get all the messages.
+
+19
+00:00:52,076 --> 00:00:54,118
+Now in the message list component,
+
+20
+00:00:54,118 --> 00:00:56,047
+we could do this in the constructor,
+
+21
+00:00:56,047 --> 00:00:59,696
+but a good practise is to use the ngOninit
+
+22
+00:00:59,696 --> 00:01:02,893
+life cycle hook for well, anything else
+
+23
+00:01:02,893 --> 00:01:06,372
+which is beyond very basic initializations.
+
+24
+00:01:06,372 --> 00:01:09,635
+The ngOninit life cycle hook is one of
+
+25
+00:01:09,635 --> 00:01:11,823
+the life cycle hooks Angular 2 reaches
+
+26
+00:01:11,823 --> 00:01:14,176
+when creating such a component.
+
+27
+00:01:14,176 --> 00:01:15,998
+It will reach several life cycles,
+
+28
+00:01:15,998 --> 00:01:17,439
+and you can learn more about this
+
+29
+00:01:17,439 --> 00:01:19,437
+in dedicated Angular 2 courses.
+
+30
+00:01:19,437 --> 00:01:21,023
+But a very important hook is the
+
+31
+00:01:21,023 --> 00:01:22,983
+Oninit life cycle hook, which is executed
+
+32
+00:01:22,983 --> 00:01:27,028
+once the component has been initialised by Angular 2.
+
+33
+00:01:27,028 --> 00:01:29,131
+Remember it's doing this in the background
+
+34
+00:01:29,131 --> 00:01:31,297
+with this add component decorator,
+
+35
+00:01:31,297 --> 00:01:33,382
+we give Angular 2 the chance to initialise
+
+36
+00:01:33,382 --> 00:01:35,478
+such a component.
+
+37
+00:01:35,478 --> 00:01:39,578
+So in order to implement this life cycle hook method,
+
+38
+00:01:39,578 --> 00:01:43,578
+I implement an interface which is called Oninit,
+
+39
+00:01:44,675 --> 00:01:49,039
+and which needs to be imported from at Angular core.
+
+40
+00:01:49,039 --> 00:01:51,772
+What this interface does is it
+
+41
+00:01:51,772 --> 00:01:54,446
+requires me to implement the method called
+
+42
+00:01:54,446 --> 00:01:58,613
+ngOninit in this class, otherwise it will get an error.
+
+43
+00:01:59,525 --> 00:02:02,502
+Now with this interface, I'm telling Angular 2
+
+44
+00:02:02,502 --> 00:02:05,203
+since it requires me to implement this method,
+
+45
+00:02:05,203 --> 00:02:07,020
+that I do have this method.
+
+46
+00:02:07,020 --> 00:02:09,167
+Which makes it safe for Angular 2 to
+
+47
+00:02:09,167 --> 00:02:10,685
+execute this method once it reaches
+
+48
+00:02:10,685 --> 00:02:12,924
+the Oninit life cycle phase.
+
+49
+00:02:12,924 --> 00:02:14,402
+It won't execute it by default
+
+50
+00:02:14,402 --> 00:02:16,938
+because I might not have this method,
+
+51
+00:02:16,938 --> 00:02:19,379
+but if I do have it, and I indicate this with
+
+52
+00:02:19,379 --> 00:02:21,972
+again, with the implement hash optics interface,
+
+53
+00:02:21,972 --> 00:02:24,927
+it will run this method automatically.
+
+54
+00:02:24,927 --> 00:02:26,455
+So in this method which is called,
+
+55
+00:02:26,455 --> 00:02:28,833
+after the component has been initialised,
+
+56
+00:02:28,833 --> 00:02:31,189
+after the properties have been initialised,
+
+57
+00:02:31,189 --> 00:02:34,631
+I can simply say this.messages equals
+
+58
+00:02:34,631 --> 00:02:37,298
+this.messageService.getMessages,
+
+59
+00:02:38,633 --> 00:02:40,598
+which will give me this array.
+
+60
+00:02:40,598 --> 00:02:42,049
+Now here's an important note.
+
+61
+00:02:42,049 --> 00:02:44,637
+I'm assigning this messages,
+
+62
+00:02:44,637 --> 00:02:47,725
+which I now can simply clear here,
+
+63
+00:02:47,725 --> 00:02:51,642
+to this array I'm having in my message service.
+
+64
+00:02:53,401 --> 00:02:56,968
+Keep in mind arrays and objects in JavaScript
+
+65
+00:02:56,968 --> 00:03:00,033
+are reference types which means
+
+66
+00:03:00,033 --> 00:03:02,718
+if I assign this array from the service
+
+67
+00:03:02,718 --> 00:03:04,442
+to the array in this component
+
+68
+00:03:04,442 --> 00:03:07,814
+as I'm doing here, this is one and the same object.
+
+69
+00:03:07,814 --> 00:03:09,769
+These are not two different objects,
+
+70
+00:03:09,769 --> 00:03:11,368
+I'm not creating a copy here.
+
+71
+00:03:11,368 --> 00:03:13,153
+I'm simply copying the pointer which
+
+72
+00:03:13,153 --> 00:03:15,707
+points to the same place in memory.
+
+73
+00:03:15,707 --> 00:03:17,777
+So this messages and this component
+
+74
+00:03:17,777 --> 00:03:21,419
+points to the same array as I have here
+
+75
+00:03:21,419 --> 00:03:23,597
+in the message service.
+
+76
+00:03:23,597 --> 00:03:25,535
+Which is great because this means that
+
+77
+00:03:25,535 --> 00:03:28,376
+whenever I add a method from some other place
+
+78
+00:03:28,376 --> 00:03:31,084
+in the application, it is added to this array
+
+79
+00:03:31,084 --> 00:03:32,877
+which happens to be the same as
+
+80
+00:03:32,877 --> 00:03:34,872
+in the message list component.
+
+81
+00:03:34,872 --> 00:03:38,296
+Which means the list will automatically get updated.
+
+82
+00:03:38,296 --> 00:03:40,091
+So once you see this automatic updating,
+
+83
+00:03:40,091 --> 00:03:41,923
+keep this in mind that this is happening
+
+84
+00:03:41,923 --> 00:03:45,067
+because we're using the same messages array here
+
+85
+00:03:45,067 --> 00:03:48,986
+due to how reference types work in JavaScript.
+
+86
+00:03:48,986 --> 00:03:52,456
+Enough of the talking so I hooked this up,
+
+87
+00:03:52,456 --> 00:03:55,733
+so with that if I save this, what we should see
+
+88
+00:03:55,733 --> 00:03:58,426
+upon reloading this application is
+
+89
+00:03:58,426 --> 00:04:00,748
+that initially this is now empty.
+
+90
+00:04:00,748 --> 00:04:02,534
+We don't have any messages anymore.
+
+91
+00:04:02,534 --> 00:04:05,372
+Which makes sense because I deleted it here.
+
+92
+00:04:05,372 --> 00:04:06,821
+I'm fetching it from the message service
+
+93
+00:04:06,821 --> 00:04:08,699
+which is empty at the beginning.
+
+94
+00:04:08,699 --> 00:04:11,280
+So let's add a new message here.
+
+95
+00:04:11,280 --> 00:04:13,427
+And after I click save, we should see it
+
+96
+00:04:13,427 --> 00:04:15,777
+up here down there.
+
+97
+00:04:15,777 --> 00:04:18,476
+Well, nothing is happening.
+
+98
+00:04:18,476 --> 00:04:19,476
+Why is that?
+
+99
+00:04:20,406 --> 00:04:22,284
+Well, I'm going to have a look at this
+
+100
+00:04:22,284 --> 00:04:23,784
+in the next video.
+

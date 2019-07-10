@@ -1,0 +1,484 @@
+1
+00:00:01,915 --> 00:00:03,936
+<v ->To create the angular application</v>
+
+2
+00:00:03,936 --> 00:00:05,881
+I will create a new folder first,
+
+3
+00:00:05,881 --> 00:00:07,953
+the assets folder.
+
+4
+00:00:07,953 --> 00:00:11,793
+In this folder I'll create a new subfolder app.
+
+5
+00:00:11,793 --> 00:00:13,822
+This will hold my Angular2 application.
+
+6
+00:00:13,822 --> 00:00:17,802
+And in here, I will create some basic files.
+
+7
+00:00:17,802 --> 00:00:19,969
+App Component for example.
+
+8
+00:00:21,036 --> 00:00:22,945
+Then I will also create some external files
+
+9
+00:00:22,945 --> 00:00:24,885
+so that we can see that this works.
+
+10
+00:00:24,885 --> 00:00:27,932
+App Component HTML for the template
+
+11
+00:00:27,932 --> 00:00:32,099
+and also App Component dot CSS file for the styles.
+
+12
+00:00:33,215 --> 00:00:36,148
+And then also my App module of course
+
+13
+00:00:36,148 --> 00:00:38,625
+to have this we need that.
+
+14
+00:00:38,625 --> 00:00:42,059
+And my main dot TS file to start everything.
+
+15
+00:00:42,059 --> 00:00:44,164
+I'll create another file too.
+
+16
+00:00:44,164 --> 00:00:47,164
+Polyfills.TS will hold the Polyfills
+
+17
+00:00:48,296 --> 00:00:50,445
+of my application, so these dependencies
+
+18
+00:00:50,445 --> 00:00:54,288
+Angular2 needs to run fine in all browsers.
+
+19
+00:00:54,288 --> 00:00:58,421
+So I'll fill this Polyfills file here first.
+
+20
+00:00:58,421 --> 00:01:00,670
+I prepared some code which I'll import
+
+21
+00:01:00,670 --> 00:01:04,022
+and what this does is it imports Core JS Polyfills we need
+
+22
+00:01:04,022 --> 00:01:06,343
+and then it also imports Zone JS.
+
+23
+00:01:06,343 --> 00:01:08,205
+We can ignore the arrows for now,
+
+24
+00:01:08,205 --> 00:01:10,930
+it will be able to figure this out in the end.
+
+25
+00:01:10,930 --> 00:01:13,340
+Let's go over to the app component
+
+26
+00:01:13,340 --> 00:01:15,079
+and quickly create it here.
+
+27
+00:01:15,079 --> 00:01:17,102
+Of course I'm not really explaining
+
+28
+00:01:17,102 --> 00:01:19,996
+what I'm doing here, we saw it as all over
+
+29
+00:01:19,996 --> 00:01:20,988
+through out the course
+
+30
+00:01:20,988 --> 00:01:23,988
+so add the component decorator here.
+
+31
+00:01:25,794 --> 00:01:28,275
+My ID unfortunately is not picking up on that yet
+
+32
+00:01:28,275 --> 00:01:31,871
+so I have to add the import manually
+
+33
+00:01:31,871 --> 00:01:33,288
+from AngularCore.
+
+34
+00:01:35,756 --> 00:01:38,782
+Oh it can't pick up because important,
+
+35
+00:01:38,782 --> 00:01:40,885
+we need to run NPM Instal to instal
+
+36
+00:01:40,885 --> 00:01:43,449
+all these angular dependencies I added
+
+37
+00:01:43,449 --> 00:01:45,021
+to my package adjacent.
+
+38
+00:01:45,021 --> 00:01:48,986
+I didn't add them with NPM Instal here in the command line.
+
+39
+00:01:48,986 --> 00:01:51,426
+Now my ID is picking up on that.
+
+40
+00:01:51,426 --> 00:01:53,411
+I'll set up a selector.
+
+41
+00:01:53,411 --> 00:01:56,161
+My app here, and the template URL
+
+42
+00:01:58,421 --> 00:02:00,838
+leading to App.Component.HTML
+
+43
+00:02:03,247 --> 00:02:05,187
+and of course the import here is wrong
+
+44
+00:02:05,187 --> 00:02:07,788
+because it should be @Angular.
+
+45
+00:02:07,788 --> 00:02:11,138
+Also let's add some style URLs here.
+
+46
+00:02:11,138 --> 00:02:15,768
+One to be precise leading to App Component dot CSS.
+
+47
+00:02:15,768 --> 00:02:18,869
+So in these files here I'll say "Hello World"
+
+48
+00:02:18,869 --> 00:02:22,202
+in the template and for testing reasons,
+
+49
+00:02:23,356 --> 00:02:26,038
+I will make it red so that we can see
+
+50
+00:02:26,038 --> 00:02:29,051
+if the styling gets applied correctly.
+
+51
+00:02:29,051 --> 00:02:31,248
+Last step here or almost the last step
+
+52
+00:02:31,248 --> 00:02:33,915
+is to create my app module here.
+
+53
+00:02:35,556 --> 00:02:37,723
+Let's add NG Module to it.
+
+54
+00:02:40,186 --> 00:02:43,019
+And also add this import NG Module
+
+55
+00:02:44,286 --> 00:02:45,786
+from @AngularCore.
+
+56
+00:02:50,608 --> 00:02:52,716
+And in this module we want to add
+
+57
+00:02:52,716 --> 00:02:56,484
+the app component to our declarations area.
+
+58
+00:02:56,484 --> 00:02:59,249
+Also add the import of course.
+
+59
+00:02:59,249 --> 00:03:02,878
+We also want to add some imports here,
+
+60
+00:03:02,878 --> 00:03:05,116
+specifically we need the browser module
+
+61
+00:03:05,116 --> 00:03:06,940
+Angular2 ships with.
+
+62
+00:03:06,940 --> 00:03:08,357
+This is imported.
+
+63
+00:03:10,666 --> 00:03:14,416
+Browser module from @Angular Platform Browser
+
+64
+00:03:17,861 --> 00:03:20,515
+and we want to add the Bootstrap array
+
+65
+00:03:20,515 --> 00:03:24,204
+to tell it to Bootstrap with this app component.
+
+66
+00:03:24,204 --> 00:03:26,687
+Missing piece now on the Angular 2 side here
+
+67
+00:03:26,687 --> 00:03:28,671
+is the Main dot TS file.
+
+68
+00:03:28,671 --> 00:03:32,152
+In here I will first import my Polyfills file
+
+69
+00:03:32,152 --> 00:03:34,665
+so that these get loaded first.
+
+70
+00:03:34,665 --> 00:03:38,665
+Then I will import platform browser dynamic here
+
+71
+00:03:42,404 --> 00:03:45,336
+to have just in time compilation in the browser.
+
+72
+00:03:45,336 --> 00:03:49,318
+I'll come to ahead of time compilation soon
+
+73
+00:03:49,318 --> 00:03:52,537
+from platform browser dynamic here
+
+74
+00:03:52,537 --> 00:03:56,353
+and with that I can call platform browser dynamic,
+
+75
+00:03:56,353 --> 00:03:59,711
+Bootstrap module, and Bootstrap my app module
+
+76
+00:03:59,711 --> 00:04:02,534
+which now also needs to be imported here.
+
+77
+00:04:02,534 --> 00:04:04,894
+This will start my application.
+
+78
+00:04:04,894 --> 00:04:08,477
+Of course right now the index HPS file is empty
+
+79
+00:04:08,477 --> 00:04:10,022
+so we're not reloading this.
+
+80
+00:04:10,022 --> 00:04:12,274
+So let's populate this file now.
+
+81
+00:04:12,274 --> 00:04:15,429
+I will create a general HTML five skeleton
+
+82
+00:04:15,429 --> 00:04:19,596
+with my ID here and let's name it Angular2 Messenger.
+
+83
+00:04:22,353 --> 00:04:23,782
+And in here this general set up
+
+84
+00:04:23,782 --> 00:04:28,443
+is great but I will need to add two links here.
+
+85
+00:04:28,443 --> 00:04:31,112
+One to Bootstrap and you may simply go
+
+86
+00:04:31,112 --> 00:04:34,428
+to GetBootstrap.com to fetch it there.
+
+87
+00:04:34,428 --> 00:04:37,595
+I will simply bring in this link here.
+
+88
+00:04:39,383 --> 00:04:41,145
+And the second link,
+
+89
+00:04:41,145 --> 00:04:44,904
+well this should lead to our own style sheets folder.
+
+90
+00:04:44,904 --> 00:04:47,887
+So to this folder you're in the public folder.
+
+91
+00:04:47,887 --> 00:04:50,138
+Where we then have a style.CSS file
+
+92
+00:04:50,138 --> 00:04:53,233
+where we can set up any styles we need.
+
+93
+00:04:53,233 --> 00:04:56,983
+And actually we got some default styles here.
+
+94
+00:04:57,818 --> 00:05:00,358
+I'll leave them as they are right now.
+
+95
+00:05:00,358 --> 00:05:02,934
+For the course project I created some different styles
+
+96
+00:05:02,934 --> 00:05:05,066
+but yeah, I'll stick to them for now
+
+97
+00:05:05,066 --> 00:05:07,526
+in this module here.
+
+98
+00:05:07,526 --> 00:05:10,100
+So these are the styles being imported.
+
+99
+00:05:10,100 --> 00:05:12,271
+One very important addition we have to make here
+
+100
+00:05:12,271 --> 00:05:16,438
+is set up the base ref to make routing work as intended.
+
+101
+00:05:18,176 --> 00:05:20,103
+And with that I can now add
+
+102
+00:05:20,103 --> 00:05:22,070
+the my app selector here,
+
+103
+00:05:22,070 --> 00:05:23,914
+add the loading text to display something
+
+104
+00:05:23,914 --> 00:05:25,139
+whilst we are loading,
+
+105
+00:05:25,139 --> 00:05:29,434
+and now very importantly add the script import here.
+
+106
+00:05:29,434 --> 00:05:32,542
+Now in the end the web peg workflow
+
+107
+00:05:32,542 --> 00:05:35,125
+will create this bundle.js file
+
+108
+00:05:36,999 --> 00:05:39,407
+in the public JS app path.
+
+109
+00:05:39,407 --> 00:05:41,699
+Now we don't need to add public to the import
+
+110
+00:05:41,699 --> 00:05:44,853
+because that is where our index page will be loaded at
+
+111
+00:05:44,853 --> 00:05:47,883
+so we have to see it from this path.
+
+112
+00:05:47,883 --> 00:05:52,511
+So we will need to add import to JS app bundle JS.
+
+113
+00:05:52,511 --> 00:05:53,448
+So let's do it here.
+
+114
+00:05:53,448 --> 00:05:54,865
+JS app bundle.js.
+
+115
+00:05:57,011 --> 00:06:00,653
+And with that we should have a working set up here.
+
+116
+00:06:00,653 --> 00:06:02,128
+A working Angular2 application
+
+117
+00:06:02,128 --> 00:06:04,832
+and loading it in the index HPS file.
+
+118
+00:06:04,832 --> 00:06:07,623
+The missing piece now is to add a script
+
+119
+00:06:07,623 --> 00:06:10,080
+to the package.json file to start
+
+120
+00:06:10,080 --> 00:06:12,577
+this development workflow, bundle everything,
+
+121
+00:06:12,577 --> 00:06:16,160
+and then be able to see this bundled code.
+

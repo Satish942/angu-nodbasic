@@ -1,0 +1,220 @@
+1
+00:00:01,927 --> 00:00:03,184
+<v Instructor>The way I want to handle errors</v>
+
+2
+00:00:03,184 --> 00:00:05,319
+is here in my front-end I will create
+
+3
+00:00:05,319 --> 00:00:09,914
+a new feature, a new directory which I'll name errors.
+
+4
+00:00:09,914 --> 00:00:11,794
+I will have an error component
+
+5
+00:00:11,794 --> 00:00:13,464
+which holds the modal I want to show
+
+6
+00:00:13,464 --> 00:00:15,356
+and I will use the error service
+
+7
+00:00:15,356 --> 00:00:19,951
+to control when this modal should appear and when not.
+
+8
+00:00:19,951 --> 00:00:22,519
+I will also create an error model.
+
+9
+00:00:22,519 --> 00:00:24,157
+So, a file which defines how our error
+
+10
+00:00:24,157 --> 00:00:26,791
+should look like in the front end.
+
+11
+00:00:26,791 --> 00:00:30,126
+So let me create these files first.
+
+12
+00:00:30,126 --> 00:00:33,502
+This is an error component dot ts file for,
+
+13
+00:00:33,502 --> 00:00:35,411
+well, the component, you guessed it.
+
+14
+00:00:35,411 --> 00:00:37,958
+The error service dot ts file for
+
+15
+00:00:37,958 --> 00:00:39,778
+the service I'm going to use.
+
+16
+00:00:39,778 --> 00:00:42,152
+And the error model dot ts file
+
+17
+00:00:42,152 --> 00:00:44,472
+for the error model.
+
+18
+00:00:44,472 --> 00:00:46,101
+Well let's have the model first
+
+19
+00:00:46,101 --> 00:00:48,974
+since this is a key part.
+
+20
+00:00:48,974 --> 00:00:53,869
+Here I will export a class named error, for example.
+
+21
+00:00:53,869 --> 00:00:56,211
+And then I will use the short and quick way
+
+22
+00:00:56,211 --> 00:00:58,898
+of setting it up by defining the properties
+
+23
+00:00:58,898 --> 00:01:01,588
+here in the constructor by prepending them
+
+24
+00:01:01,588 --> 00:01:05,758
+with this access modifier, public or private.
+
+25
+00:01:05,758 --> 00:01:07,868
+So what should an error look like?
+
+26
+00:01:07,868 --> 00:01:09,694
+Well let's have a look at our back end.
+
+27
+00:01:09,694 --> 00:01:12,236
+How do the errors look like with fro?
+
+28
+00:01:12,236 --> 00:01:15,120
+Our errors here always have a title,
+
+29
+00:01:15,120 --> 00:01:17,863
+and then the actual error object.
+
+30
+00:01:17,863 --> 00:01:22,468
+So it does the case here and here, and always.
+
+31
+00:01:22,468 --> 00:01:26,099
+Now this of course allows me to now
+
+32
+00:01:26,099 --> 00:01:30,266
+go to my error model and set this object up in the same way.
+
+33
+00:01:31,535 --> 00:01:34,352
+So here I want to have a public title,
+
+34
+00:01:34,352 --> 00:01:36,685
+which is a string, and then I want to have
+
+35
+00:01:36,685 --> 00:01:39,897
+well, let's say a error object
+
+36
+00:01:39,897 --> 00:01:41,858
+which could be of type any.
+
+37
+00:01:41,858 --> 00:01:44,898
+Or since I also do know that all these
+
+38
+00:01:44,898 --> 00:01:47,099
+error objects on the back end
+
+39
+00:01:47,099 --> 00:01:51,841
+do have a message, I could also call this message.
+
+40
+00:01:51,841 --> 00:01:52,939
+Of course I will need to make sure
+
+41
+00:01:52,939 --> 00:01:56,401
+to extract this message from the error object.
+
+42
+00:01:56,401 --> 00:01:59,719
+As a side note, why do I know that on the back end,
+
+43
+00:01:59,719 --> 00:02:02,700
+this error object fro by mongoose
+
+44
+00:02:02,700 --> 00:02:05,386
+does have a message property?
+
+45
+00:02:05,386 --> 00:02:06,846
+Well simply by inspecting it or
+
+46
+00:02:06,846 --> 00:02:08,882
+reading it in the documentation.
+
+47
+00:02:08,882 --> 00:02:12,048
+So this will have a message, and all my
+
+48
+00:02:12,048 --> 00:02:14,715
+custom errors like this one here
+
+49
+00:02:15,668 --> 00:02:18,152
+also do have this message property.
+
+50
+00:02:18,152 --> 00:02:19,742
+So I can extract the message,
+
+51
+00:02:19,742 --> 00:02:22,569
+and this is what I wanna use in my model here.
+
+52
+00:02:22,569 --> 00:02:25,145
+This is the basic setup I wanna use.
+
+53
+00:02:25,145 --> 00:02:28,116
+With this, I can next work on the component
+
+54
+00:02:28,116 --> 00:02:30,940
+to create a nice modal I wanna display
+
+55
+00:02:30,940 --> 00:02:32,607
+when a error occurs.
+

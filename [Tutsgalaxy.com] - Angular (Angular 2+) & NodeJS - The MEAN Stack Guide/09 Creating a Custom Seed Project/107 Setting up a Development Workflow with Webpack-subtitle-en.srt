@@ -1,0 +1,216 @@
+1
+00:00:02,129 --> 00:00:04,209
+<v Instructor>Thusfar, we already started</v>
+
+2
+00:00:04,209 --> 00:00:05,954
+setting up this workflow.
+
+3
+00:00:05,954 --> 00:00:08,316
+I want to continue with the dev workflow,
+
+4
+00:00:08,316 --> 00:00:09,674
+but then we also need to build
+
+5
+00:00:09,674 --> 00:00:11,212
+our Angular 2 application
+
+6
+00:00:11,212 --> 00:00:14,867
+so that we can actually test this and see something.
+
+7
+00:00:14,867 --> 00:00:17,871
+Now, here in the corrupted config.dev file,
+
+8
+00:00:17,871 --> 00:00:20,494
+I will import webpackMerge
+
+9
+00:00:20,494 --> 00:00:23,358
+to be able to merge the config I'm creating here
+
+10
+00:00:23,358 --> 00:00:25,380
+with the common config.
+
+11
+00:00:25,380 --> 00:00:26,553
+I don't want to overwrite it.
+
+12
+00:00:26,553 --> 00:00:29,929
+I really want to merge the differences.
+
+13
+00:00:29,929 --> 00:00:33,950
+Therefore I will import the config configuration here.
+
+14
+00:00:33,950 --> 00:00:38,525
+It, of course, lives in this webpack.config.common file.
+
+15
+00:00:38,525 --> 00:00:40,942
+Here I'll add .js to find it.
+
+16
+00:00:41,832 --> 00:00:45,672
+And I will export the merged configuration here
+
+17
+00:00:45,672 --> 00:00:48,804
+So we'll call webpackMerge, which is a function
+
+18
+00:00:48,804 --> 00:00:51,659
+and here I pass the common configuration
+
+19
+00:00:51,659 --> 00:00:55,065
+and that has an object the things I want to override.
+
+20
+00:00:55,065 --> 00:00:59,289
+I will set up a devtool to get some source maps and so on.
+
+21
+00:00:59,289 --> 00:01:00,540
+And you can learn more about this
+
+22
+00:01:00,540 --> 00:01:02,244
+in the official documentation.
+
+23
+00:01:02,244 --> 00:01:04,744
+I'm going to use this one here
+
+24
+00:01:06,670 --> 00:01:08,685
+and then I will set up the output
+
+25
+00:01:08,685 --> 00:01:12,175
+where I want to store the bundled file.
+
+26
+00:01:12,175 --> 00:01:14,191
+Well, I want to store it
+
+27
+00:01:14,191 --> 00:01:18,358
+in ./public/js/app path here.
+
+28
+00:01:22,259 --> 00:01:25,426
+Then, the filename shall be bundle.js.
+
+29
+00:01:27,060 --> 00:01:29,727
+And I will set up the publicPath
+
+30
+00:01:30,593 --> 00:01:33,593
+to be /js/app.
+
+31
+00:01:34,485 --> 00:01:37,492
+This is important to let webpack know
+
+32
+00:01:37,492 --> 00:01:40,909
+where our bundle, our compiled code lives
+
+33
+00:01:41,932 --> 00:01:43,743
+Because if we use lazy loading
+
+34
+00:01:43,743 --> 00:01:45,564
+where we have multiple chunks,
+
+35
+00:01:45,564 --> 00:01:46,861
+we not only have one bundle,
+
+36
+00:01:46,861 --> 00:01:48,618
+we also have small other bundles
+
+37
+00:01:48,618 --> 00:01:50,501
+for our lazy-loaded modules,
+
+38
+00:01:50,501 --> 00:01:52,533
+it needs to know where to find them.
+
+39
+00:01:52,533 --> 00:01:55,406
+But default look at our root folder,
+
+40
+00:01:55,406 --> 00:01:56,840
+which is the wrong place.
+
+41
+00:01:56,840 --> 00:01:58,963
+It has to go to /js/app.
+
+42
+00:01:58,963 --> 00:02:00,463
+This is important.
+
+43
+00:02:01,821 --> 00:02:04,845
+And then here I will set up the chunkFilename
+
+44
+00:02:04,845 --> 00:02:09,038
+so how it will name such chunks used in lazy-loading.
+
+45
+00:02:09,038 --> 00:02:13,871
+It should assign a dynamic id, which I do with the id.
+
+46
+00:02:13,871 --> 00:02:16,396
+Woops, these commas should be after the string.
+
+47
+00:02:16,396 --> 00:02:19,495
+Which I do with the id in the square brackets.
+
+48
+00:02:19,495 --> 00:02:21,328
+And then add chunk.js.
+
+49
+00:02:23,294 --> 00:02:25,127
+So, what's wrong here?
+
+50
+00:02:26,285 --> 00:02:27,949
+Yeah, don't need a plus here.
+
+51
+00:02:27,949 --> 00:02:29,116
+So, like this.
+
+52
+00:02:30,527 --> 00:02:32,171
+This is my development setup.
+
+53
+00:02:32,171 --> 00:02:34,720
+With that, let's now create the Angular 2 application
+
+54
+00:02:34,720 --> 00:02:37,887
+so that we can actually see something.
+

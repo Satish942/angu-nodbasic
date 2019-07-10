@@ -1,0 +1,252 @@
+1
+00:00:02,065 --> 00:00:03,216
+<v Instructor>Remember in the last video,</v>
+
+2
+00:00:03,216 --> 00:00:05,677
+we had the problem that upon clicking Save,
+
+3
+00:00:05,677 --> 00:00:07,714
+the messages don't get added here,
+
+4
+00:00:07,714 --> 00:00:09,631
+though as we can see in the Console log,
+
+5
+00:00:09,631 --> 00:00:11,424
+we clearly are creating them.
+
+6
+00:00:11,424 --> 00:00:13,944
+They are getting added to this array.
+
+7
+00:00:13,944 --> 00:00:16,629
+In the last video, I explained that the array
+
+8
+00:00:16,629 --> 00:00:19,512
+we use in the message list component gets assigned
+
+9
+00:00:19,512 --> 00:00:22,114
+the same array we used in the service,
+
+10
+00:00:22,114 --> 00:00:24,429
+so it should automatically update.
+
+11
+00:00:24,429 --> 00:00:26,937
+Why is this not happening?
+
+12
+00:00:26,937 --> 00:00:30,952
+Well, let's go back to the video where I showed
+
+13
+00:00:30,952 --> 00:00:33,673
+the slides about dependency injection.
+
+14
+00:00:33,673 --> 00:00:36,446
+there I also explained that we can inject
+
+15
+00:00:36,446 --> 00:00:39,014
+or that we can provide such a service on a
+
+16
+00:00:39,014 --> 00:00:43,695
+per component basis, or a per application basis.
+
+17
+00:00:43,695 --> 00:00:46,520
+Actually, there's even a bit more to it.
+
+18
+00:00:46,520 --> 00:00:49,410
+The Angular 2 dependency injector,
+
+19
+00:00:49,410 --> 00:00:53,796
+which we're using here, is a hierarchical injector,
+
+20
+00:00:53,796 --> 00:00:58,556
+which means it can be set up in a way to give us
+
+21
+00:00:58,556 --> 00:01:01,707
+one instance of this message service for all
+
+22
+00:01:01,707 --> 00:01:04,704
+our components, or only for some,
+
+23
+00:01:04,704 --> 00:01:07,176
+or one instance per component.
+
+24
+00:01:07,176 --> 00:01:10,160
+Right now, we're in the one instance per component mode,
+
+25
+00:01:10,160 --> 00:01:13,468
+which explains why we're not seeing the messages.
+
+26
+00:01:13,468 --> 00:01:15,340
+The message service we're using in the
+
+27
+00:01:15,340 --> 00:01:17,596
+message list component simply is a different one
+
+28
+00:01:17,596 --> 00:01:20,220
+than the one in the message input component.
+
+29
+00:01:20,220 --> 00:01:23,185
+Angular 2 creates two instances of the service.
+
+30
+00:01:23,185 --> 00:01:25,625
+This might be the behaviour we want,
+
+31
+00:01:25,625 --> 00:01:27,400
+but here it is not.
+
+32
+00:01:27,400 --> 00:01:30,917
+Instead, you want to use the same instance.
+
+33
+00:01:30,917 --> 00:01:33,238
+Now since the injector is hierarchical,
+
+34
+00:01:33,238 --> 00:01:35,851
+we can simply remove the provider set up here
+
+35
+00:01:35,851 --> 00:01:37,843
+in the message input component,
+
+36
+00:01:37,843 --> 00:01:40,943
+and also in the message list component.
+
+37
+00:01:40,943 --> 00:01:43,024
+So after removing it in both components,
+
+38
+00:01:43,024 --> 00:01:45,209
+let's go to the app component,
+
+39
+00:01:45,209 --> 00:01:47,952
+which holds the inputted list component,
+
+40
+00:01:47,952 --> 00:01:49,754
+and let's add it here.
+
+41
+00:01:49,754 --> 00:01:53,327
+Here in the app component, let's add the provider's array
+
+42
+00:01:53,327 --> 00:01:54,577
+MessageService.
+
+43
+00:01:56,056 --> 00:01:58,643
+Also add the import, of course.
+
+44
+00:01:58,643 --> 00:02:02,799
+What this will do is, it will create one single instance
+
+45
+00:02:02,799 --> 00:02:05,862
+of this MessageService for the app component
+
+46
+00:02:05,862 --> 00:02:09,712
+and, and this is important, all its shell components.
+
+47
+00:02:09,712 --> 00:02:12,870
+So for all the components we use in the app component,
+
+48
+00:02:12,870 --> 00:02:14,741
+namely, the inputted list.
+
+49
+00:02:14,741 --> 00:02:16,901
+So now the inputted list component will share
+
+50
+00:02:16,901 --> 00:02:19,051
+the same instance of the service,
+
+51
+00:02:19,051 --> 00:02:21,694
+which should now lead to the desired behaviour
+
+52
+00:02:21,694 --> 00:02:24,734
+that if we update this array in this instance,
+
+53
+00:02:24,734 --> 00:02:28,268
+it is updated in the other component as well.
+
+54
+00:02:28,268 --> 00:02:30,026
+So if I save this,
+
+55
+00:02:30,026 --> 00:02:32,806
+and then we reload this application here.
+
+56
+00:02:32,806 --> 00:02:34,549
+Let's clear the console,
+
+57
+00:02:34,549 --> 00:02:36,559
+and try this again.
+
+58
+00:02:36,559 --> 00:02:38,998
+Now you can see the new message
+
+59
+00:02:38,998 --> 00:02:42,197
+and it gets added because now we set this up in a way
+
+60
+00:02:42,197 --> 00:02:44,669
+that this now works in the desired way,
+
+61
+00:02:44,669 --> 00:02:47,102
+and we're using the same instance of the service
+
+62
+00:02:47,102 --> 00:02:50,324
+with the same messages array for both the input
+
+63
+00:02:50,324 --> 00:02:52,241
+and the list component.
+

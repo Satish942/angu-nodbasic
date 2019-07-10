@@ -1,0 +1,116 @@
+1
+00:00:01,647 --> 00:00:03,914
+<v ->In the next videos I will deploy the application</v>
+
+2
+00:00:03,914 --> 00:00:06,351
+we built with offline compilations.
+
+3
+00:00:06,351 --> 00:00:09,641
+So, whenever you see me rebuild the application
+
+4
+00:00:09,641 --> 00:00:12,568
+I use the command NPM run build production.
+
+5
+00:00:12,568 --> 00:00:15,073
+This has changed since I recorded the videos,
+
+6
+00:00:15,073 --> 00:00:19,231
+now simply NPM run build:prod like this.
+
+7
+00:00:19,231 --> 00:00:22,352
+So not production, just prod.
+
+8
+00:00:22,352 --> 00:00:25,041
+Besides that, all the other steps you see
+
+9
+00:00:25,041 --> 00:00:26,849
+should be the very same.
+
+10
+00:00:26,849 --> 00:00:28,878
+The messages you see here are changed a little bit,
+
+11
+00:00:28,878 --> 00:00:30,879
+and the folder structure on the left,
+
+12
+00:00:30,879 --> 00:00:33,371
+since I'm now using you built process,
+
+13
+00:00:33,371 --> 00:00:34,646
+but generally it's the same.
+
+14
+00:00:34,646 --> 00:00:38,622
+Also my assertion about which files to deploy is the same.
+
+15
+00:00:38,622 --> 00:00:42,150
+You need to deploy all the folders
+
+16
+00:00:42,150 --> 00:00:44,043
+you see here, including app js.
+
+17
+00:00:44,043 --> 00:00:46,772
+This file, not the assets folder.
+
+18
+00:00:46,772 --> 00:00:49,027
+Especially of course make sure
+
+19
+00:00:49,027 --> 00:00:52,133
+that you've got your bundled application here,
+
+20
+00:00:52,133 --> 00:00:54,821
+which should be done automatically though
+
+21
+00:00:54,821 --> 00:00:57,259
+when you run NPM run build:prod.
+
+22
+00:00:57,259 --> 00:01:00,981
+Also important, you don't need to import
+
+23
+00:01:00,981 --> 00:01:02,475
+enableProdMode anymore.
+
+24
+00:01:02,475 --> 00:01:05,659
+It's already done here in the MainAOT.ts,
+
+25
+00:01:05,659 --> 00:01:07,393
+which happens to be the file being used
+
+26
+00:01:07,393 --> 00:01:09,060
+when we run NPM build:prod.
+
+27
+00:01:09,060 --> 00:01:11,816
+So this will be enabled by default.
+
+28
+00:01:11,816 --> 00:01:13,485
+With that I wish you fun with the next videos
+
+29
+00:01:13,485 --> 00:01:16,902
+where we actually deploy our application.
+

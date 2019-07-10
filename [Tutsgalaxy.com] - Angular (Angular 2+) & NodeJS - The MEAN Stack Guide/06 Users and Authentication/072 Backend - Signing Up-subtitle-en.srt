@@ -1,0 +1,528 @@
+1
+00:00:00,747 --> 00:00:04,457
+<v Narrator>As before I want to start on the back end.</v>
+
+2
+00:00:04,457 --> 00:00:07,516
+Now in the user JS file here in the routes folder
+
+3
+00:00:07,516 --> 00:00:10,199
+because I'm going to create a user related route.
+
+4
+00:00:10,199 --> 00:00:11,126
+Which route?
+
+5
+00:00:11,126 --> 00:00:13,866
+Well, the one which allows me to sign up a user
+
+6
+00:00:13,866 --> 00:00:16,771
+because signing up a user is the basis for all the rest.
+
+7
+00:00:16,771 --> 00:00:19,237
+I can't log in a user if I don't have one, right?
+
+8
+00:00:19,237 --> 00:00:23,460
+So, in this user JS file the goal is to first export
+
+9
+00:00:23,460 --> 00:00:27,306
+the router like we do in the messages or in the app JS file.
+
+10
+00:00:27,306 --> 00:00:31,038
+So I'm just going to copy all the code from the app JS file
+
+11
+00:00:31,038 --> 00:00:34,689
+and put it in here because I want to set up the same router.
+
+12
+00:00:34,689 --> 00:00:38,339
+Of course I will work on this route here though.
+
+13
+00:00:38,339 --> 00:00:39,523
+It's not a get route.
+
+14
+00:00:39,523 --> 00:00:41,418
+It will be a post route because
+
+15
+00:00:41,418 --> 00:00:44,279
+creating a user will be a post request.
+
+16
+00:00:44,279 --> 00:00:47,669
+We're creating a resource on the server in the end.
+
+17
+00:00:47,669 --> 00:00:50,811
+Here of course this general function is right,
+
+18
+00:00:50,811 --> 00:00:53,968
+but I don't want to render a response.
+
+19
+00:00:53,968 --> 00:00:57,796
+Instead I want to use my mongoose user model I created
+
+20
+00:00:57,796 --> 00:01:01,131
+here in the models folder in the user JS file.
+
+21
+00:01:01,131 --> 00:01:03,953
+This specifies how a user should look like,
+
+22
+00:01:03,953 --> 00:01:05,117
+how we create a user.
+
+23
+00:01:05,117 --> 00:01:08,373
+So to do this I will first import this here.
+
+24
+00:01:08,373 --> 00:01:11,623
+So we'll store it in the user variable,
+
+25
+00:01:12,813 --> 00:01:15,693
+and require it from the models folder
+
+26
+00:01:15,693 --> 00:01:19,501
+and then the user JS file, and then in my router post
+
+27
+00:01:19,501 --> 00:01:22,581
+method here in this post route I want to create
+
+28
+00:01:22,581 --> 00:01:24,531
+a new user like I before created
+
+29
+00:01:24,531 --> 00:01:26,469
+a new method using this model.
+
+30
+00:01:26,469 --> 00:01:28,580
+But here the user model, of course.
+
+31
+00:01:28,580 --> 00:01:31,558
+I'll pass JavaScript object which contains the data
+
+32
+00:01:31,558 --> 00:01:33,987
+with which I want to create the user.
+
+33
+00:01:33,987 --> 00:01:35,938
+Now, the data we need can again
+
+34
+00:01:35,938 --> 00:01:37,973
+be seen here in the user model.
+
+35
+00:01:37,973 --> 00:01:41,565
+A first name, a last name, the password and an email,
+
+36
+00:01:41,565 --> 00:01:45,117
+and the messages, well, that's something I'll come back to.
+
+37
+00:01:45,117 --> 00:01:49,202
+Let's first stick to the four fields we start with.
+
+38
+00:01:49,202 --> 00:01:52,369
+So here I want to pass the first name,
+
+39
+00:01:53,661 --> 00:01:56,915
+and I can't retrieve this from the body of my request.
+
+40
+00:01:56,915 --> 00:01:59,863
+As before, when I created a new message here,
+
+41
+00:01:59,863 --> 00:02:03,548
+I simply assume that I get this data.
+
+42
+00:02:03,548 --> 00:02:06,922
+Since I'm the one creating this application
+
+43
+00:02:06,922 --> 00:02:09,172
+I can make this assumption.
+
+44
+00:02:10,139 --> 00:02:14,401
+So here I get the first name and then I can simply duplicate
+
+45
+00:02:14,401 --> 00:02:18,568
+this three times to also get my last name there after
+
+46
+00:02:19,787 --> 00:02:23,704
+to get the password and then finally the email.
+
+47
+00:02:25,846 --> 00:02:30,168
+Now this will generally create a new all user object
+
+48
+00:02:30,168 --> 00:02:33,681
+but it does have one big security flaw.
+
+49
+00:02:33,681 --> 00:02:35,514
+Do you seen which one?
+
+50
+00:02:36,502 --> 00:02:37,667
+It's the password.
+
+51
+00:02:37,667 --> 00:02:40,370
+The password is stored in plain text here.
+
+52
+00:02:40,370 --> 00:02:42,282
+I'm not encrypting my password,
+
+53
+00:02:42,282 --> 00:02:45,244
+and this is something you never ever wanna do.
+
+54
+00:02:45,244 --> 00:02:50,099
+Now as a side note, you also want to submit it via SSL.
+
+55
+00:02:50,099 --> 00:02:52,999
+I'm not doing this here in the local development environment
+
+56
+00:02:52,999 --> 00:02:55,506
+but on the real server you might really think
+
+57
+00:02:55,506 --> 00:02:57,735
+about using SSL to encrypt the data
+
+58
+00:02:57,735 --> 00:02:59,491
+you send over your network.
+
+59
+00:02:59,491 --> 00:03:02,235
+So using SSL makes your app more secure,
+
+60
+00:03:02,235 --> 00:03:04,662
+but one thing you definitely have to do either way
+
+61
+00:03:04,662 --> 00:03:08,960
+is encrypt the password you store in the database.
+
+62
+00:03:08,960 --> 00:03:11,746
+Now how do we encrypt the password here?
+
+63
+00:03:11,746 --> 00:03:13,581
+Thankfully there are third party
+
+64
+00:03:13,581 --> 00:03:15,998
+packages we can use for this.
+
+65
+00:03:17,252 --> 00:03:19,738
+So I will cancel my build process here
+
+66
+00:03:19,738 --> 00:03:21,889
+and instal such a package.
+
+67
+00:03:21,889 --> 00:03:25,402
+The package I'll use for this is, can be installed via
+
+68
+00:03:25,402 --> 00:03:30,137
+npm instal --save to instal it as protection dependency,
+
+69
+00:03:30,137 --> 00:03:34,304
+and then the name is becryptjs which is a package allowing
+
+70
+00:03:35,406 --> 00:03:38,323
+us to easily implement this hashing
+
+71
+00:03:40,261 --> 00:03:43,338
+or the encryption of this password.
+
+72
+00:03:43,338 --> 00:03:47,621
+So after installing this we can now import it here.
+
+73
+00:03:47,621 --> 00:03:50,108
+Let's name it becrypt and of course we need
+
+74
+00:03:50,108 --> 00:03:52,888
+to require it from becryptjs here
+
+75
+00:03:52,888 --> 00:03:56,738
+and there after hashing is very, very simple.
+
+76
+00:03:56,738 --> 00:03:59,698
+For the password here, for the value I want to assign
+
+77
+00:03:59,698 --> 00:04:03,698
+to this password I use my becrypt variable here,
+
+78
+00:04:04,533 --> 00:04:07,138
+and then I can call hash sync
+
+79
+00:04:07,138 --> 00:04:10,709
+which means basically hash it synchronously.
+
+80
+00:04:10,709 --> 00:04:14,876
+So here I then pass my plain text as the first argument.
+
+81
+00:04:16,432 --> 00:04:18,542
+So this password I wanna encrypt,
+
+82
+00:04:18,542 --> 00:04:22,549
+and the second argument are the number of salting rounds.
+
+83
+00:04:22,549 --> 00:04:25,016
+Now salting is basically the algorithm
+
+84
+00:04:25,016 --> 00:04:28,193
+or the strength of this algorithm.
+
+85
+00:04:28,193 --> 00:04:31,109
+It defines how strong this encryption is.
+
+86
+00:04:31,109 --> 00:04:34,626
+So let's put this cue 10 for example,
+
+87
+00:04:34,626 --> 00:04:38,691
+and with this set up we're storing an encrypted password.
+
+88
+00:04:38,691 --> 00:04:42,858
+Be aware, this encrypted password is a one way encryption.
+
+89
+00:04:43,822 --> 00:04:45,572
+You can't decrypt it.
+
+90
+00:04:46,425 --> 00:04:50,551
+If you wonder how we then later on can check if the password
+
+91
+00:04:50,551 --> 00:04:54,142
+the user uses for logging in is the same as the one stored
+
+92
+00:04:54,142 --> 00:04:56,076
+in the database I'll come back to this
+
+93
+00:04:56,076 --> 00:04:58,918
+question in the login section.
+
+94
+00:04:58,918 --> 00:05:00,477
+For now be aware that we're storing
+
+95
+00:05:00,477 --> 00:05:02,943
+a saved password at this point.
+
+96
+00:05:02,943 --> 00:05:05,588
+So with this user set up in safe way
+
+97
+00:05:05,588 --> 00:05:08,725
+I can now call the save method on this user
+
+98
+00:05:08,725 --> 00:05:13,481
+and here I'll add the default call back you already know.
+
+99
+00:05:13,481 --> 00:05:15,928
+Now I first wanna check for errors
+
+100
+00:05:15,928 --> 00:05:18,908
+and I can use my error check code
+
+101
+00:05:18,908 --> 00:05:21,828
+from the messages JS file here.
+
+102
+00:05:21,828 --> 00:05:23,703
+It's the same checking if error exists,
+
+103
+00:05:23,703 --> 00:05:27,847
+and then in which case I would pass the error here
+
+104
+00:05:27,847 --> 00:05:29,919
+and return from this function.
+
+105
+00:05:29,919 --> 00:05:32,899
+But if we don't get an error I will set the status code
+
+106
+00:05:32,899 --> 00:05:35,661
+to 201 for resource was created
+
+107
+00:05:35,661 --> 00:05:39,744
+and I will pass them JSON data with the response.
+
+108
+00:05:40,753 --> 00:05:44,245
+In this object I'm passing here I'll set a message
+
+109
+00:05:44,245 --> 00:05:48,412
+of let's say user created and then I will pass my result
+
+110
+00:05:49,885 --> 00:05:53,481
+as the object that had cued this object here.
+
+111
+00:05:53,481 --> 00:05:57,546
+So the result of this operation, the user who was created,
+
+112
+00:05:57,546 --> 00:05:59,460
+and this is my back end function.
+
+113
+00:05:59,460 --> 00:06:00,917
+This is all I wanna do here.
+
+114
+00:06:00,917 --> 00:06:04,511
+This is the route which allows me to create a new user.
+
+115
+00:06:04,511 --> 00:06:07,905
+Now the missing piece is to use this user JS file
+
+116
+00:06:07,905 --> 00:06:11,911
+in the routes folder in the app JS file in the route folder.
+
+117
+00:06:11,911 --> 00:06:16,273
+Here we right now only handle slash message routes
+
+118
+00:06:16,273 --> 00:06:18,641
+and then all other routes.
+
+119
+00:06:18,641 --> 00:06:22,114
+But we're not importing the routes in our user JS file.
+
+120
+00:06:22,114 --> 00:06:25,228
+Therefore I will duplicate this import up here,
+
+121
+00:06:25,228 --> 00:06:29,019
+and set up the user routes variable importing my user JS
+
+122
+00:06:29,019 --> 00:06:32,533
+file in the routes folder, and then down here I will
+
+123
+00:06:32,533 --> 00:06:34,565
+duplicate the message route,
+
+124
+00:06:34,565 --> 00:06:38,236
+and now it's up to you which path you wanna have in the URL.
+
+125
+00:06:38,236 --> 00:06:40,880
+I will manage or I will store all
+
+126
+00:06:40,880 --> 00:06:44,134
+of that in the user path here.
+
+127
+00:06:44,134 --> 00:06:47,333
+Make sure it should not interfere with any paths
+
+128
+00:06:47,333 --> 00:06:50,308
+you might have configured in your angular two
+
+129
+00:06:50,308 --> 00:06:52,463
+application in this set up here.
+
+130
+00:06:52,463 --> 00:06:54,812
+So here I can then set up my user routes.
+
+131
+00:06:54,812 --> 00:06:57,219
+With that the back end is prepared.
+
+132
+00:06:57,219 --> 00:07:01,386
+The next step is to connect the front end to the back end.
+

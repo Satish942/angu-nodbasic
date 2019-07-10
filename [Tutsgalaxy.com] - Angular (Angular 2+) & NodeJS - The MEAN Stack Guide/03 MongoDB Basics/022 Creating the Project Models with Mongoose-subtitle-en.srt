@@ -1,0 +1,900 @@
+1
+00:00:02,232 --> 00:00:03,834
+<v ->Now I already explained that one</v>
+
+2
+00:00:03,834 --> 00:00:06,622
+of the biggest advantages of mongoose is the fact
+
+3
+00:00:06,622 --> 00:00:08,835
+that we can create models.
+
+4
+00:00:08,835 --> 00:00:11,853
+And we can use these models to create objects based
+
+5
+00:00:11,853 --> 00:00:13,520
+on them in our code,
+
+6
+00:00:14,468 --> 00:00:16,069
+and we can then use these objects
+
+7
+00:00:16,069 --> 00:00:18,045
+to directly access the database,
+
+8
+00:00:18,045 --> 00:00:20,789
+and behind the scenes mongoose will create
+
+9
+00:00:20,789 --> 00:00:23,806
+the appropriate collections for our models
+
+10
+00:00:23,806 --> 00:00:25,487
+and manage our data there.
+
+11
+00:00:25,487 --> 00:00:27,570
+So we don't have to write our queries.
+
+12
+00:00:27,570 --> 00:00:30,700
+We can use this very intuitive database access
+
+13
+00:00:30,700 --> 00:00:33,145
+of using our data in the Node.js code
+
+14
+00:00:33,145 --> 00:00:34,847
+in the Chalice script code.
+
+15
+00:00:34,847 --> 00:00:37,044
+And calling functions like save
+
+16
+00:00:37,044 --> 00:00:39,634
+to also save a copy to the database.
+
+17
+00:00:39,634 --> 00:00:41,969
+You will see this is very intuitive.
+
+18
+00:00:41,969 --> 00:00:44,708
+And I will create two models which we will use
+
+19
+00:00:44,708 --> 00:00:47,172
+throughout this course because in this course,
+
+20
+00:00:47,172 --> 00:00:49,676
+which kind of application are we going to build?
+
+21
+00:00:49,676 --> 00:00:53,361
+We're going to build application where we have messages
+
+22
+00:00:53,361 --> 00:00:55,405
+and users who can create messages,
+
+23
+00:00:55,405 --> 00:00:57,308
+who can sign up, sign in.
+
+24
+00:00:57,308 --> 00:01:00,518
+So we wanna be able store both messages and users,
+
+25
+00:01:00,518 --> 00:01:03,727
+so I will create a message and a user model.
+
+26
+00:01:03,727 --> 00:01:05,367
+For that I'll create a new folder
+
+27
+00:01:05,367 --> 00:01:08,503
+in the root project folder which I'll name models.
+
+28
+00:01:08,503 --> 00:01:10,237
+This is a service side folder too.
+
+29
+00:01:10,237 --> 00:01:13,046
+Angular 2 doesn't care about our models here,
+
+30
+00:01:13,046 --> 00:01:15,309
+but our back-it does.
+
+31
+00:01:15,309 --> 00:01:19,142
+In there, I will create a new file, message.js
+
+32
+00:01:20,061 --> 00:01:23,308
+which will later on hold my message model.
+
+33
+00:01:23,308 --> 00:01:26,318
+I'll also create a second file, user.js
+
+34
+00:01:26,318 --> 00:01:28,805
+for, you guessed it, the user model.
+
+35
+00:01:28,805 --> 00:01:31,432
+How do we create such a model with mongoose?
+
+36
+00:01:31,432 --> 00:01:33,762
+Let's start with the message model.
+
+37
+00:01:33,762 --> 00:01:37,738
+The first step is to import mongoose in this file too
+
+38
+00:01:37,738 --> 00:01:41,807
+because just because we import it in the app js file here,
+
+39
+00:01:41,807 --> 00:01:42,640
+here,
+
+40
+00:01:42,640 --> 00:01:45,009
+doesn't mean that it is available in our files too.
+
+41
+00:01:45,009 --> 00:01:47,165
+We need to import it into every file where we want
+
+42
+00:01:47,165 --> 00:01:48,466
+to use it.
+
+43
+00:01:48,466 --> 00:01:50,568
+So with that I got access to mongoose.
+
+44
+00:01:50,568 --> 00:01:52,394
+And then I will create another variable
+
+45
+00:01:52,394 --> 00:01:54,383
+which I'll call Schema.
+
+46
+00:01:54,383 --> 00:01:57,802
+This will use this mongoose package I just imported,
+
+47
+00:01:57,802 --> 00:02:01,307
+and use the Schema object in there.
+
+48
+00:02:01,307 --> 00:02:03,827
+Schema is basically a helper object
+
+49
+00:02:03,827 --> 00:02:07,595
+which allows me to create the blueprint of my models.
+
+50
+00:02:07,595 --> 00:02:11,044
+With this schema, I can now create a new schema
+
+51
+00:02:11,044 --> 00:02:12,745
+with a lower case S.
+
+52
+00:02:12,745 --> 00:02:14,482
+This will be my own schema I set up
+
+53
+00:02:14,482 --> 00:02:18,289
+for the message model which I'll use,
+
+54
+00:02:18,289 --> 00:02:20,649
+and I can create a new Schema with a new keyword
+
+55
+00:02:20,649 --> 00:02:25,050
+and this Schema object I imported or I fetched
+
+56
+00:02:25,050 --> 00:02:27,780
+from my mongoose package up here.
+
+57
+00:02:27,780 --> 00:02:30,600
+Now this schema constructor here expects
+
+58
+00:02:30,600 --> 00:02:33,526
+to get a Chalice script object as an argument,
+
+59
+00:02:33,526 --> 00:02:37,339
+and in this object, we define how our user model,
+
+60
+00:02:37,339 --> 00:02:40,622
+excuse me, our message model, should look like.
+
+61
+00:02:40,622 --> 00:02:43,323
+What could our message look like?
+
+62
+00:02:43,323 --> 00:02:45,731
+I want to keep it simple, so the message should have
+
+63
+00:02:45,731 --> 00:02:48,449
+a content and it should hold a reference
+
+64
+00:02:48,449 --> 00:02:50,881
+to the user who created the message.
+
+65
+00:02:50,881 --> 00:02:55,048
+So we're going to have two fields, content and user.
+
+66
+00:02:56,196 --> 00:03:00,204
+Now here they keys are the names of these fields,
+
+67
+00:03:00,204 --> 00:03:02,299
+or the names of our properties,
+
+68
+00:03:02,299 --> 00:03:06,503
+and these will be stored in the Mongo Database
+
+69
+00:03:06,503 --> 00:03:08,086
+as field names too.
+
+70
+00:03:09,853 --> 00:03:12,895
+As a value, I pass and shelve the script object,
+
+71
+00:03:12,895 --> 00:03:16,016
+defining how this field should look like,
+
+72
+00:03:16,016 --> 00:03:18,180
+how it is configured.
+
+73
+00:03:18,180 --> 00:03:21,789
+So the content, lets say, should be of type String.
+
+74
+00:03:21,789 --> 00:03:24,487
+Type is a property mongoose understands
+
+75
+00:03:24,487 --> 00:03:27,861
+to define which type of value should be stored
+
+76
+00:03:27,861 --> 00:03:29,523
+in this field.
+
+77
+00:03:29,523 --> 00:03:33,690
+And I will add another key mongoose understands, required.
+
+78
+00:03:35,450 --> 00:03:38,160
+Required set to true basically means
+
+79
+00:03:38,160 --> 00:03:40,414
+this field may never be empty.
+
+80
+00:03:40,414 --> 00:03:43,015
+We should always have a content.
+
+81
+00:03:43,015 --> 00:03:47,182
+Now for the user, I will set this to another type.
+
+82
+00:03:48,348 --> 00:03:50,765
+The type here is Schema.Types
+
+83
+00:03:51,599 --> 00:03:54,368
+to access all the types mongoose knows,
+
+84
+00:03:54,368 --> 00:03:55,868
+and then ObjectId.
+
+85
+00:03:56,947 --> 00:03:59,549
+We can't use just ObjectId.
+
+86
+00:03:59,549 --> 00:04:02,801
+The shortcut works for string but not for this Id
+
+87
+00:04:02,801 --> 00:04:04,159
+or for this type.
+
+88
+00:04:04,159 --> 00:04:06,027
+What is the ObjectId type?
+
+89
+00:04:06,027 --> 00:04:09,544
+This is basically the internal type mongoose uses
+
+90
+00:04:09,544 --> 00:04:12,921
+to store the Ids of the different objects we store
+
+91
+00:04:12,921 --> 00:04:14,056
+in the database.
+
+92
+00:04:14,056 --> 00:04:16,929
+Each object we store automatically gets an Id,
+
+93
+00:04:16,929 --> 00:04:20,525
+even though we don't set up an Id field here in our schema.
+
+94
+00:04:20,525 --> 00:04:23,811
+And this Id automatically created by mongoose
+
+95
+00:04:23,811 --> 00:04:27,666
+and stored in the database is of type ObjectId.
+
+96
+00:04:27,666 --> 00:04:28,842
+Behind the scenes or in the end,
+
+97
+00:04:28,842 --> 00:04:31,875
+it's a string, but it is managed differently,
+
+98
+00:04:31,875 --> 00:04:34,090
+since it is also created on its own.
+
+99
+00:04:34,090 --> 00:04:37,918
+So this is kind of an internal thing mongoose does for us.
+
+100
+00:04:37,918 --> 00:04:40,680
+I also want to set up something else,
+
+101
+00:04:40,680 --> 00:04:44,847
+but I'll come back to this after creating this user Schema.
+
+102
+00:04:45,710 --> 00:04:49,108
+Now we have the blueprint, but we want the model.
+
+103
+00:04:49,108 --> 00:04:51,276
+We can't instantiate this blueprint.
+
+104
+00:04:51,276 --> 00:04:54,289
+We can't create a new message based on that blueprint.
+
+105
+00:04:54,289 --> 00:04:56,340
+We need a model to do so.
+
+106
+00:04:56,340 --> 00:04:58,881
+So what I now do is I want to export something
+
+107
+00:04:58,881 --> 00:05:01,548
+in this file with module.exports
+
+108
+00:05:01,548 --> 00:05:04,029
+and this something is the actual model,
+
+109
+00:05:04,029 --> 00:05:05,735
+for that I'll use mongoose.
+
+110
+00:05:05,735 --> 00:05:07,547
+And then the model method.
+
+111
+00:05:07,547 --> 00:05:09,894
+This method expects two arguments,
+
+112
+00:05:09,894 --> 00:05:12,486
+the first one, the name of this model,
+
+113
+00:05:12,486 --> 00:05:14,341
+I'll name it message.
+
+114
+00:05:14,341 --> 00:05:16,014
+We will then be able to create a new message
+
+115
+00:05:16,014 --> 00:05:19,932
+with new Message later on, just like that.
+
+116
+00:05:19,932 --> 00:05:22,017
+So this is what this message here does.
+
+117
+00:05:22,017 --> 00:05:24,053
+It also determines the name of the collection
+
+118
+00:05:24,053 --> 00:05:27,302
+mongoose will create automatically for us in the database.
+
+119
+00:05:27,302 --> 00:05:31,276
+Mongoose will always take this name we define here
+
+120
+00:05:31,276 --> 00:05:32,829
+and use it as a collection name
+
+121
+00:05:32,829 --> 00:05:37,255
+but lowercase and in a plural form, so messages.
+
+122
+00:05:37,255 --> 00:05:39,839
+So this collection will be created automatically
+
+123
+00:05:39,839 --> 00:05:44,274
+for us as soon as we start writing data to the database.
+
+124
+00:05:44,274 --> 00:05:46,633
+And the second argument we need to pass here of course
+
+125
+00:05:46,633 --> 00:05:49,467
+is the schema we want to use for this model.
+
+126
+00:05:49,467 --> 00:05:52,660
+With that our message model is set up.
+
+127
+00:05:52,660 --> 00:05:54,785
+Let's work on the user model next.
+
+128
+00:05:54,785 --> 00:05:57,011
+I will copy the code from the message models,
+
+129
+00:05:57,011 --> 00:05:58,695
+since a lot of it is equal.
+
+130
+00:05:58,695 --> 00:06:00,821
+Of course the fields will very.
+
+131
+00:06:00,821 --> 00:06:03,300
+How should a user look like?
+
+132
+00:06:03,300 --> 00:06:07,293
+Let's say a user should have a first name and a last name,
+
+133
+00:06:07,293 --> 00:06:10,380
+a password, and probably an email.
+
+134
+00:06:10,380 --> 00:06:13,555
+And we also want to have some messages.
+
+135
+00:06:13,555 --> 00:06:17,265
+Remember on the message schema we had the user reference?
+
+136
+00:06:17,265 --> 00:06:20,905
+On the user schema, we want to have this messages reference.
+
+137
+00:06:20,905 --> 00:06:24,624
+Message yes because one user might have multiple messages,
+
+138
+00:06:24,624 --> 00:06:27,842
+whereas each message can only be created by one user.
+
+139
+00:06:27,842 --> 00:06:30,582
+This is why the fields are named differently.
+
+140
+00:06:30,582 --> 00:06:32,721
+So let's start setting them up.
+
+141
+00:06:32,721 --> 00:06:36,346
+First name should be of type String
+
+142
+00:06:36,346 --> 00:06:38,407
+and should be required.
+
+143
+00:06:38,407 --> 00:06:41,094
+We will get validation errors or errors
+
+144
+00:06:41,094 --> 00:06:43,167
+if we try to write data to the database
+
+145
+00:06:43,167 --> 00:06:47,143
+which doesn't satisfy these conditions as a side note.
+
+146
+00:06:47,143 --> 00:06:50,422
+The last name should have the same setup,
+
+147
+00:06:50,422 --> 00:06:52,461
+so shall have the password.
+
+148
+00:06:52,461 --> 00:06:55,109
+We don't need to set up anything special for the password.
+
+149
+00:06:55,109 --> 00:06:57,592
+In the end it will be stored as a string,
+
+150
+00:06:57,592 --> 00:06:58,986
+and it should be required.
+
+151
+00:06:58,986 --> 00:07:00,869
+We'll worry about encryption
+
+152
+00:07:00,869 --> 00:07:03,206
+in later stages of the course.
+
+153
+00:07:03,206 --> 00:07:04,903
+Now the email is different.
+
+154
+00:07:04,903 --> 00:07:06,554
+It is of type string.
+
+155
+00:07:06,554 --> 00:07:10,393
+It is required, but I also want it to be unique,
+
+156
+00:07:10,393 --> 00:07:12,666
+so let's pass unique.
+
+157
+00:07:12,666 --> 00:07:16,788
+Now, unique even though it is a property recognised
+
+158
+00:07:16,788 --> 00:07:20,587
+by mongoose, it's not validated automatically.
+
+159
+00:07:20,587 --> 00:07:24,656
+So unique can be set up here, but we would still be able
+
+160
+00:07:24,656 --> 00:07:27,239
+to pass multiple times this key
+
+161
+00:07:28,795 --> 00:07:32,431
+or this email to the database without getting an error.
+
+162
+00:07:32,431 --> 00:07:35,060
+To prevent this I'll add in our package
+
+163
+00:07:35,060 --> 00:07:37,893
+instal it with npm install--save,
+
+164
+00:07:38,906 --> 00:07:41,739
+and then mongoose-unique-validator
+
+165
+00:07:43,364 --> 00:07:45,826
+is the name of the package we wanna use.
+
+166
+00:07:45,826 --> 00:07:47,992
+This third-party package now allows us
+
+167
+00:07:47,992 --> 00:07:52,420
+to make sure that we get this extra validation,
+
+168
+00:07:52,420 --> 00:07:56,719
+however in order to get it, we need to take our schema
+
+169
+00:07:56,719 --> 00:08:00,615
+and use the plugin method which mongoose offers us.
+
+170
+00:08:00,615 --> 00:08:03,983
+This allows us to add a new plug into the schema,
+
+171
+00:08:03,983 --> 00:08:08,165
+and the plugin I wanna use is the mongooseUniqueValidator.
+
+172
+00:08:08,165 --> 00:08:12,296
+So let's also import it, mongooseUniqueValidator,
+
+173
+00:08:12,296 --> 00:08:14,375
+choose any name you want.
+
+174
+00:08:14,375 --> 00:08:16,815
+Validator, like this.
+
+175
+00:08:16,815 --> 00:08:19,048
+And of course I need to require
+
+176
+00:08:19,048 --> 00:08:21,930
+the mongoose-unique-validator here.
+
+177
+00:08:21,930 --> 00:08:24,789
+With that I can simply pass it here as an argument
+
+178
+00:08:24,789 --> 00:08:26,273
+to the plugin.
+
+179
+00:08:26,273 --> 00:08:29,837
+And now, remove the parenthesis here though.
+
+180
+00:08:29,837 --> 00:08:31,484
+They will be passed to reference.
+
+181
+00:08:31,484 --> 00:08:33,661
+With that we got the extra validation
+
+182
+00:08:33,661 --> 00:08:36,791
+if fields marked as unique are indeed unique
+
+183
+00:08:36,791 --> 00:08:38,815
+in the database.
+
+184
+00:08:38,815 --> 00:08:40,921
+Back to the configuration, we're still missing
+
+185
+00:08:40,921 --> 00:08:42,956
+the messages here.
+
+186
+00:08:42,956 --> 00:08:45,060
+Messages first of all is an array.
+
+187
+00:08:45,060 --> 00:08:47,125
+We indicate this with square brackets
+
+188
+00:08:47,125 --> 00:08:49,771
+telling mongoose that this is an array,
+
+189
+00:08:49,771 --> 00:08:52,323
+that these are multiple messages.
+
+190
+00:08:52,323 --> 00:08:53,955
+Then we set up the type.
+
+191
+00:08:53,955 --> 00:08:57,622
+Here again the type is Schema.Types.ObjectId
+
+192
+00:08:58,555 --> 00:09:01,284
+Remember messages will only be an array
+
+193
+00:09:01,284 --> 00:09:04,331
+of strings in the end, an array of Ids.
+
+194
+00:09:04,331 --> 00:09:07,283
+But with ObjectId we're taking care
+
+195
+00:09:07,283 --> 00:09:09,466
+that mongoose works with it correctly
+
+196
+00:09:09,466 --> 00:09:11,791
+as it handles these Ids automatically
+
+197
+00:09:11,791 --> 00:09:13,874
+in the background for us.
+
+198
+00:09:14,849 --> 00:09:16,339
+We're almost done.
+
+199
+00:09:16,339 --> 00:09:19,725
+Missing piece of course is to rename this to User down here,
+
+200
+00:09:19,725 --> 00:09:21,821
+so this model should be named User.
+
+201
+00:09:21,821 --> 00:09:24,654
+Again as with message this will automatically create
+
+202
+00:09:24,654 --> 00:09:26,737
+a collection named users.
+
+203
+00:09:27,915 --> 00:09:30,832
+And we haven't really told mongoose
+
+204
+00:09:31,893 --> 00:09:35,910
+that messages here refers to this message model,
+
+205
+00:09:35,910 --> 00:09:39,243
+and user here refers to this user model.
+
+206
+00:09:40,207 --> 00:09:44,067
+We told it that this will actually hold some Id,
+
+207
+00:09:44,067 --> 00:09:47,940
+and it's obviously not the Id of the user model itself here
+
+208
+00:09:47,940 --> 00:09:50,393
+in the user schema because that will be stored
+
+209
+00:09:50,393 --> 00:09:52,678
+in a separate field.
+
+210
+00:09:52,678 --> 00:09:56,147
+But we haven't told mongoose the Id of what will be stored
+
+211
+00:09:56,147 --> 00:09:58,478
+in this messages array then.
+
+212
+00:09:58,478 --> 00:10:02,220
+We do so by adding another configuration property here,
+
+213
+00:10:02,220 --> 00:10:03,053
+ref.
+
+214
+00:10:04,044 --> 00:10:08,384
+Ref tells mongoose this field here has a connexion
+
+215
+00:10:08,384 --> 00:10:12,230
+or holds a connexion to another model you know
+
+216
+00:10:12,230 --> 00:10:14,276
+or I created here.
+
+217
+00:10:14,276 --> 00:10:17,925
+We then pass as a string the name of this model, Message
+
+218
+00:10:17,925 --> 00:10:20,867
+since I want to refer to this message model,
+
+219
+00:10:20,867 --> 00:10:23,112
+and therefore here in the message model
+
+220
+00:10:23,112 --> 00:10:25,240
+or the message schema I should say,
+
+221
+00:10:25,240 --> 00:10:29,896
+we also set up a ref pointing to user, so to our user model.
+
+222
+00:10:29,896 --> 00:10:33,641
+Now behind the scenes mongoose is aware of this connexion
+
+223
+00:10:33,641 --> 00:10:36,930
+and is able to perform some nice operations here
+
+224
+00:10:36,930 --> 00:10:38,510
+we'll see throughout this course
+
+225
+00:10:38,510 --> 00:10:42,677
+when we want to access this relation and want to use it.
+

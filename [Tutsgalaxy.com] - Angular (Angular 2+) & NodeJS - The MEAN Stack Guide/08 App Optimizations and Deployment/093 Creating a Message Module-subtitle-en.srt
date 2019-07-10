@@ -1,0 +1,404 @@
+1
+00:00:01,323 --> 00:00:03,812
+<v ->So I want to start with the messages part here</v>
+
+2
+00:00:03,812 --> 00:00:05,567
+and create a new module there.
+
+3
+00:00:05,567 --> 00:00:09,893
+So I will create a new file, message dot nodule dot TS,
+
+4
+00:00:09,893 --> 00:00:11,918
+and in there I will export a class
+
+5
+00:00:11,918 --> 00:00:14,572
+which I'll name Message Module.
+
+6
+00:00:14,572 --> 00:00:16,543
+We already used such a module here,
+
+7
+00:00:16,543 --> 00:00:19,483
+the app module, which bundles our whole application.
+
+8
+00:00:19,483 --> 00:00:21,882
+We can do this, our application isn't that big
+
+9
+00:00:21,882 --> 00:00:23,456
+so there's nothing wrong with that,
+
+10
+00:00:23,456 --> 00:00:26,564
+but to show you how to bundle it into multiple modules
+
+11
+00:00:26,564 --> 00:00:28,664
+or how to split it into multiple modules,
+
+12
+00:00:28,664 --> 00:00:31,058
+I'll take this approach now.
+
+13
+00:00:31,058 --> 00:00:34,263
+So for the message module, I will now attach
+
+14
+00:00:34,263 --> 00:00:36,930
+the At NG Module decorator here.
+
+15
+00:00:37,899 --> 00:00:40,515
+So that we recognise or register this
+
+16
+00:00:40,515 --> 00:00:42,999
+as a module for Angular2.
+
+17
+00:00:42,999 --> 00:00:45,645
+And I have to import NG Module
+
+18
+00:00:45,645 --> 00:00:47,395
+from At Angular Core.
+
+19
+00:00:51,932 --> 00:00:54,745
+Now in this NG Module I want to declare
+
+20
+00:00:54,745 --> 00:00:57,351
+all the components which are only used
+
+21
+00:00:57,351 --> 00:01:00,326
+in this message part and nowhere else.
+
+22
+00:01:00,326 --> 00:01:02,646
+So let's have a look at our app module.
+
+23
+00:01:02,646 --> 00:01:04,840
+First of all we see both off service
+
+24
+00:01:04,840 --> 00:01:07,482
+and arrow service are global services
+
+25
+00:01:07,482 --> 00:01:09,960
+so we should not modularize them.
+
+26
+00:01:09,960 --> 00:01:12,150
+How about the message service.
+
+27
+00:01:12,150 --> 00:01:15,155
+Well the message service lives in this app component
+
+28
+00:01:15,155 --> 00:01:18,415
+but we only use it in the messages part
+
+29
+00:01:18,415 --> 00:01:21,798
+so we might also outsource that so I will remove this,
+
+30
+00:01:21,798 --> 00:01:23,456
+but I was talking about components.
+
+31
+00:01:23,456 --> 00:01:26,315
+Let's have a look at the app module.
+
+32
+00:01:26,315 --> 00:01:28,511
+So component wise we can strip out
+
+33
+00:01:28,511 --> 00:01:30,540
+all message related components here
+
+34
+00:01:30,540 --> 00:01:33,886
+since we will contain them in our message module.
+
+35
+00:01:33,886 --> 00:01:36,069
+They are all part of the message feature.
+
+36
+00:01:36,069 --> 00:01:38,424
+We know where you use one of the selectors
+
+37
+00:01:38,424 --> 00:01:40,529
+of one of the message components,
+
+38
+00:01:40,529 --> 00:01:43,842
+message related components, in our app component.
+
+39
+00:01:43,842 --> 00:01:46,237
+So no need to make it available there.
+
+40
+00:01:46,237 --> 00:01:48,849
+We do use the messages component in routing
+
+41
+00:01:48,849 --> 00:01:50,827
+but for that we don't need to declare it
+
+42
+00:01:50,827 --> 00:01:52,559
+in our app module.
+
+43
+00:01:52,559 --> 00:01:54,958
+We do have the import up here
+
+44
+00:01:54,958 --> 00:01:57,842
+and the router got everything it needs with that.
+
+45
+00:01:57,842 --> 00:01:59,615
+We would only need to declare one of
+
+46
+00:01:59,615 --> 00:02:02,763
+the message related components in our app module
+
+47
+00:02:02,763 --> 00:02:04,750
+if we were to use one of its selectors
+
+48
+00:02:04,750 --> 00:02:06,560
+and directly embed it in one
+
+49
+00:02:06,560 --> 00:02:08,910
+of our components templates here,
+
+50
+00:02:08,910 --> 00:02:10,438
+but that isn't the case.
+
+51
+00:02:10,438 --> 00:02:13,458
+So if data can go back to the message module,
+
+52
+00:02:13,458 --> 00:02:17,311
+and here I want to implement the messages component,
+
+53
+00:02:17,311 --> 00:02:20,285
+there after the message list component,
+
+54
+00:02:20,285 --> 00:02:24,009
+and the message component for the signal component here,
+
+55
+00:02:24,009 --> 00:02:26,035
+also add all the imports of course.
+
+56
+00:02:26,035 --> 00:02:28,798
+And the message input component.
+
+57
+00:02:28,798 --> 00:02:31,318
+These are the components of this message feature
+
+58
+00:02:31,318 --> 00:02:34,921
+which I can now contain or control
+
+59
+00:02:34,921 --> 00:02:37,152
+in this message module.
+
+60
+00:02:37,152 --> 00:02:40,965
+I also need to import some module here.
+
+61
+00:02:40,965 --> 00:02:43,489
+The modules I do need are basically
+
+62
+00:02:43,489 --> 00:02:45,718
+two built in modules.
+
+63
+00:02:45,718 --> 00:02:49,728
+One, the common module which has to be imported
+
+64
+00:02:49,728 --> 00:02:52,418
+from At Angular Common.
+
+65
+00:02:52,418 --> 00:02:55,525
+It includes directives like NG Four and so on
+
+66
+00:02:55,525 --> 00:02:56,962
+so we need that.
+
+67
+00:02:56,962 --> 00:02:59,607
+And then since in the message input component
+
+68
+00:02:59,607 --> 00:03:01,505
+we used a template driven approach,
+
+69
+00:03:01,505 --> 00:03:04,360
+I also need the forms module here.
+
+70
+00:03:04,360 --> 00:03:07,277
+So make sure to import forms module
+
+71
+00:03:08,283 --> 00:03:10,559
+from At Angular Forms.
+
+72
+00:03:10,559 --> 00:03:14,207
+With this set up I can now go to my app module here
+
+73
+00:03:14,207 --> 00:03:16,604
+and get rid of the forms module.
+
+74
+00:03:16,604 --> 00:03:20,107
+Get rid of all the unused imports up here of course.
+
+75
+00:03:20,107 --> 00:03:22,542
+That is the sense of splitting this up.
+
+76
+00:03:22,542 --> 00:03:24,815
+And then I need to add a new import
+
+77
+00:03:24,815 --> 00:03:27,743
+to my app module, the message module of course.
+
+78
+00:03:27,743 --> 00:03:30,886
+Otherwise we won't have that functionality available.
+
+79
+00:03:30,886 --> 00:03:33,120
+But before viewing it,
+
+80
+00:03:33,120 --> 00:03:36,363
+we still have to make sure that in our message model
+
+81
+00:03:36,363 --> 00:03:39,050
+or module, excuse me, here,
+
+82
+00:03:39,050 --> 00:03:42,767
+we also add the provider for the message service
+
+83
+00:03:42,767 --> 00:03:44,917
+because we removed it from our app component,
+
+84
+00:03:44,917 --> 00:03:46,571
+keep this in mind.
+
+85
+00:03:46,571 --> 00:03:48,392
+Now of that if we save one more time
+
+86
+00:03:48,392 --> 00:03:50,533
+and let it recompile again now we not only
+
+87
+00:03:50,533 --> 00:03:52,460
+get the components in the message module
+
+88
+00:03:52,460 --> 00:03:55,068
+but also the service, and with this
+
+89
+00:03:55,068 --> 00:03:57,098
+if I now reload the application,
+
+90
+00:03:57,098 --> 00:03:59,700
+we see the working application again.
+
+91
+00:03:59,700 --> 00:04:02,429
+But now with our code distributed
+
+92
+00:04:02,429 --> 00:04:06,944
+or our module split up and a feature module being created.
+
+93
+00:04:06,944 --> 00:04:09,426
+If you want to learn more about feature modules,
+
+94
+00:04:09,426 --> 00:04:11,371
+definitely have a look at a dedicated
+
+95
+00:04:11,371 --> 00:04:14,351
+Angular2 course like my complete guide for example.
+
+96
+00:04:14,351 --> 00:04:16,656
+There I dive deeper into this topic,
+
+97
+00:04:16,656 --> 00:04:18,975
+but basically with that we split up
+
+98
+00:04:18,975 --> 00:04:21,460
+our app module, making it a bit leaner,
+
+99
+00:04:21,460 --> 00:04:24,023
+and as you will see with the off module,
+
+100
+00:04:24,023 --> 00:04:27,412
+having some other advantages we can use.
+
+101
+00:04:27,412 --> 00:04:31,245
+So with that let's head on to that off module.
+

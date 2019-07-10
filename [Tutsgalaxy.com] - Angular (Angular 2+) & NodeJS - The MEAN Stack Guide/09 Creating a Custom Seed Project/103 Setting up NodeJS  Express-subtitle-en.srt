@@ -1,0 +1,188 @@
+1
+00:00:01,765 --> 00:00:03,688
+<v ->The first thing I did was I created</v>
+
+2
+00:00:03,688 --> 00:00:07,076
+a normal node express application,
+
+3
+00:00:07,076 --> 00:00:09,776
+and for that I used express generator.
+
+4
+00:00:09,776 --> 00:00:11,399
+Which you can find some instructions
+
+5
+00:00:11,399 --> 00:00:14,290
+on at expressjs.com and simply Google for
+
+6
+00:00:14,290 --> 00:00:16,900
+express generator, you will find this page.
+
+7
+00:00:16,900 --> 00:00:20,062
+This is a little tool which scaffolds out
+
+8
+00:00:20,062 --> 00:00:23,554
+a basic express, node express project,
+
+9
+00:00:23,554 --> 00:00:26,059
+and I'm using this to build up on it
+
+10
+00:00:26,059 --> 00:00:28,002
+and adjust it to my needs.
+
+11
+00:00:28,002 --> 00:00:29,741
+So you can basically follow these steps
+
+12
+00:00:29,741 --> 00:00:31,191
+on this page and first run
+
+13
+00:00:31,191 --> 00:00:34,214
+npm instal express-generator -G
+
+14
+00:00:34,214 --> 00:00:36,871
+to globally instal this express generator
+
+15
+00:00:36,871 --> 00:00:38,627
+on your machine.
+
+16
+00:00:38,627 --> 00:00:40,923
+And once you have done so, switch into the folder
+
+17
+00:00:40,923 --> 00:00:42,891
+where you want to create your project.
+
+18
+00:00:42,891 --> 00:00:44,320
+I'm in an empty folder here.
+
+19
+00:00:44,320 --> 00:00:47,497
+And then run express dot if you want to
+
+20
+00:00:47,497 --> 00:00:49,905
+use this folder, otherwise the name of the folder
+
+21
+00:00:49,905 --> 00:00:52,559
+you want to create for this project.
+
+22
+00:00:52,559 --> 00:00:55,981
+And then, minus minus hps here because
+
+23
+00:00:55,981 --> 00:00:58,418
+I want to set up hps handlebars as
+
+24
+00:00:58,418 --> 00:01:00,443
+the default view engine.
+
+25
+00:01:00,443 --> 00:01:01,693
+Now I'm getting a warning here because
+
+26
+00:01:01,693 --> 00:01:04,902
+I got some idIDEfiles in this folder already,
+
+27
+00:01:04,902 --> 00:01:06,504
+but with that it scaffolded out
+
+28
+00:01:06,504 --> 00:01:09,139
+this project folder or setup and you might
+
+29
+00:01:09,139 --> 00:01:11,844
+already recognise this from earlier.
+
+30
+00:01:11,844 --> 00:01:15,615
+It's really close to what you saw before.
+
+31
+00:01:15,615 --> 00:01:17,281
+Now in this project, the first thing
+
+32
+00:01:17,281 --> 00:01:18,922
+you gotta do is to navigate inside of it
+
+33
+00:01:18,922 --> 00:01:21,983
+to in the terminal, run nmp instal
+
+34
+00:01:21,983 --> 00:01:23,964
+because this didn't instal the dependencies,
+
+35
+00:01:23,964 --> 00:01:25,556
+it only gave us a package to chase
+
+36
+00:01:25,556 --> 00:01:27,687
+and follow with some basic dependencies
+
+37
+00:01:27,687 --> 00:01:30,714
+node and express need to work correctly.
+
+38
+00:01:30,714 --> 00:01:33,033
+After doing so, you may run npm start.
+
+39
+00:01:33,033 --> 00:01:34,736
+This script is also already set up,
+
+40
+00:01:34,736 --> 00:01:37,184
+which allows you to start this application.
+
+41
+00:01:37,184 --> 00:01:39,800
+And then you can already head over and view it
+
+42
+00:01:39,800 --> 00:01:41,300
+at localhost:3000.
+
+43
+00:01:42,231 --> 00:01:45,833
+That's all, this is how the node express app got started.
+
+44
+00:01:45,833 --> 00:01:48,465
+Of course there's no Angular part in there yet,
+
+45
+00:01:48,465 --> 00:01:50,777
+but we at least have the back end.
+
+46
+00:01:50,777 --> 00:01:52,973
+Though, I will fine-tune this a little bit too.
+
+47
+00:01:52,973 --> 00:01:56,056
+And I will work on the back end next.
+

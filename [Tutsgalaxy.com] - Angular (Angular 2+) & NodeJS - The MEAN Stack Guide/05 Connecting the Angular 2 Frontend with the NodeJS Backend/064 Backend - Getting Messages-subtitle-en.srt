@@ -1,0 +1,264 @@
+1
+00:00:02,912 --> 00:00:03,989
+<v Instructor>So while it is nice</v>
+
+2
+00:00:03,989 --> 00:00:07,931
+to be able to save messages, to see them being locked here,
+
+3
+00:00:07,931 --> 00:00:11,759
+and to see them here in the mongdoDB shell client,
+
+4
+00:00:11,759 --> 00:00:15,120
+it would be great to also see them in our application here
+
+5
+00:00:15,120 --> 00:00:17,700
+once we reload the application.
+
+6
+00:00:17,700 --> 00:00:21,867
+But right now, this is not happening, so let's work on this.
+
+7
+00:00:22,862 --> 00:00:25,139
+I'll again start with the backend.
+
+8
+00:00:25,139 --> 00:00:28,839
+So in my messages.js file in the routes folder,
+
+9
+00:00:28,839 --> 00:00:32,131
+I'll add a new route, and you can add it below
+
+10
+00:00:32,131 --> 00:00:35,857
+or above the post route, I will add it above.
+
+11
+00:00:35,857 --> 00:00:38,038
+This will be a get route because now I want
+
+12
+00:00:38,038 --> 00:00:40,248
+to get my messages.
+
+13
+00:00:40,248 --> 00:00:43,448
+The path is all just slash because remember,
+
+14
+00:00:43,448 --> 00:00:46,678
+it has this invisible message at the beginning,
+
+15
+00:00:46,678 --> 00:00:51,568
+since this is our filter in the root app.js file.
+
+16
+00:00:51,568 --> 00:00:54,406
+I then have the well-known callback function,
+
+17
+00:00:54,406 --> 00:00:56,718
+which passes me the request, the response,
+
+18
+00:00:56,718 --> 00:01:00,215
+and this next callback I can execute.
+
+19
+00:01:00,215 --> 00:01:04,215
+And in here, I now want to find all my messages.
+
+20
+00:01:05,238 --> 00:01:08,238
+I can use my mongoose model to do so,
+
+21
+00:01:08,238 --> 00:01:11,358
+so I can directly use the model, the object I imported
+
+22
+00:01:11,358 --> 00:01:14,441
+here at the top, and call find on it.
+
+23
+00:01:16,057 --> 00:01:18,478
+Now it could pass arguments to control
+
+24
+00:01:18,478 --> 00:01:20,598
+which messages to find.
+
+25
+00:01:20,598 --> 00:01:22,726
+This would be a java script object where it could say
+
+26
+00:01:22,726 --> 00:01:26,644
+content should be, and then, well, whatever condition.
+
+27
+00:01:26,644 --> 00:01:30,638
+But if I don't pass anything, that means find all messages
+
+28
+00:01:30,638 --> 00:01:33,878
+and this indeed is what I want to do here.
+
+29
+00:01:33,878 --> 00:01:38,486
+Now, I could add the callback in here, function.
+
+30
+00:01:38,486 --> 00:01:42,113
+But I would do it differently, and you'll learn why
+
+31
+00:01:42,113 --> 00:01:44,960
+I set it up differently in the next section
+
+32
+00:01:44,960 --> 00:01:46,581
+when we add users.
+
+33
+00:01:46,581 --> 00:01:50,811
+I will use a style where I can chain multiple methods
+
+34
+00:01:50,811 --> 00:01:54,193
+to retrieve data, and then at the end, I call exec
+
+35
+00:01:54,193 --> 00:01:55,822
+to execute them all.
+
+36
+00:01:55,822 --> 00:01:59,453
+Now right now, I only have find chained, so this doesn't
+
+37
+00:01:59,453 --> 00:02:01,593
+make any sense right now, but again, I'll come back
+
+38
+00:02:01,593 --> 00:02:05,054
+to this in the next section of the course.
+
+39
+00:02:05,054 --> 00:02:08,843
+So this exec function then takes the callback,
+
+40
+00:02:08,843 --> 00:02:12,534
+which I could also pass to the find method directly,
+
+41
+00:02:12,534 --> 00:02:16,803
+which either gives me an error or any documents it fetched.
+
+42
+00:02:16,803 --> 00:02:20,094
+We can also name this messages, since we know it will be
+
+43
+00:02:20,094 --> 00:02:22,283
+a couple of messages.
+
+44
+00:02:22,283 --> 00:02:26,574
+So in here, I now want to check if we do have an error,
+
+45
+00:02:26,574 --> 00:02:29,825
+in which case, again, I will just copy the code
+
+46
+00:02:29,825 --> 00:02:34,083
+from down here, I will return status code 500,
+
+47
+00:02:34,083 --> 00:02:37,551
+an error occurred, and pass the error object.
+
+48
+00:02:37,551 --> 00:02:40,553
+But if we don't have an error, in this case,
+
+49
+00:02:40,553 --> 00:02:45,174
+I want to set the status code to 200 for successful,
+
+50
+00:02:45,174 --> 00:02:48,551
+and then I want to pass a j.son data,
+
+51
+00:02:48,551 --> 00:02:51,374
+where some j.son data, which is a java script object here
+
+52
+00:02:51,374 --> 00:02:55,763
+where I set some message, let's say, simply success,
+
+53
+00:02:55,763 --> 00:02:57,953
+whatever you like, of course, you don't have to pass
+
+54
+00:02:57,953 --> 00:03:00,823
+this message in the first place, if you don't want this.
+
+55
+00:03:00,823 --> 00:03:04,573
+And then, and this is important, my messages.
+
+56
+00:03:05,534 --> 00:03:08,534
+Now I could name it messages, I'll stick to object
+
+57
+00:03:08,534 --> 00:03:12,105
+since this was also the field name I chose down here
+
+58
+00:03:12,105 --> 00:03:15,443
+when we saved the message, but you're free to rename this.
+
+59
+00:03:15,443 --> 00:03:19,643
+Just make sure to also use this field on the front end then.
+
+60
+00:03:19,643 --> 00:03:21,976
+So here, I pass my messages.
+
+61
+00:03:22,903 --> 00:03:27,355
+This is all, this is my backend route and function
+
+62
+00:03:27,355 --> 00:03:30,614
+to fetch my messages from the database.
+
+63
+00:03:30,614 --> 00:03:32,683
+Now the next thing we gotta do is,
+
+64
+00:03:32,683 --> 00:03:36,683
+we need to connect our Angular 2 front-end to this function
+
+65
+00:03:36,683 --> 00:03:40,043
+and call this function or access this route
+
+66
+00:03:40,043 --> 00:03:43,376
+and then work with the data we get back.
+

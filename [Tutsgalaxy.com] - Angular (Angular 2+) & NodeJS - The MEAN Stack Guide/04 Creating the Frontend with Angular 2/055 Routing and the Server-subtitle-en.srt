@@ -1,0 +1,164 @@
+1
+00:00:01,500 --> 00:00:03,528
+<v Instructor>Before doing so, before adding the</v>
+
+2
+00:00:03,528 --> 00:00:07,384
+authentication part to finish this section here,
+
+3
+00:00:07,384 --> 00:00:11,113
+I want to highlight something else.
+
+4
+00:00:11,113 --> 00:00:13,725
+If I click on these links, you'll see
+
+5
+00:00:13,725 --> 00:00:16,910
+we clearly change the URL up here.
+
+6
+00:00:16,910 --> 00:00:21,559
+If I now reload by hitting enter, it still works.
+
+7
+00:00:21,559 --> 00:00:23,737
+This works because I configured this
+
+8
+00:00:23,737 --> 00:00:26,711
+seed project in a specific way.
+
+9
+00:00:26,711 --> 00:00:29,199
+By default, it would not work.
+
+10
+00:00:29,199 --> 00:00:33,005
+Because if I hit enter here, we send a new request
+
+11
+00:00:33,005 --> 00:00:37,172
+to the server, and the server has no /auth route.
+
+12
+00:00:38,278 --> 00:00:40,019
+Let's have a look in the routes file.
+
+13
+00:00:40,019 --> 00:00:42,317
+We only have slash nothing.
+
+14
+00:00:42,317 --> 00:00:45,798
+So, why don't we get a 404 error?
+
+15
+00:00:45,798 --> 00:00:47,812
+Why is Angular 2 able to pick up
+
+16
+00:00:47,812 --> 00:00:51,495
+before the server throws a 404 error?
+
+17
+00:00:51,495 --> 00:00:54,002
+Because I configured the server in such a way
+
+18
+00:00:54,002 --> 00:00:57,502
+and you have to do the same in your custom setup.
+
+19
+00:00:57,502 --> 00:01:01,719
+Your server should not return 404 errors.
+
+20
+00:01:01,719 --> 00:01:04,743
+Instead, if it encounters a route it doesn't know,
+
+21
+00:01:04,743 --> 00:01:07,738
+like here, /auth, which is perfectly normal
+
+22
+00:01:07,738 --> 00:01:09,394
+for a single-page application
+
+23
+00:01:09,394 --> 00:01:12,240
+where routes are registered in JavaScript.
+
+24
+00:01:12,240 --> 00:01:13,965
+In such a case, and there's a setup
+
+25
+00:01:13,965 --> 00:01:18,490
+in the app.js file here in the root project folder,
+
+26
+00:01:18,490 --> 00:01:20,697
+in such a case you see down here
+
+27
+00:01:20,697 --> 00:01:23,300
+that I catch any 404 errors.
+
+28
+00:01:23,300 --> 00:01:26,502
+So, whenever we reach this point here where we seem
+
+29
+00:01:26,502 --> 00:01:30,333
+to not have found any fitting routes, in such a case,
+
+30
+00:01:30,333 --> 00:01:33,368
+I also want to return the index page,
+
+31
+00:01:33,368 --> 00:01:35,672
+which, of course, holds our Angular 2 application,
+
+32
+00:01:35,672 --> 00:01:37,880
+starts our Angular 2 application,
+
+33
+00:01:37,880 --> 00:01:41,120
+and therefore, then, knows how to handle this route.
+
+34
+00:01:41,120 --> 00:01:44,380
+If I would throw a 404 error here,
+
+35
+00:01:44,380 --> 00:01:46,612
+we would get that before Angular 2 has a chance
+
+36
+00:01:46,612 --> 00:01:47,855
+to take over.
+
+37
+00:01:47,855 --> 00:01:51,680
+So, whatever your server is configured in a way
+
+38
+00:01:51,680 --> 00:01:54,263
+that in case of a 404 error,
+
+39
+00:01:54,263 --> 00:01:56,954
+it returns your index.html,
+
+40
+00:01:56,954 --> 00:02:01,284
+index.hbs, whatever file, and gives Angular 2 a chance
+
+41
+00:02:01,284 --> 00:02:02,451
+to take over.
+

@@ -1,0 +1,212 @@
+1
+00:00:01,478 --> 00:00:04,054
+<v ->So back in our Node.js application,</v>
+
+2
+00:00:04,054 --> 00:00:07,502
+or in our project here, I wanna instal Mongoose.
+
+3
+00:00:07,502 --> 00:00:09,699
+It's a third-party package, and we would have to
+
+4
+00:00:09,699 --> 00:00:12,358
+instal the default MongoDB driver,
+
+5
+00:00:12,358 --> 00:00:13,390
+too, if you wanted to use that,
+
+6
+00:00:13,390 --> 00:00:15,814
+but I want to use Mongoose, so what I will need
+
+7
+00:00:15,814 --> 00:00:18,433
+to instal is the Mongoose package.
+
+8
+00:00:18,433 --> 00:00:20,681
+I do this by running npm instal,
+
+9
+00:00:20,681 --> 00:00:22,692
+and then, minus minus save to save it
+
+10
+00:00:22,692 --> 00:00:25,643
+as a production dependency in the package.json file
+
+11
+00:00:25,643 --> 00:00:28,364
+to create an entry there.
+
+12
+00:00:28,364 --> 00:00:30,482
+Whoops, Mongoose is the name.
+
+13
+00:00:30,482 --> 00:00:33,592
+This will pull down Mongoose, and instal it
+
+14
+00:00:33,592 --> 00:00:36,698
+in our project so that we can use it.
+
+15
+00:00:36,698 --> 00:00:38,390
+With the installation finished here,
+
+16
+00:00:38,390 --> 00:00:40,752
+again, ignore any warnings you might get,
+
+17
+00:00:40,752 --> 00:00:43,509
+with that finished, you see in the package.json,
+
+18
+00:00:43,509 --> 00:00:45,409
+Mongoose was added here.
+
+19
+00:00:45,409 --> 00:00:47,357
+So now, we're good to use Mongoose.
+
+20
+00:00:47,357 --> 00:00:49,170
+How do we use it, then?
+
+21
+00:00:49,170 --> 00:00:53,186
+The first step is, we need to connect our app to Mongoose.
+
+22
+00:00:53,186 --> 00:00:55,075
+We do this in the app.js files,
+
+23
+00:00:55,075 --> 00:00:58,313
+so in every request, we wanna connect to the database.
+
+24
+00:00:58,313 --> 00:01:02,032
+Here, I will create a new variable named mongoose,
+
+25
+00:01:02,032 --> 00:01:04,699
+and that will require the Mongoose package.
+
+26
+00:01:04,699 --> 00:01:06,259
+So I'm basically pointing to this
+
+27
+00:01:06,259 --> 00:01:09,074
+Mongoose package we just installed.
+
+28
+00:01:09,074 --> 00:01:12,218
+Now, in order to connect to it on each request,
+
+29
+00:01:12,218 --> 00:01:16,051
+I can now execute mongoose.connect, like this.
+
+30
+00:01:17,361 --> 00:01:20,709
+With this connect function, we will establish a connexion,
+
+31
+00:01:20,709 --> 00:01:22,199
+but of course, we need to tell it
+
+32
+00:01:22,199 --> 00:01:24,404
+where the Mongoose server lives.
+
+33
+00:01:24,404 --> 00:01:27,618
+We do so by specifying the path here.
+
+34
+00:01:27,618 --> 00:01:32,029
+Now, the path is something we can figure out
+
+35
+00:01:32,029 --> 00:01:36,151
+by having a look at our running Mongo server.
+
+36
+00:01:36,151 --> 00:01:38,996
+When starting it up, you see some general
+
+37
+00:01:38,996 --> 00:01:40,763
+information about the path up here.
+
+38
+00:01:40,763 --> 00:01:44,060
+You see that the port is 27017.
+
+39
+00:01:44,060 --> 00:01:46,390
+And the path instance that is running on our machine,
+
+40
+00:01:46,390 --> 00:01:49,408
+localhost, so the domain is localhost.
+
+41
+00:01:49,408 --> 00:01:52,658
+So here, we connect to localhost 27017,
+
+42
+00:01:54,103 --> 00:01:56,250
+and then, you add a slash and the name
+
+43
+00:01:56,250 --> 00:01:58,162
+of the database you wanna use.
+
+44
+00:01:58,162 --> 00:02:01,031
+You can add a database you haven't created yet,
+
+45
+00:02:01,031 --> 00:02:04,150
+because it will be created for you on the fly.
+
+46
+00:02:04,150 --> 00:02:06,215
+So, node-angular is the one I will use
+
+47
+00:02:06,215 --> 00:02:09,026
+throughout this project, and you may specify it like this.
+
+48
+00:02:09,026 --> 00:02:10,458
+It should work.
+
+49
+00:02:10,458 --> 00:02:13,391
+With that, we're connecting to our MongoDB server
+
+50
+00:02:13,391 --> 00:02:17,288
+through our Node.js application using this Mongoose package.
+
+51
+00:02:17,288 --> 00:02:20,366
+Now, Mongoose is there for more than just connecting us,
+
+52
+00:02:20,366 --> 00:02:22,792
+you will learn, but this is the first basic step
+
+53
+00:02:22,792 --> 00:02:26,959
+to later be able to actually perform database operations.
+

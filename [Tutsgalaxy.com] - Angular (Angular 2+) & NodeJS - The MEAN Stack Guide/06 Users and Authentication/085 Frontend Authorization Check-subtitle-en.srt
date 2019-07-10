@@ -1,0 +1,480 @@
+1
+00:00:01,687 --> 00:00:02,928
+<v Instructor>So now that I'm populating</v>
+
+2
+00:00:02,928 --> 00:00:06,188
+the user field in my message with the actual user,
+
+3
+00:00:06,188 --> 00:00:08,429
+or at least with id and first name,
+
+4
+00:00:08,429 --> 00:00:10,779
+I can use this on my front end,
+
+5
+00:00:10,779 --> 00:00:14,589
+where I fetch my messages in the message service
+
+6
+00:00:14,589 --> 00:00:16,819
+here, getMessages.
+
+7
+00:00:16,819 --> 00:00:20,539
+Right now, the new message I create has the Dummy username,
+
+8
+00:00:20,539 --> 00:00:22,648
+and I don't populate the userid,
+
+9
+00:00:22,648 --> 00:00:24,029
+though I could have done that before,
+
+10
+00:00:24,029 --> 00:00:28,008
+but well, now it's time to work on this anyways.
+
+11
+00:00:28,008 --> 00:00:32,568
+Here, I first want to get the actual first name,
+
+12
+00:00:32,568 --> 00:00:37,098
+so instead of Dummy, I can simply access my message,
+
+13
+00:00:37,098 --> 00:00:41,040
+then user, and now remember, this was expanded,
+
+14
+00:00:41,040 --> 00:00:44,457
+so here now, I can access the first name,
+
+15
+00:00:45,648 --> 00:00:49,128
+since this is the one field by which I expanded it.
+
+16
+00:00:49,128 --> 00:00:52,128
+I can also store the id here,
+
+17
+00:00:52,128 --> 00:00:56,295
+by accessing message, user, and then, underscore, id.
+
+18
+00:00:58,048 --> 00:01:01,568
+So with this setup, and I can bring this in multiple lines
+
+19
+00:01:01,568 --> 00:01:03,469
+to make it a bit easier to read.
+
+20
+00:01:03,469 --> 00:01:07,682
+And now, finally passing all the user data
+
+21
+00:01:07,682 --> 00:01:11,139
+to each of the messages I'm creating here.
+
+22
+00:01:11,139 --> 00:01:15,306
+So now, I do store this connexion on the front end as well.
+
+23
+00:01:16,228 --> 00:01:17,789
+Now of course, the same is true here,
+
+24
+00:01:17,789 --> 00:01:19,658
+when I add a new message.
+
+25
+00:01:19,658 --> 00:01:21,859
+Here, I also create a message,
+
+26
+00:01:21,859 --> 00:01:25,156
+and I also need to populate this with the right data.
+
+27
+00:01:25,156 --> 00:01:28,859
+Now, you could think that I should, therefore,
+
+28
+00:01:28,859 --> 00:01:30,877
+on the backend in my routes folder,
+
+29
+00:01:30,877 --> 00:01:33,356
+when creating a new message here,
+
+30
+00:01:33,356 --> 00:01:36,059
+I also need to kind of populate this,
+
+31
+00:01:36,059 --> 00:01:39,176
+but there is no need to do so, because the result,
+
+32
+00:01:39,176 --> 00:01:41,749
+which I'm sending back to the front end here,
+
+33
+00:01:41,749 --> 00:01:45,916
+actually already has the expanded user object inside of it,
+
+34
+00:01:46,808 --> 00:01:51,539
+since I already do fetch my user here, when I find it by id.
+
+35
+00:01:51,539 --> 00:01:55,177
+Then, I add it to my message here.
+
+36
+00:01:55,177 --> 00:01:57,429
+This, in this case then, is not only the id,
+
+37
+00:01:57,429 --> 00:01:59,728
+but the complete user object, and therefore,
+
+38
+00:01:59,728 --> 00:02:03,389
+I already have the complete user object available here.
+
+39
+00:02:03,389 --> 00:02:05,568
+This allows me, on the front end now,
+
+40
+00:02:05,568 --> 00:02:08,477
+here, in the case where I add a new message,
+
+41
+00:02:08,477 --> 00:02:12,227
+to now simply say, result.obj.user.firstName,
+
+42
+00:02:15,299 --> 00:02:19,132
+and here, of course, it's result.obj.user._id,
+
+43
+00:02:21,957 --> 00:02:24,709
+and with that, I'm saving all the user data
+
+44
+00:02:24,709 --> 00:02:26,907
+in the front end as well.
+
+45
+00:02:26,907 --> 00:02:29,349
+Let's use the additional data we're now fetching
+
+46
+00:02:29,349 --> 00:02:31,349
+in our message component
+
+47
+00:02:31,349 --> 00:02:33,797
+to now show the edit and delete buttons,
+
+48
+00:02:33,797 --> 00:02:37,128
+only if the user is allowed to edit or delete,
+
+49
+00:02:37,128 --> 00:02:40,088
+and to show the right username.
+
+50
+00:02:40,088 --> 00:02:43,057
+To do so, I will go to my message component,
+
+51
+00:02:43,057 --> 00:02:45,739
+and here, I already display, message.username,
+
+52
+00:02:45,739 --> 00:02:48,349
+so this should work automatically.
+
+53
+00:02:48,349 --> 00:02:50,997
+Let's restart the backend service,
+
+54
+00:02:50,997 --> 00:02:52,877
+since we changed something there,
+
+55
+00:02:52,877 --> 00:02:56,548
+and then go to our application and reload here,
+
+56
+00:02:56,548 --> 00:02:58,899
+and we see, indeed, the username of
+
+57
+00:02:58,899 --> 00:03:01,229
+the user who created this.
+
+58
+00:03:01,229 --> 00:03:04,339
+If I, now, I'm still logged in,
+
+59
+00:03:04,339 --> 00:03:06,256
+add a new message here,
+
+60
+00:03:07,757 --> 00:03:09,287
+we also see that username.
+
+61
+00:03:09,287 --> 00:03:11,528
+So this already works, but we need to make sure
+
+62
+00:03:11,528 --> 00:03:15,077
+that we only see the buttons we are allowed to press.
+
+63
+00:03:15,077 --> 00:03:16,979
+So that if I now log out,
+
+64
+00:03:16,979 --> 00:03:19,928
+and log in with the other user,
+
+65
+00:03:19,928 --> 00:03:23,678
+I only see the buttons on this first message,
+
+66
+00:03:24,637 --> 00:03:27,304
+but not on the second one, here.
+
+67
+00:03:28,155 --> 00:03:30,909
+To implement this method, I will add a new method
+
+68
+00:03:30,909 --> 00:03:33,837
+to my message component TypeScript code.
+
+69
+00:03:33,837 --> 00:03:35,669
+I'll name it belongsToUser,
+
+70
+00:03:35,669 --> 00:03:37,669
+because this is what I want to check here.
+
+71
+00:03:37,669 --> 00:03:39,357
+If this component, excuse me,
+
+72
+00:03:39,357 --> 00:03:43,109
+if this message belongs to the currently logged in user.
+
+73
+00:03:43,109 --> 00:03:46,526
+I can determine this by simply returning,
+
+74
+00:03:47,869 --> 00:03:50,369
+localStorage, getItem, userId.
+
+75
+00:03:53,528 --> 00:03:56,779
+Remember, we're also storing the userId in the local storage
+
+76
+00:03:56,779 --> 00:03:59,529
+when authenticating a user, here.
+
+77
+00:04:00,876 --> 00:04:02,869
+So if this item here,
+
+78
+00:04:02,869 --> 00:04:05,699
+if this userId stored in the local storage,
+
+79
+00:04:05,699 --> 00:04:09,032
+equals the userId of our message object.
+
+80
+00:04:11,739 --> 00:04:14,317
+Now of course, since we're in Javascript on the front end,
+
+81
+00:04:14,317 --> 00:04:16,768
+we can always modify this on our own,
+
+82
+00:04:16,768 --> 00:04:19,168
+so you might be able to hack this,
+
+83
+00:04:19,168 --> 00:04:22,749
+and see these buttons on a message you didn't create,
+
+84
+00:04:22,749 --> 00:04:24,357
+but guess what, it doesn't matter.
+
+85
+00:04:24,357 --> 00:04:26,568
+We're checking it on the backend anyways,
+
+86
+00:04:26,568 --> 00:04:27,736
+and this is important.
+
+87
+00:04:27,736 --> 00:04:30,208
+You always need to check on the backend
+
+88
+00:04:30,208 --> 00:04:31,796
+because on the front end,
+
+89
+00:04:31,796 --> 00:04:34,248
+people are able to change your code.
+
+90
+00:04:34,248 --> 00:04:38,596
+Javascript isn't secured against user changes,
+
+91
+00:04:38,596 --> 00:04:40,608
+so you need to make sure to always
+
+92
+00:04:40,608 --> 00:04:44,308
+do the important validation on the backend.
+
+93
+00:04:44,308 --> 00:04:47,088
+I only implement this check here on the front end
+
+94
+00:04:47,088 --> 00:04:49,429
+to provide a better user experience.
+
+95
+00:04:49,429 --> 00:04:51,309
+If the user wants to hack this,
+
+96
+00:04:51,309 --> 00:04:53,768
+and don't have the better experience, therefore,
+
+97
+00:04:53,768 --> 00:04:55,597
+be my guest, do it.
+
+98
+00:04:55,597 --> 00:04:58,709
+The important validation happens on the backend.
+
+99
+00:04:58,709 --> 00:05:02,792
+This is only to provide a better user experience.
+
+100
+00:05:03,757 --> 00:05:06,629
+So this belongsToUser method here,
+
+101
+00:05:06,629 --> 00:05:10,998
+can now be used in the message component html code
+
+102
+00:05:10,998 --> 00:05:14,699
+to check if this button, or if these buttons here,
+
+103
+00:05:14,699 --> 00:05:16,590
+should actually be shown.
+
+104
+00:05:16,590 --> 00:05:18,988
+So here, I can say, ngIf,
+
+105
+00:05:18,988 --> 00:05:22,478
+and I only want to show them if belongs to user,
+
+106
+00:05:22,478 --> 00:05:25,478
+returns True, so if this does equal.
+
+107
+00:05:26,678 --> 00:05:30,486
+Otherwise, I don't want to show these buttons.
+
+108
+00:05:30,486 --> 00:05:34,550
+So with this, let's recompile it and reload.
+
+109
+00:05:34,550 --> 00:05:38,318
+And now, you'll see I only see the buttons on this message,
+
+110
+00:05:38,318 --> 00:05:41,838
+which, if we open the console, I may delete,
+
+111
+00:05:41,838 --> 00:05:43,849
+but I don't see it on the other message,
+
+112
+00:05:43,849 --> 00:05:45,870
+which wasn't created by me.
+
+113
+00:05:45,870 --> 00:05:47,819
+So let me create a new message,
+
+114
+00:05:47,819 --> 00:05:51,819
+and now, I will login with the other user again,
+
+115
+00:05:52,670 --> 00:05:54,848
+and now, you see, it changed.
+
+116
+00:05:54,848 --> 00:05:57,156
+Now, I only see the buttons here,
+
+117
+00:05:57,156 --> 00:06:00,150
+and I am able to change it.
+
+118
+00:06:00,150 --> 00:06:02,438
+And of course, would also be able to delete it,
+
+119
+00:06:02,438 --> 00:06:05,099
+but I can't click it on the second message,
+
+120
+00:06:05,099 --> 00:06:08,266
+which is the behaviour I wanted to add.
+

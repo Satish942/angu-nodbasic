@@ -1,0 +1,256 @@
+1
+00:00:01,906 --> 00:00:03,777
+<v ->You wanna head over to mongodb.com</v>
+
+2
+00:00:03,777 --> 00:00:07,455
+which is the official webpage of MongoDB.
+
+3
+00:00:07,455 --> 00:00:10,842
+And here, download is the link we wanna use.
+
+4
+00:00:10,842 --> 00:00:12,806
+Now on the download centre, make sure
+
+5
+00:00:12,806 --> 00:00:15,716
+to use the right version, which would be
+
+6
+00:00:15,716 --> 00:00:19,008
+the community server for the testing purposes here.
+
+7
+00:00:19,008 --> 00:00:21,978
+Then your operating system, and then the version
+
+8
+00:00:21,978 --> 00:00:25,301
+you wanna use, the default version should be fine.
+
+9
+00:00:25,301 --> 00:00:27,648
+Thereafter, you may download this
+
+10
+00:00:27,648 --> 00:00:29,592
+and depending on your operating system,
+
+11
+00:00:29,592 --> 00:00:31,580
+you can also follow through the
+
+12
+00:00:31,580 --> 00:00:34,196
+installation instructions here to understand
+
+13
+00:00:34,196 --> 00:00:36,012
+how to use that download.
+
+14
+00:00:36,012 --> 00:00:37,839
+On Windows, it should be installer.
+
+15
+00:00:37,839 --> 00:00:40,195
+On OS X it stays package.
+
+16
+00:00:40,195 --> 00:00:42,636
+So let's simply download it here.
+
+17
+00:00:42,636 --> 00:00:44,875
+You don't need to register there,
+
+18
+00:00:44,875 --> 00:00:46,509
+it will start automatically.
+
+19
+00:00:46,509 --> 00:00:50,710
+And after this download finished, I'll be back.
+
+20
+00:00:50,710 --> 00:00:53,562
+I'm in the downloads folder where I downloaded this.
+
+21
+00:00:53,562 --> 00:00:55,388
+On any operating system you should be able
+
+22
+00:00:55,388 --> 00:00:57,666
+to double-click on it, and on Windows
+
+23
+00:00:57,666 --> 00:00:59,559
+it should start an installer.
+
+24
+00:00:59,559 --> 00:01:01,718
+In Mac it will give you this folder.
+
+25
+00:01:01,718 --> 00:01:04,768
+Now this folder already has everything you need
+
+26
+00:01:04,768 --> 00:01:08,491
+in the bin folder, you have multiple executables
+
+27
+00:01:08,491 --> 00:01:10,177
+you can run through the terminal.
+
+28
+00:01:10,177 --> 00:01:12,172
+I will show you how to do that in a second.
+
+29
+00:01:12,172 --> 00:01:14,416
+Which allow you to start your Mongo server
+
+30
+00:01:14,416 --> 00:01:16,037
+with this executable or your client
+
+31
+00:01:16,037 --> 00:01:17,790
+with this executable.
+
+32
+00:01:17,790 --> 00:01:20,582
+You may now move this whole folder
+
+33
+00:01:20,582 --> 00:01:23,934
+and rename to any place on your machine
+
+34
+00:01:23,934 --> 00:01:25,477
+where you wanna store it and where you
+
+35
+00:01:25,477 --> 00:01:27,515
+later on also wanna access it.
+
+36
+00:01:27,515 --> 00:01:30,185
+Now to successfully set up your environment
+
+37
+00:01:30,185 --> 00:01:32,713
+to use MongoDB, then make sure to
+
+38
+00:01:32,713 --> 00:01:34,670
+go to this quick start guide.
+
+39
+00:01:34,670 --> 00:01:36,039
+It should automatically redirect
+
+40
+00:01:36,039 --> 00:01:38,672
+to the one for your operating system.
+
+41
+00:01:38,672 --> 00:01:40,670
+You may choose the right version
+
+42
+00:01:40,670 --> 00:01:42,329
+otherwise here on the left.
+
+43
+00:01:42,329 --> 00:01:45,693
+And make sure to follow these steps here.
+
+44
+00:01:45,693 --> 00:01:48,011
+Now we already did instal it.
+
+45
+00:01:48,011 --> 00:01:50,971
+The important part for us is to now
+
+46
+00:01:50,971 --> 00:01:52,687
+configure it correctly.
+
+47
+00:01:52,687 --> 00:01:54,768
+You may add this path variable here,
+
+48
+00:01:54,768 --> 00:01:55,900
+but you don't need to do that.
+
+49
+00:01:55,900 --> 00:01:57,155
+I will show you how to use without this
+
+50
+00:01:57,155 --> 00:01:58,488
+extra step here.
+
+51
+00:02:00,207 --> 00:02:01,806
+But important is that you create
+
+52
+00:02:01,806 --> 00:02:04,019
+this data directory here.
+
+53
+00:02:04,019 --> 00:02:05,993
+So make sure to definitely follow
+
+54
+00:02:05,993 --> 00:02:08,656
+this step here to set up this directory
+
+55
+00:02:08,656 --> 00:02:10,365
+which will be the directory holding
+
+56
+00:02:10,365 --> 00:02:12,545
+the actual data later on.
+
+57
+00:02:12,545 --> 00:02:14,890
+The directory we downloaded holds the
+
+58
+00:02:14,890 --> 00:02:16,384
+server and the code we need to
+
+59
+00:02:16,384 --> 00:02:18,915
+execute our server, but in this data directory
+
+60
+00:02:18,915 --> 00:02:21,250
+which should create with these easy steps here,
+
+61
+00:02:21,250 --> 00:02:23,659
+the data will be stored thereafter.
+
+62
+00:02:23,659 --> 00:02:25,501
+So make sure to execute the steps
+
+63
+00:02:25,501 --> 00:02:28,582
+one and two there regarding running MongoDB.
+
+64
+00:02:28,582 --> 00:02:31,999
+I'll come back to this in the next video.
+

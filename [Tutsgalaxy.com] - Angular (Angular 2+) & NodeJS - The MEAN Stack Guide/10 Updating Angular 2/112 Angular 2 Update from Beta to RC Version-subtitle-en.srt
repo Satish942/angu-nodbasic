@@ -1,0 +1,740 @@
+1
+00:00:01,475 --> 00:00:02,499
+<v ->Hi, welcome.</v>
+
+2
+00:00:02,499 --> 00:00:06,542
+As you might be aware, Angular Two went from beta
+
+3
+00:00:06,542 --> 00:00:10,593
+to release candidate status right now and it will probably
+
+4
+00:00:10,593 --> 00:00:12,010
+be released soon.
+
+5
+00:00:12,858 --> 00:00:16,618
+Now, from beta to release candidate, there weren't too many
+
+6
+00:00:16,618 --> 00:00:18,912
+changes but some happened.
+
+7
+00:00:18,912 --> 00:00:21,345
+In this video, I want to guide you through all these
+
+8
+00:00:21,345 --> 00:00:23,853
+changes so that you are able, for example,
+
+9
+00:00:23,853 --> 00:00:28,486
+to use all my lectures or videos on Angular Two and apply
+
+10
+00:00:28,486 --> 00:00:32,391
+the knowledge there with the new release candidate.
+
+11
+00:00:32,391 --> 00:00:35,153
+Because, as I said, it's really easy to do.
+
+12
+00:00:35,153 --> 00:00:37,895
+To say the important thing first, all the content
+
+13
+00:00:37,895 --> 00:00:39,034
+is very up to date.
+
+14
+00:00:39,034 --> 00:00:41,177
+There are only three changes I want to talk
+
+15
+00:00:41,177 --> 00:00:42,698
+about in this video.
+
+16
+00:00:42,698 --> 00:00:47,029
+Two of them, only very very minor, and one, the router,
+
+17
+00:00:47,029 --> 00:00:48,643
+being a little bit bigger.
+
+18
+00:00:48,643 --> 00:00:50,824
+Let's start with the minor ones.
+
+19
+00:00:50,824 --> 00:00:54,600
+Here, I got a little example project and the first important
+
+20
+00:00:54,600 --> 00:00:57,337
+change is something you see right here at the top.
+
+21
+00:00:57,337 --> 00:00:59,868
+The naming of the package has changed.
+
+22
+00:00:59,868 --> 00:01:02,833
+In the background, the structure of the package has also
+
+23
+00:01:02,833 --> 00:01:04,146
+changed a little bit.
+
+24
+00:01:04,146 --> 00:01:07,328
+But for us here, only the name we have to use
+
+25
+00:01:07,328 --> 00:01:08,875
+when importing changed.
+
+26
+00:01:08,875 --> 00:01:13,042
+So now it's no longer angular2/core, for example,
+
+27
+00:01:13,983 --> 00:01:16,816
+but it's @angular/core.
+
+28
+00:01:18,710 --> 00:01:21,319
+So here at the bottom you can see an old import
+
+29
+00:01:21,319 --> 00:01:24,283
+and here at the top you see a recent one.
+
+30
+00:01:24,283 --> 00:01:27,592
+But if you exchange angular two for @angular,
+
+31
+00:01:27,592 --> 00:01:29,085
+you're good to go.
+
+32
+00:01:29,085 --> 00:01:30,970
+Now on this page, you can already see the router
+
+33
+00:01:30,970 --> 00:01:33,475
+which is by far the biggest change, though not
+
+34
+00:01:33,475 --> 00:01:37,643
+that difficult to get from the old router to the new router.
+
+35
+00:01:37,643 --> 00:01:39,748
+But I want to begin with another change.
+
+36
+00:01:39,748 --> 00:01:40,581
+NgFor.
+
+37
+00:01:40,581 --> 00:01:42,828
+Here the syntax changed.
+
+38
+00:01:42,828 --> 00:01:46,278
+The old syntax is this one with the hashtag.
+
+39
+00:01:46,278 --> 00:01:50,952
+The new one is to use let item of items, for example.
+
+40
+00:01:50,952 --> 00:01:53,681
+This still creates this local variable you can use
+
+41
+00:01:53,681 --> 00:01:56,336
+and the usage is completely the same.
+
+42
+00:01:56,336 --> 00:02:00,419
+It's just that you exchange hashtag for let here.
+
+43
+00:02:01,343 --> 00:02:04,030
+Now with those two changes out of the way, let's talk
+
+44
+00:02:04,030 --> 00:02:06,598
+about the biggest change- the router.
+
+45
+00:02:06,598 --> 00:02:08,752
+Here is an example router.
+
+46
+00:02:08,752 --> 00:02:11,420
+The old one with RouteConfig three routes
+
+47
+00:02:11,420 --> 00:02:13,845
+with names and so on.
+
+48
+00:02:13,845 --> 00:02:17,153
+Now in the individual routes, I have a subroute
+
+49
+00:02:17,153 --> 00:02:20,282
+in route two, indicated by the three dots here
+
+50
+00:02:20,282 --> 00:02:23,110
+and I'm passing a parameter to route three.
+
+51
+00:02:23,110 --> 00:02:25,406
+Now in route two, I definitely have other routes,
+
+52
+00:02:25,406 --> 00:02:28,059
+but already you can see the new syntax that we'll come
+
+53
+00:02:28,059 --> 00:02:29,075
+back to in a second.
+
+54
+00:02:29,075 --> 00:02:32,955
+In route three, I'm getting this pass parameter by injecting
+
+55
+00:02:32,955 --> 00:02:36,785
+RouteParams and then fetching it here through, well,
+
+56
+00:02:36,785 --> 00:02:39,540
+the RouteParams and then the get method.
+
+57
+00:02:39,540 --> 00:02:42,657
+Here are a couple of things which will change.
+
+58
+00:02:42,657 --> 00:02:45,780
+In the up component where I define my routes,
+
+59
+00:02:45,780 --> 00:02:48,976
+routes are no longer defined using RouteConfig,
+
+60
+00:02:48,976 --> 00:02:51,857
+but instead, by using the route's metadata.
+
+61
+00:02:51,857 --> 00:02:55,323
+Introduced by the @angular/router package.
+
+62
+00:02:55,323 --> 00:02:59,685
+So again, just exchanging angular two with @angular here.
+
+63
+00:02:59,685 --> 00:03:02,488
+So with this routes, its a new metadata which should
+
+64
+00:03:02,488 --> 00:03:04,142
+be used to set up routes.
+
+65
+00:03:04,142 --> 00:03:05,966
+The old router is still available
+
+66
+00:03:05,966 --> 00:03:10,133
+at @angular/router_depricated with a dash between.
+
+67
+00:03:11,606 --> 00:03:14,355
+But you should use the new one, in my opinion.
+
+68
+00:03:14,355 --> 00:03:18,360
+So this is the new way to set up routes
+
+69
+00:03:18,360 --> 00:03:20,973
+but it's not the only thing that changed here.
+
+70
+00:03:20,973 --> 00:03:23,381
+Also, routes no longer have names.
+
+71
+00:03:23,381 --> 00:03:27,048
+They are identified by the path which is unique, anyway,
+
+72
+00:03:27,048 --> 00:03:29,296
+therefore, names are gone.
+
+73
+00:03:29,296 --> 00:03:33,188
+Use as default currently, at the moment we record
+
+74
+00:03:33,188 --> 00:03:36,579
+this video, doesn't work but will probably be reintroduced
+
+75
+00:03:36,579 --> 00:03:38,480
+to work again.
+
+76
+00:03:38,480 --> 00:03:43,128
+But right now, routes are set up with path and component.
+
+77
+00:03:43,128 --> 00:03:45,733
+Another thing that changed is we no longer need the three
+
+78
+00:03:45,733 --> 00:03:47,802
+dots when having subrouting.
+
+79
+00:03:47,802 --> 00:03:50,836
+We can define this like any other route and Angular Two
+
+80
+00:03:50,836 --> 00:03:53,803
+will figure out that this route has routes, well,
+
+81
+00:03:53,803 --> 00:03:57,753
+within it in the component where this route leads to.
+
+82
+00:03:57,753 --> 00:03:59,225
+So this is how the router would be set
+
+83
+00:03:59,225 --> 00:04:00,753
+up in the app component.
+
+84
+00:04:00,753 --> 00:04:03,491
+I can get rid of this old import here.
+
+85
+00:04:03,491 --> 00:04:06,869
+Now, let's go to the route child components
+
+86
+00:04:06,869 --> 00:04:08,840
+where this route leads to.
+
+87
+00:04:08,840 --> 00:04:10,608
+The first component is a normal component.
+
+88
+00:04:10,608 --> 00:04:12,268
+There is nothing to change here.
+
+89
+00:04:12,268 --> 00:04:14,798
+Now, before I go to route two, I'm gonna go to
+
+90
+00:04:14,798 --> 00:04:18,135
+the router component which has the links.
+
+91
+00:04:18,135 --> 00:04:20,638
+This is how links were set up in the past, right?
+
+92
+00:04:20,638 --> 00:04:24,303
+You had an array where the first element was the name
+
+93
+00:04:24,303 --> 00:04:27,208
+of the route and the second an object with parameters
+
+94
+00:04:27,208 --> 00:04:28,970
+if you were to pass any.
+
+95
+00:04:28,970 --> 00:04:30,834
+That also changed.
+
+96
+00:04:30,834 --> 00:04:35,124
+The new way to use it is to use the paths of the routes
+
+97
+00:04:35,124 --> 00:04:37,002
+and the paths here, in this case,
+
+98
+00:04:37,002 --> 00:04:39,702
+are just route one, route two, route three.
+
+99
+00:04:39,702 --> 00:04:43,692
+I can leave out the leading slash here.
+
+100
+00:04:43,692 --> 00:04:47,765
+And then parameters can simply pass as additional arguments
+
+101
+00:04:47,765 --> 00:04:49,740
+in this or elements in this array.
+
+102
+00:04:49,740 --> 00:04:54,156
+So by adding one here, I am passing this as an ID
+
+103
+00:04:54,156 --> 00:04:58,539
+to route three since route three expects to get an ID here,
+
+104
+00:04:58,539 --> 00:05:01,068
+as set up in this app component.
+
+105
+00:05:01,068 --> 00:05:04,451
+So with this, I am setting up these route links
+
+106
+00:05:04,451 --> 00:05:07,674
+in the new way with the new syntax which is very similar
+
+107
+00:05:07,674 --> 00:05:11,010
+to the old one but now no longer using the names,
+
+108
+00:05:11,010 --> 00:05:12,735
+but instead the paths.
+
+109
+00:05:12,735 --> 00:05:16,337
+Notice that if I have slash route one, this is an absolute
+
+110
+00:05:16,337 --> 00:05:19,357
+route from the domain of this page.
+
+111
+00:05:19,357 --> 00:05:22,211
+If I want to have a relative one, I might use
+
+112
+00:05:22,211 --> 00:05:24,291
+dot slash, for example.
+
+113
+00:05:24,291 --> 00:05:26,454
+You can see this in route two component
+
+114
+00:05:26,454 --> 00:05:28,275
+where I have subrouting.
+
+115
+00:05:28,275 --> 00:05:30,754
+These are the routes set up here.
+
+116
+00:05:30,754 --> 00:05:34,248
+And here you can see that with the very first subroute,
+
+117
+00:05:34,248 --> 00:05:37,943
+I'm using dot slash to indicate that I want to use
+
+118
+00:05:37,943 --> 00:05:42,064
+this first route which is set up here which means it has
+
+119
+00:05:42,064 --> 00:05:46,231
+no path here so it should be the kind of default route
+
+120
+00:05:46,231 --> 00:05:48,372
+in this subroute here.
+
+121
+00:05:48,372 --> 00:05:49,415
+Right.
+
+122
+00:05:49,415 --> 00:05:53,244
+But if I were to use this as a path,
+
+123
+00:05:53,244 --> 00:05:54,968
+just as an empty stream,
+
+124
+00:05:54,968 --> 00:05:59,022
+that will lead me to the app component.
+
+125
+00:05:59,022 --> 00:06:00,806
+The route component.
+
+126
+00:06:00,806 --> 00:06:03,992
+So to this first component I see in the app.
+
+127
+00:06:03,992 --> 00:06:08,205
+In order to use a relative route, I use dot slash
+
+128
+00:06:08,205 --> 00:06:12,121
+which means stay on the same URL you're currently at.
+
+129
+00:06:12,121 --> 00:06:14,283
+Of course, I can add other things here
+
+130
+00:06:14,283 --> 00:06:16,354
+like subroute two, for example.
+
+131
+00:06:16,354 --> 00:06:19,992
+This will also lead me to subroute two which just means
+
+132
+00:06:19,992 --> 00:06:23,825
+seen from the current path or the current URL.
+
+133
+00:06:24,721 --> 00:06:25,779
+I hope this is clear.
+
+134
+00:06:25,779 --> 00:06:29,282
+Simply just that you have absolute and relative paths
+
+135
+00:06:29,282 --> 00:06:30,983
+you can specify here.
+
+136
+00:06:30,983 --> 00:06:34,003
+And really, you can navigate here like if you were
+
+137
+00:06:34,003 --> 00:06:36,179
+in a folder structure.
+
+138
+00:06:36,179 --> 00:06:37,787
+So in this route two component here,
+
+139
+00:06:37,787 --> 00:06:41,420
+this is just as subfolder of the overall router component
+
+140
+00:06:41,420 --> 00:06:44,192
+because I have a subrouter in the overall router.
+
+141
+00:06:44,192 --> 00:06:46,622
+This is how you have to think about it and then figuring
+
+142
+00:06:46,622 --> 00:06:49,562
+out the right paths to specify here
+
+143
+00:06:49,562 --> 00:06:51,389
+is really straightforward.
+
+144
+00:06:51,389 --> 00:06:54,497
+And in the end, it's just the paths you set up here
+
+145
+00:06:54,497 --> 00:06:56,840
+in your route's metadata.
+
+146
+00:06:56,840 --> 00:07:00,669
+So that was a lot of talking about router links
+
+147
+00:07:00,669 --> 00:07:02,337
+and how to get there.
+
+148
+00:07:02,337 --> 00:07:04,945
+But in the end, it's the old syntax,
+
+149
+00:07:04,945 --> 00:07:08,227
+just use the paths and not the names.
+
+150
+00:07:08,227 --> 00:07:11,289
+Now fetching parameters also changed.
+
+151
+00:07:11,289 --> 00:07:15,013
+We're no longer using RouteParams but instead now,
+
+152
+00:07:15,013 --> 00:07:17,024
+the RouteSegment.
+
+153
+00:07:17,024 --> 00:07:20,841
+Because Angular Two no longer knows RouteParams,
+
+154
+00:07:20,841 --> 00:07:23,508
+it only knows segments of a URL.
+
+155
+00:07:24,371 --> 00:07:26,985
+Segments not only means parameters but, well,
+
+156
+00:07:26,985 --> 00:07:27,836
+all the same.
+
+157
+00:07:27,836 --> 00:07:29,593
+Ones you might have in a URL.
+
+158
+00:07:29,593 --> 00:07:33,735
+But parameters are part of these segments, therefore,
+
+159
+00:07:33,735 --> 00:07:38,160
+to get a parameter, I now use my RouteSegment here,
+
+160
+00:07:38,160 --> 00:07:40,334
+and then I access it here.
+
+161
+00:07:40,334 --> 00:07:43,784
+RouteSegment has a method called getParam
+
+162
+00:07:43,784 --> 00:07:45,783
+and then it works like before.
+
+163
+00:07:45,783 --> 00:07:49,077
+You just pass the name off to parameter you want to get.
+
+164
+00:07:49,077 --> 00:07:53,212
+So really, not that different, just a, well, different
+
+165
+00:07:53,212 --> 00:07:54,398
+way of going there.
+
+166
+00:07:54,398 --> 00:07:57,240
+Not having a separate module for the parameters,
+
+167
+00:07:57,240 --> 00:08:00,363
+but instead, having one for the whole URL.
+
+168
+00:08:00,363 --> 00:08:02,535
+All of the segments in the URL.
+
+169
+00:08:02,535 --> 00:08:04,408
+That was a lot of talking.
+
+170
+00:08:04,408 --> 00:08:06,345
+Let's see this in action.
+
+171
+00:08:06,345 --> 00:08:07,473
+This is a running app.
+
+172
+00:08:07,473 --> 00:08:10,910
+Here you have to list with let instead of hashtag.
+
+173
+00:08:10,910 --> 00:08:13,004
+And then you have the different routes.
+
+174
+00:08:13,004 --> 00:08:15,909
+As you can see, I'm passing to parameter if I'm manually
+
+175
+00:08:15,909 --> 00:08:17,992
+changing this in the URL.
+
+176
+00:08:19,000 --> 00:08:19,833
+This still works.
+
+177
+00:08:19,833 --> 00:08:23,342
+Now I'm passing eight and the subroutes all to work,
+
+178
+00:08:23,342 --> 00:08:25,662
+as you can see, if I click on them.
+
+179
+00:08:25,662 --> 00:08:27,786
+So these are the changes Angular Two introduced
+
+180
+00:08:27,786 --> 00:08:30,330
+from beta to release candidate.
+
+181
+00:08:30,330 --> 00:08:32,884
+As you hopefully saw, it's not that difficult
+
+182
+00:08:32,884 --> 00:08:34,314
+to adjust your code.
+
+183
+00:08:34,314 --> 00:08:37,200
+I hope this video was helpful in this process.
+
+184
+00:08:37,200 --> 00:08:38,370
+See you in all the other videos.
+
+185
+00:08:38,370 --> 00:08:39,203
+Bye.
+

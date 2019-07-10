@@ -1,0 +1,132 @@
+1
+00:00:01,953 --> 00:00:04,225
+<v ->So we got our MongoDB server set up,</v>
+
+2
+00:00:04,225 --> 00:00:07,861
+and we could work with just MongoDB and Node.js.
+
+3
+00:00:07,861 --> 00:00:11,109
+MongoDB ships its own client we can use in Node.js.
+
+4
+00:00:11,109 --> 00:00:12,518
+Remember a client is what connects
+
+5
+00:00:12,518 --> 00:00:15,011
+to the MongoDB server so we could
+
+6
+00:00:15,011 --> 00:00:17,669
+download the Mongo Node client from the
+
+7
+00:00:17,669 --> 00:00:20,532
+Mongo webpage and get started with that,
+
+8
+00:00:20,532 --> 00:00:22,054
+but if you were to use this client,
+
+9
+00:00:22,054 --> 00:00:24,930
+we would have to write all the excess
+
+10
+00:00:24,930 --> 00:00:27,474
+and all the query logic on our own.
+
+11
+00:00:27,474 --> 00:00:30,542
+We also wouldn't have features like
+
+12
+00:00:30,542 --> 00:00:33,821
+using models against which we could verify some data
+
+13
+00:00:33,821 --> 00:00:35,315
+or something like that.
+
+14
+00:00:35,315 --> 00:00:37,347
+So what we will use is a different client
+
+15
+00:00:37,347 --> 00:00:38,504
+not the default one.
+
+16
+00:00:38,504 --> 00:00:40,960
+The one I'll use is called Mongoose.
+
+17
+00:00:40,960 --> 00:00:43,859
+Mongoose is more than just a Mongo client.
+
+18
+00:00:43,859 --> 00:00:46,450
+It is a package which also allows us
+
+19
+00:00:46,450 --> 00:00:48,617
+to define schemas, models.
+
+20
+00:00:49,459 --> 00:00:50,886
+So for example, a user should have
+
+21
+00:00:50,886 --> 00:00:52,530
+a first name which is a string,
+
+22
+00:00:52,530 --> 00:00:54,088
+a last name which is a string.
+
+23
+00:00:54,088 --> 00:00:56,519
+You can set up such a configuration,
+
+24
+00:00:56,519 --> 00:00:59,524
+and then you can use this schemas blueprint
+
+25
+00:00:59,524 --> 00:01:02,432
+to create objects based on that model
+
+26
+00:01:02,432 --> 00:01:04,718
+and directly on this object you created,
+
+27
+00:01:04,718 --> 00:01:06,609
+you can then execute database methods
+
+28
+00:01:06,609 --> 00:01:09,011
+like save or delete so you don't have
+
+29
+00:01:09,011 --> 00:01:10,538
+to write the queries on your own.
+
+30
+00:01:10,538 --> 00:01:13,083
+You also get this extra validation
+
+31
+00:01:13,083 --> 00:01:15,040
+if the data you create actually fits
+
+32
+00:01:15,040 --> 00:01:16,761
+the model you set up, and this is
+
+33
+00:01:16,761 --> 00:01:18,844
+why Mongoose is so great.
+

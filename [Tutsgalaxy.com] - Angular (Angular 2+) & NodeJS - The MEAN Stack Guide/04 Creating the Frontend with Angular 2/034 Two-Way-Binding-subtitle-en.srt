@@ -1,0 +1,320 @@
+1
+00:00:01,971 --> 00:00:04,080
+<v Instructor>So our application now looks like this.</v>
+
+2
+00:00:04,080 --> 00:00:05,269
+Much better already.
+
+3
+00:00:05,269 --> 00:00:07,459
+We're getting closer to the goal of creating
+
+4
+00:00:07,459 --> 00:00:09,739
+a messenger here or to creating an app
+
+5
+00:00:09,739 --> 00:00:12,000
+where we can create messages.
+
+6
+00:00:12,000 --> 00:00:14,509
+Now, the content is still very static, though.
+
+7
+00:00:14,509 --> 00:00:17,549
+Yes, we dynamically outputted in the template,
+
+8
+00:00:17,549 --> 00:00:20,719
+but we're not able to change it, are we?
+
+9
+00:00:20,719 --> 00:00:23,451
+Well, we'll make this really dynamic later on,
+
+10
+00:00:23,451 --> 00:00:26,496
+but let's already improve this a little bit.
+
+11
+00:00:26,496 --> 00:00:30,693
+Let's learn about another way of data binding in Angular 2,
+
+12
+00:00:30,693 --> 00:00:32,566
+two-way data binding.
+
+13
+00:00:32,566 --> 00:00:36,667
+Right now, I'm using string interpolation to output data.
+
+14
+00:00:36,667 --> 00:00:39,965
+Now it would be great if you could also dynamically set it.
+
+15
+00:00:39,965 --> 00:00:42,736
+So let's add a simple input field up here.
+
+16
+00:00:42,736 --> 00:00:44,595
+It doesn't have too much styling,
+
+17
+00:00:44,595 --> 00:00:47,595
+just a simple input like that.
+
+18
+00:00:47,595 --> 00:00:50,925
+And now I want to hook up this input
+
+19
+00:00:50,925 --> 00:00:54,084
+or whatever we type here to the content of this message
+
+20
+00:00:54,084 --> 00:00:58,565
+so that we ourselves can change the content of this message.
+
+21
+00:00:58,565 --> 00:01:00,296
+Nothing easier than that.
+
+22
+00:01:00,296 --> 00:01:01,802
+Angular 2 offers us nice syntax
+
+23
+00:01:01,802 --> 00:01:04,013
+for this form of data binding.
+
+24
+00:01:04,013 --> 00:01:06,083
+We use square brackets,
+
+25
+00:01:06,083 --> 00:01:09,595
+and then inside of these square brackets, parentheses,
+
+26
+00:01:09,595 --> 00:01:12,433
+and then inside of here, ngModel.
+
+27
+00:01:12,433 --> 00:01:14,518
+Now, this might look strange, what it basically allows us
+
+28
+00:01:14,518 --> 00:01:18,704
+to do is, it allows us to bind this input here,
+
+29
+00:01:18,704 --> 00:01:23,595
+to any property we zip up between the quotation marks here.
+
+30
+00:01:23,595 --> 00:01:25,413
+So don't use curly braces here,
+
+31
+00:01:25,413 --> 00:01:27,523
+you only use it for string interpolation.
+
+32
+00:01:27,523 --> 00:01:31,573
+Here, simply type the property to which you want to bind.
+
+33
+00:01:31,573 --> 00:01:35,235
+In my case, this is message content.
+
+34
+00:01:35,235 --> 00:01:37,395
+Now what this all does is, it tells Angular 2
+
+35
+00:01:37,395 --> 00:01:40,181
+whenever I type something in the input,
+
+36
+00:01:40,181 --> 00:01:45,080
+store it in message.content, and whenever a message.content
+
+37
+00:01:45,080 --> 00:01:48,431
+gets changed somewhere else, or at the beginning of this
+
+38
+00:01:48,431 --> 00:01:51,451
+application is simply initialised, all the output, it ask
+
+39
+00:01:51,451 --> 00:01:53,112
+the value in this input.
+
+40
+00:01:53,112 --> 00:01:55,251
+This is why it's called two-way data binding.
+
+41
+00:01:55,251 --> 00:01:57,003
+It works in both directions.
+
+42
+00:01:57,003 --> 00:01:59,901
+We can change it, and we can see it there.
+
+43
+00:01:59,901 --> 00:02:03,461
+It will also affect message.content wherever else we use it
+
+44
+00:02:03,461 --> 00:02:05,478
+in this application.
+
+45
+00:02:05,478 --> 00:02:06,620
+Now in order to use it,
+
+46
+00:02:06,620 --> 00:02:09,933
+we also have to add it to app.module
+
+47
+00:02:09,933 --> 00:02:13,301
+We specifically, we have to import another built-in module.
+
+48
+00:02:13,301 --> 00:02:15,581
+Right now, we're only importing the browser module,
+
+49
+00:02:15,581 --> 00:02:18,533
+which contains some basic things we need for a browser
+
+50
+00:02:18,533 --> 00:02:21,581
+application that we built with Angular 2.
+
+51
+00:02:21,581 --> 00:02:25,363
+Now, we also need the forms module because this happens
+
+52
+00:02:25,363 --> 00:02:28,821
+to be the built-in module, a module Angular 2 ships with,
+
+53
+00:02:28,821 --> 00:02:33,344
+which offers us access to this ngModel thing we're using.
+
+54
+00:02:33,344 --> 00:02:37,881
+So if I save this, and you also need to import this from
+
+55
+00:02:37,881 --> 00:02:40,824
+@angular/forms as you can see here,
+
+56
+00:02:40,824 --> 00:02:43,172
+so if I add this and then I save my application
+
+57
+00:02:43,172 --> 00:02:45,080
+to let it recompile,
+
+58
+00:02:45,080 --> 00:02:47,821
+if I then reload the application, you now see
+
+59
+00:02:47,821 --> 00:02:49,662
+we got this new input field,
+
+60
+00:02:49,662 --> 00:02:52,903
+which automatically also displays a message.
+
+61
+00:02:52,903 --> 00:02:55,503
+Keep in mind, nowhere am I using
+
+62
+00:02:55,503 --> 00:02:58,041
+string interpolation related to this input.
+
+63
+00:02:58,041 --> 00:03:01,958
+So this message we see here, clearly comes from
+
+64
+00:03:02,908 --> 00:03:04,408
+this ngModel here.
+
+65
+00:03:05,777 --> 00:03:08,761
+So now with that set up, watch the message below
+
+66
+00:03:08,761 --> 00:03:11,727
+in the panel if I start changing this.
+
+67
+00:03:11,727 --> 00:03:13,150
+Do you see this?
+
+68
+00:03:13,150 --> 00:03:15,590
+Now we're dynamically changing the content
+
+69
+00:03:15,590 --> 00:03:19,180
+through Angular 2's two-way data binding.
+
+70
+00:03:19,180 --> 00:03:21,481
+Now, of course, this is not really how the application
+
+71
+00:03:21,481 --> 00:03:22,740
+will work in the end.
+
+72
+00:03:22,740 --> 00:03:25,685
+We want to have a clean input field, which we can submit
+
+73
+00:03:25,685 --> 00:03:28,089
+upon clicking a button and not change it all the time
+
+74
+00:03:28,089 --> 00:03:30,358
+we type something here, also we will later on
+
+75
+00:03:30,358 --> 00:03:32,318
+have multiple messages.
+
+76
+00:03:32,318 --> 00:03:34,860
+But if we will all use this concept again,
+
+77
+00:03:34,860 --> 00:03:37,990
+and I want you to understand how the data works Angular 2,
+
+78
+00:03:37,990 --> 00:03:41,417
+and how we can make it flow from the template
+
+79
+00:03:41,417 --> 00:03:44,486
+to the component class, and back to the template,
+
+80
+00:03:44,486 --> 00:03:46,736
+like we're doing right now.
+

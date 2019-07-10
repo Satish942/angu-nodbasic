@@ -1,0 +1,316 @@
+1
+00:00:01,838 --> 00:00:03,612
+<v Instructor>Now saving the message is actually</v>
+
+2
+00:00:03,612 --> 00:00:07,641
+the most complicated method or thing to do here,
+
+3
+00:00:07,641 --> 00:00:11,550
+but no worries, it's not that complicated in the end.
+
+4
+00:00:11,550 --> 00:00:13,382
+I'll set up a new route here,
+
+5
+00:00:13,382 --> 00:00:15,108
+and this will be a patch route.
+
+6
+00:00:15,108 --> 00:00:18,430
+Patch is a HDP word you'll commonly use to
+
+7
+00:00:18,430 --> 00:00:21,612
+change existing data, put would be an alternative
+
+8
+00:00:21,612 --> 00:00:24,700
+if you want to simply override the existing one.
+
+9
+00:00:24,700 --> 00:00:27,182
+Here, we expect the slash route.
+
+10
+00:00:27,182 --> 00:00:31,212
+Again this has message in front of it automatically,
+
+11
+00:00:31,212 --> 00:00:34,902
+but here I also want to pass the id as a parameter,
+
+12
+00:00:34,902 --> 00:00:37,822
+the id of the message we want to work on,
+
+13
+00:00:37,822 --> 00:00:39,690
+or we want to update.
+
+14
+00:00:39,690 --> 00:00:43,550
+Then we have the well-known callback function here,
+
+15
+00:00:43,550 --> 00:00:45,102
+as we always do.
+
+16
+00:00:45,102 --> 00:00:48,532
+And now inside of here, the job is to use
+
+17
+00:00:48,532 --> 00:00:51,588
+the message object, the message model,
+
+18
+00:00:51,588 --> 00:00:53,611
+to find the message.
+
+19
+00:00:53,611 --> 00:00:57,390
+Now here, I can use the handy find by id method here,
+
+20
+00:00:57,390 --> 00:01:02,132
+and then pass the id, which gets passed as a parameter,
+
+21
+00:01:02,132 --> 00:01:06,873
+so let's access it on request params and then id.
+
+22
+00:01:06,873 --> 00:01:09,241
+The name I chose here in the path.
+
+23
+00:01:09,241 --> 00:01:12,479
+In this case, I'll execute another callback,
+
+24
+00:01:12,479 --> 00:01:16,646
+where I either get an error or my message if we do find it.
+
+25
+00:01:18,073 --> 00:01:22,661
+So, here first, let's handle the error that we have
+
+26
+00:01:22,661 --> 00:01:24,578
+problems fetching this.
+
+27
+00:01:25,601 --> 00:01:30,454
+In this case, I want to return the same error as always.
+
+28
+00:01:30,454 --> 00:01:32,973
+Let's return this one here.
+
+29
+00:01:32,973 --> 00:01:34,694
+We could also encounter the case
+
+30
+00:01:34,694 --> 00:01:37,027
+that we don't have an error,
+
+31
+00:01:38,244 --> 00:01:42,894
+but message is not found because we don't have that id.
+
+32
+00:01:42,894 --> 00:01:47,625
+In this case, I also want to return the status code of 500,
+
+33
+00:01:47,625 --> 00:01:51,458
+but let's give it a title of no message found,
+
+34
+00:01:52,604 --> 00:01:56,134
+something like this, and of course, all the pass the error,
+
+35
+00:01:56,134 --> 00:01:58,734
+though here, I don't pass the error object
+
+36
+00:01:58,734 --> 00:02:02,241
+because remember, error here is only set in the first
+
+37
+00:02:02,241 --> 00:02:04,801
+if block, not necessarily in this one,
+
+38
+00:02:04,801 --> 00:02:06,667
+because we don't have an error,
+
+39
+00:02:06,667 --> 00:02:08,522
+we just don't find the message.
+
+40
+00:02:08,522 --> 00:02:11,893
+So here, I will create my own one, and to be consistent
+
+41
+00:02:11,893 --> 00:02:15,025
+about these errors, I later on want to be able to retrieve
+
+42
+00:02:15,025 --> 00:02:17,585
+detailed errors messages.
+
+43
+00:02:17,585 --> 00:02:21,116
+The errors found by mongoose, these ones here,
+
+44
+00:02:21,116 --> 00:02:23,316
+will contain the message property,
+
+45
+00:02:23,316 --> 00:02:26,766
+therefore my custom object here will also get one.
+
+46
+00:02:26,766 --> 00:02:30,276
+This is a good practise to make sure that you're really
+
+47
+00:02:30,276 --> 00:02:33,778
+able to show your errors on the front-end,
+
+48
+00:02:33,778 --> 00:02:36,718
+and that your errors have a specific format
+
+49
+00:02:36,718 --> 00:02:39,410
+with it you can work on the front-end.
+
+50
+00:02:39,410 --> 00:02:42,519
+So here, you can enter any error text you want.
+
+51
+00:02:42,519 --> 00:02:45,696
+Here, I will simply say message not found, which of course,
+
+52
+00:02:45,696 --> 00:02:49,919
+also is the title, but you can make this more detailed.
+
+53
+00:02:49,919 --> 00:02:53,428
+Now the final step is to save or to update this message.
+
+54
+00:02:53,428 --> 00:02:56,458
+So here, I want to access message content,
+
+55
+00:02:56,458 --> 00:02:59,535
+since this is the field we're changing, and instead
+
+56
+00:02:59,535 --> 00:03:03,039
+of the call to request, and now where is the content
+
+57
+00:03:03,039 --> 00:03:05,087
+of the new message or of the updated message?
+
+58
+00:03:05,087 --> 00:03:09,399
+Well, this is send in the request body, so a patch request
+
+59
+00:03:09,399 --> 00:03:11,380
+typically has both:
+
+60
+00:03:11,380 --> 00:03:14,930
+some data in the path, like the id parameter,
+
+61
+00:03:14,930 --> 00:03:16,700
+and some date in the body.
+
+62
+00:03:16,700 --> 00:03:19,970
+So let's access request body content,
+
+63
+00:03:19,970 --> 00:03:23,780
+for the updated message content, and thereafter, I can call
+
+64
+00:03:23,780 --> 00:03:27,810
+message saved, like I did when creating a new message.
+
+65
+00:03:27,810 --> 00:03:31,143
+Here again, of course, with the callback
+
+66
+00:03:32,260 --> 00:03:36,427
+the error or the result, and now I can just copy the code
+
+67
+00:03:37,678 --> 00:03:42,219
+from the post route here where I created new message.
+
+68
+00:03:42,219 --> 00:03:45,679
+We either have an error or we are successful,
+
+69
+00:03:45,679 --> 00:03:50,323
+but I will change the status code to 200 here then,
+
+70
+00:03:50,323 --> 00:03:53,908
+and I'll rename it to updated message.
+
+71
+00:03:53,908 --> 00:03:57,148
+Now this is my backend function, far as getting the message,
+
+72
+00:03:57,148 --> 00:04:02,046
+checking for errors, and if I actually did get the message,
+
+73
+00:04:02,046 --> 00:04:05,777
+and then changing it, and lastly, saving the
+
+74
+00:04:05,777 --> 00:04:08,348
+well, changed message back to the database.
+
+75
+00:04:08,348 --> 00:04:11,508
+Mongoose will hear automatically not create a new one,
+
+76
+00:04:11,508 --> 00:04:13,849
+but simply override the old one,
+
+77
+00:04:13,849 --> 00:04:18,016
+or override the change fields in the old one to be precise.
+
+78
+00:04:20,649 --> 00:04:23,699
+With this set up, it's time to go back to the front-end
+
+79
+00:04:23,699 --> 00:04:26,282
+and hook it up to this backend.
+

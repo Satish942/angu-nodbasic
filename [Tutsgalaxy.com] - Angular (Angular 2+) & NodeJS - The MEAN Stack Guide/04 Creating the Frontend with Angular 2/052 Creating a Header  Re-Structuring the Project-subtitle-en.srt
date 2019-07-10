@@ -1,0 +1,432 @@
+1
+00:00:01,712 --> 00:00:03,439
+<v Narrator>It's nice that the messaging part</v>
+
+2
+00:00:03,439 --> 00:00:06,071
+is developing well but we also have
+
+3
+00:00:06,071 --> 00:00:09,646
+this auth part and we haven't really worked on that.
+
+4
+00:00:09,646 --> 00:00:12,812
+Right now our whole app component only represents
+
+5
+00:00:12,812 --> 00:00:14,777
+the messages part.
+
+6
+00:00:14,777 --> 00:00:16,693
+I want to change this.
+
+7
+00:00:16,693 --> 00:00:20,223
+I now also want to start working on the authentication part
+
+8
+00:00:20,223 --> 00:00:21,906
+and more than that I also want
+
+9
+00:00:21,906 --> 00:00:23,713
+to implement routing, which means I want
+
+10
+00:00:23,713 --> 00:00:26,586
+to be able to switch between my messages part
+
+11
+00:00:26,586 --> 00:00:28,634
+and my authentication part.
+
+12
+00:00:28,634 --> 00:00:29,908
+So in one part I want to be able
+
+13
+00:00:29,908 --> 00:00:31,993
+to still create and see my messages
+
+14
+00:00:31,993 --> 00:00:34,416
+but in the other part I want to be able
+
+15
+00:00:34,416 --> 00:00:36,833
+to sign up or sign in a user.
+
+16
+00:00:38,318 --> 00:00:40,901
+Well for that I need routing.
+
+17
+00:00:40,901 --> 00:00:42,915
+I want to be able to load different pages
+
+18
+00:00:42,915 --> 00:00:46,449
+depending on different links on which I clicked.
+
+19
+00:00:46,449 --> 00:00:49,910
+To do so, I will add yet another component
+
+20
+00:00:49,910 --> 00:00:53,688
+to my messages feature file here for the folder.
+
+21
+00:00:53,688 --> 00:00:56,188
+The messages component dot TS.
+
+22
+00:00:58,329 --> 00:01:00,541
+So I already have a message component
+
+23
+00:01:00,541 --> 00:01:02,473
+which represents a single message.
+
+24
+00:01:02,473 --> 00:01:06,373
+This now should represent my whole messages feature,
+
+25
+00:01:06,373 --> 00:01:08,433
+this messages part here.
+
+26
+00:01:08,433 --> 00:01:12,463
+So here I will export my messages component
+
+27
+00:01:12,463 --> 00:01:14,927
+and of course you already guessed it,
+
+28
+00:01:14,927 --> 00:01:18,008
+I will add my component decorator to this
+
+29
+00:01:18,008 --> 00:01:22,727
+which needs to be imported from @AngularCore like always.
+
+30
+00:01:22,727 --> 00:01:27,445
+Here I'll pass my auth check and we'll set up the selector.
+
+31
+00:01:27,445 --> 00:01:29,695
+Let's name it App Messages.
+
+32
+00:01:31,024 --> 00:01:33,202
+I also want to set up the template
+
+33
+00:01:33,202 --> 00:01:35,336
+and you could use an external file.
+
+34
+00:01:35,336 --> 00:01:37,675
+I'm going to use an inline template again
+
+35
+00:01:37,675 --> 00:01:40,345
+like this with back ticks.
+
+36
+00:01:40,345 --> 00:01:42,032
+And in this template I want to have
+
+37
+00:01:42,032 --> 00:01:46,199
+all the code I have here in my app component HTML file.
+
+38
+00:01:48,869 --> 00:01:52,553
+Because again, I want to have this messages component
+
+39
+00:01:52,553 --> 00:01:57,030
+to be the responsible part for my messages feature.
+
+40
+00:01:57,030 --> 00:02:01,197
+So with this I created my separate app messages component
+
+41
+00:02:03,311 --> 00:02:06,018
+and now I could include it like this here
+
+42
+00:02:06,018 --> 00:02:08,434
+but I don't want to do that
+
+43
+00:02:08,434 --> 00:02:10,526
+because I want to use routing.
+
+44
+00:02:10,526 --> 00:02:13,641
+I still need to register it in my module here.
+
+45
+00:02:13,641 --> 00:02:18,197
+So here it's time to now add my messages component
+
+46
+00:02:18,197 --> 00:02:20,244
+also at the import, so that we're able
+
+47
+00:02:20,244 --> 00:02:22,571
+to use it in routing later on.
+
+48
+00:02:22,571 --> 00:02:24,376
+Before adding routing, let me also add
+
+49
+00:02:24,376 --> 00:02:26,993
+a component to the auth file.
+
+50
+00:02:26,993 --> 00:02:28,628
+To the auth folder.
+
+51
+00:02:28,628 --> 00:02:32,617
+Authentication dot component dot TS will be the file name
+
+52
+00:02:32,617 --> 00:02:34,744
+and in here I'll also export a class
+
+53
+00:02:34,744 --> 00:02:37,327
+named Authentication Component.
+
+54
+00:02:39,537 --> 00:02:43,704
+Here I'll also assign a decorator component like this.
+
+55
+00:02:45,685 --> 00:02:48,431
+Imported from @AngularCore as always
+
+56
+00:02:48,431 --> 00:02:52,598
+and let's give it a selector of app authentication.
+
+57
+00:02:53,748 --> 00:02:56,175
+The template will grow later on.
+
+58
+00:02:56,175 --> 00:02:57,610
+For now all I will do here
+
+59
+00:02:57,610 --> 00:03:00,560
+is I will simply output an H1 tag
+
+60
+00:03:00,560 --> 00:03:02,856
+where I say authentication to know
+
+61
+00:03:02,856 --> 00:03:05,143
+that we successfully got there.
+
+62
+00:03:05,143 --> 00:03:08,636
+I also won't include this is my app component template
+
+63
+00:03:08,636 --> 00:03:10,351
+but again I also need to add it
+
+64
+00:03:10,351 --> 00:03:13,098
+to my app module to make Angular2 aware
+
+65
+00:03:13,098 --> 00:03:15,443
+of this component so that I can use it
+
+66
+00:03:15,443 --> 00:03:17,530
+in routing later on.
+
+67
+00:03:17,530 --> 00:03:19,197
+Also add the import.
+
+68
+00:03:20,891 --> 00:03:23,803
+Now I finally also want to create a header
+
+69
+00:03:23,803 --> 00:03:26,214
+and I will store this in the app folder.
+
+70
+00:03:26,214 --> 00:03:28,392
+Though I could create a subfolder
+
+71
+00:03:28,392 --> 00:03:30,814
+named Shared or something like this.
+
+72
+00:03:30,814 --> 00:03:33,845
+Here the header component should,
+
+73
+00:03:33,845 --> 00:03:35,321
+well you might have expected it,
+
+74
+00:03:35,321 --> 00:03:36,571
+hold my header.
+
+75
+00:03:37,613 --> 00:03:40,966
+So in here I'll also export this class,
+
+76
+00:03:40,966 --> 00:03:44,216
+Header Component at Component Decorator
+
+77
+00:03:49,220 --> 00:03:52,150
+with your shallow grouped object passed here
+
+78
+00:03:52,150 --> 00:03:55,314
+and this should get a selector of App Header
+
+79
+00:03:55,314 --> 00:03:56,499
+and then again a template.
+
+80
+00:03:56,499 --> 00:03:58,549
+I'm going to use an in line template here too.
+
+81
+00:03:58,549 --> 00:04:01,047
+You might outsource it if you prefer that of course
+
+82
+00:04:01,047 --> 00:04:03,880
+and there a header with class row.
+
+83
+00:04:05,841 --> 00:04:10,798
+And then a Nav element with the classes Col MD Eight
+
+84
+00:04:10,798 --> 00:04:13,412
+and then Col MD offset to elect
+
+85
+00:04:13,412 --> 00:04:17,640
+the four Bootstrap grid classes to style it nicely
+
+86
+00:04:17,640 --> 00:04:20,595
+and in here let's give this
+
+87
+00:04:20,595 --> 00:04:24,651
+an ordered list with the class Nav, Nav Pills.
+
+88
+00:04:24,651 --> 00:04:28,006
+This is just Pills Navigation look Bootstrap offers us.
+
+89
+00:04:28,006 --> 00:04:30,615
+You can find it on Get Bootstrap dot com of course
+
+90
+00:04:30,615 --> 00:04:33,614
+if you want to learn more about that.
+
+91
+00:04:33,614 --> 00:04:35,054
+Oops.
+
+92
+00:04:35,054 --> 00:04:38,614
+And in here let's create two list items
+
+93
+00:04:38,614 --> 00:04:41,447
+with anchor text to have my links.
+
+94
+00:04:47,167 --> 00:04:50,290
+I want to have a messenger link
+
+95
+00:04:50,290 --> 00:04:53,607
+and let's say an authentication link.
+
+96
+00:04:53,607 --> 00:04:55,688
+I will remove the href element
+
+97
+00:04:55,688 --> 00:04:57,608
+because I will replace this later on,
+
+98
+00:04:57,608 --> 00:04:59,496
+but for now I will leave it like this
+
+99
+00:04:59,496 --> 00:05:01,670
+and register this header component
+
+100
+00:05:01,670 --> 00:05:05,837
+which now, until now only has a default Bootstrap styling
+
+101
+00:05:07,705 --> 00:05:10,695
+to the app module, also add the import.
+
+102
+00:05:10,695 --> 00:05:13,475
+This allows me in my app component HTML file
+
+103
+00:05:13,475 --> 00:05:16,475
+to include the app header like that.
+
+104
+00:05:17,452 --> 00:05:20,483
+So if I save this and reload the application
+
+105
+00:05:20,483 --> 00:05:23,222
+we now see this header with the two pills.
+
+106
+00:05:23,222 --> 00:05:25,233
+No pill is active right now
+
+107
+00:05:25,233 --> 00:05:28,234
+and while the routing of course doesn't work.
+
+108
+00:05:28,234 --> 00:05:31,817
+So we clearly can improve this a bit more.
+

@@ -1,0 +1,232 @@
+1
+00:00:01,571 --> 00:00:04,857
+<v Instructor>How do we use HTTP in Angular 2?</v>
+
+2
+00:00:04,857 --> 00:00:06,480
+Because we now need to use it.
+
+3
+00:00:06,480 --> 00:00:08,919
+We want to send data the user entered
+
+4
+00:00:08,919 --> 00:00:12,309
+in our Angular 2 application to the back end
+
+5
+00:00:12,309 --> 00:00:14,688
+to this route we just created.
+
+6
+00:00:14,688 --> 00:00:17,342
+Normally, we have this request response
+
+7
+00:00:17,342 --> 00:00:20,086
+workflow here, between server and client.
+
+8
+00:00:20,086 --> 00:00:22,068
+The client sends a request to the server,
+
+9
+00:00:22,068 --> 00:00:24,215
+and the server responds.
+
+10
+00:00:24,215 --> 00:00:26,155
+But how do we do this with Angular 2?
+
+11
+00:00:26,155 --> 00:00:29,522
+Remember, we only get one page which we render,
+
+12
+00:00:29,522 --> 00:00:33,312
+and then, Angular 2 handles the complete webpage.
+
+13
+00:00:33,312 --> 00:00:35,822
+Well, it turns out, Angular 2 is still able
+
+14
+00:00:35,822 --> 00:00:38,497
+to send requests behind the scenes.
+
+15
+00:00:38,497 --> 00:00:40,701
+So, it doesn't re-render the page,
+
+16
+00:00:40,701 --> 00:00:43,801
+but it is still able to send Ajax requests,
+
+17
+00:00:43,801 --> 00:00:46,744
+so, requests which are then handled
+
+18
+00:00:46,744 --> 00:00:51,003
+in the background by Angular 2 once we get a response.
+
+19
+00:00:51,003 --> 00:00:54,656
+Such a request is sent with a concept
+
+20
+00:00:54,656 --> 00:00:57,444
+or a object named Observables.
+
+21
+00:00:57,444 --> 00:00:59,473
+Angular 2 uses these Observables,
+
+22
+00:00:59,473 --> 00:01:02,688
+and Observables are basically objects
+
+23
+00:01:02,688 --> 00:01:04,668
+coming from a third-party library
+
+24
+00:01:04,668 --> 00:01:09,044
+which allow us to handle asynchronous tasks.
+
+25
+00:01:09,044 --> 00:01:12,716
+And such a HTTP request is an asynchronous task,
+
+26
+00:01:12,716 --> 00:01:15,074
+because we send it now, but we get back
+
+27
+00:01:15,074 --> 00:01:19,415
+the response in a couple of milliseconds or seconds.
+
+28
+00:01:19,415 --> 00:01:21,939
+So, the Angular 2 HTTP service,
+
+29
+00:01:21,939 --> 00:01:23,663
+a built-in service which allows us
+
+30
+00:01:23,663 --> 00:01:26,866
+to connect to the web, so, to connect
+
+31
+00:01:26,866 --> 00:01:30,104
+to any routes and handler responses in the background,
+
+32
+00:01:30,104 --> 00:01:32,595
+this service uses Observables.
+
+33
+00:01:32,595 --> 00:01:36,619
+So it basically sets up a request as an Observable,
+
+34
+00:01:36,619 --> 00:01:40,078
+which means it gives us this Observable thereafter,
+
+35
+00:01:40,078 --> 00:01:42,952
+so that we can listen to any responses
+
+36
+00:01:42,952 --> 00:01:45,813
+we get back from the request, which was sent
+
+37
+00:01:45,813 --> 00:01:48,351
+to the back end to our server.
+
+38
+00:01:48,351 --> 00:01:50,967
+So that's just a pattern to make sure
+
+39
+00:01:50,967 --> 00:01:54,692
+that we can still execute code whilst our request
+
+40
+00:01:54,692 --> 00:01:57,639
+is travelling through the web, handled by the server,
+
+41
+00:01:57,639 --> 00:02:00,098
+and eventually gives us back a response.
+
+42
+00:02:00,098 --> 00:02:02,991
+It would be pretty bad if we would have to wait for that.
+
+43
+00:02:02,991 --> 00:02:06,706
+And, it turns out, with Observables, it's really easy to do.
+
+44
+00:02:06,706 --> 00:02:09,841
+So, once we get this response, we can use
+
+45
+00:02:09,841 --> 00:02:12,713
+another method provided by this
+
+46
+00:02:12,713 --> 00:02:15,937
+Observables third-party library Angular 2 uses,
+
+47
+00:02:15,937 --> 00:02:18,804
+which allows us to map this response,
+
+48
+00:02:18,804 --> 00:02:21,214
+which basically means transform it,
+
+49
+00:02:21,214 --> 00:02:24,009
+so, for example, extract certain fields
+
+50
+00:02:24,009 --> 00:02:26,388
+from that response we're interested in,
+
+51
+00:02:26,388 --> 00:02:29,196
+and we can do all of that in a callback
+
+52
+00:02:29,196 --> 00:02:33,241
+of this subscribe function we used on this Observable
+
+53
+00:02:33,241 --> 00:02:35,452
+to send the request in the first place,
+
+54
+00:02:35,452 --> 00:02:38,908
+and to be informed about responses coming back.
+
+55
+00:02:38,908 --> 00:02:40,671
+Well, that's the theory.
+
+56
+00:02:40,671 --> 00:02:43,436
+It becomes more clear once we see this in action,
+
+57
+00:02:43,436 --> 00:02:45,156
+and you'll see it's pretty easy
+
+58
+00:02:45,156 --> 00:02:48,239
+to send HTTP requests with Angular 2.
+

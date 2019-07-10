@@ -1,0 +1,276 @@
+1
+00:00:02,073 --> 00:00:03,940
+<v Instructor>Now, before making the next steps</v>
+
+2
+00:00:03,940 --> 00:00:06,573
+and securing the content of my application,
+
+3
+00:00:06,573 --> 00:00:08,604
+I want to do one other thing.
+
+4
+00:00:08,604 --> 00:00:11,862
+I want to make this Logout button work,
+
+5
+00:00:11,862 --> 00:00:14,166
+and I also want to make sure that I don't see the
+
+6
+00:00:14,166 --> 00:00:17,589
+Signin tab if I already am signed in,
+
+7
+00:00:17,589 --> 00:00:19,777
+and that I don't see the Logout tab
+
+8
+00:00:19,777 --> 00:00:21,787
+if I'm not logged in.
+
+9
+00:00:21,787 --> 00:00:23,338
+So, that these are only shown
+
+10
+00:00:23,338 --> 00:00:26,277
+depending on my login state.
+
+11
+00:00:26,277 --> 00:00:28,704
+Let's start by implementing the Logout button.
+
+12
+00:00:28,704 --> 00:00:29,830
+In the authService,
+
+13
+00:00:29,830 --> 00:00:31,539
+I'll add a new method here
+
+14
+00:00:31,539 --> 00:00:34,831
+to simply have all of my authentication-related
+
+15
+00:00:34,831 --> 00:00:36,741
+methods in one place.
+
+16
+00:00:36,741 --> 00:00:40,859
+And here, logout is simply a function or a method
+
+17
+00:00:40,859 --> 00:00:42,436
+which takes no argument.
+
+18
+00:00:42,436 --> 00:00:45,439
+And what will this function do?
+
+19
+00:00:45,439 --> 00:00:49,366
+It will simply take my local storage and clear it,
+
+20
+00:00:49,366 --> 00:00:50,608
+because I want to delete both
+
+21
+00:00:50,608 --> 00:00:53,002
+the user id and my token.
+
+22
+00:00:53,002 --> 00:00:54,918
+And with that, the only thing
+
+23
+00:00:54,918 --> 00:00:58,498
+which would give me access to restricted resources,
+
+24
+00:00:58,498 --> 00:01:00,162
+my token, is gone
+
+25
+00:01:00,162 --> 00:01:02,429
+and that basically means I am locked out.
+
+26
+00:01:02,429 --> 00:01:04,401
+There is no session to invalidate.
+
+27
+00:01:04,401 --> 00:01:06,444
+But without the token, I can't do anything.
+
+28
+00:01:06,444 --> 00:01:08,562
+So, I am locked out with that.
+
+29
+00:01:08,562 --> 00:01:11,466
+Now with this, I can go to my LogoutComponent.
+
+30
+00:01:11,466 --> 00:01:13,147
+I do have the onLogout method
+
+31
+00:01:13,147 --> 00:01:15,625
+which is triggered once I click this button.
+
+32
+00:01:15,625 --> 00:01:18,964
+And here I want to use my authService,
+
+33
+00:01:18,964 --> 00:01:20,820
+so let me add a constructor
+
+34
+00:01:20,820 --> 00:01:22,584
+and store the authService
+
+35
+00:01:22,584 --> 00:01:24,907
+in this AuthService property.
+
+36
+00:01:24,907 --> 00:01:26,459
+Of course, you need to add the import
+
+37
+00:01:26,459 --> 00:01:28,775
+to authService at the top.
+
+38
+00:01:28,775 --> 00:01:32,135
+And, I not only want to trigger this logout function
+
+39
+00:01:32,135 --> 00:01:33,244
+in the authService,
+
+40
+00:01:33,244 --> 00:01:35,452
+I also want to navigate away.
+
+41
+00:01:35,452 --> 00:01:40,097
+So I will also inject the Angular to Router here.
+
+42
+00:01:40,097 --> 00:01:42,189
+Of course, the Router therefore, also needs
+
+43
+00:01:42,189 --> 00:01:44,875
+to be imported from .@angular/router.
+
+44
+00:01:44,875 --> 00:01:46,712
+And then in the onLogout method here,
+
+45
+00:01:46,712 --> 00:01:50,302
+I can call this authService, logout,
+
+46
+00:01:50,302 --> 00:01:52,133
+the function I just created.
+
+47
+00:01:52,133 --> 00:01:55,283
+And I can call this router, navigate,
+
+48
+00:01:55,283 --> 00:01:56,450
+and then pass
+
+49
+00:01:57,599 --> 00:01:59,721
+an array of URL segments.
+
+50
+00:01:59,721 --> 00:02:02,612
+And here, let's say I want to go to auth,
+
+51
+00:02:02,612 --> 00:02:03,445
+and then
+
+52
+00:02:04,467 --> 00:02:05,300
+signin.
+
+53
+00:02:07,425 --> 00:02:09,472
+So, with this set up,
+
+54
+00:02:09,472 --> 00:02:10,846
+let's re-compile this.
+
+55
+00:02:10,846 --> 00:02:13,334
+We don't need to restart the server
+
+56
+00:02:13,334 --> 00:02:14,867
+because we didn't change anything there.
+
+57
+00:02:14,867 --> 00:02:18,520
+If it's false, let's try it again.
+
+58
+00:02:18,520 --> 00:02:19,770
+It should work.
+
+59
+00:02:21,304 --> 00:02:22,137
+Yeah.
+
+60
+00:02:22,137 --> 00:02:23,197
+Looks better.
+
+61
+00:02:23,197 --> 00:02:26,113
+So with that, let me reload this application,
+
+62
+00:02:26,113 --> 00:02:28,186
+and hit this Logout button.
+
+63
+00:02:28,186 --> 00:02:29,909
+I get re-directed to the Signin page.
+
+64
+00:02:29,909 --> 00:02:30,742
+Great.
+
+65
+00:02:30,742 --> 00:02:32,694
+And if we go to the application here,
+
+66
+00:02:32,694 --> 00:02:36,268
+we see that indeed, our local storage was cleared.
+
+67
+00:02:36,268 --> 00:02:38,655
+So this is the working Logout button.
+
+68
+00:02:38,655 --> 00:02:40,720
+The next step is to now, conditionally,
+
+69
+00:02:40,720 --> 00:02:42,720
+show or hide these tabs.
+

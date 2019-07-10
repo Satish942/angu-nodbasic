@@ -1,0 +1,524 @@
+1
+00:00:01,792 --> 00:00:04,531
+<v ->In the last lecture, we set up our Mongoose models.</v>
+
+2
+00:00:04,531 --> 00:00:07,199
+Time to use them and to really understand what Mongoose does
+
+3
+00:00:07,199 --> 00:00:08,752
+behind the scenes.
+
+4
+00:00:08,752 --> 00:00:10,841
+So we got a message in the user model,
+
+5
+00:00:10,841 --> 00:00:14,040
+and we already got this node HBS view, where we are able
+
+6
+00:00:14,040 --> 00:00:16,168
+to submit a message.
+
+7
+00:00:16,168 --> 00:00:18,440
+I'll change this to email because I want to create
+
+8
+00:00:18,440 --> 00:00:21,552
+a user model as it is to a more complex one,
+
+9
+00:00:21,552 --> 00:00:23,821
+and I changed the name to email here too,
+
+10
+00:00:23,821 --> 00:00:25,021
+for the input field.
+
+11
+00:00:25,021 --> 00:00:27,264
+I would get rid of this message output up here,
+
+12
+00:00:27,264 --> 00:00:29,157
+don't need it anymore.
+
+13
+00:00:29,157 --> 00:00:32,344
+And for now, this will be the view I'm able to submit.
+
+14
+00:00:32,344 --> 00:00:36,156
+Now in my app.js file, I will update this message here
+
+15
+00:00:36,156 --> 00:00:39,547
+to no longer get a message in the URL and to no longer
+
+16
+00:00:39,547 --> 00:00:41,105
+pass one to the view
+
+17
+00:00:41,105 --> 00:00:43,608
+because I don't output it there anymore.
+
+18
+00:00:43,608 --> 00:00:46,416
+To be precise, I can also get rid of this route,
+
+19
+00:00:46,416 --> 00:00:48,576
+simply use my root route and render node here,
+
+20
+00:00:48,576 --> 00:00:52,358
+so that we don't have to type /message all the time.
+
+21
+00:00:52,358 --> 00:00:55,790
+So this is my get route, loading this node HBS view.
+
+22
+00:00:55,790 --> 00:00:57,177
+Now when we hit submit there,
+
+23
+00:00:57,177 --> 00:01:00,670
+we wanna submit to just "slash", let's say,
+
+24
+00:01:00,670 --> 00:01:03,539
+so here, I would also update this action to just
+
+25
+00:01:03,539 --> 00:01:08,376
+target/ there for reaching this /post route here.
+
+26
+00:01:08,376 --> 00:01:12,038
+And then here, I want to create a new email first,
+
+27
+00:01:12,038 --> 00:01:14,088
+or extract the email from the request,
+
+28
+00:01:14,088 --> 00:01:16,938
+so I will start the variable and we can extract it
+
+29
+00:01:16,938 --> 00:01:19,317
+on this request body, as we learned before,
+
+30
+00:01:19,317 --> 00:01:21,347
+because this is how we submit it.
+
+31
+00:01:21,347 --> 00:01:23,358
+It is stored in the input field named email,
+
+32
+00:01:23,358 --> 00:01:25,797
+and therefore we can access this email property
+
+33
+00:01:25,797 --> 00:01:28,596
+on the body of our request.
+
+34
+00:01:28,596 --> 00:01:31,128
+With that, I wanna store it in the new user model
+
+35
+00:01:31,128 --> 00:01:34,550
+or a new user object based on our user model.
+
+36
+00:01:34,550 --> 00:01:37,707
+To do so, I first need to add an import,
+
+37
+00:01:37,707 --> 00:01:41,280
+the import to the user model we created.
+
+38
+00:01:41,280 --> 00:01:45,400
+So here, I'll point to my models folder,
+
+39
+00:01:45,400 --> 00:01:47,040
+and then the user file.
+
+40
+00:01:47,040 --> 00:01:48,571
+Without the file extension,
+
+41
+00:01:48,571 --> 00:01:50,179
+this will be added automatically.
+
+42
+00:01:50,179 --> 00:01:53,259
+We don't need to specify .js there, it actually would lead
+
+43
+00:01:53,259 --> 00:01:55,931
+to an error if we did so.
+
+44
+00:01:55,931 --> 00:02:00,098
+This will import the user model since we do exported here.
+
+45
+00:02:01,280 --> 00:02:03,395
+With that, we got access to this user model,
+
+46
+00:02:03,395 --> 00:02:07,462
+and I can now call new user using this variable,
+
+47
+00:02:07,462 --> 00:02:10,462
+which uses this exported user model.
+
+48
+00:02:11,472 --> 00:02:13,142
+Now, of course, if I were to store this
+
+49
+00:02:13,142 --> 00:02:15,051
+in a var other than users, I would have to call
+
+50
+00:02:15,051 --> 00:02:18,040
+new users here, but user makes more sense
+
+51
+00:02:18,040 --> 00:02:20,814
+because it is onc user we create.
+
+52
+00:02:20,814 --> 00:02:23,500
+Now to the constructor, we pass a java script object,
+
+53
+00:02:23,500 --> 00:02:26,434
+where we configure this model we want to create,
+
+54
+00:02:26,434 --> 00:02:29,224
+or where we configure this object we want to create
+
+55
+00:02:29,224 --> 00:02:31,704
+based on this model, I should say.
+
+56
+00:02:31,704 --> 00:02:34,144
+So here, we know that we will have a first name
+
+57
+00:02:34,144 --> 00:02:36,973
+because this is how we set it up here, we get a first name,
+
+58
+00:02:36,973 --> 00:02:39,552
+a last name, a password, and an email and the messages,
+
+59
+00:02:39,552 --> 00:02:42,224
+of course, but these aren't required, so I don't have
+
+60
+00:02:42,224 --> 00:02:45,192
+to pass them, and I won't here because we don't have
+
+61
+00:02:45,192 --> 00:02:49,371
+any messages yet, we will do so later in the course, though.
+
+62
+00:02:49,371 --> 00:02:51,080
+So here, I got the first name.
+
+63
+00:02:51,080 --> 00:02:53,472
+I'll set it to Max because this is my name.
+
+64
+00:02:53,472 --> 00:02:55,202
+Choose whatever name you like.
+
+65
+00:02:55,202 --> 00:02:57,501
+I get the last name, I'll set it Schwartz,
+
+66
+00:02:57,501 --> 00:02:59,213
+part of my last name.
+
+67
+00:02:59,213 --> 00:03:02,421
+And I get a password, we're not encrypting it here.
+
+68
+00:03:02,421 --> 00:03:04,813
+We will do so later in the course, of course,
+
+69
+00:03:04,813 --> 00:03:07,594
+but for now, I'll name it whereas store super-secret
+
+70
+00:03:07,594 --> 00:03:10,890
+as a password, which obviously isn't.
+
+71
+00:03:10,890 --> 00:03:13,842
+And then the email should be the email I extract
+
+72
+00:03:13,842 --> 00:03:16,741
+from the request body, of course, I could've extracted it
+
+73
+00:03:16,741 --> 00:03:19,392
+right here, just want to make this
+
+74
+00:03:19,392 --> 00:03:21,490
+as structured as possible.
+
+75
+00:03:21,490 --> 00:03:24,752
+With this, I created my user here, an object based
+
+76
+00:03:24,752 --> 00:03:27,941
+on my model, and I passed my data to this user object
+
+77
+00:03:27,941 --> 00:03:32,551
+to, well, set it up as the model requires me to set it up.
+
+78
+00:03:32,551 --> 00:03:35,200
+Now comes the part which I mentioned earlier.
+
+79
+00:03:35,200 --> 00:03:38,192
+It's super easy to now save this to the database.
+
+80
+00:03:38,192 --> 00:03:42,730
+All we have to do is run it user save, that's all.
+
+81
+00:03:42,730 --> 00:03:46,880
+This will tell Mongoose to store this user object
+
+82
+00:03:46,880 --> 00:03:49,799
+in the user's collection, it will create a collection
+
+83
+00:03:49,799 --> 00:03:53,189
+automatically if we don't have it yet in the database.
+
+84
+00:03:53,189 --> 00:03:54,320
+In which database?
+
+85
+00:03:54,320 --> 00:03:58,487
+In the one we configured here in our root app.js file.
+
+86
+00:04:00,240 --> 00:04:03,501
+We can pass a callback here, which is executed
+
+87
+00:04:03,501 --> 00:04:06,440
+after this saving has been done where we can listen
+
+88
+00:04:06,440 --> 00:04:10,221
+for errors because as arguments, Mongoose will give us
+
+89
+00:04:10,221 --> 00:04:12,960
+an error or the result of this operation,
+
+90
+00:04:12,960 --> 00:04:15,392
+and we will use this callback throughout the course
+
+91
+00:04:15,392 --> 00:04:16,639
+to handle errors.
+
+92
+00:04:16,639 --> 00:04:19,970
+For now let's keep it simple and just call save.
+
+93
+00:04:19,970 --> 00:04:21,720
+Now in the end, of course, we want to redirect
+
+94
+00:04:21,720 --> 00:04:24,952
+to just "slash" and no longer append a message here
+
+95
+00:04:24,952 --> 00:04:26,870
+because that won't work anymore.
+
+96
+00:04:26,870 --> 00:04:29,770
+With that, let's restart the server because we changed
+
+97
+00:04:29,770 --> 00:04:32,250
+a lot of service that cued,
+
+98
+00:04:32,250 --> 00:04:33,610
+and let's head over to the application,
+
+99
+00:04:33,610 --> 00:04:35,880
+at localhost3000 now.
+
+100
+00:04:35,880 --> 00:04:38,917
+I'll store a database or an email to the database
+
+101
+00:04:38,917 --> 00:04:41,437
+by entering it here and hitting submit,
+
+102
+00:04:41,437 --> 00:04:42,951
+and now, did it work?
+
+103
+00:04:42,951 --> 00:04:45,232
+We can't tell because we're not fetching it yet,
+
+104
+00:04:45,232 --> 00:04:47,290
+we only stored something there.
+
+105
+00:04:47,290 --> 00:04:49,812
+Well, I showed you earlier how we can tell.
+
+106
+00:04:49,812 --> 00:04:53,684
+Let's go back to terminal and start this mongo client
+
+107
+00:04:53,684 --> 00:04:57,594
+on Windows without the terminal simply executable,
+
+108
+00:04:57,594 --> 00:05:00,164
+and in there, we should use node angular
+
+109
+00:05:00,164 --> 00:05:02,204
+since this is the database we used.
+
+110
+00:05:02,204 --> 00:05:05,604
+And then we got some collections, you saw that earlier,
+
+111
+00:05:05,604 --> 00:05:09,933
+we can access the user collection by typing db.users
+
+112
+00:05:09,933 --> 00:05:14,244
+and then find will show us all the users in this collection
+
+113
+00:05:14,244 --> 00:05:16,844
+and here we indeed see this new user as a single object
+
+114
+00:05:16,844 --> 00:05:20,186
+Max Schwarz super-secret and email,
+
+115
+00:05:20,186 --> 00:05:24,364
+this looks really like the user we just created and it is.
+
+116
+00:05:24,364 --> 00:05:26,607
+You see, the messages are always empty
+
+117
+00:05:26,607 --> 00:05:29,407
+because we didn't pass one, and you see it has this
+
+118
+00:05:29,407 --> 00:05:32,476
+underscore id field, which we didn't create,
+
+119
+00:05:32,476 --> 00:05:34,676
+which Mongoose creates automatically.
+
+120
+00:05:34,676 --> 00:05:35,935
+I mentioned this earlier.
+
+121
+00:05:35,935 --> 00:05:40,496
+Mongoose does this 4S, and it uses this object id type here,
+
+122
+00:05:40,496 --> 00:05:43,439
+though in the database in the end, this will be just
+
+123
+00:05:43,439 --> 00:05:46,718
+a string, so we see it a bit different here.
+
+124
+00:05:46,718 --> 00:05:49,416
+It's a special kind of string, so to say, holding the idea
+
+125
+00:05:49,416 --> 00:05:53,048
+off this object, this unit idea, of course.
+
+126
+00:05:53,048 --> 00:05:55,789
+This is how we can store data in the database,
+
+127
+00:05:55,789 --> 00:05:59,199
+and I think this is really convenient,
+
+128
+00:05:59,199 --> 00:06:00,811
+and this is the reason why I use Mongoose
+
+129
+00:06:00,811 --> 00:06:04,411
+because it's so easy to set this up and to get validation
+
+130
+00:06:04,411 --> 00:06:08,151
+to see if this is right and to store data in the database.
+
+131
+00:06:08,151 --> 00:06:12,318
+Now in next lecture, let's all go fetch some data.
+

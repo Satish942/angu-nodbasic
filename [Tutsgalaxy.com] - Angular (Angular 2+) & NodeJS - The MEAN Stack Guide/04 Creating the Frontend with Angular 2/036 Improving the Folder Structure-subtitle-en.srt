@@ -1,0 +1,108 @@
+1
+00:00:01,849 --> 00:00:03,851
+<v Instructor>Now as we can see our app folder is</v>
+
+2
+00:00:03,851 --> 00:00:07,384
+already getting pretty crowded and it's a good practise
+
+3
+00:00:07,384 --> 00:00:09,561
+to structure your project.
+
+4
+00:00:09,561 --> 00:00:13,089
+You want to create sub-folders to keep your project clean
+
+5
+00:00:13,089 --> 00:00:16,508
+and keep the possibility to quickly navigate and see
+
+6
+00:00:16,508 --> 00:00:19,584
+what is located where and so on.
+
+7
+00:00:19,584 --> 00:00:22,580
+Now how do you structure Angular2 project?
+
+8
+00:00:22,580 --> 00:00:25,487
+It's a good practise to structure it by feature.
+
+9
+00:00:25,487 --> 00:00:29,287
+So I will not create a folder named models
+
+10
+00:00:29,287 --> 00:00:33,935
+and then a folder named components, like this.
+
+11
+00:00:33,935 --> 00:00:36,319
+This is not how you should structure it.
+
+12
+00:00:36,319 --> 00:00:39,991
+This will quickly get it unmaintainable
+
+13
+00:00:39,991 --> 00:00:43,074
+and hard to understand once it grows.
+
+14
+00:00:44,057 --> 00:00:46,303
+Instead structure it by feature.
+
+15
+00:00:46,303 --> 00:00:49,386
+So here we'll have a messages feature
+
+16
+00:00:50,361 --> 00:00:53,723
+and we'll also have a off feature,
+
+17
+00:00:53,723 --> 00:00:56,058
+so user related stuff.
+
+18
+00:00:56,058 --> 00:00:58,450
+With that I can move my messages model to the
+
+19
+00:00:58,450 --> 00:01:02,156
+messages folder and the user model to the off folder.
+
+20
+00:01:02,156 --> 00:01:04,339
+I'll keep the other files in the app folder
+
+21
+00:01:04,339 --> 00:01:07,935
+but these will be the only files I have there pretty much.
+
+22
+00:01:07,935 --> 00:01:10,842
+All other components and so on, which I'll soon create,
+
+23
+00:01:10,842 --> 00:01:13,068
+will go into sub-folders too.
+
+24
+00:01:13,068 --> 00:01:16,835
+So here in the app folder, in the root folder there,
+
+25
+00:01:16,835 --> 00:01:19,527
+I only want to have files which are related to the
+
+26
+00:01:19,527 --> 00:01:24,459
+start up of the application, really to the root application.
+
+27
+00:01:24,459 --> 00:01:27,959
+All other things will go into sub-folders.
+

@@ -1,0 +1,192 @@
+1
+00:00:01,829 --> 00:00:04,429
+<v ->With the application optimised like this,</v>
+
+2
+00:00:04,429 --> 00:00:06,979
+using multiple modules to lazy loading,
+
+3
+00:00:06,979 --> 00:00:09,499
+we can now build it for production by running
+
+4
+00:00:09,499 --> 00:00:10,999
+mpm run build:prod
+
+5
+00:00:11,989 --> 00:00:14,847
+This is the script I set up in the package.json
+
+6
+00:00:14,847 --> 00:00:17,746
+which now also uses offline compilation.
+
+7
+00:00:17,746 --> 00:00:20,407
+What does offline compilation mean?
+
+8
+00:00:20,407 --> 00:00:23,226
+I'll start with the opposite, the default way,
+
+9
+00:00:23,226 --> 00:00:24,877
+the Angular 2 compiler works,
+
+10
+00:00:24,877 --> 00:00:27,477
+with compiler, I mean the template compiler
+
+11
+00:00:27,477 --> 00:00:30,245
+rendering our templates,
+
+12
+00:00:30,245 --> 00:00:32,837
+is that it does this at runtime in the browser,
+
+13
+00:00:32,837 --> 00:00:35,367
+so the compiler is part of the code we ship
+
+14
+00:00:35,367 --> 00:00:37,117
+as are our templates.
+
+15
+00:00:38,037 --> 00:00:42,186
+Now, Angular 2 offers a second mode of preparing
+
+16
+00:00:42,186 --> 00:00:45,666
+our application, and that is using the offline compiler.
+
+17
+00:00:45,666 --> 00:00:48,727
+As the name implies, we use data compiler
+
+18
+00:00:48,727 --> 00:00:53,087
+during development, so right now, after finishing everything
+
+19
+00:00:53,087 --> 00:00:55,037
+when building for production,
+
+20
+00:00:55,037 --> 00:00:58,658
+and this now parses and compiles all the templates
+
+21
+00:00:58,658 --> 00:01:00,479
+on our machine here.
+
+22
+00:01:00,479 --> 00:01:02,098
+This has a huge advantage.
+
+23
+00:01:02,098 --> 00:01:05,410
+First, the templates and some code is optimised,
+
+24
+00:01:05,410 --> 00:01:08,439
+unnecessary code is stripped out,
+
+25
+00:01:08,439 --> 00:01:11,858
+and second, we don't need to ship the Angular 2 compiler,
+
+26
+00:01:11,858 --> 00:01:14,447
+which actually makes up around 50%
+
+27
+00:01:14,447 --> 00:01:17,479
+of the whole Angular 2 framework, so our bundle
+
+28
+00:01:17,479 --> 00:01:21,618
+gets much, much smaller, and I can show that to you.
+
+29
+00:01:21,618 --> 00:01:25,162
+Compilation finished, this now creates a bundle,
+
+30
+00:01:25,162 --> 00:01:27,453
+and it should still work as before.
+
+31
+00:01:27,453 --> 00:01:29,809
+If we reload, you'll see it works.
+
+32
+00:01:29,809 --> 00:01:32,039
+Now let's go to the network tab again.
+
+33
+00:01:32,039 --> 00:01:36,179
+Remember before, we saw eight megabytes of a bundle there.
+
+34
+00:01:36,179 --> 00:01:40,570
+Now if I reload again, you see this shrank down
+
+35
+00:01:40,570 --> 00:01:45,010
+to 836 kilobytes, still pretty big, but keep in mind,
+
+36
+00:01:45,010 --> 00:01:46,410
+it's not gzipped.
+
+37
+00:01:46,410 --> 00:01:50,749
+So once it's gzipped this, it will shrink even more.
+
+38
+00:01:50,749 --> 00:01:53,519
+This is offline compilation in place.
+
+39
+00:01:53,519 --> 00:01:55,868
+As you see, a huge improvement
+
+40
+00:01:55,868 --> 00:01:58,958
+really helping your application at load time
+
+41
+00:01:58,958 --> 00:02:01,926
+and also at runtime, since some unnecessary stuff
+
+42
+00:02:01,926 --> 00:02:03,766
+is stripped out.
+
+43
+00:02:03,766 --> 00:02:06,905
+In the Build Your Own C-Project Module in this course,
+
+44
+00:02:06,905 --> 00:02:09,567
+you'll learn how to set up the work flow to implement
+
+45
+00:02:09,567 --> 00:02:10,957
+this offline compilation.
+
+46
+00:02:10,957 --> 00:02:14,357
+Here, you just see the result, and with that I'd say,
+
+47
+00:02:14,357 --> 00:02:16,837
+we got a very well optimised application,
+
+48
+00:02:16,837 --> 00:02:18,837
+which we now can deploy.
+

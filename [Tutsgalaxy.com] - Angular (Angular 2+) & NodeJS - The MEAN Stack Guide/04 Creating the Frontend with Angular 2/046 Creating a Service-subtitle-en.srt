@@ -1,0 +1,256 @@
+1
+00:00:01,423 --> 00:00:02,750
+<v Instructor>Back in the project,</v>
+
+2
+00:00:02,750 --> 00:00:04,622
+I wanna create such a new service.
+
+3
+00:00:04,622 --> 00:00:06,180
+It's going to be a service used
+
+4
+00:00:06,180 --> 00:00:08,948
+in my messages feature here.
+
+5
+00:00:08,948 --> 00:00:10,212
+So I'm going to create this file
+
+6
+00:00:10,212 --> 00:00:12,296
+in this messages folder, and a fitting name
+
+7
+00:00:12,296 --> 00:00:14,778
+would be message.service.ts since
+
+8
+00:00:14,778 --> 00:00:17,926
+this will be a service for my messages.
+
+9
+00:00:17,926 --> 00:00:19,721
+Now how does such a service look like?
+
+10
+00:00:19,721 --> 00:00:21,842
+It's a normal class, which we export
+
+11
+00:00:21,842 --> 00:00:24,958
+to make it usable outside of this file too.
+
+12
+00:00:24,958 --> 00:00:27,329
+And I'm not going to name it just service.
+
+13
+00:00:27,329 --> 00:00:29,806
+I'm going to name it message service,
+
+14
+00:00:29,806 --> 00:00:32,810
+since it will hold my message related things.
+
+15
+00:00:32,810 --> 00:00:35,689
+Now in this service, a very important thing
+
+16
+00:00:35,689 --> 00:00:39,276
+which I wanna have is my array of messages.
+
+17
+00:00:39,276 --> 00:00:41,367
+So this will be of type message,
+
+18
+00:00:41,367 --> 00:00:44,575
+which needs to be imported from ./message.model
+
+19
+00:00:44,575 --> 00:00:47,521
+so my own male model here, of type message array.
+
+20
+00:00:47,521 --> 00:00:50,519
+And it will be an empty array let's say for now.
+
+21
+00:00:50,519 --> 00:00:54,291
+So this is my central messages array
+
+22
+00:00:54,291 --> 00:00:57,068
+which I will soon use to store and manage
+
+23
+00:00:57,068 --> 00:01:00,735
+all my messages in my front end application.
+
+24
+00:01:00,735 --> 00:01:03,292
+Now in order to be able to use this array,
+
+25
+00:01:03,292 --> 00:01:06,792
+I want to create a at message method here,
+
+26
+00:01:07,914 --> 00:01:10,220
+which allows me to add a new message
+
+27
+00:01:10,220 --> 00:01:13,778
+to this property or to this central array.
+
+28
+00:01:13,778 --> 00:01:17,727
+And here I expect to get a message as an argument.
+
+29
+00:01:17,727 --> 00:01:20,006
+Of course this should be of type message.
+
+30
+00:01:20,006 --> 00:01:22,335
+And then I can simply use my messages array
+
+31
+00:01:22,335 --> 00:01:25,583
+to push this new message on it.
+
+32
+00:01:25,583 --> 00:01:27,953
+You can, by the way, make this a private property
+
+33
+00:01:27,953 --> 00:01:31,189
+which is not accessible from outside.
+
+34
+00:01:31,189 --> 00:01:33,571
+As the next step I also want to be able to
+
+35
+00:01:33,571 --> 00:01:35,389
+get my messages here, so let's add
+
+36
+00:01:35,389 --> 00:01:37,402
+a get messages method to this class
+
+37
+00:01:37,402 --> 00:01:40,392
+which simply returns my messages array here
+
+38
+00:01:40,392 --> 00:01:44,210
+so that I have access to the central array.
+
+39
+00:01:44,210 --> 00:01:47,061
+And I want to add one other method.
+
+40
+00:01:47,061 --> 00:01:49,289
+Adding and getting messages is great,
+
+41
+00:01:49,289 --> 00:01:52,206
+we'll soon also add an edit method,
+
+42
+00:01:53,173 --> 00:01:55,049
+but for now I want to implement
+
+43
+00:01:55,049 --> 00:01:58,249
+a delete message method, which allows me to
+
+44
+00:01:58,249 --> 00:02:01,915
+pass a message to this method here.
+
+45
+00:02:01,915 --> 00:02:04,887
+And then here I want to take my messages array
+
+46
+00:02:04,887 --> 00:02:07,474
+and splice it and remove one element
+
+47
+00:02:07,474 --> 00:02:09,617
+with the splice method.
+
+48
+00:02:09,617 --> 00:02:12,487
+I want to start at the index of the message
+
+49
+00:02:12,487 --> 00:02:14,611
+and passing as an argument.
+
+50
+00:02:14,611 --> 00:02:16,739
+I'm getting this index with the index.of method
+
+51
+00:02:16,739 --> 00:02:18,423
+on my messages array.
+
+52
+00:02:18,423 --> 00:02:20,673
+And then I want to splice exactly one element,
+
+53
+00:02:20,673 --> 00:02:23,450
+so remove this one element from this array.
+
+54
+00:02:23,450 --> 00:02:26,066
+This will alter this array and remove
+
+55
+00:02:26,066 --> 00:02:28,664
+that element I want to remove.
+
+56
+00:02:28,664 --> 00:02:31,840
+With this, this is the functionality,
+
+57
+00:02:31,840 --> 00:02:34,377
+I want to outsource in a separate file
+
+58
+00:02:34,377 --> 00:02:36,159
+in this message service.
+
+59
+00:02:36,159 --> 00:02:38,466
+I can then use this message service
+
+60
+00:02:38,466 --> 00:02:41,329
+and other components to, in one component,
+
+61
+00:02:41,329 --> 00:02:45,385
+add a message, in another component, get messages.
+
+62
+00:02:45,385 --> 00:02:47,743
+I will extend this service in the next videos,
+
+63
+00:02:47,743 --> 00:02:50,052
+but for now let's hook up this
+
+64
+00:02:50,052 --> 00:02:52,552
+at message functionality here.
+

@@ -1,0 +1,276 @@
+1
+00:00:02,448 --> 00:00:04,508
+<v Voiceover>In order to ensure that only users</v>
+
+2
+00:00:04,508 --> 00:00:07,145
+who created a post are able to add it or delete it.
+
+3
+00:00:07,145 --> 00:00:10,218
+I need to work on the patch and delete routes here
+
+4
+00:00:10,218 --> 00:00:14,324
+on my back end. Specifically I need to fetch the user there
+
+5
+00:00:14,324 --> 00:00:16,306
+and check if this is the user,
+
+6
+00:00:16,306 --> 00:00:18,820
+who actually created the message.
+
+7
+00:00:18,820 --> 00:00:21,148
+Thankfully we know how to fetch the user.
+
+8
+00:00:21,148 --> 00:00:23,907
+I can extract it from the decoded token,
+
+9
+00:00:23,907 --> 00:00:27,181
+so let's just copy this code from the post route.
+
+10
+00:00:27,181 --> 00:00:29,266
+So with that we get access to the token,
+
+11
+00:00:29,266 --> 00:00:31,661
+or to the value stored in the token.
+
+12
+00:00:31,661 --> 00:00:33,920
+Again keep in mind we should only use this
+
+13
+00:00:33,920 --> 00:00:37,813
+after validating the token, which we do here.
+
+14
+00:00:37,813 --> 00:00:41,185
+So with this, we're able to access the user.
+
+15
+00:00:41,185 --> 00:00:43,023
+So what I want to do here is,
+
+16
+00:00:43,023 --> 00:00:44,702
+I want to check if we got an error.
+
+17
+00:00:44,702 --> 00:00:49,610
+If we don't find a message. But then I only want to check
+
+18
+00:00:49,610 --> 00:00:51,110
+if my message user
+
+19
+00:00:52,680 --> 00:00:54,016
+is the same,
+
+20
+00:00:54,016 --> 00:00:57,009
+or to be precise here is not the same.
+
+21
+00:00:57,009 --> 00:01:00,316
+As the user stored in my token.
+
+22
+00:01:00,316 --> 00:01:02,494
+So I want to compare the user ID's here,
+
+23
+00:01:02,494 --> 00:01:05,839
+since message.user is just the user ID.
+
+24
+00:01:05,839 --> 00:01:10,121
+It's not the complete user object, it's simply the ID.
+
+25
+00:01:10,121 --> 00:01:13,026
+So if they are not equal, I know that a different
+
+26
+00:01:13,026 --> 00:01:15,286
+user is trying to delete this message.
+
+27
+00:01:15,286 --> 00:01:17,879
+Then who created this message?
+
+28
+00:01:17,879 --> 00:01:21,746
+So in this case, I don't want to allow this.
+
+29
+00:01:21,746 --> 00:01:23,163
+I want to return,
+
+30
+00:01:25,966 --> 00:01:27,667
+let's say this error here.
+
+31
+00:01:27,667 --> 00:01:31,782
+The not authenticated error we set up here.
+
+32
+00:01:31,782 --> 00:01:33,491
+Here we are.
+
+33
+00:01:33,491 --> 00:01:34,896
+Let's return this in this case.
+
+34
+00:01:34,896 --> 00:01:38,217
+Of course without the error check here, just like this.
+
+35
+00:01:38,217 --> 00:01:42,384
+I want to implement the same check when deleting this.
+
+36
+00:01:43,702 --> 00:01:44,785
+So down here,
+
+37
+00:01:45,895 --> 00:01:46,728
+I will now
+
+38
+00:01:48,265 --> 00:01:49,432
+add this check
+
+39
+00:01:50,903 --> 00:01:51,885
+in here too,
+
+40
+00:01:51,885 --> 00:01:55,121
+before removing it. Let's check is users are equal.
+
+41
+00:01:55,121 --> 00:01:58,787
+If they are not, return with a status code of 401.
+
+42
+00:01:58,787 --> 00:02:01,777
+Of course, this shouldn't be error
+
+43
+00:02:01,777 --> 00:02:04,720
+since we don't have the error object here.
+
+44
+00:02:04,720 --> 00:02:06,553
+Here I will simply say
+
+45
+00:02:07,538 --> 00:02:09,205
+"users do not match"
+
+46
+00:02:11,581 --> 00:02:14,081
+and quickly copy this up here.
+
+47
+00:02:15,654 --> 00:02:17,128
+Here too.
+
+48
+00:02:17,128 --> 00:02:19,742
+So with that, we set this up to make sure
+
+49
+00:02:19,742 --> 00:02:22,191
+that unauthenticated users are not able to delete
+
+50
+00:02:22,191 --> 00:02:24,897
+other users posts and messages.
+
+51
+00:02:24,897 --> 00:02:29,483
+Let's see this in action, by restarting the server
+
+52
+00:02:29,483 --> 00:02:31,979
+and reloading our front end page.
+
+53
+00:02:31,979 --> 00:02:34,725
+Though that wouldn't have been necessary.
+
+54
+00:02:34,725 --> 00:02:37,771
+Let's create a new message here,
+
+55
+00:02:37,771 --> 00:02:39,441
+and then switch the user.
+
+56
+00:02:39,441 --> 00:02:41,969
+So now I'll log in with my other user
+
+57
+00:02:41,969 --> 00:02:46,126
+and I'll try to delete this. So let's clear the console.
+
+58
+00:02:46,126 --> 00:02:48,388
+It is deleted here, but again only because
+
+59
+00:02:48,388 --> 00:02:50,715
+we don't check it in the front end yet.
+
+60
+00:02:50,715 --> 00:02:54,557
+But as you see, I do get the error and if I reload
+
+61
+00:02:54,557 --> 00:02:56,725
+the message is back.
+
+62
+00:02:56,725 --> 00:02:59,675
+The same should be true for editing.
+
+63
+00:02:59,675 --> 00:03:02,756
+Which also, if I change it.
+
+64
+00:03:02,756 --> 00:03:04,924
+Shouldn't be stored on the server.
+
+65
+00:03:04,924 --> 00:03:08,381
+Looks great, so we get this additional route protection.
+
+66
+00:03:08,381 --> 00:03:12,249
+Of course we still need to polish our front end,
+
+67
+00:03:12,249 --> 00:03:14,110
+So that we don't see these buttons
+
+68
+00:03:14,110 --> 00:03:15,440
+if they give us an error anyways.
+
+69
+00:03:15,440 --> 00:03:19,607
+We also want to output the user name here of course.
+

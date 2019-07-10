@@ -1,0 +1,1096 @@
+1
+00:00:01,484 --> 00:00:04,210
+<v Instructor>Editing messages is something right now</v>
+
+2
+00:00:04,210 --> 00:00:06,328
+we haven't really implemented.
+
+3
+00:00:06,328 --> 00:00:10,467
+I can click Edit, but this will only change the value here.
+
+4
+00:00:10,467 --> 00:00:13,187
+Well, now, I want to have the functionality
+
+5
+00:00:13,187 --> 00:00:14,840
+that once I click Edit,
+
+6
+00:00:14,840 --> 00:00:17,304
+I load the message here in the input field,
+
+7
+00:00:17,304 --> 00:00:21,181
+I can change it and then save it back to the database.
+
+8
+00:00:21,181 --> 00:00:23,795
+I also want to have a button which allows me to,
+
+9
+00:00:23,795 --> 00:00:26,547
+well, cancel the editing process,
+
+10
+00:00:26,547 --> 00:00:29,235
+and not only do I want to have this process,
+
+11
+00:00:29,235 --> 00:00:31,805
+which is 100% front-end only,
+
+12
+00:00:31,805 --> 00:00:35,528
+I also want to store whatever I enter here
+
+13
+00:00:35,528 --> 00:00:37,896
+as a new value to the database.
+
+14
+00:00:37,896 --> 00:00:40,723
+Of course, only if I save and not if I cancel.
+
+15
+00:00:40,723 --> 00:00:44,136
+So, let's implement this starting with the front-end.
+
+16
+00:00:44,136 --> 00:00:46,653
+If we have a look at the message list component,
+
+17
+00:00:46,653 --> 00:00:50,221
+which is the component rendering all our messages,
+
+18
+00:00:50,221 --> 00:00:51,928
+and then at the MessageComponent,
+
+19
+00:00:51,928 --> 00:00:53,763
+which is the individual message,
+
+20
+00:00:53,763 --> 00:00:55,501
+we see this onEdit method,
+
+21
+00:00:55,501 --> 00:01:00,227
+which executes or which emits this editClicked event here.
+
+22
+00:01:00,227 --> 00:01:05,101
+This event is then handled by the MessageListComponent here.
+
+23
+00:01:05,101 --> 00:01:08,195
+Here, where I list into this custom event.
+
+24
+00:01:08,195 --> 00:01:12,680
+Well, and then here, I simply changed the content.
+
+25
+00:01:12,680 --> 00:01:15,043
+I don't want to use the setup anymore.
+
+26
+00:01:15,043 --> 00:01:17,981
+I want to edit the actual message in the array
+
+27
+00:01:17,981 --> 00:01:19,933
+and then save it to the database.
+
+28
+00:01:19,933 --> 00:01:22,408
+So, I'll delete this in the MessageListComponent
+
+29
+00:01:22,408 --> 00:01:24,648
+where I list into my own event,
+
+30
+00:01:24,648 --> 00:01:25,992
+and in the MessageComponent,
+
+31
+00:01:25,992 --> 00:01:28,925
+I will delete this output in the EventEmitter.
+
+32
+00:01:28,925 --> 00:01:31,720
+I also no longer need to import EventEmitter
+
+33
+00:01:31,720 --> 00:01:34,600
+and output, therefore, since I don't use it.
+
+34
+00:01:34,600 --> 00:01:37,757
+Now, I want to do all of that in the Service,
+
+35
+00:01:37,757 --> 00:01:39,667
+in the Message Service.
+
+36
+00:01:39,667 --> 00:01:43,144
+So, I'll get rid of this line, which doesn't work right now,
+
+37
+00:01:43,144 --> 00:01:45,139
+and back in the Message Service,
+
+38
+00:01:45,139 --> 00:01:47,357
+it's time to work on that.
+
+39
+00:01:47,357 --> 00:01:50,227
+Here, I want to add a new method,
+
+40
+00:01:50,227 --> 00:01:52,560
+which I'll call editMessage.
+
+41
+00:01:53,437 --> 00:01:55,731
+To this method, I wanna pass the Message,
+
+42
+00:01:55,731 --> 00:01:57,309
+which should get edited,
+
+43
+00:01:57,309 --> 00:02:00,861
+and I will call this message from my message component.
+
+44
+00:02:00,861 --> 00:02:03,464
+Now all I want to do here, though, is
+
+45
+00:02:03,464 --> 00:02:07,016
+I want to inform the message input component
+
+46
+00:02:07,016 --> 00:02:09,480
+that it should now load this message
+
+47
+00:02:09,480 --> 00:02:12,980
+into this input here in the HTML template,
+
+48
+00:02:14,045 --> 00:02:17,288
+so that I'm able to, well, change it.
+
+49
+00:02:17,288 --> 00:02:19,091
+So, in order to do this,
+
+50
+00:02:19,091 --> 00:02:23,496
+I will add a new property here and EventEmitter,
+
+51
+00:02:23,496 --> 00:02:26,461
+and I will call it, messageIsEdit,
+
+52
+00:02:26,461 --> 00:02:29,784
+of course, you may choose whatever name you like.
+
+53
+00:02:29,784 --> 00:02:32,451
+This will be a new EventEmitter,
+
+54
+00:02:33,741 --> 00:02:36,280
+of course, therefore, you will need to import it
+
+55
+00:02:36,280 --> 00:02:38,947
+from "@angular/core",
+
+56
+00:02:38,947 --> 00:02:41,997
+and it will event a message object.
+
+57
+00:02:41,997 --> 00:02:45,827
+It will emit, excuse me, a message object in the end.
+
+58
+00:02:45,827 --> 00:02:49,267
+So, with this set up, I can go to my editMessage method,
+
+59
+00:02:49,267 --> 00:02:52,100
+where I called this.messageIsEdit,
+
+60
+00:02:53,507 --> 00:02:55,725
+and emit this event.
+
+61
+00:02:55,725 --> 00:02:58,659
+Here, I wanna pass the message which is sent
+
+62
+00:02:58,659 --> 00:03:00,141
+to this method.
+
+63
+00:03:00,141 --> 00:03:02,051
+Why do I set it up like this?
+
+64
+00:03:02,051 --> 00:03:04,877
+Because the Service will now act as a middle man
+
+65
+00:03:04,877 --> 00:03:06,819
+between the MessageComponent,
+
+66
+00:03:06,819 --> 00:03:09,933
+which we'll now, simply use this Service,
+
+67
+00:03:09,933 --> 00:03:13,642
+and call editMessage, and pass the message
+
+68
+00:03:13,642 --> 00:03:15,225
+off this component,
+
+69
+00:03:16,355 --> 00:03:18,573
+this.message, of course,
+
+70
+00:03:18,573 --> 00:03:22,712
+and the input component, when I wanna list into this.
+
+71
+00:03:22,712 --> 00:03:27,480
+So, here, I will implement OnInit lifecycle hook,
+
+72
+00:03:27,480 --> 00:03:30,989
+which also needs to be imported from "@angular/core"
+
+73
+00:03:30,989 --> 00:03:35,181
+to add the ngOnInit method, which is the perfect place
+
+74
+00:03:35,181 --> 00:03:39,397
+to now call this.messageService.messageIsEdit,
+
+75
+00:03:39,397 --> 00:03:42,723
+so this event, and subscribe to any events
+
+76
+00:03:42,723 --> 00:03:44,141
+which may get emitted,
+
+77
+00:03:44,141 --> 00:03:47,597
+so that this message input component gets informed
+
+78
+00:03:47,597 --> 00:03:49,688
+whenever in some other component,
+
+79
+00:03:49,688 --> 00:03:52,109
+I click the edit button.
+
+80
+00:03:52,109 --> 00:03:56,707
+Now, what do I want to do once the edit button is clicked?
+
+81
+00:03:56,707 --> 00:04:00,739
+I want to load this message into my input field.
+
+82
+00:04:00,739 --> 00:04:02,712
+Now, of course, if we have a look
+
+83
+00:04:02,712 --> 00:04:06,051
+at the message input component template,
+
+84
+00:04:06,051 --> 00:04:08,845
+right now, we're not really using
+
+85
+00:04:08,845 --> 00:04:11,800
+any pre-filled values, this is always empty.
+
+86
+00:04:11,800 --> 00:04:14,840
+We don't have a possibility to fill this input
+
+87
+00:04:14,840 --> 00:04:16,856
+with our own value.
+
+88
+00:04:16,856 --> 00:04:19,395
+Time to add this functionality.
+
+89
+00:04:19,395 --> 00:04:23,608
+In the time script file, in the class body,
+
+90
+00:04:23,608 --> 00:04:26,429
+I'll create a new property, called message,
+
+91
+00:04:26,429 --> 00:04:30,419
+which will present the message loaded into the input field.
+
+92
+00:04:30,419 --> 00:04:32,445
+This is of type Message,
+
+93
+00:04:32,445 --> 00:04:35,389
+and by default, that this of course, undefined
+
+94
+00:04:35,389 --> 00:04:38,216
+because by default, the field should be empty,
+
+95
+00:04:38,216 --> 00:04:41,619
+so there is no message pre-filled into this field
+
+96
+00:04:41,619 --> 00:04:44,840
+because the default is set we create a new message,
+
+97
+00:04:44,840 --> 00:04:47,656
+but I can hook up this input field
+
+98
+00:04:47,656 --> 00:04:51,603
+with this ngModel here, by adding square brackets.
+
+99
+00:04:51,603 --> 00:04:54,109
+Not square brackets and parentheses,
+
+100
+00:04:54,109 --> 00:04:56,253
+I don't want to set up two-way binding.
+
+101
+00:04:56,253 --> 00:04:58,643
+I don't want to ...
+
+102
+00:04:58,643 --> 00:05:01,384
+Update the message property
+
+103
+00:05:01,384 --> 00:05:04,115
+of this component on every key stroke,
+
+104
+00:05:04,115 --> 00:05:06,387
+but I want to pre-fill it.
+
+105
+00:05:06,387 --> 00:05:09,693
+If this message property we set up here,
+
+106
+00:05:09,693 --> 00:05:11,863
+if this is not a new find,
+
+107
+00:05:11,863 --> 00:05:16,051
+then I want to fill the value into this input field.
+
+108
+00:05:16,051 --> 00:05:18,429
+This is what ngModel, here, does.
+
+109
+00:05:18,429 --> 00:05:20,019
+Though, of course, I want to target
+
+110
+00:05:20,019 --> 00:05:21,629
+the content of this message,
+
+111
+00:05:21,629 --> 00:05:24,371
+and I pass a question mark to only do this
+
+112
+00:05:24,371 --> 00:05:25,992
+if it is not undefined,
+
+113
+00:05:25,992 --> 00:05:27,144
+in which case, of course,
+
+114
+00:05:27,144 --> 00:05:30,419
+there is no content field to access.
+
+115
+00:05:30,419 --> 00:05:31,586
+So, if the ...
+
+116
+00:05:32,979 --> 00:05:37,011
+Message property, here, is undefined as it is by default,
+
+117
+00:05:37,011 --> 00:05:40,061
+there will be no value in my input field,
+
+118
+00:05:40,061 --> 00:05:43,240
+but if we do have a value for message,
+
+119
+00:05:43,240 --> 00:05:46,952
+if it is set to something else, than undefined or null,
+
+120
+00:05:46,952 --> 00:05:50,595
+well then, we will see the content of this message.
+
+121
+00:05:50,595 --> 00:05:52,717
+So, here, back to the ngOnInit method,
+
+122
+00:05:52,717 --> 00:05:56,003
+where I subscribe to my messageIsEdit event.
+
+123
+00:05:56,003 --> 00:05:58,327
+Here, I can simply say,
+
+124
+00:05:58,327 --> 00:05:59,827
+well, for each ...
+
+125
+00:06:00,968 --> 00:06:02,685
+Message I get passed,
+
+126
+00:06:02,685 --> 00:06:05,101
+since I know I will get a message passed
+
+127
+00:06:05,101 --> 00:06:08,611
+to this call back, so it is of type message,
+
+128
+00:06:08,611 --> 00:06:12,579
+since that is what this event emitter is set up to emit.
+
+129
+00:06:12,579 --> 00:06:14,776
+In this case, if we receive such a data
+
+130
+00:06:14,776 --> 00:06:18,797
+if this event is fired, then I want to set this message
+
+131
+00:06:18,797 --> 00:06:20,856
+equal to the message I get passed
+
+132
+00:06:20,856 --> 00:06:23,011
+through the event emitter.
+
+133
+00:06:23,011 --> 00:06:27,693
+Now, let's save this and I already see this in action.
+
+134
+00:06:27,693 --> 00:06:30,480
+If I reload my application here,
+
+135
+00:06:30,480 --> 00:06:32,147
+and I click on Edit,
+
+136
+00:06:33,085 --> 00:06:35,645
+see this, we already load Test.
+
+137
+00:06:35,645 --> 00:06:37,885
+Though, right now, if I click Save,
+
+138
+00:06:37,885 --> 00:06:41,437
+I created a new object, as you will see once I reload.
+
+139
+00:06:41,437 --> 00:06:42,707
+So, this doesn't really work.
+
+140
+00:06:42,707 --> 00:06:44,307
+It doesn't really save it.
+
+141
+00:06:44,307 --> 00:06:47,005
+Also, I get no way of clearing this input,
+
+142
+00:06:47,005 --> 00:06:49,928
+and well, of course, I can clear it like this,
+
+143
+00:06:49,928 --> 00:06:51,869
+but then, I have the red button.
+
+144
+00:06:51,869 --> 00:06:55,155
+So, this needs some more fine-tuning.
+
+145
+00:06:55,155 --> 00:06:58,984
+The fine-tuning I wanna apply to this input field here is,
+
+146
+00:06:58,984 --> 00:07:00,595
+I want to have a clear button,
+
+147
+00:07:00,595 --> 00:07:03,075
+which allows me to reset the form,
+
+148
+00:07:03,075 --> 00:07:05,997
+and I want to, once I click the Save button,
+
+149
+00:07:05,997 --> 00:07:08,451
+not Save it as a new
+
+150
+00:07:08,451 --> 00:07:11,480
+message, but instead update the existing one.
+
+151
+00:07:11,480 --> 00:07:15,391
+I'll need a new method in my Service form disc.
+
+152
+00:07:15,391 --> 00:07:19,213
+Well, let's start with resetting the form.
+
+153
+00:07:19,213 --> 00:07:20,600
+Here, in the onSubmit method,
+
+154
+00:07:20,600 --> 00:07:23,981
+I already call Form, resetForm, when I clicked Save.
+
+155
+00:07:23,981 --> 00:07:28,792
+So, this is done, but I want to have this Cancel button.
+
+156
+00:07:28,792 --> 00:07:31,128
+Here, I want to add a new button
+
+157
+00:07:31,128 --> 00:07:34,211
+to my input component to this form.
+
+158
+00:07:34,211 --> 00:07:36,376
+So, I'll quickly do this.
+
+159
+00:07:36,376 --> 00:07:40,141
+I'll add a button, which is of type buttons,
+
+160
+00:07:40,141 --> 00:07:42,616
+so, that it doesn't submit this form,
+
+161
+00:07:42,616 --> 00:07:44,504
+and then, we'll get the bootstrap classes,
+
+162
+00:07:44,504 --> 00:07:47,427
+btn and btn-danger, to make it red,
+
+163
+00:07:47,427 --> 00:07:50,488
+and here, I'll simply say, "Clear",
+
+164
+00:07:50,488 --> 00:07:54,655
+and what this clear button does is, it will execute
+
+165
+00:07:55,613 --> 00:07:59,780
+the onClear method in my input component body here.
+
+166
+00:08:01,277 --> 00:08:03,444
+So, here, we have onClear,
+
+167
+00:08:04,445 --> 00:08:07,837
+and what do I wanna do here in onClear?
+
+168
+00:08:07,837 --> 00:08:10,504
+Well, let's call form.resetForm,
+
+169
+00:08:11,400 --> 00:08:14,259
+and in order to be able to do so,
+
+170
+00:08:14,259 --> 00:08:17,587
+I need to pass my form here, of course,
+
+171
+00:08:17,587 --> 00:08:20,872
+which I can do since I have access to it
+
+172
+00:08:20,872 --> 00:08:23,037
+with this f reference,
+
+173
+00:08:23,037 --> 00:08:25,309
+so I can pass it just like I passed it
+
+174
+00:08:25,309 --> 00:08:27,400
+to the onSubmit method.
+
+175
+00:08:27,400 --> 00:08:31,251
+Let's save this and see if it does what we want.
+
+176
+00:08:31,251 --> 00:08:34,643
+If I reload my application here, click Edit,
+
+177
+00:08:34,643 --> 00:08:36,424
+we see the Clear button.
+
+178
+00:08:36,424 --> 00:08:40,019
+If I click Clear, it clears the form
+
+179
+00:08:40,019 --> 00:08:43,400
+and I am not able to Submit this anymore.
+
+180
+00:08:43,400 --> 00:08:46,376
+So, this resets it, and just clears the value.
+
+181
+00:08:46,376 --> 00:08:48,808
+So, that does what I want it to do,
+
+182
+00:08:48,808 --> 00:08:51,752
+but still, we're not able to really
+
+183
+00:08:51,752 --> 00:08:53,608
+update an existing message
+
+184
+00:08:53,608 --> 00:08:55,613
+instead of saving a new one.
+
+185
+00:08:55,613 --> 00:08:57,863
+So, let's work on this now.
+
+186
+00:08:59,731 --> 00:09:02,056
+I have to work on the onSubmit method,
+
+187
+00:09:02,056 --> 00:09:05,501
+which is the place where I currently call the addMessage
+
+188
+00:09:05,501 --> 00:09:07,027
+method in the Service.
+
+189
+00:09:07,027 --> 00:09:10,227
+While I don't have a update Message method yet,
+
+190
+00:09:10,227 --> 00:09:12,616
+but I can already implement a logic here
+
+191
+00:09:12,616 --> 00:09:16,125
+to decide which method in the Service should get called.
+
+192
+00:09:16,125 --> 00:09:18,461
+So, here I will add a if statement,
+
+193
+00:09:18,461 --> 00:09:21,139
+where I simply check if this message
+
+194
+00:09:21,139 --> 00:09:23,581
+is not null or undefined
+
+195
+00:09:23,581 --> 00:09:26,547
+because if this message is null or undefined,
+
+196
+00:09:26,547 --> 00:09:29,309
+then I know we're creating a new message,
+
+197
+00:09:29,309 --> 00:09:31,389
+but if it is not null or undefined,
+
+198
+00:09:31,389 --> 00:09:34,259
+so in this case here, we're editing,
+
+199
+00:09:34,259 --> 00:09:36,426
+otherwise, we're creating.
+
+200
+00:09:37,864 --> 00:09:39,272
+So, if we're creating,
+
+201
+00:09:39,272 --> 00:09:42,291
+well then I wanna execute this code form.resetForm,
+
+202
+00:09:42,291 --> 00:09:44,701
+welds stay outside because I wanna execute this
+
+203
+00:09:44,701 --> 00:09:45,868
+in both cases,
+
+204
+00:09:46,781 --> 00:09:50,269
+but if we're editing, then I simply want to set
+
+205
+00:09:50,269 --> 00:09:52,488
+this.message.content
+
+206
+00:09:52,488 --> 00:09:56,655
+to the content of my form.value.content field here.
+
+207
+00:09:58,147 --> 00:10:00,227
+So, if the content field in my form,
+
+208
+00:10:00,227 --> 00:10:02,644
+the single input I have here,
+
+209
+00:10:03,822 --> 00:10:06,621
+and then I want to call a method in the MessageService,
+
+210
+00:10:06,621 --> 00:10:10,288
+which allows me to really update my message.
+
+211
+00:10:11,165 --> 00:10:14,771
+So, let's create such a method in the Service here.
+
+212
+00:10:14,771 --> 00:10:17,021
+I'll name it updateMessage,
+
+213
+00:10:18,024 --> 00:10:20,232
+so this is not the method loading the message.
+
+214
+00:10:20,232 --> 00:10:22,856
+It's the one which we changes it,
+
+215
+00:10:22,856 --> 00:10:25,608
+and it expects to get the message
+
+216
+00:10:25,608 --> 00:10:28,179
+which should get updated.
+
+217
+00:10:28,179 --> 00:10:31,592
+Now, what do I need to do here?
+
+218
+00:10:31,592 --> 00:10:33,821
+Right now, nothing.
+
+219
+00:10:33,821 --> 00:10:36,077
+I'll soon add the HDP methods
+
+220
+00:10:36,077 --> 00:10:38,829
+to reach out to the server and change it here,
+
+221
+00:10:38,829 --> 00:10:40,397
+but to change it on the front-end,
+
+222
+00:10:40,397 --> 00:10:42,531
+I don't need to do anything here.
+
+223
+00:10:42,531 --> 00:10:44,963
+We already got all the functionality we want.
+
+224
+00:10:44,963 --> 00:10:47,683
+We're already editing this.message.content
+
+225
+00:10:47,683 --> 00:10:50,531
+and set it equal to form.value.content.
+
+226
+00:10:50,531 --> 00:10:53,027
+Remember, this message here,
+
+227
+00:10:53,027 --> 00:10:55,640
+the message we use in this input component
+
+228
+00:10:55,640 --> 00:10:59,021
+comes from this global array where we message,
+
+229
+00:10:59,021 --> 00:11:02,296
+where we manage all the messages, we get it here,
+
+230
+00:11:02,296 --> 00:11:04,344
+when we list into the event,
+
+231
+00:11:04,344 --> 00:11:06,861
+and therefore if we change the message here,
+
+232
+00:11:06,861 --> 00:11:08,589
+the one in the array is changed,
+
+233
+00:11:08,589 --> 00:11:10,755
+since we're only using arrays and objects here,
+
+234
+00:11:10,755 --> 00:11:12,323
+so, only reference types.
+
+235
+00:11:12,323 --> 00:11:13,709
+We're not changing a copy,
+
+236
+00:11:13,709 --> 00:11:16,397
+we're changing the actual message.
+
+237
+00:11:16,397 --> 00:11:18,328
+So let's see this in action.
+
+238
+00:11:18,328 --> 00:11:20,824
+If I save this and let it recompile,
+
+239
+00:11:20,824 --> 00:11:23,640
+and I load my application here,
+
+240
+00:11:23,640 --> 00:11:26,883
+if I click Edit and I change it to Test 2
+
+241
+00:11:26,883 --> 00:11:30,317
+and save this, now you'll see no knew message was edited.
+
+242
+00:11:30,317 --> 00:11:33,176
+Instead, this one here was edited,
+
+243
+00:11:33,176 --> 00:11:37,411
+and if I reload, you will also see we didn't add a new one.
+
+244
+00:11:37,411 --> 00:11:39,416
+Of course, the edit didn't persist
+
+245
+00:11:39,416 --> 00:11:42,851
+because well, we're not storing it in the database,
+
+246
+00:11:42,851 --> 00:11:45,779
+but we're now in the edit mode here.
+
+247
+00:11:45,779 --> 00:11:48,200
+The strange thing is, the form is not reset.
+
+248
+00:11:48,200 --> 00:11:50,781
+So, let's see why this happens.
+
+249
+00:11:50,781 --> 00:11:52,403
+The form does not reset
+
+250
+00:11:52,403 --> 00:11:55,486
+because this message is changed here.
+
+251
+00:11:56,595 --> 00:11:59,432
+So, we're setting this message here,
+
+252
+00:11:59,432 --> 00:12:02,301
+and that means, it's not undefined or null.
+
+253
+00:12:02,301 --> 00:12:06,376
+So, we need to call this.message equals null here
+
+254
+00:12:06,376 --> 00:12:09,053
+to set this object back to null,
+
+255
+00:12:09,053 --> 00:12:12,083
+in which case, we will no longer output anything here
+
+256
+00:12:12,083 --> 00:12:13,597
+since message is now null
+
+257
+00:12:13,597 --> 00:12:15,784
+and we don't access to content,
+
+258
+00:12:15,784 --> 00:12:18,376
+and therefore, to make everything work correctly,
+
+259
+00:12:18,376 --> 00:12:20,019
+we also need to do the same here
+
+260
+00:12:20,019 --> 00:12:22,461
+in the onClear message, method.
+
+261
+00:12:22,461 --> 00:12:25,459
+So, here, we also need to set this to null.
+
+262
+00:12:25,459 --> 00:12:27,592
+What this will do is that if click on Edit,
+
+263
+00:12:27,592 --> 00:12:29,651
+and I clear and Edit again,
+
+264
+00:12:29,651 --> 00:12:32,360
+it now also sets this to null in between.
+
+265
+00:12:32,360 --> 00:12:35,795
+If I wouldn't reset this to null here, too,
+
+266
+00:12:35,795 --> 00:12:36,856
+then you will see that
+
+267
+00:12:36,856 --> 00:12:38,947
+if you click Edit and Clear, it clears it,
+
+268
+00:12:38,947 --> 00:12:41,827
+but if you click Edit again, it won't load it.
+
+269
+00:12:41,827 --> 00:12:43,885
+So, with this, we've got the form set up,
+
+270
+00:12:43,885 --> 00:12:46,616
+we're able to edit it and to really change it.
+
+271
+00:12:46,616 --> 00:12:48,590
+Now, it's time to work on the back-end,
+
+272
+00:12:48,590 --> 00:12:51,384
+and allow us to save these changes
+
+273
+00:12:51,384 --> 00:12:53,123
+we're making on the front-end
+
+274
+00:12:53,123 --> 00:12:55,790
+to our database on the back-end.
+

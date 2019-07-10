@@ -1,0 +1,348 @@
+1
+00:00:01,679 --> 00:00:03,389
+<v Instructor>We're almost there.</v>
+
+2
+00:00:03,389 --> 00:00:06,286
+I will now copy all that code here,
+
+3
+00:00:06,286 --> 00:00:07,592
+in my
+
+4
+00:00:07,592 --> 00:00:09,048
+class body
+
+5
+00:00:09,048 --> 00:00:10,474
+to my signin component,
+
+6
+00:00:10,474 --> 00:00:14,108
+since it will also use this approach of creating a form.
+
+7
+00:00:14,108 --> 00:00:15,678
+Of course, you should then also
+
+8
+00:00:15,678 --> 00:00:19,069
+copy all these form-related imports here
+
+9
+00:00:19,069 --> 00:00:20,399
+into the signin component,
+
+10
+00:00:20,399 --> 00:00:23,183
+so that this is all enabled again.
+
+11
+00:00:23,183 --> 00:00:26,393
+And, of course, we also need to synchronise this.
+
+12
+00:00:26,393 --> 00:00:27,407
+So I'm simply copying
+
+13
+00:00:27,407 --> 00:00:29,923
+the template of the signup form,
+
+14
+00:00:29,923 --> 00:00:33,238
+though here I only need email and passwords.
+
+15
+00:00:33,238 --> 00:00:34,850
+So, I will remove the inputs
+
+16
+00:00:34,850 --> 00:00:37,048
+for first and last name,
+
+17
+00:00:37,048 --> 00:00:38,504
+and then of course all that means
+
+18
+00:00:38,504 --> 00:00:40,949
+that in my signin component TypeScript class,
+
+19
+00:00:40,949 --> 00:00:43,605
+I will remove these controls here too.
+
+20
+00:00:43,605 --> 00:00:45,910
+So now I do have a lighter version
+
+21
+00:00:45,910 --> 00:00:49,333
+of the signup form here in the signin component,
+
+22
+00:00:49,333 --> 00:00:52,153
+which means that if I reload the application
+
+23
+00:00:52,153 --> 00:00:54,551
+I now get the signin component here.
+
+24
+00:00:54,551 --> 00:00:57,325
+Still has the same functionality as before,
+
+25
+00:00:57,325 --> 00:01:00,649
+but now only for mail and password.
+
+26
+00:01:00,649 --> 00:01:02,416
+With this we got our application
+
+27
+00:01:02,416 --> 00:01:04,575
+or frontend almost finished.
+
+28
+00:01:04,575 --> 00:01:06,272
+We've got our authentication section here
+
+29
+00:01:06,272 --> 00:01:08,051
+with Signup, Signin, and Logout,
+
+30
+00:01:08,051 --> 00:01:10,528
+which we can switch with child routing.
+
+31
+00:01:10,528 --> 00:01:11,939
+Get our Messenger, where we can
+
+32
+00:01:11,939 --> 00:01:13,178
+add new routes.
+
+33
+00:01:13,178 --> 00:01:16,021
+The one thing I want to fix, or add now
+
+34
+00:01:16,021 --> 00:01:18,244
+before moving on to the next module,
+
+35
+00:01:18,244 --> 00:01:21,353
+where you've finally connected to Node.js;
+
+36
+00:01:21,353 --> 00:01:23,989
+so bring these two pieces together,
+
+37
+00:01:23,989 --> 00:01:25,695
+is these two buttons.
+
+38
+00:01:25,695 --> 00:01:26,981
+Deleting doesn't work,
+
+39
+00:01:26,981 --> 00:01:28,541
+and reloads it actually.
+
+40
+00:01:28,541 --> 00:01:29,871
+And the same is true for editing,
+
+41
+00:01:29,871 --> 00:01:30,992
+which does work,
+
+42
+00:01:30,992 --> 00:01:33,995
+though it only replaces it with some static text,
+
+43
+00:01:33,995 --> 00:01:36,419
+but then also reloads the page.
+
+44
+00:01:36,419 --> 00:01:38,975
+I will leave the static text for editing,
+
+45
+00:01:38,975 --> 00:01:41,163
+but I want to hook up the delete button,
+
+46
+00:01:41,163 --> 00:01:44,999
+and I also want to remove this unnecessary reloading,
+
+47
+00:01:44,999 --> 00:01:47,509
+or this annoying reloading.
+
+48
+00:01:47,509 --> 00:01:49,853
+Back in the message-component.html file,
+
+49
+00:01:49,853 --> 00:01:53,189
+the reloading is triggered by these references here.
+
+50
+00:01:53,189 --> 00:01:55,030
+Because now with routing in place,
+
+51
+00:01:55,030 --> 00:01:56,864
+this simply triggers a reload.
+
+52
+00:01:56,864 --> 00:02:00,094
+So by removing it, I get rid of this annoying feature,
+
+53
+00:02:00,094 --> 00:02:01,094
+or function.
+
+54
+00:02:02,314 --> 00:02:04,613
+I also want to hook up the delete button.
+
+55
+00:02:04,613 --> 00:02:07,247
+So let's execute onDelete here.
+
+56
+00:02:07,247 --> 00:02:10,833
+Of course, this new method should now be added here.
+
+57
+00:02:10,833 --> 00:02:14,380
+And remember, we already do have the delete method
+
+58
+00:02:14,380 --> 00:02:16,825
+in the messages-service here.
+
+59
+00:02:16,825 --> 00:02:19,491
+So therefore, I can simply
+
+60
+00:02:19,491 --> 00:02:22,457
+inject this messageService here too,
+
+61
+00:02:22,457 --> 00:02:24,489
+in the message component.
+
+62
+00:02:24,489 --> 00:02:29,103
+So messageService should get injected here too.
+
+63
+00:02:29,103 --> 00:02:32,770
+Make sure to add the import at the top here.
+
+64
+00:02:34,436 --> 00:02:36,920
+And with this message now available,
+
+65
+00:02:36,920 --> 00:02:38,394
+note is it's the same instance
+
+66
+00:02:38,394 --> 00:02:40,505
+as in the input and list component,
+
+67
+00:02:40,505 --> 00:02:43,189
+since I provided in this messages component
+
+68
+00:02:43,189 --> 00:02:44,904
+which holds them all.
+
+69
+00:02:44,904 --> 00:02:46,632
+So since it is the same instance,
+
+70
+00:02:46,632 --> 00:02:50,580
+I can simply call this.messageService.deleteMessage,
+
+71
+00:02:50,580 --> 00:02:53,080
+and here, I pass this.message.
+
+72
+00:02:54,201 --> 00:02:55,481
+So the message which I get
+
+73
+00:02:55,481 --> 00:02:58,176
+passed into this component from outside;
+
+74
+00:02:58,176 --> 00:03:00,829
+which is the currently loaded one.
+
+75
+00:03:00,829 --> 00:03:01,996
+So, with that,
+
+76
+00:03:03,071 --> 00:03:06,533
+if I reload my application again
+
+77
+00:03:06,533 --> 00:03:08,404
+and add a new message,
+
+78
+00:03:08,404 --> 00:03:10,249
+you see editing doesn't reload,
+
+79
+00:03:10,249 --> 00:03:13,501
+and deleting, well, deletes it.
+
+80
+00:03:13,501 --> 00:03:15,601
+This is the finished front end.
+
+81
+00:03:15,601 --> 00:03:18,547
+Now let's move on to the Node.js section
+
+82
+00:03:18,547 --> 00:03:21,047
+and add the backend so that the messages
+
+83
+00:03:21,047 --> 00:03:23,086
+are stored on the server,
+
+84
+00:03:23,086 --> 00:03:24,608
+are really edited,
+
+85
+00:03:24,608 --> 00:03:26,056
+and are really fetched
+
+86
+00:03:26,056 --> 00:03:27,528
+from the server.
+
+87
+00:03:27,528 --> 00:03:29,195
+So, time to move on.
+

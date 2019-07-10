@@ -1,0 +1,252 @@
+1
+00:00:01,688 --> 00:00:02,944
+<v Instructor>Thus far, I explained</v>
+
+2
+00:00:02,944 --> 00:00:04,855
+the idea behind components.
+
+3
+00:00:04,855 --> 00:00:06,786
+I explained how we can use data binding,
+
+4
+00:00:06,786 --> 00:00:09,040
+the different forms of data binding.
+
+5
+00:00:09,040 --> 00:00:10,866
+I also mentioned directives,
+
+6
+00:00:10,866 --> 00:00:14,039
+but we haven't really digged into them.
+
+7
+00:00:14,039 --> 00:00:15,088
+Let's do that now.
+
+8
+00:00:15,088 --> 00:00:16,778
+What are directives?
+
+9
+00:00:16,778 --> 00:00:19,027
+Directives are instructions in the code,
+
+10
+00:00:19,027 --> 00:00:20,360
+like here, ngif.
+
+11
+00:00:22,307 --> 00:00:24,741
+These instructions are encountered by Angular 2
+
+12
+00:00:24,741 --> 00:00:27,178
+at run time, and when it finds them,
+
+13
+00:00:27,178 --> 00:00:29,075
+it knows what to do because we have to
+
+14
+00:00:29,075 --> 00:00:31,306
+register all directives, therefore Angular 2
+
+15
+00:00:31,306 --> 00:00:33,883
+knows what to do when it finds a directive.
+
+16
+00:00:33,883 --> 00:00:35,763
+For example here, with ngif, the instruction
+
+17
+00:00:35,763 --> 00:00:37,960
+would be, that's that built in directive,
+
+18
+00:00:37,960 --> 00:00:39,008
+as a side note,
+
+19
+00:00:39,008 --> 00:00:41,781
+"Only attach this HTML element and all
+
+20
+00:00:41,781 --> 00:00:44,900
+its children to the DOM if condition (between the
+
+21
+00:00:44,900 --> 00:00:47,400
+quotation marks here) is met."
+
+22
+00:00:49,192 --> 00:00:51,052
+This allows us to conditionally attach
+
+23
+00:00:51,052 --> 00:00:53,469
+or detach content to the DOM.
+
+24
+00:00:54,312 --> 00:00:55,587
+That's, by the way, important.
+
+25
+00:00:55,587 --> 00:00:57,021
+It's not hiding and showing,
+
+26
+00:00:57,021 --> 00:00:59,811
+it's attaching or detaching.
+
+27
+00:00:59,811 --> 00:01:01,485
+This alters instruction.
+
+28
+00:01:01,485 --> 00:01:03,602
+My-component, as we used it before,
+
+29
+00:01:03,602 --> 00:01:05,001
+here the instruction is,
+
+30
+00:01:05,001 --> 00:01:08,223
+"Insert MyComponent
+
+31
+00:01:08,223 --> 00:01:11,213
+here", and this of course, as before, includes
+
+32
+00:01:11,213 --> 00:01:14,748
+not only the template but also the business logic,
+
+33
+00:01:14,748 --> 00:01:17,508
+in the typescript class.
+
+34
+00:01:17,508 --> 00:01:21,416
+So components are directives with a View, the template,
+
+35
+00:01:21,416 --> 00:01:23,329
+but the key thing to take away is
+
+36
+00:01:23,329 --> 00:01:25,368
+that directives are such instructions
+
+37
+00:01:25,368 --> 00:01:27,384
+which, no matter if we have the component
+
+38
+00:01:27,384 --> 00:01:30,152
+or a simple directive like ngif here,
+
+39
+00:01:30,152 --> 00:01:33,688
+which allow us to change things on the DOM,
+
+40
+00:01:33,688 --> 00:01:36,626
+which make our application dynamic.
+
+41
+00:01:36,626 --> 00:01:38,595
+All directives, no matter if it's a component
+
+42
+00:01:38,595 --> 00:01:41,762
+or a normal directive, use 'selectors'
+
+43
+00:01:42,738 --> 00:01:46,152
+to let Angular 2 know which parts of the HTML code
+
+44
+00:01:46,152 --> 00:01:48,434
+represent in the instruction.
+
+45
+00:01:48,434 --> 00:01:50,781
+After all, ngif is added like an attribute
+
+46
+00:01:50,781 --> 00:01:52,802
+to Section, so how does Angular 2 know
+
+47
+00:01:52,802 --> 00:01:56,151
+the difference between Hidden, which is a default
+
+48
+00:01:56,151 --> 00:01:59,059
+HTML attribute, and this ngif thing?
+
+49
+00:01:59,059 --> 00:02:01,540
+Well, we tell it about these selectors.
+
+50
+00:02:01,540 --> 00:02:03,580
+You saw this for Components where we
+
+51
+00:02:03,580 --> 00:02:06,603
+registered them in the declarations area
+
+52
+00:02:06,603 --> 00:02:08,337
+and at Module.
+
+53
+00:02:08,337 --> 00:02:11,112
+And these selectors work like CSS selectors,
+
+54
+00:02:11,112 --> 00:02:14,804
+so we use MyComponent for example, typically
+
+55
+00:02:14,804 --> 00:02:17,992
+for components, but you could also use #MyID
+
+56
+00:02:17,992 --> 00:02:21,115
+to select any element which has an ideal of MyID.
+
+57
+00:02:21,115 --> 00:02:23,147
+I also showed this before.
+
+58
+00:02:23,147 --> 00:02:25,680
+That's the theory behind directives.
+
+59
+00:02:25,680 --> 00:02:28,388
+We attach them to the DOM to make
+
+60
+00:02:28,388 --> 00:02:31,148
+a part of the DOM dynamic and to change
+
+61
+00:02:31,148 --> 00:02:33,002
+it at run time.
+
+62
+00:02:33,002 --> 00:02:35,741
+Now let's see some examples for such directives
+
+63
+00:02:35,741 --> 00:02:37,574
+and see how they work.
+

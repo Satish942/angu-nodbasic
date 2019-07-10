@@ -1,0 +1,280 @@
+1
+00:00:01,903 --> 00:00:03,716
+<v Instructor>In order to hook up these links</v>
+
+2
+00:00:03,716 --> 00:00:05,896
+to our existing routes, we're going to use
+
+3
+00:00:05,896 --> 00:00:08,054
+another built-in directive.
+
+4
+00:00:08,054 --> 00:00:09,987
+This directive uses property binding,
+
+5
+00:00:09,987 --> 00:00:12,258
+because we need to pass an argument,
+
+6
+00:00:12,258 --> 00:00:15,831
+and it's named routerLink, in square brackets
+
+7
+00:00:15,831 --> 00:00:17,867
+because of property binding.
+
+8
+00:00:17,867 --> 00:00:21,308
+routerLink expects to get an array where each element
+
+9
+00:00:21,308 --> 00:00:24,975
+represents a segment in our path in the URL.
+
+10
+00:00:26,177 --> 00:00:30,344
+So if we would have something like /messages/1
+
+11
+00:00:31,228 --> 00:00:35,235
+then we would have messages, and the second element
+
+12
+00:00:35,235 --> 00:00:36,661
+would be 1.
+
+13
+00:00:36,661 --> 00:00:40,828
+And then it would navigate you out of main/messages/1.
+
+14
+00:00:41,885 --> 00:00:45,640
+Well here we only have messages, but I want to go there
+
+15
+00:00:45,640 --> 00:00:48,216
+absolutely, so add a leading slash.
+
+16
+00:00:48,216 --> 00:00:50,901
+Again for the same reason I explained before,
+
+17
+00:00:50,901 --> 00:00:55,284
+to force Angular 2 to always load localhost/messages
+
+18
+00:00:55,284 --> 00:00:58,776
+and not appended to the end of the existing path.
+
+19
+00:00:58,776 --> 00:01:00,813
+Now with that, I can simply copy this
+
+20
+00:01:00,813 --> 00:01:02,817
+and also append it down here.
+
+21
+00:01:02,817 --> 00:01:06,349
+But here, of course, I want to go to /auth.
+
+22
+00:01:06,349 --> 00:01:10,766
+With that, if I reload this application again,
+
+23
+00:01:10,766 --> 00:01:13,688
+now you can see, this is hooked up,
+
+24
+00:01:13,688 --> 00:01:16,124
+but you see the styling is a bit off.
+
+25
+00:01:16,124 --> 00:01:18,339
+I'm not talking about the authentication part here
+
+26
+00:01:18,339 --> 00:01:19,291
+jumping around.
+
+27
+00:01:19,291 --> 00:01:22,034
+That's simply because we haven't added any bootstrap grid
+
+28
+00:01:22,034 --> 00:01:24,609
+to this component yet, since it is very incomplete.
+
+29
+00:01:24,609 --> 00:01:26,324
+We will work on this later.
+
+30
+00:01:26,324 --> 00:01:29,249
+But it would be nice to see which route is active.
+
+31
+00:01:29,249 --> 00:01:30,749
+So let's add this.
+
+32
+00:01:32,199 --> 00:01:36,241
+Since I'm using bootstrap, I can mark a route as active
+
+33
+00:01:36,241 --> 00:01:39,139
+by simply adding the CSS class named active
+
+34
+00:01:39,139 --> 00:01:42,396
+to the list item which holds the link.
+
+35
+00:01:42,396 --> 00:01:44,070
+If I do this and reload,
+
+36
+00:01:44,070 --> 00:01:46,066
+you now see Messenger is active.
+
+37
+00:01:46,066 --> 00:01:47,752
+But of course, it stays active,
+
+38
+00:01:47,752 --> 00:01:49,622
+even if I go to Authentication,
+
+39
+00:01:49,622 --> 00:01:52,214
+because I hard-coded this here.
+
+40
+00:01:52,214 --> 00:01:54,603
+It would be nice if we could conditionally attach
+
+41
+00:01:54,603 --> 00:01:56,218
+this CSS class.
+
+42
+00:01:56,218 --> 00:01:58,488
+And it turns out, with Angular 2 we can.
+
+43
+00:01:58,488 --> 00:02:00,751
+We can add another directive here, which is named
+
+44
+00:02:00,751 --> 00:02:04,105
+routerLinkActive, or actually it belongs to the
+
+45
+00:02:04,105 --> 00:02:06,394
+routerLink directive here.
+
+46
+00:02:06,394 --> 00:02:09,973
+routerLink, or Angular 2 routing in general, is able to
+
+47
+00:02:09,973 --> 00:02:14,721
+find this directive, and whatever I pass as a name
+
+48
+00:02:14,721 --> 00:02:17,831
+between the quotation marks here, gets assigned to
+
+49
+00:02:17,831 --> 00:02:22,071
+this list item as a CSS class whenever a link
+
+50
+00:02:22,071 --> 00:02:25,971
+on this list item, or nested in this list item,
+
+51
+00:02:25,971 --> 00:02:29,593
+like it is the case here, gets active.
+
+52
+00:02:29,593 --> 00:02:33,089
+So here, I don't then want to apply the active class,
+
+53
+00:02:33,089 --> 00:02:36,718
+and I do the same for the auth link here.
+
+54
+00:02:36,718 --> 00:02:39,573
+Now this means the active class only gets applied
+
+55
+00:02:39,573 --> 00:02:42,483
+if the nested link is the active one.
+
+56
+00:02:42,483 --> 00:02:43,919
+Very, very convenient,
+
+57
+00:02:43,919 --> 00:02:45,298
+and very powerful.
+
+58
+00:02:45,298 --> 00:02:47,320
+It's only two directives used here,
+
+59
+00:02:47,320 --> 00:02:49,803
+and it give us very flexible routing,
+
+60
+00:02:49,803 --> 00:02:52,278
+and very flexible links.
+
+61
+00:02:52,278 --> 00:02:54,448
+So with this in place, if I now reload,
+
+62
+00:02:54,448 --> 00:02:56,503
+you see Authentication is active,
+
+63
+00:02:56,503 --> 00:02:59,398
+but if I click on Messenger, now that is active.
+
+64
+00:02:59,398 --> 00:03:01,517
+And with that, we got our routing set up.
+
+65
+00:03:01,517 --> 00:03:05,767
+Of course, it's next time to improve this authentication
+
+66
+00:03:05,767 --> 00:03:08,769
+part here a bit, before we then finally can leave
+
+67
+00:03:08,769 --> 00:03:10,554
+the front end world for a second,
+
+68
+00:03:10,554 --> 00:03:13,207
+and hook up our Messenger to the back end,
+
+69
+00:03:13,207 --> 00:03:15,707
+to really save our messages there
+
+70
+00:03:15,707 --> 00:03:19,707
+and, well, get our back end back into the party.
+

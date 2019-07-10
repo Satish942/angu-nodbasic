@@ -1,0 +1,448 @@
+1
+00:00:01,984 --> 00:00:03,704
+<v Instructor>So, time to send a token</v>
+
+2
+00:00:03,704 --> 00:00:06,535
+with each request we issued in Angular 2 application
+
+3
+00:00:06,535 --> 00:00:08,258
+to take advantage of the additional
+
+4
+00:00:08,258 --> 00:00:12,017
+security measures we set up on the backend.
+
+5
+00:00:12,017 --> 00:00:14,563
+Now I want to send the token
+
+6
+00:00:14,563 --> 00:00:16,917
+in my messages service here,
+
+7
+00:00:16,917 --> 00:00:19,153
+where I reach out to my message related routes,
+
+8
+00:00:19,153 --> 00:00:21,899
+which are the routes I'm protecting right now.
+
+9
+00:00:21,899 --> 00:00:26,108
+I want to add a token for sending, or for creating a message
+
+10
+00:00:26,108 --> 00:00:28,524
+and for updating and deleting it.
+
+11
+00:00:28,524 --> 00:00:32,124
+Not forgetting though, this route is not protected.
+
+12
+00:00:32,124 --> 00:00:34,153
+So how do I send a token?
+
+13
+00:00:34,153 --> 00:00:36,763
+Let's start with the add message method here.
+
+14
+00:00:36,763 --> 00:00:39,924
+I will create a new constant and name it token.
+
+15
+00:00:39,924 --> 00:00:42,179
+And here I want to first check
+
+16
+00:00:42,179 --> 00:00:45,244
+if I do have a token in my local storage.
+
+17
+00:00:45,244 --> 00:00:48,577
+So I can simply say localStorage.getItem
+
+18
+00:00:50,095 --> 00:00:53,095
+token and then check if this exists.
+
+19
+00:00:55,578 --> 00:00:58,404
+So by adding a question mark I will only reach
+
+20
+00:00:58,404 --> 00:01:01,495
+the following code if this is not null.
+
+21
+00:01:01,495 --> 00:01:05,440
+If it is not null, I want to set the token constant
+
+22
+00:01:05,440 --> 00:01:08,857
+equal to a string which says ?token=
+
+23
+00:01:11,022 --> 00:01:14,689
+and then the actual token I can now retrieve
+
+24
+00:01:15,560 --> 00:01:19,098
+since I just checked if it exists, like this.
+
+25
+00:01:19,098 --> 00:01:20,797
+So I will just restructure this
+
+26
+00:01:20,797 --> 00:01:23,879
+over multiple lines to make it easier to read.
+
+27
+00:01:23,879 --> 00:01:26,213
+Here we have the out statement
+
+28
+00:01:26,213 --> 00:01:29,202
+where it simply set as equal to an empty string.
+
+29
+00:01:29,202 --> 00:01:31,198
+So why do I use this set up?
+
+30
+00:01:31,198 --> 00:01:34,196
+Because now in the case of an existing token,
+
+31
+00:01:34,196 --> 00:01:36,567
+I automatically set up this query string
+
+32
+00:01:36,567 --> 00:01:39,326
+which I want to append to end of my URL.
+
+33
+00:01:39,326 --> 00:01:42,176
+So here where I set up my URL,
+
+34
+00:01:42,176 --> 00:01:44,271
+I will simply add + token
+
+35
+00:01:44,271 --> 00:01:47,455
+and this is even a empty string, so nothing.
+
+36
+00:01:47,455 --> 00:01:50,608
+Or it is my query string where I set up token equals
+
+37
+00:01:50,608 --> 00:01:53,924
+and then the actual token stored in my local storage.
+
+38
+00:01:53,924 --> 00:01:57,983
+And with that I'm sending my token with each request.
+
+39
+00:01:57,983 --> 00:02:01,025
+Now I can simply copy my token here
+
+40
+00:02:01,025 --> 00:02:05,053
+and go down to the update message method here,
+
+41
+00:02:05,053 --> 00:02:06,919
+where I also need to append it.
+
+42
+00:02:06,919 --> 00:02:08,260
+Here the important thing is to
+
+43
+00:02:08,260 --> 00:02:10,190
+append it after the messageId,
+
+44
+00:02:10,190 --> 00:02:12,742
+this is important because you don't want to overwrite this,
+
+45
+00:02:12,742 --> 00:02:15,860
+this parameter is expected in this position.
+
+46
+00:02:15,860 --> 00:02:19,654
+And of course also pass it for the delete route.
+
+47
+00:02:19,654 --> 00:02:21,404
+Also after messageId.
+
+48
+00:02:22,851 --> 00:02:26,792
+With this, let's recompile these changes here.
+
+49
+00:02:26,792 --> 00:02:28,947
+And then head over to the application.
+
+50
+00:02:28,947 --> 00:02:31,369
+And right now, I should be logged in.
+
+51
+00:02:31,369 --> 00:02:34,119
+So lets create a new method here.
+
+52
+00:02:35,549 --> 00:02:37,363
+This looks great, it seems to work.
+
+53
+00:02:37,363 --> 00:02:40,968
+If I reload, lets see if it persists, looks great.
+
+54
+00:02:40,968 --> 00:02:44,188
+Now lets also check it in our Mongo Shell.
+
+55
+00:02:44,188 --> 00:02:49,076
+If I, here, run db.messages.find
+
+56
+00:02:49,076 --> 00:02:50,707
+we see the new message and we see that
+
+57
+00:02:50,707 --> 00:02:52,786
+the user ID field is populated.
+
+58
+00:02:52,786 --> 00:02:53,932
+So this worked.
+
+59
+00:02:53,932 --> 00:02:55,379
+And now lets see if the message
+
+60
+00:02:55,379 --> 00:02:59,116
+was added to the array of messages on the user.
+
+61
+00:02:59,116 --> 00:03:02,348
+Looks great, the messages array does have a new ID.
+
+62
+00:03:02,348 --> 00:03:05,194
+And if we compare IDs, this ID matches
+
+63
+00:03:05,194 --> 00:03:07,075
+this ID off the message.
+
+64
+00:03:07,075 --> 00:03:08,287
+And, of course, the same is true
+
+65
+00:03:08,287 --> 00:03:11,407
+for the user ID and the user ID down here.
+
+66
+00:03:11,407 --> 00:03:14,941
+So we see that our mapping works.
+
+67
+00:03:14,941 --> 00:03:17,514
+That we're now able to create new messages.
+
+68
+00:03:17,514 --> 00:03:20,965
+And just to show this again, that if I log out here
+
+69
+00:03:20,965 --> 00:03:22,858
+and I create a new message now,
+
+70
+00:03:22,858 --> 00:03:27,393
+I get an error and the message is not created.
+
+71
+00:03:27,393 --> 00:03:30,393
+Now lets also see if deleting works.
+
+72
+00:03:31,338 --> 00:03:32,575
+Nope we get an error.
+
+73
+00:03:32,575 --> 00:03:35,246
+Of course it disappears here but as soon as we reload
+
+74
+00:03:35,246 --> 00:03:38,589
+it's back, because, well we don't check
+
+75
+00:03:38,589 --> 00:03:40,741
+on the frontend if the user is authenticated.
+
+76
+00:03:40,741 --> 00:03:42,034
+We will add this soon.
+
+77
+00:03:42,034 --> 00:03:43,104
+But on the backend we're making
+
+78
+00:03:43,104 --> 00:03:45,248
+sure we're not able to delete it.
+
+79
+00:03:45,248 --> 00:03:48,157
+But as soon as I do log in again,
+
+80
+00:03:48,157 --> 00:03:51,546
+and now I click delete, this looks better.
+
+81
+00:03:51,546 --> 00:03:55,224
+Now it's gone and now lets see if was also removed
+
+82
+00:03:55,224 --> 00:03:58,528
+from the array of messages on our user.
+
+83
+00:03:58,528 --> 00:04:00,908
+Looks great. The messages array is empty.
+
+84
+00:04:00,908 --> 00:04:03,269
+Which means we're not storing any reference
+
+85
+00:04:03,269 --> 00:04:06,436
+to any message which no longer exists.
+
+86
+00:04:07,433 --> 00:04:11,416
+With that we set up the basic route protection
+
+87
+00:04:11,416 --> 00:04:13,842
+on the backend. We're able to work with that.
+
+88
+00:04:13,842 --> 00:04:16,349
+But of course it would be nice if
+
+89
+00:04:16,349 --> 00:04:18,641
+we only see the options on the frontend
+
+90
+00:04:18,641 --> 00:04:20,498
+which we actually have.
+
+91
+00:04:20,498 --> 00:04:23,831
+So, for example, if we are authenticated
+
+92
+00:04:25,434 --> 00:04:28,098
+and create a new post, this is great.
+
+93
+00:04:28,098 --> 00:04:30,416
+But then as soon as I log out,
+
+94
+00:04:30,416 --> 00:04:32,906
+I shouldn't see the edit and delete buttons
+
+95
+00:04:32,906 --> 00:04:35,554
+because I'm not able to use them anyways.
+
+96
+00:04:35,554 --> 00:04:39,022
+So this is some fine-tuning we need to implement here.
+
+97
+00:04:39,022 --> 00:04:41,055
+Also, we want to replace this dummy
+
+98
+00:04:41,055 --> 00:04:43,950
+here with the actual user name.
+
+99
+00:04:43,950 --> 00:04:48,025
+Additionally, right now if we create multiple users;
+
+100
+00:04:48,025 --> 00:04:51,275
+let's say I create another one: Test22,
+
+101
+00:04:52,732 --> 00:04:55,548
+and then which has this other email address
+
+102
+00:04:55,548 --> 00:04:57,619
+so a new user was created.
+
+103
+00:04:57,619 --> 00:05:00,536
+And now I sign in with this user.
+
+104
+00:05:00,536 --> 00:05:02,812
+I am able to delete this.
+
+105
+00:05:02,812 --> 00:05:04,833
+So now we don't have protection at all.
+
+106
+00:05:04,833 --> 00:05:07,144
+I can delete the messages of other users.
+
+107
+00:05:07,144 --> 00:05:09,285
+So that's all the same thing we need to fix.
+
+108
+00:05:09,285 --> 00:05:11,541
+So still a couple of work left here.
+
+109
+00:05:11,541 --> 00:05:14,100
+Lets start by making our backend
+
+110
+00:05:14,100 --> 00:05:16,176
+protection a little bit stronger
+
+111
+00:05:16,176 --> 00:05:17,969
+and ensuring that only the user
+
+112
+00:05:17,969 --> 00:05:22,136
+who created a resource is able to delete or edit it.
+

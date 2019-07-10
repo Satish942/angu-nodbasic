@@ -1,0 +1,748 @@
+1
+00:00:01,602 --> 00:00:04,445
+<v ->Time to deploy the application on AWS.</v>
+
+2
+00:00:04,445 --> 00:00:07,868
+To do so I'll of course also need to make some changes
+
+3
+00:00:07,868 --> 00:00:12,512
+to my app later on but first let's start on AWS.
+
+4
+00:00:12,512 --> 00:00:15,654
+Of course I will still use Mongo Lab as my Mongo database
+
+5
+00:00:15,654 --> 00:00:17,207
+so make sure to watch this lecture
+
+6
+00:00:17,207 --> 00:00:19,210
+to know how to set this all up.
+
+7
+00:00:19,210 --> 00:00:21,460
+I'll then head over to AWS.
+
+8
+00:00:22,699 --> 00:00:25,890
+Just go there and I will click the login
+
+9
+00:00:25,890 --> 00:00:28,915
+and I'll switch this to English here maybe.
+
+10
+00:00:28,915 --> 00:00:30,619
+That just sounds like a good idea,
+
+11
+00:00:30,619 --> 00:00:35,000
+and so I'll login here to the management console.
+
+12
+00:00:35,000 --> 00:00:37,381
+I am already logged in but of course you may
+
+13
+00:00:37,381 --> 00:00:41,068
+just create a new account with AWS if you don't have that.
+
+14
+00:00:41,068 --> 00:00:44,110
+Be aware that there is a free tier available
+
+15
+00:00:44,110 --> 00:00:47,266
+which means that many services as long as you stay
+
+16
+00:00:47,266 --> 00:00:50,806
+in certain volumes are free to use for your one year.
+
+17
+00:00:50,806 --> 00:00:54,443
+Read the documentation AWS provides to learn more about this
+
+18
+00:00:54,443 --> 00:00:55,979
+to make sure you're not running
+
+19
+00:00:55,979 --> 00:00:57,833
+into any costs you do not want.
+
+20
+00:00:57,833 --> 00:00:59,832
+I'm not responsible for your bill
+
+21
+00:00:59,832 --> 00:01:01,718
+you are getting in the end.
+
+22
+00:01:01,718 --> 00:01:04,379
+So what's definitely included in the free here is what
+
+23
+00:01:04,379 --> 00:01:07,719
+I'm showing you here, as long as your app matches my app
+
+24
+00:01:07,719 --> 00:01:09,985
+and you're not getting tonnes of traffic, 'cause again,
+
+25
+00:01:09,985 --> 00:01:13,539
+if you pass certain volumes in terms of traffic
+
+26
+00:01:13,539 --> 00:01:16,201
+and so on, you will run into problems.
+
+27
+00:01:16,201 --> 00:01:19,822
+I would use Elastic Beanstalk which is a service
+
+28
+00:01:19,822 --> 00:01:23,625
+AWS offers which will automatically set up everything
+
+29
+00:01:23,625 --> 00:01:25,540
+we need for our app.
+
+30
+00:01:25,540 --> 00:01:29,031
+We could also do this manually by launching an EC2 instance
+
+31
+00:01:29,031 --> 00:01:32,319
+and then an S3 instance and connecting everything
+
+32
+00:01:32,319 --> 00:01:35,428
+and then adding auto scaling, and if you're interested
+
+33
+00:01:35,428 --> 00:01:40,141
+in that check out some courses and tutorials on using AWS.
+
+34
+00:01:40,141 --> 00:01:43,679
+But this course is not really a hardcore AWS deployment
+
+35
+00:01:43,679 --> 00:01:45,547
+and administration course.
+
+36
+00:01:45,547 --> 00:01:47,449
+So I'll go with Elastic Beanstalk
+
+37
+00:01:47,449 --> 00:01:49,795
+which is kind of similar to Hiroku.
+
+38
+00:01:49,795 --> 00:01:52,903
+It makes deploying applications very easy.
+
+39
+00:01:52,903 --> 00:01:55,747
+Now here on the Elastic Beanstalk site click on create
+
+40
+00:01:55,747 --> 00:01:58,987
+new application and enter an application name.
+
+41
+00:01:58,987 --> 00:02:01,385
+Angular two deployment for me.
+
+42
+00:02:01,385 --> 00:02:04,904
+You can add a description if you want and then click next.
+
+43
+00:02:04,904 --> 00:02:09,602
+Choose create web server then, then choose node JS
+
+44
+00:02:09,602 --> 00:02:13,769
+and then next and then just leave sample application
+
+45
+00:02:15,585 --> 00:02:19,485
+checked here to start with a default application.
+
+46
+00:02:19,485 --> 00:02:21,059
+We'll change this later on.
+
+47
+00:02:21,059 --> 00:02:24,316
+This is all fine, click next again.
+
+48
+00:02:24,316 --> 00:02:26,036
+This is fine too, and here you'll see
+
+49
+00:02:26,036 --> 00:02:28,786
+your URL you will get at the end.
+
+50
+00:02:30,202 --> 00:02:31,119
+Click next.
+
+51
+00:02:33,757 --> 00:02:36,650
+You can also click next here.
+
+52
+00:02:36,650 --> 00:02:39,147
+Make sure you have the micro instance here selected
+
+53
+00:02:39,147 --> 00:02:41,181
+because this is part of the free tier
+
+54
+00:02:41,181 --> 00:02:42,834
+and won't cost you anything, as long as
+
+55
+00:02:42,834 --> 00:02:46,091
+you stay in certain limits, as I said.
+
+56
+00:02:46,091 --> 00:02:47,860
+All of that here is fine.
+
+57
+00:02:47,860 --> 00:02:49,247
+Just leave it.
+
+58
+00:02:49,247 --> 00:02:50,490
+Click next.
+
+59
+00:02:50,490 --> 00:02:51,582
+Don't need that here.
+
+60
+00:02:51,582 --> 00:02:52,491
+Click next.
+
+61
+00:02:52,491 --> 00:02:54,458
+And of course you can configure this more detailed
+
+62
+00:02:54,458 --> 00:02:58,625
+but as I said this is not really about AWS in depth course.
+
+63
+00:03:00,609 --> 00:03:01,442
+It's not.
+
+64
+00:03:02,990 --> 00:03:05,933
+So that's the review and what I'm going to do
+
+65
+00:03:05,933 --> 00:03:10,477
+is I'll copy my URL here which is the URL of the server.
+
+66
+00:03:10,477 --> 00:03:13,290
+I'll then click launch to launch the instance
+
+67
+00:03:13,290 --> 00:03:17,159
+since this will take a couple of seconds or even minutes
+
+68
+00:03:17,159 --> 00:03:20,796
+and well, as I said, just leave this launch here,
+
+69
+00:03:20,796 --> 00:03:23,937
+and I'll head over to my application entity assets folder.
+
+70
+00:03:23,937 --> 00:03:26,682
+So to the Angular Two code, and then our messages.
+
+71
+00:03:26,682 --> 00:03:29,110
+I'll go to the message service and I want to make sure
+
+72
+00:03:29,110 --> 00:03:33,277
+to replace this URL here local host 3000 and http,
+
+73
+00:03:34,501 --> 00:03:38,072
+with the URL address copied from the AWS service,
+
+74
+00:03:38,072 --> 00:03:40,752
+because this is the URL of my server
+
+75
+00:03:40,752 --> 00:03:43,381
+and of course I have to connect to this URL
+
+76
+00:03:43,381 --> 00:03:46,274
+and not to my local host which won't work.
+
+77
+00:03:46,274 --> 00:03:49,514
+So I'll do this and then here in auth service
+
+78
+00:03:49,514 --> 00:03:52,514
+I'll also replace all of these URLs,
+
+79
+00:03:55,267 --> 00:03:57,136
+and there's one other thing I have to do,
+
+80
+00:03:57,136 --> 00:03:59,217
+which is not obvious.
+
+81
+00:03:59,217 --> 00:04:02,427
+I have to rename my app.js file.
+
+82
+00:04:02,427 --> 00:04:05,734
+I have to do this because later when I upload it
+
+83
+00:04:05,734 --> 00:04:10,694
+Elastic Beanstalk will automatically launch my node JS app,
+
+84
+00:04:10,694 --> 00:04:13,554
+and it follows a certain pattern to launch it.
+
+85
+00:04:13,554 --> 00:04:16,017
+It tries to run node server.js.
+
+86
+00:04:16,017 --> 00:04:19,586
+So if I would have file server.js it would launch that.
+
+87
+00:04:19,586 --> 00:04:23,753
+Then it tries node app JS and then it tries NPM start.
+
+88
+00:04:26,053 --> 00:04:29,194
+I want it to use NPM start because this is the script
+
+89
+00:04:29,194 --> 00:04:31,526
+which actually launches the server.
+
+90
+00:04:31,526 --> 00:04:35,130
+However as I said it would first try node app JS
+
+91
+00:04:35,130 --> 00:04:37,011
+which I certainly don't want to happen
+
+92
+00:04:37,011 --> 00:04:40,123
+since this file doesn't do anything if it runs that alone.
+
+93
+00:04:40,123 --> 00:04:44,290
+Therefore I will rename this file to just application.js.
+
+94
+00:04:47,166 --> 00:04:50,671
+Of course another approach possible if you adjust every path
+
+95
+00:04:50,671 --> 00:04:55,297
+there after is to put this www file in the root folder
+
+96
+00:04:55,297 --> 00:04:57,251
+and you would name it to server.js.
+
+97
+00:04:57,251 --> 00:04:59,930
+But I'll go with the renaming of application JS,
+
+98
+00:04:59,930 --> 00:05:04,097
+and I have to adjust one other file then, the www file.
+
+99
+00:05:05,452 --> 00:05:08,858
+Here I am importing my app from the app.js file
+
+100
+00:05:08,858 --> 00:05:12,131
+and I of course have to change this to application now.
+
+101
+00:05:12,131 --> 00:05:14,826
+With that I am good to go and I will open up the command
+
+102
+00:05:14,826 --> 00:05:18,659
+line here and I'll rebuild my app to bundle it
+
+103
+00:05:22,068 --> 00:05:25,969
+and reflect all the changes I made and as this is done
+
+104
+00:05:25,969 --> 00:05:30,318
+it's time to prepare a folder which you can upload to AWS.
+
+105
+00:05:30,318 --> 00:05:33,476
+Now of course there are also other ways of deploying.
+
+106
+00:05:33,476 --> 00:05:37,047
+You can use the Elastic Beanstalk command line interface.
+
+107
+00:05:37,047 --> 00:05:40,734
+You can use more advanced techniques but here I want to show
+
+108
+00:05:40,734 --> 00:05:44,239
+you the basic technique of quickly getting your app to run.
+
+109
+00:05:44,239 --> 00:05:48,306
+This is still starting the instance or the, well,
+
+110
+00:05:48,306 --> 00:05:51,729
+the application, that's fine, and I will head over
+
+111
+00:05:51,729 --> 00:05:53,481
+to my Finder.
+
+112
+00:05:53,481 --> 00:05:57,069
+Here I opened my project and now I want to show you how
+
+113
+00:05:57,069 --> 00:05:59,566
+you can quickly create a zip file which you can upload
+
+114
+00:05:59,566 --> 00:06:01,979
+to your Elastic Beanstalk application
+
+115
+00:06:01,979 --> 00:06:06,146
+and AWS will automatically unpack this and start your app.
+
+116
+00:06:07,898 --> 00:06:10,180
+What do we need in the zip file?
+
+117
+00:06:10,180 --> 00:06:12,608
+I need the application.js.
+
+118
+00:06:12,608 --> 00:06:14,065
+I don't need the assets folder
+
+119
+00:06:14,065 --> 00:06:16,397
+because that's the uncompiled type script code.
+
+120
+00:06:16,397 --> 00:06:17,339
+We don't need that.
+
+121
+00:06:17,339 --> 00:06:19,552
+I need the bin folder which holds my server.
+
+122
+00:06:19,552 --> 00:06:21,059
+I don't need the gulp file.
+
+123
+00:06:21,059 --> 00:06:23,324
+That's for deployment, or development, excuse me,
+
+124
+00:06:23,324 --> 00:06:25,043
+for development only.
+
+125
+00:06:25,043 --> 00:06:26,131
+I need the models.
+
+126
+00:06:26,131 --> 00:06:28,086
+I don't need the node modules.
+
+127
+00:06:28,086 --> 00:06:31,293
+Node, AWS will instal that for me.
+
+128
+00:06:31,293 --> 00:06:34,104
+I do need the package.json file, that's important.
+
+129
+00:06:34,104 --> 00:06:35,807
+I need public and routes.
+
+130
+00:06:35,807 --> 00:06:37,328
+I don't need the builder here.
+
+131
+00:06:37,328 --> 00:06:38,832
+I don't need TS config.
+
+132
+00:06:38,832 --> 00:06:42,453
+I don't need typings, and while all of that is not needed,
+
+133
+00:06:42,453 --> 00:06:44,123
+I need the views though.
+
+134
+00:06:44,123 --> 00:06:47,000
+So these are the files I need and on Mac I can simply
+
+135
+00:06:47,000 --> 00:06:50,583
+right click and compress them, or zip them.
+
+136
+00:06:52,505 --> 00:06:55,448
+On Windows you might have an app installed
+
+137
+00:06:55,448 --> 00:06:57,627
+or a programme installed to do the same.
+
+138
+00:06:57,627 --> 00:06:59,761
+Otherwise just launch your zipping programme
+
+139
+00:06:59,761 --> 00:07:03,417
+and make sure to add these files into a zip folder.
+
+140
+00:07:03,417 --> 00:07:07,584
+So you can then compress them and you get well a zip file.
+
+141
+00:07:09,154 --> 00:07:10,841
+Name it whatever you want.
+
+142
+00:07:10,841 --> 00:07:14,742
+I'll name mine, name mine deploy zip.
+
+143
+00:07:14,742 --> 00:07:16,710
+So this is the file we'll actually upload
+
+144
+00:07:16,710 --> 00:07:19,636
+as soon as I'm allowed to do so.
+
+145
+00:07:19,636 --> 00:07:22,265
+So I'll wait for this to finish.
+
+146
+00:07:22,265 --> 00:07:23,803
+That was good timing.
+
+147
+00:07:23,803 --> 00:07:25,421
+I'm ready to do it now.
+
+148
+00:07:25,421 --> 00:07:29,490
+So I'll choose upload and then I'll choose my file,
+
+149
+00:07:29,490 --> 00:07:31,987
+the deploy.zip file here.
+
+150
+00:07:31,987 --> 00:07:35,654
+Open it, deploy it, and this will upload it,
+
+151
+00:07:38,832 --> 00:07:41,560
+and now it's again going back into work mode here,
+
+152
+00:07:41,560 --> 00:07:43,723
+because of course now it's basically installing
+
+153
+00:07:43,723 --> 00:07:46,933
+all the node modules and starting up your app.
+
+154
+00:07:46,933 --> 00:07:49,413
+I'll be back once this is running.
+
+155
+00:07:49,413 --> 00:07:50,998
+So the deployment just finished.
+
+156
+00:07:50,998 --> 00:07:55,663
+Now let's open a new tab and enter the link I added before.
+
+157
+00:07:55,663 --> 00:07:57,363
+We should see our application.
+
+158
+00:07:57,363 --> 00:07:58,622
+This looks great.
+
+159
+00:07:58,622 --> 00:08:01,036
+Now since I'm using the same Mongo app with,
+
+160
+00:08:01,036 --> 00:08:04,442
+as with the Hiroku video I already have a user account,
+
+161
+00:08:04,442 --> 00:08:06,409
+but I'll create a new one as well.
+
+162
+00:08:06,409 --> 00:08:07,897
+Just name is test two here.
+
+163
+00:08:07,897 --> 00:08:10,030
+Give it an email address of test two.
+
+164
+00:08:10,030 --> 00:08:11,121
+Sign up.
+
+165
+00:08:11,121 --> 00:08:13,204
+Let's see if this worked.
+
+166
+00:08:14,923 --> 00:08:16,098
+Looks good.
+
+167
+00:08:16,098 --> 00:08:17,833
+As you can see, I already see a message
+
+168
+00:08:17,833 --> 00:08:19,801
+I created in the Hiroku deployment video.
+
+169
+00:08:19,801 --> 00:08:22,134
+I'll add a new message here,
+
+170
+00:08:24,348 --> 00:08:26,233
+and then I can see this was created by another user.
+
+171
+00:08:26,233 --> 00:08:27,589
+Therefore I can't change it.
+
+172
+00:08:27,589 --> 00:08:31,937
+I can change this one here and yeah, looks good.
+
+173
+00:08:31,937 --> 00:08:34,169
+We got our application on AWS.
+
+174
+00:08:34,169 --> 00:08:36,368
+This is how easy you can deploy.
+
+175
+00:08:36,368 --> 00:08:38,877
+Now of course, you can then also add other services.
+
+176
+00:08:38,877 --> 00:08:41,888
+You can use route 53 to add your own domain,
+
+177
+00:08:41,888 --> 00:08:45,329
+cloud front to increase performance if you were hosting it
+
+178
+00:08:45,329 --> 00:08:49,115
+on a CDN or a cloud distribution network,
+
+179
+00:08:49,115 --> 00:08:52,686
+and turning on automatic compression, and so on.
+
+180
+00:08:52,686 --> 00:08:54,968
+But yeah, these are really details which
+
+181
+00:08:54,968 --> 00:08:57,216
+would be far beyond the scope of this course.
+
+182
+00:08:57,216 --> 00:09:00,057
+This is how you can actually get your application to run
+
+183
+00:09:00,057 --> 00:09:02,788
+there and for all the other things I strongly recommend
+
+184
+00:09:02,788 --> 00:09:05,233
+checking out the AWS documentation
+
+185
+00:09:05,233 --> 00:09:08,392
+or separate tutorials on how to do this.
+
+186
+00:09:08,392 --> 00:09:12,510
+With that I hope this is helpful to you and I'll see you
+
+187
+00:09:12,510 --> 00:09:16,677
+in all the other videos and hopefully courses, bye.
+

@@ -1,0 +1,684 @@
+1
+00:00:02,099 --> 00:00:04,839
+<v Instructor>So with users signed up and signed in,</v>
+
+2
+00:00:04,839 --> 00:00:08,239
+it's time to now map them to our messages.
+
+3
+00:00:08,239 --> 00:00:12,291
+We do have a check to avoid that unauthenticated users
+
+4
+00:00:12,291 --> 00:00:15,261
+are able to reach our post routes here,
+
+5
+00:00:15,261 --> 00:00:18,038
+but remember in our user model,
+
+6
+00:00:18,038 --> 00:00:19,661
+we do have these messages arrayed,
+
+7
+00:00:19,661 --> 00:00:22,200
+so each user may have multiple messages
+
+8
+00:00:22,200 --> 00:00:24,533
+and each message has a user.
+
+9
+00:00:25,512 --> 00:00:28,676
+So its time to now fill this connexion with some life.
+
+10
+00:00:28,676 --> 00:00:31,836
+Right now, we don't have that connexion in our database.
+
+11
+00:00:31,836 --> 00:00:33,309
+So the first thing I'll do is,
+
+12
+00:00:33,309 --> 00:00:37,355
+I will clear all existing messages in my database
+
+13
+00:00:37,355 --> 00:00:40,637
+by running db.messages.remove and pass
+
+14
+00:00:40,637 --> 00:00:43,808
+an empty javascript object because the existing messages
+
+15
+00:00:43,808 --> 00:00:46,156
+of course don't have a user mapped to them,
+
+16
+00:00:46,156 --> 00:00:48,178
+and from now on, I want to make sure
+
+17
+00:00:48,178 --> 00:00:52,298
+that I only create messages where this mapping exists.
+
+18
+00:00:52,298 --> 00:00:55,178
+So with the messages cleared, it's now time
+
+19
+00:00:55,178 --> 00:00:58,378
+to go the messages.js file in the routes folder
+
+20
+00:00:58,378 --> 00:01:01,328
+and make sure we do create this connexion
+
+21
+00:01:01,328 --> 00:01:04,495
+whenever we create a new message here.
+
+22
+00:01:06,116 --> 00:01:08,258
+So here where we save the message,
+
+23
+00:01:08,258 --> 00:01:12,853
+it would be great if we could also save this message
+
+24
+00:01:12,853 --> 00:01:17,089
+on our user, and on the other hand save the user
+
+25
+00:01:17,089 --> 00:01:20,558
+who sent this request in this message.
+
+26
+00:01:20,558 --> 00:01:24,326
+Well, to do so we need to fetch the user
+
+27
+00:01:24,326 --> 00:01:26,657
+who reached this route in the first place.
+
+28
+00:01:26,657 --> 00:01:30,230
+Now, we can do this since we, if your remember this,
+
+29
+00:01:30,230 --> 00:01:34,157
+stored our user in the payload of our token,
+
+30
+00:01:34,157 --> 00:01:36,710
+and this token needs to be sent with each request
+
+31
+00:01:36,710 --> 00:01:40,390
+in order to be able to create a new message.
+
+32
+00:01:40,390 --> 00:01:45,325
+Therefore, here we can retrieve our user from our token.
+
+33
+00:01:45,325 --> 00:01:49,095
+So let's create a new variable and name it decoded.
+
+34
+00:01:49,095 --> 00:01:52,012
+Here, I want to use the jwt package
+
+35
+00:01:53,210 --> 00:01:55,417
+to decode a token.
+
+36
+00:01:55,417 --> 00:01:57,817
+Now, a token is not one-way encrypted.
+
+37
+00:01:57,817 --> 00:02:00,006
+We can decrypt it. This is important,
+
+38
+00:02:00,006 --> 00:02:03,286
+otherwise we wouldn't have a chance of getting the data.
+
+39
+00:02:03,286 --> 00:02:04,966
+But here is the important thing
+
+40
+00:02:04,966 --> 00:02:07,286
+about the decode method I'm using here:
+
+41
+00:02:07,286 --> 00:02:12,145
+this method is not checking if the token is valid.
+
+42
+00:02:12,145 --> 00:02:15,297
+We do this up here with jwt.verify.
+
+43
+00:02:15,297 --> 00:02:18,257
+Here we pass the secret and see if the token is valid.
+
+44
+00:02:18,257 --> 00:02:21,246
+With jwt.decode, I don't check the validity,
+
+45
+00:02:21,246 --> 00:02:23,705
+I only decode the token.
+
+46
+00:02:23,705 --> 00:02:27,035
+This is fine here because I already do check the validity
+
+47
+00:02:27,035 --> 00:02:28,995
+before reaching this route.
+
+48
+00:02:28,995 --> 00:02:31,904
+If you don't have this check before reaching this,
+
+49
+00:02:31,904 --> 00:02:35,417
+don't use decode, always use verify.
+
+50
+00:02:35,417 --> 00:02:38,265
+Remember, you get to decode a token there too.
+
+51
+00:02:38,265 --> 00:02:40,435
+There's just no need to reuse verify here,
+
+52
+00:02:40,435 --> 00:02:42,086
+because again I do check it
+
+53
+00:02:42,086 --> 00:02:44,475
+before actually reaching this route.
+
+54
+00:02:44,475 --> 00:02:46,664
+So here all I pass is the token,
+
+55
+00:02:46,664 --> 00:02:48,985
+which is stored in a query parameter,
+
+56
+00:02:48,985 --> 00:02:52,465
+and that gives me the decoded token.
+
+57
+00:02:52,465 --> 00:02:53,298
+I can then
+
+58
+00:02:54,375 --> 00:02:55,893
+find this user
+
+59
+00:02:55,893 --> 00:02:56,726
+in my ID
+
+60
+00:02:57,639 --> 00:02:59,889
+by using User.findById here
+
+61
+00:03:02,760 --> 00:03:05,712
+and pass the decoded object,
+
+62
+00:03:05,712 --> 00:03:08,960
+where I stored the user in the user field.
+
+63
+00:03:08,960 --> 00:03:13,127
+Remember this here, it's stored in the user field.
+
+64
+00:03:14,011 --> 00:03:15,094
+And then _id.
+
+65
+00:03:17,090 --> 00:03:19,098
+I then have a callback
+
+66
+00:03:19,098 --> 00:03:22,598
+where I do either get an error or my user.
+
+67
+00:03:23,464 --> 00:03:25,510
+Now, I first of course, as always,
+
+68
+00:03:25,510 --> 00:03:28,232
+want to check if I do have an error,
+
+69
+00:03:28,232 --> 00:03:31,461
+and if I don't have an error,
+
+70
+00:03:31,461 --> 00:03:34,148
+I can now save my message.
+
+71
+00:03:34,148 --> 00:03:37,333
+So we'll take all of the code down here
+
+72
+00:03:37,333 --> 00:03:39,916
+and put that into my code here.
+
+73
+00:03:41,776 --> 00:03:44,735
+So with that, I'm now creating a new message.
+
+74
+00:03:44,735 --> 00:03:46,135
+When creating this message,
+
+75
+00:03:46,135 --> 00:03:50,616
+I can now finally populate the second field, the user field.
+
+76
+00:03:50,616 --> 00:03:54,118
+This will simply be the user I extracted
+
+77
+00:03:54,118 --> 00:03:56,176
+from the database here.
+
+78
+00:03:56,176 --> 00:03:58,535
+By extracting it from the database like this,
+
+79
+00:03:58,535 --> 00:04:01,488
+I make it easy for Mongoose to automatically setup
+
+80
+00:04:01,488 --> 00:04:05,128
+all the connexions in the background for me.
+
+81
+00:04:05,128 --> 00:04:07,728
+Now with that, the other step I want to do,
+
+82
+00:04:07,728 --> 00:04:10,456
+of course, is when I save this message,
+
+83
+00:04:10,456 --> 00:04:13,535
+and I know it was saved successfully here,
+
+84
+00:04:13,535 --> 00:04:16,271
+I also want to access my user,
+
+85
+00:04:16,271 --> 00:04:19,299
+the messages array of that user.
+
+86
+00:04:19,299 --> 00:04:23,036
+Remember, we do have this field, which is an array.
+
+87
+00:04:23,036 --> 00:04:27,678
+And here I want to push a new message on this array.
+
+88
+00:04:27,678 --> 00:04:29,408
+Of course, the message I want to push
+
+89
+00:04:29,408 --> 00:04:31,064
+is the result of this operation,
+
+90
+00:04:31,064 --> 00:04:34,263
+so the message we just created.
+
+91
+00:04:34,263 --> 00:04:37,296
+Of course, here we then need to call user.save
+
+92
+00:04:37,296 --> 00:04:39,823
+to save this updated user where we pushed
+
+93
+00:04:39,823 --> 00:04:43,944
+the new message on the stack of messages.
+
+94
+00:04:43,944 --> 00:04:48,344
+With this setup, I'm creating disconnection on the back end.
+
+95
+00:04:48,344 --> 00:04:50,904
+I'm adding the user to the message,
+
+96
+00:04:50,904 --> 00:04:54,725
+and the message to the array of messages on the user.
+
+97
+00:04:54,725 --> 00:04:57,784
+With this the connexion is setup on the back end.
+
+98
+00:04:57,784 --> 00:05:00,365
+Now for all of this to work, to be able
+
+99
+00:05:00,365 --> 00:05:02,416
+to find the user by ID, you, of course,
+
+100
+00:05:02,416 --> 00:05:05,645
+also need to import the user model here.
+
+101
+00:05:05,645 --> 00:05:08,680
+So make sure to add this import here,
+
+102
+00:05:08,680 --> 00:05:12,763
+where we import user from models/user.
+
+103
+00:05:14,386 --> 00:05:17,616
+This is extremely important, otherwise this will not work.
+
+104
+00:05:17,616 --> 00:05:20,136
+Now on the other route, let's have a look
+
+105
+00:05:20,136 --> 00:05:22,826
+when patching, when editing a message,
+
+106
+00:05:22,826 --> 00:05:27,016
+I don't need to update anything about this relation
+
+107
+00:05:27,016 --> 00:05:30,364
+because the message just changed.
+
+108
+00:05:30,364 --> 00:05:33,066
+The user relation didn't change.
+
+109
+00:05:33,066 --> 00:05:36,797
+It's a different thing here when I delete a message though.
+
+110
+00:05:36,797 --> 00:05:41,346
+If I delete a message, I need to remove it from the stack,
+
+111
+00:05:41,346 --> 00:05:44,706
+or from the array of messages a user has.
+
+112
+00:05:44,706 --> 00:05:47,764
+So this is something we should also take care of
+
+113
+00:05:47,764 --> 00:05:49,524
+when setting up this mapping,
+
+114
+00:05:49,524 --> 00:05:51,605
+that we don't leave leave the message ID
+
+115
+00:05:51,605 --> 00:05:53,736
+in the array of messages for a user
+
+116
+00:05:53,736 --> 00:05:57,125
+if the message was already deleted.
+
+117
+00:05:57,125 --> 00:05:59,924
+Now we could fetch the user here
+
+118
+00:05:59,924 --> 00:06:03,765
+and delete this message from the array of messages,
+
+119
+00:06:03,765 --> 00:06:07,616
+but Mongoose gives us another nice way of doing that.
+
+120
+00:06:07,616 --> 00:06:10,477
+In the message model here, we can create
+
+121
+00:06:10,477 --> 00:06:12,866
+some kind of Mongoose middleware,
+
+122
+00:06:12,866 --> 00:06:15,323
+so a method which will get executed
+
+123
+00:06:15,323 --> 00:06:18,336
+whenever something happens to a message.
+
+124
+00:06:18,336 --> 00:06:21,226
+I can define this directly on the schema,
+
+125
+00:06:21,226 --> 00:06:23,965
+and there I use the post method to say,
+
+126
+00:06:23,965 --> 00:06:27,536
+"do it after" a certain action happened.
+
+127
+00:06:27,536 --> 00:06:30,005
+Then as the first argument in a string,
+
+128
+00:06:30,005 --> 00:06:33,136
+I specify for which action I want to listen.
+
+129
+00:06:33,136 --> 00:06:35,445
+It's the remove action here.
+
+130
+00:06:35,445 --> 00:06:38,483
+I want to get active whenever a message was removed.
+
+131
+00:06:38,483 --> 00:06:42,314
+This now will then execute this callback,
+
+132
+00:06:42,314 --> 00:06:45,474
+which passes me the message which was removed,
+
+133
+00:06:45,474 --> 00:06:47,504
+but it still has a reference to this message
+
+134
+00:06:47,504 --> 00:06:49,304
+even though we did delete it.
+
+135
+00:06:49,304 --> 00:06:51,602
+That's the cool thing about it.
+
+136
+00:06:51,602 --> 00:06:54,882
+So I know this message was deleted.
+
+137
+00:06:54,882 --> 00:06:58,132
+Now with this, I can simply find a user
+
+138
+00:06:59,678 --> 00:07:03,811
+by ID; of course, I need to import the user
+
+139
+00:07:03,811 --> 00:07:06,138
+from my models for this,
+
+140
+00:07:06,138 --> 00:07:08,221
+so from this folder here,
+
+141
+00:07:09,331 --> 00:07:10,498
+the user file.
+
+142
+00:07:13,371 --> 00:07:17,469
+And then here I can simply pass message.user
+
+143
+00:07:17,469 --> 00:07:20,069
+since our message has a user field
+
+144
+00:07:20,069 --> 00:07:24,489
+and this user field actually only holds the ID of that user,
+
+145
+00:07:24,489 --> 00:07:26,990
+we can pass this without an issue here.
+
+146
+00:07:26,990 --> 00:07:29,670
+So there we then have a callback,
+
+147
+00:07:29,670 --> 00:07:33,487
+where I either get an error or the user.
+
+148
+00:07:33,487 --> 00:07:35,670
+Then here I could also check for an error,
+
+149
+00:07:35,670 --> 00:07:38,127
+but I'll leave this out here.
+
+150
+00:07:38,127 --> 00:07:41,960
+All I wanna do here is, I want to take my user
+
+151
+00:07:43,630 --> 00:07:46,670
+access its messages array and then
+
+152
+00:07:46,670 --> 00:07:48,961
+pull a message from this array.
+
+153
+00:07:48,961 --> 00:07:50,940
+The message I do want to pull, of course,
+
+154
+00:07:50,940 --> 00:07:53,830
+is the message I passed here to this callback
+
+155
+00:07:53,830 --> 00:07:55,663
+of my post middleware.
+
+156
+00:07:57,580 --> 00:08:01,260
+Thereafter, I save the user to reflect this update,
+
+157
+00:08:01,260 --> 00:08:03,129
+and with that, I make sure
+
+158
+00:08:03,129 --> 00:08:05,870
+that whenever a message is deleted,
+
+159
+00:08:05,870 --> 00:08:08,878
+the messages array on the user,
+
+160
+00:08:08,878 --> 00:08:10,670
+who created this message,
+
+161
+00:08:10,670 --> 00:08:15,063
+is updated so that I don't have any redundant connexions
+
+162
+00:08:15,063 --> 00:08:17,022
+in my database, and by the way,
+
+163
+00:08:17,022 --> 00:08:20,096
+this is why I cleared my database before starting with that,
+
+164
+00:08:20,096 --> 00:08:23,235
+so that I don't have any old data sitting there.
+
+165
+00:08:23,235 --> 00:08:24,656
+With these changes in place,
+
+166
+00:08:24,656 --> 00:08:27,325
+let's restart our back end server
+
+167
+00:08:27,325 --> 00:08:28,982
+to reflect this latest code.
+
+168
+00:08:28,982 --> 00:08:31,862
+And now we can continue working on the front end
+
+169
+00:08:31,862 --> 00:08:34,142
+to actually send the token with requests,
+
+170
+00:08:34,142 --> 00:08:36,784
+so that all of our valuable setup
+
+171
+00:08:36,784 --> 00:08:39,867
+on the back end is now actually used.
+

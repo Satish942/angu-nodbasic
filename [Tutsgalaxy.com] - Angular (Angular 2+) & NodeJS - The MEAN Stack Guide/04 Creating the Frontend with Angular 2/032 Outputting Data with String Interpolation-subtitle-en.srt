@@ -1,0 +1,276 @@
+1
+00:00:02,116 --> 00:00:03,685
+<v Instructor>If we have a look at our application,</v>
+
+2
+00:00:03,685 --> 00:00:04,650
+it's clearly nice;
+
+3
+00:00:04,650 --> 00:00:05,716
+it displays Hello World,
+
+4
+00:00:05,716 --> 00:00:07,625
+but, it's not really doing anything.
+
+5
+00:00:07,625 --> 00:00:10,019
+We're not seeing anything dynamic.
+
+6
+00:00:10,019 --> 00:00:11,845
+Now back in our editor,
+
+7
+00:00:11,845 --> 00:00:13,834
+or the editor of your choice,
+
+8
+00:00:13,834 --> 00:00:17,270
+you should have the webpack process still running
+
+9
+00:00:17,270 --> 00:00:19,341
+by running npm run bolt.
+
+10
+00:00:19,341 --> 00:00:20,567
+It should keep running
+
+11
+00:00:20,567 --> 00:00:22,967
+here in your terminal window.
+
+12
+00:00:22,967 --> 00:00:24,359
+And then
+
+13
+00:00:24,359 --> 00:00:25,374
+you can go to,
+
+14
+00:00:25,374 --> 00:00:27,850
+let's say the AppComponent es file
+
+15
+00:00:27,850 --> 00:00:30,035
+and now let's create a new property
+
+16
+00:00:30,035 --> 00:00:31,384
+in this TypeScript class.
+
+17
+00:00:31,384 --> 00:00:32,575
+A new property is simply created
+
+18
+00:00:32,575 --> 00:00:33,810
+by typing a name here,
+
+19
+00:00:33,810 --> 00:00:34,643
+like a variable,
+
+20
+00:00:34,643 --> 00:00:37,061
+but without var at the beginning.
+
+21
+00:00:37,061 --> 00:00:39,212
+So content, and then let's say,
+
+22
+00:00:39,212 --> 00:00:40,516
+Some content.
+
+23
+00:00:40,516 --> 00:00:42,555
+Assign a string as a value.
+
+24
+00:00:42,555 --> 00:00:45,189
+You can assign any value you want.
+
+25
+00:00:45,189 --> 00:00:48,269
+Now back in the AppComponent html file,
+
+26
+00:00:48,269 --> 00:00:50,560
+we want to output this new content.
+
+27
+00:00:50,560 --> 00:00:51,890
+And do you remember the slide
+
+28
+00:00:51,890 --> 00:00:52,728
+where I told you that
+
+29
+00:00:52,728 --> 00:00:55,865
+we have the content in our body here;
+
+30
+00:00:55,865 --> 00:00:57,649
+and the content in our template,
+
+31
+00:00:57,649 --> 00:01:00,280
+which we can connect via data binding?
+
+32
+00:01:00,280 --> 00:01:02,589
+Let's use one form of data binding:
+
+33
+00:01:02,589 --> 00:01:04,200
+string interpolation.
+
+34
+00:01:04,200 --> 00:01:05,581
+We've got four forms,
+
+35
+00:01:05,581 --> 00:01:07,667
+and you will see them all throughout this course,
+
+36
+00:01:07,667 --> 00:01:09,976
+but let's start with string interpolation,
+
+37
+00:01:09,976 --> 00:01:12,712
+which is the most common one, probably.
+
+38
+00:01:12,712 --> 00:01:14,481
+String interpolation works by using
+
+39
+00:01:14,481 --> 00:01:17,144
+double curly braces, opening and closing,
+
+40
+00:01:17,144 --> 00:01:19,338
+and in between here, you can output
+
+41
+00:01:19,338 --> 00:01:22,346
+any property or result of a method,
+
+42
+00:01:22,346 --> 00:01:26,422
+or anything else from your component class.
+
+43
+00:01:26,422 --> 00:01:28,172
+So, from within here.
+
+44
+00:01:29,345 --> 00:01:30,760
+I want to output my content,
+
+45
+00:01:30,760 --> 00:01:32,558
+so what I simply can write here is,
+
+46
+00:01:32,558 --> 00:01:33,922
+content.
+
+47
+00:01:33,922 --> 00:01:37,182
+And this will output my component content.
+
+48
+00:01:37,182 --> 00:01:38,437
+Now upon saving this,
+
+49
+00:01:38,437 --> 00:01:40,184
+the code will re-compile,
+
+50
+00:01:40,184 --> 00:01:42,194
+and if we then reload the application,
+
+51
+00:01:42,194 --> 00:01:44,563
+you see, some content, here.
+
+52
+00:01:44,563 --> 00:01:46,643
+This is how easy it is
+
+53
+00:01:46,643 --> 00:01:49,576
+to make our application dynamic
+
+54
+00:01:49,576 --> 00:01:51,842
+and to output things or content
+
+55
+00:01:51,842 --> 00:01:53,772
+from our component class
+
+56
+00:01:53,772 --> 00:01:57,882
+from our business logic, so to say, in our template.
+
+57
+00:01:57,882 --> 00:01:59,479
+Now you can maybe already imagine
+
+58
+00:01:59,479 --> 00:02:01,576
+how easy it will later on be
+
+59
+00:02:01,576 --> 00:02:03,369
+to also hook up a button here,
+
+60
+00:02:03,369 --> 00:02:04,854
+and change this content
+
+61
+00:02:04,854 --> 00:02:06,797
+and dynamically update everything,
+
+62
+00:02:06,797 --> 00:02:08,965
+without having to write complicated code
+
+63
+00:02:08,965 --> 00:02:12,308
+to manually select what to update, and so on.
+
+64
+00:02:12,308 --> 00:02:15,773
+This is what makes Angular2 so powerful.
+
+65
+00:02:15,773 --> 00:02:18,034
+But, that's just the beginning.
+
+66
+00:02:18,034 --> 00:02:21,507
+And, before diving deeper into these tiny examples,
+
+67
+00:02:21,507 --> 00:02:24,091
+let's go back to our overall application,
+
+68
+00:02:24,091 --> 00:02:25,633
+and work on that.
+
+69
+00:02:25,633 --> 00:02:28,800
+Let's start building this application.
+

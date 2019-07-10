@@ -1,0 +1,696 @@
+1
+00:00:01,731 --> 00:00:03,291
+<v Instructor>Now even though we're still early</v>
+
+2
+00:00:03,291 --> 00:00:04,461
+in the application,
+
+3
+00:00:04,461 --> 00:00:08,049
+we already know where we'll kind of end up in the end.
+
+4
+00:00:08,049 --> 00:00:09,829
+We know it since we set up our models
+
+5
+00:00:09,829 --> 00:00:13,996
+in the MongoDB section in this course, message and user.
+
+6
+00:00:14,891 --> 00:00:17,427
+We'll have a message part where we can create,
+
+7
+00:00:17,427 --> 00:00:19,229
+edit and delete messages,
+
+8
+00:00:19,229 --> 00:00:22,149
+and we'll have the authorization or user part,
+
+9
+00:00:22,149 --> 00:00:23,760
+where we are able to create users,
+
+10
+00:00:23,760 --> 00:00:27,941
+sign up so to say, or sign in with users.
+
+11
+00:00:27,941 --> 00:00:30,731
+We should also reflect that on our front end.
+
+12
+00:00:30,731 --> 00:00:33,389
+It would be great to have some models there, too,
+
+13
+00:00:33,389 --> 00:00:35,469
+because we can't use our back-end models
+
+14
+00:00:35,469 --> 00:00:37,349
+in our Angular 2 application.
+
+15
+00:00:37,349 --> 00:00:38,829
+We can't access them here.
+
+16
+00:00:38,829 --> 00:00:40,568
+We will later on reach out to the back end
+
+17
+00:00:40,568 --> 00:00:42,699
+to fetch data and store data,
+
+18
+00:00:42,699 --> 00:00:45,248
+but we're not able to use the properties
+
+19
+00:00:45,248 --> 00:00:49,286
+of these models here to validate our front-end input
+
+20
+00:00:49,286 --> 00:00:52,259
+and so on, or not that easy, at least.
+
+21
+00:00:52,259 --> 00:00:55,120
+So to do this, I want to create these same models here
+
+22
+00:00:55,120 --> 00:00:56,760
+on the front end,
+
+23
+00:00:56,760 --> 00:01:00,579
+to basically have a blueprint to work with on the front end
+
+24
+00:01:00,579 --> 00:01:03,537
+so that I know a message will have these fields,
+
+25
+00:01:03,537 --> 00:01:05,859
+a user will have these fields,
+
+26
+00:01:05,859 --> 00:01:08,611
+and also some additional fields, as you will learn.
+
+27
+00:01:08,611 --> 00:01:12,171
+So let's create two new files in the app folder here.
+
+28
+00:01:12,171 --> 00:01:17,019
+A message.ts file, or let's name it message.model.ts,
+
+29
+00:01:17,019 --> 00:01:19,102
+and a user.model.ts file.
+
+30
+00:01:20,857 --> 00:01:23,840
+These types of files will hold some classes,
+
+31
+00:01:23,840 --> 00:01:25,369
+which simply define,
+
+32
+00:01:25,369 --> 00:01:27,840
+how a message and a user should look like,
+
+33
+00:01:27,840 --> 00:01:29,269
+so that when we use a message
+
+34
+00:01:29,269 --> 00:01:31,469
+like we do here in the AppComponent,
+
+35
+00:01:31,469 --> 00:01:34,560
+we have a clear blueprint and a message looks the same
+
+36
+00:01:34,560 --> 00:01:37,789
+throughout our application, no matter where we use it.
+
+37
+00:01:37,789 --> 00:01:40,059
+So how should a message look like?
+
+38
+00:01:40,059 --> 00:01:42,309
+Well, it should be a class which we export
+
+39
+00:01:42,309 --> 00:01:45,129
+so that we can use it outside of this file, too.
+
+40
+00:01:45,129 --> 00:01:47,838
+And I'll name it "Message" with a capital M.
+
+41
+00:01:47,838 --> 00:01:50,091
+And in here, I want to have a content,
+
+42
+00:01:50,091 --> 00:01:51,771
+which will be of type: string.
+
+43
+00:01:51,771 --> 00:01:54,099
+And this is how you assign a type with TypeScript,
+
+44
+00:01:54,099 --> 00:01:57,019
+the property name, then a colon, and then the string.
+
+45
+00:01:57,019 --> 00:01:59,480
+And now this property is limited to this type.
+
+46
+00:01:59,480 --> 00:02:01,177
+You can't use a different type now,
+
+47
+00:02:01,177 --> 00:02:03,419
+or you will get an error.
+
+48
+00:02:03,419 --> 00:02:06,010
+But it not only have a content of a message,
+
+49
+00:02:06,010 --> 00:02:10,240
+I also will have an author, or let's say username here,
+
+50
+00:02:10,240 --> 00:02:12,891
+the username of the person who created this message.
+
+51
+00:02:12,891 --> 00:02:15,019
+This will also be a string.
+
+52
+00:02:15,019 --> 00:02:18,029
+Now that would theoretically be all I need,
+
+53
+00:02:18,029 --> 00:02:21,019
+but my model should have two other things
+
+54
+00:02:21,019 --> 00:02:25,058
+which will make managing my messages later on easier.
+
+55
+00:02:25,058 --> 00:02:29,149
+Later on, when I'm able to edit and delete my messages,
+
+56
+00:02:29,149 --> 00:02:32,091
+I will need to pass some information back to the server
+
+57
+00:02:32,091 --> 00:02:34,880
+when I click the delete button on the front end.
+
+58
+00:02:34,880 --> 00:02:37,419
+The info which I need to pass to the server is,
+
+59
+00:02:37,419 --> 00:02:40,629
+what was the ID of the message which got deleted?
+
+60
+00:02:40,629 --> 00:02:43,360
+Identifying the message by content is dangerous,
+
+61
+00:02:43,360 --> 00:02:46,318
+because if I have two messages with the same content,
+
+62
+00:02:46,318 --> 00:02:48,731
+I wouldn't know which one to delete.
+
+63
+00:02:48,731 --> 00:02:50,458
+Therefore, I later on also want
+
+64
+00:02:50,458 --> 00:02:52,958
+to store the ID of my message,
+
+65
+00:02:54,039 --> 00:02:57,856
+which will also be a string since MongoDB creates IDs
+
+66
+00:02:57,856 --> 00:03:00,709
+which are strings and not numbers.
+
+67
+00:03:00,709 --> 00:03:02,379
+And there's another thing.
+
+68
+00:03:02,379 --> 00:03:05,019
+I also want to store the user ID.
+
+69
+00:03:05,019 --> 00:03:07,309
+I shouldn't have duplicated usernames,
+
+70
+00:03:07,309 --> 00:03:11,139
+but it is possible because I will not control that,
+
+71
+00:03:11,139 --> 00:03:14,629
+I will only make sure that I have unique email addresses.
+
+72
+00:03:14,629 --> 00:03:15,920
+So I might have two users
+
+73
+00:03:15,920 --> 00:03:18,491
+with the same username creating a message.
+
+74
+00:03:18,491 --> 00:03:21,759
+Now, if I want to know if a user is able
+
+75
+00:03:21,759 --> 00:03:23,179
+to delete a message,
+
+76
+00:03:23,179 --> 00:03:26,328
+I want to check if he was the one who created it.
+
+77
+00:03:26,328 --> 00:03:27,867
+Now using a username is dangerous
+
+78
+00:03:27,867 --> 00:03:30,189
+because it's not unique, as I just explained.
+
+79
+00:03:30,189 --> 00:03:32,079
+So I also want to store the user ID
+
+80
+00:03:32,079 --> 00:03:34,208
+of the person who created a message,
+
+81
+00:03:34,208 --> 00:03:37,379
+so that I know if I should show the delete button or not.
+
+82
+00:03:37,379 --> 00:03:39,448
+And I come back to this later on.
+
+83
+00:03:39,448 --> 00:03:41,606
+But this will be the four fields I want to use
+
+84
+00:03:41,606 --> 00:03:45,899
+on my front end with the logic I just explained.
+
+85
+00:03:45,899 --> 00:03:47,720
+Now, to be able to initialise this,
+
+86
+00:03:47,720 --> 00:03:49,448
+I'll also add a constructor,
+
+87
+00:03:49,448 --> 00:03:50,806
+that's the default constructor,
+
+88
+00:03:50,806 --> 00:03:53,259
+the TypeScript class it ship with,
+
+89
+00:03:53,259 --> 00:03:55,720
+or which we can also use in all types of classes,
+
+90
+00:03:55,720 --> 00:03:58,379
+and here I want to be able to pass my content,
+
+91
+00:03:58,379 --> 00:04:02,019
+my username, so basically the same fields as before.
+
+92
+00:04:02,019 --> 00:04:06,349
+And I'll show a quicker way of setting this up in a second.
+
+93
+00:04:06,349 --> 00:04:08,719
+So this is my messages model.
+
+94
+00:04:08,719 --> 00:04:12,360
+Here of course I need to assign this.content to content,
+
+95
+00:04:12,360 --> 00:04:15,818
+this.username to username, and so on.
+
+96
+00:04:15,818 --> 00:04:17,985
+So let me quickly do this.
+
+97
+00:04:25,158 --> 00:04:28,179
+With this setup, I'm able to create messages,
+
+98
+00:04:28,179 --> 00:04:32,617
+and also able to then have a unique blueprint
+
+99
+00:04:32,617 --> 00:04:34,179
+how a message should look like
+
+100
+00:04:34,179 --> 00:04:36,200
+in my whole front-end application.
+
+101
+00:04:36,200 --> 00:04:38,669
+Now how should the user model look like?
+
+102
+00:04:38,669 --> 00:04:40,299
+Let's have a look at it.
+
+103
+00:04:40,299 --> 00:04:44,200
+Of course it'll also be exported class User,
+
+104
+00:04:44,200 --> 00:04:46,560
+and in here now I'll use a quick array
+
+105
+00:04:46,560 --> 00:04:48,579
+of setting up all these fields.
+
+106
+00:04:48,579 --> 00:04:51,387
+I can use a shortcut TypeScript offers me,
+
+107
+00:04:51,387 --> 00:04:53,347
+where I can directly set up properties
+
+108
+00:04:53,347 --> 00:04:55,744
+and assign the values in the constructor.
+
+109
+00:04:55,744 --> 00:04:58,507
+So do the same as here in the message model,
+
+110
+00:04:58,507 --> 00:05:01,955
+but with only one line of code instead of 10.
+
+111
+00:05:01,955 --> 00:05:03,836
+So here in my user model,
+
+112
+00:05:03,836 --> 00:05:07,608
+let's think about what fields should a user have.
+
+113
+00:05:07,608 --> 00:05:09,648
+Well, here I want to stick to the fields I set up
+
+114
+00:05:09,648 --> 00:05:12,016
+on the back end, so in my models file,
+
+115
+00:05:12,016 --> 00:05:14,136
+we see a user has a first name, a last name,
+
+116
+00:05:14,136 --> 00:05:15,865
+a password and an email.
+
+117
+00:05:15,865 --> 00:05:17,925
+The messages are something I'll not store
+
+118
+00:05:17,925 --> 00:05:19,816
+in my user model on the front end,
+
+119
+00:05:19,816 --> 00:05:22,685
+because I will fetch that differently as you will learn.
+
+120
+00:05:22,685 --> 00:05:24,645
+So in the user model here,
+
+121
+00:05:24,645 --> 00:05:28,323
+I want to have an email which should be of type: string.
+
+122
+00:05:28,323 --> 00:05:30,587
+Now this would be the approach we used before.
+
+123
+00:05:30,587 --> 00:05:33,336
+It's getting passed as an argument to the constructor.
+
+124
+00:05:33,336 --> 00:05:34,923
+If I want to tell TypeScript, "Hey,
+
+125
+00:05:34,923 --> 00:05:37,576
+"this should also be a property of this class
+
+126
+00:05:37,576 --> 00:05:40,355
+"and please assign the value automatically,"
+
+127
+00:05:40,355 --> 00:05:43,075
+then I simply add public or private in the beginning
+
+128
+00:05:43,075 --> 00:05:45,285
+to make it a public or private property.
+
+129
+00:05:45,285 --> 00:05:50,000
+And now I have the same as if I would have written,
+
+130
+00:05:50,000 --> 00:05:53,629
+public email or omit public since it is the default,
+
+131
+00:05:53,629 --> 00:05:56,569
+email: string, and then in here,
+
+132
+00:05:56,569 --> 00:06:00,736
+this string, this.email equals, oops, equals email,
+
+133
+00:06:02,986 --> 00:06:03,819
+like this.
+
+134
+00:06:03,819 --> 00:06:05,896
+So I can omit all of that,
+
+135
+00:06:05,896 --> 00:06:09,565
+and by simply placing it in the constructor here
+
+136
+00:06:09,565 --> 00:06:11,334
+as an argument with public in front of it,
+
+137
+00:06:11,334 --> 00:06:13,238
+I get the same result.
+
+138
+00:06:13,238 --> 00:06:15,539
+Now I do the same for the password,
+
+139
+00:06:15,539 --> 00:06:17,438
+which should be a string,
+
+140
+00:06:17,438 --> 00:06:19,569
+and I'll split it up over multiple lines
+
+141
+00:06:19,569 --> 00:06:22,630
+since this will get a bit longer.
+
+142
+00:06:22,630 --> 00:06:27,317
+I also want to have my firstName, which will be a string,
+
+143
+00:06:27,317 --> 00:06:31,548
+and I will also have my lastName, which will be a string,
+
+144
+00:06:31,548 --> 00:06:32,381
+like this.
+
+145
+00:06:33,230 --> 00:06:35,339
+Now there's one important thing.
+
+146
+00:06:35,339 --> 00:06:38,150
+When I create users or when I use users,
+
+147
+00:06:38,150 --> 00:06:40,969
+I will not always have all four fields.
+
+148
+00:06:40,969 --> 00:06:43,030
+I will only use the first and last name
+
+149
+00:06:43,030 --> 00:06:45,649
+when I create a user in this application,
+
+150
+00:06:45,649 --> 00:06:49,727
+not really if I only sign in with a user later on.
+
+151
+00:06:49,727 --> 00:06:52,830
+Therefore, I will make first and lastName optional
+
+152
+00:06:52,830 --> 00:06:54,918
+by adding a question mark.
+
+153
+00:06:54,918 --> 00:06:58,438
+This now means, you can pass these arguments,
+
+154
+00:06:58,438 --> 00:07:00,190
+but you don't have to.
+
+155
+00:07:00,190 --> 00:07:03,099
+The properties will then just be undefined.
+
+156
+00:07:03,099 --> 00:07:06,310
+Because for signing in, I only need the email and password,
+
+157
+00:07:06,310 --> 00:07:08,030
+and I don't want to force the user
+
+158
+00:07:08,030 --> 00:07:10,378
+to enter more info than I need.
+
+159
+00:07:10,378 --> 00:07:13,929
+This is why I make these fields optional.
+
+160
+00:07:13,929 --> 00:07:17,089
+With that, we added these models to the front end,
+
+161
+00:07:17,089 --> 00:07:19,190
+and that now gives us a clear blueprint,
+
+162
+00:07:19,190 --> 00:07:22,910
+which we can use to make our application more structured,
+
+163
+00:07:22,910 --> 00:07:26,918
+and make sure we're using everything we need to use,
+
+164
+00:07:26,918 --> 00:07:29,998
+or we're working in a consistent way.
+
+165
+00:07:29,998 --> 00:07:32,489
+The same is true of my message model.
+
+166
+00:07:32,489 --> 00:07:36,798
+Message ID and user ID should be optional.
+
+167
+00:07:36,798 --> 00:07:39,139
+I won't always have that.
+
+168
+00:07:39,139 --> 00:07:41,358
+So let me make it optional here,
+
+169
+00:07:41,358 --> 00:07:43,716
+and of course also in the constructor,
+
+170
+00:07:43,716 --> 00:07:46,389
+so that I'm not required to pass them.
+
+171
+00:07:46,389 --> 00:07:49,219
+And with that, I set up a nice, basic setup,
+
+172
+00:07:49,219 --> 00:07:51,337
+which gives me the blueprints I'll work with
+
+173
+00:07:51,337 --> 00:07:52,739
+throughout the application,
+
+174
+00:07:52,739 --> 00:07:56,322
+to be able to work with messages and users.
+

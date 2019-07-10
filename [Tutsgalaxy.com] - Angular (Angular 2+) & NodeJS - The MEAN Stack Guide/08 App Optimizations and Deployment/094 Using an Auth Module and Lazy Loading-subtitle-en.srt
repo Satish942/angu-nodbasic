@@ -1,0 +1,648 @@
+1
+00:00:01,782 --> 00:00:02,812
+<v ->Now, the last lecture,</v>
+
+2
+00:00:02,812 --> 00:00:05,407
+we created this message module to outsource
+
+3
+00:00:05,407 --> 00:00:07,756
+our message-related parts or code,
+
+4
+00:00:07,756 --> 00:00:10,303
+components in that module.
+
+5
+00:00:10,303 --> 00:00:12,774
+It makes our app module file leaner,
+
+6
+00:00:12,774 --> 00:00:15,842
+but, besides that, there aren't that many advantages
+
+7
+00:00:15,842 --> 00:00:17,378
+because we still import it.
+
+8
+00:00:17,378 --> 00:00:19,202
+So, it is a good approach.
+
+9
+00:00:19,202 --> 00:00:21,427
+It makes this file a bit easier to read,
+
+10
+00:00:21,427 --> 00:00:23,898
+but, performancewise, we don't gain anything.
+
+11
+00:00:23,898 --> 00:00:26,436
+This will change with the auth module, though.
+
+12
+00:00:26,436 --> 00:00:29,476
+The auth module is loaded via routing.
+
+13
+00:00:29,476 --> 00:00:31,161
+So is the message module,
+
+14
+00:00:31,161 --> 00:00:33,166
+but we always load the messages here
+
+15
+00:00:33,166 --> 00:00:35,129
+since we redirect to them, right?
+
+16
+00:00:35,129 --> 00:00:37,645
+But, for the auth module, we don't do that.
+
+17
+00:00:37,645 --> 00:00:39,163
+So, it would make sense
+
+18
+00:00:39,163 --> 00:00:43,716
+to only load the authentication parts if we need them.
+
+19
+00:00:43,716 --> 00:00:47,883
+So, for that, let's create a new module in the auth folder,
+
+20
+00:00:49,490 --> 00:00:52,797
+auth module ts,
+
+21
+00:00:52,797 --> 00:00:55,036
+and, as before, I will simply export
+
+22
+00:00:55,036 --> 00:00:57,458
+a class named AuthModule here,
+
+23
+00:00:57,458 --> 00:01:00,208
+and I will attach NgModule to it,
+
+24
+00:01:01,195 --> 00:01:04,003
+this NgModule decorator, which of course,
+
+25
+00:01:04,003 --> 00:01:07,170
+I need to import from at angular core.
+
+26
+00:01:12,137 --> 00:01:16,322
+With that imported, we can now add components
+
+27
+00:01:16,322 --> 00:01:19,614
+we only use in the auth part.
+
+28
+00:01:19,614 --> 00:01:20,894
+Let's head over the app module
+
+29
+00:01:20,894 --> 00:01:22,874
+and see what we can strip out.
+
+30
+00:01:22,874 --> 00:01:25,471
+Well, we could remove these Signin, Signup
+
+31
+00:01:25,471 --> 00:01:27,029
+and Logout components.
+
+32
+00:01:27,029 --> 00:01:29,162
+These are only used in the auth section,
+
+33
+00:01:29,162 --> 00:01:30,971
+and you might think that you can also remove
+
+34
+00:01:30,971 --> 00:01:32,653
+the authentication component.
+
+35
+00:01:32,653 --> 00:01:34,406
+This is not true, though.
+
+36
+00:01:34,406 --> 00:01:37,085
+We do use it in the routing here,
+
+37
+00:01:37,085 --> 00:01:40,652
+and while I will change the way we load our routes soon,
+
+38
+00:01:40,652 --> 00:01:43,115
+we still need to declare it.
+
+39
+00:01:43,115 --> 00:01:45,914
+We didn't need to do this for the messages component before
+
+40
+00:01:45,914 --> 00:01:48,352
+because we import the message module
+
+41
+00:01:48,352 --> 00:01:50,338
+right away at the beginning here,
+
+42
+00:01:50,338 --> 00:01:51,894
+when we start our app.
+
+43
+00:01:51,894 --> 00:01:54,903
+So, the message module, and therefore, the message component
+
+44
+00:01:54,903 --> 00:01:57,091
+is available to our root router.
+
+45
+00:01:57,091 --> 00:02:00,263
+Now, for the authentication component and the auth part,
+
+46
+00:02:00,263 --> 00:02:02,657
+I want to lazily load this module, which means
+
+47
+00:02:02,657 --> 00:02:05,577
+I want to only load it once we need it.
+
+48
+00:02:05,577 --> 00:02:07,892
+The authentication components here, though,
+
+49
+00:02:07,892 --> 00:02:09,045
+is needed all the time
+
+50
+00:02:09,045 --> 00:02:11,639
+because it's part of our root routes.
+
+51
+00:02:11,639 --> 00:02:13,443
+Therefore, we can't remove
+
+52
+00:02:13,443 --> 00:02:15,350
+the authentication component here.
+
+53
+00:02:15,350 --> 00:02:18,670
+What we can remove, though, are the ReactiveFormsModules
+
+54
+00:02:18,670 --> 00:02:20,742
+or this ReactiveFormsModule here
+
+55
+00:02:20,742 --> 00:02:22,871
+because this is not needed.
+
+56
+00:02:22,871 --> 00:02:26,340
+We will import this in the auth module,
+
+57
+00:02:26,340 --> 00:02:27,913
+where we use the reactive forms
+
+58
+00:02:27,913 --> 00:02:30,947
+to submit our Signup and Signin forms.
+
+59
+00:02:30,947 --> 00:02:33,303
+The AuthService definitely has to say here
+
+60
+00:02:33,303 --> 00:02:34,959
+because we use it application-wide,
+
+61
+00:02:34,959 --> 00:02:38,165
+so we'll let it stay in the app module.
+
+62
+00:02:38,165 --> 00:02:42,398
+With that, I can head over to the auth module
+
+63
+00:02:42,398 --> 00:02:45,648
+and add the Signin, SignUp
+
+64
+00:02:47,615 --> 00:02:50,746
+and Logout components here.
+
+65
+00:02:50,746 --> 00:02:54,698
+And, of course, we also need to import some things.
+
+66
+00:02:54,698 --> 00:02:57,909
+For example, the CommonModule and then
+
+67
+00:02:57,909 --> 00:02:59,151
+the ReactiveFormsModule.
+
+68
+00:02:59,151 --> 00:03:02,984
+I'll add the imports app here first.
+
+69
+00:03:04,154 --> 00:03:07,231
+At angular common, we add the CommonModule,
+
+70
+00:03:07,231 --> 00:03:11,998
+and from at angular forms,
+
+71
+00:03:11,998 --> 00:03:14,598
+we add the ReactiveFormsModule.
+
+72
+00:03:14,598 --> 00:03:17,129
+So, let's also add them here to the imports,
+
+73
+00:03:17,129 --> 00:03:18,093
+and then, that's it!
+
+74
+00:03:18,093 --> 00:03:19,722
+This is my app module.
+
+75
+00:03:19,722 --> 00:03:21,911
+Now, as I said, I want to lazily load it,
+
+76
+00:03:21,911 --> 00:03:23,576
+and, therefore, I need to change
+
+77
+00:03:23,576 --> 00:03:25,290
+the way we load the routes.
+
+78
+00:03:25,290 --> 00:03:27,561
+Right now, we load them right at the beginning.
+
+79
+00:03:27,561 --> 00:03:29,888
+Here, in the app routing file,
+
+80
+00:03:29,888 --> 00:03:32,530
+we import this auth routes constant,
+
+81
+00:03:32,530 --> 00:03:34,820
+which is set up in the auth routes file,
+
+82
+00:03:34,820 --> 00:03:36,590
+and here, we load all these components,
+
+83
+00:03:36,590 --> 00:03:38,955
+so that's no lazy load at all.
+
+84
+00:03:38,955 --> 00:03:41,560
+In order to change this, I need to set up
+
+85
+00:03:41,560 --> 00:03:44,977
+my own router module in this auth module.
+
+86
+00:03:46,343 --> 00:03:49,824
+I'll first rename this file to auth routing
+
+87
+00:03:49,824 --> 00:03:52,355
+to be in line with the app routing file
+
+88
+00:03:52,355 --> 00:03:54,638
+from a naming perspective.
+
+89
+00:03:54,638 --> 00:03:58,033
+Then, I will no longer export this constant here.
+
+90
+00:03:58,033 --> 00:04:01,372
+Instead, I want to export a new constant,
+
+91
+00:04:01,372 --> 00:04:03,788
+which I'll name authRouting,
+
+92
+00:04:03,788 --> 00:04:06,204
+which uses the RouterModule.
+
+93
+00:04:06,204 --> 00:04:10,378
+I have to import it from at angular router.
+
+94
+00:04:10,378 --> 00:04:13,224
+And then, the forChild method.
+
+95
+00:04:13,224 --> 00:04:16,218
+In the app routing file, we use forRoot
+
+96
+00:04:16,218 --> 00:04:19,960
+to restructure some route routes for the whole application.
+
+97
+00:04:19,960 --> 00:04:23,261
+Now, in the auth routing file here,
+
+98
+00:04:23,261 --> 00:04:25,002
+I want restructure some routes,
+
+99
+00:04:25,002 --> 00:04:27,214
+which are only valid for this auth section,
+
+100
+00:04:27,214 --> 00:04:29,046
+which is why I use forChild.
+
+101
+00:04:29,046 --> 00:04:30,928
+It's only a part of the application,
+
+102
+00:04:30,928 --> 00:04:33,042
+not the entire application.
+
+103
+00:04:33,042 --> 00:04:36,182
+And here, I pass by auth routes as an argument.
+
+104
+00:04:36,182 --> 00:04:37,708
+This, of course, means that
+
+105
+00:04:37,708 --> 00:04:40,080
+I now need to adjust my routing file.
+
+106
+00:04:40,080 --> 00:04:41,919
+First of all, I can remove this import,
+
+107
+00:04:41,919 --> 00:04:43,280
+it doesn't work any more.
+
+108
+00:04:43,280 --> 00:04:46,210
+And, second, this part here has to change.
+
+109
+00:04:46,210 --> 00:04:49,858
+Instead of directly importing children like this,
+
+110
+00:04:49,858 --> 00:04:53,380
+I now use loadChildren,
+
+111
+00:04:53,380 --> 00:04:57,411
+and this key tells Angular 2 to lazy load them.
+
+112
+00:04:57,411 --> 00:05:00,725
+Here, I therefore pass a string as a value,
+
+113
+00:05:00,725 --> 00:05:03,136
+and this is important, a string, not a type.
+
+114
+00:05:03,136 --> 00:05:05,944
+I don't import the auth routing.
+
+115
+00:05:05,944 --> 00:05:08,602
+Router here does RouterModule I created there,
+
+116
+00:05:08,602 --> 00:05:11,825
+that would, indeed, load them instantly again.
+
+117
+00:05:11,825 --> 00:05:14,243
+Instead, here, I create a string,
+
+118
+00:05:14,243 --> 00:05:17,612
+where I point to this module I want to load.
+
+119
+00:05:17,612 --> 00:05:21,171
+Now, that is, seen from this app routing file on,
+
+120
+00:05:21,171 --> 00:05:22,974
+in the slash auth folder,
+
+121
+00:05:22,974 --> 00:05:25,167
+and here in the auth dot module file
+
+122
+00:05:25,167 --> 00:05:26,938
+without the extension.
+
+123
+00:05:26,938 --> 00:05:29,725
+I also need to specify the name of the class
+
+124
+00:05:29,725 --> 00:05:31,104
+I want to import.
+
+125
+00:05:31,104 --> 00:05:34,211
+This is, of course, AuthModule.
+
+126
+00:05:34,211 --> 00:05:37,570
+So, therefore, here, I separate it with a hashtag
+
+127
+00:05:37,570 --> 00:05:39,249
+and then AuthModule.
+
+128
+00:05:39,249 --> 00:05:41,938
+I added a package to my webpack work flow,
+
+129
+00:05:41,938 --> 00:05:45,812
+which converts the string in, actually, a function,
+
+130
+00:05:45,812 --> 00:05:47,251
+which Angular 2 can use at run time
+
+131
+00:05:47,251 --> 00:05:51,733
+to dynamically load this module when it needs it.
+
+132
+00:05:51,733 --> 00:05:53,967
+Now, since I point to the module here,
+
+133
+00:05:53,967 --> 00:05:57,440
+and we created the RouterModule in the auth routing file,
+
+134
+00:05:57,440 --> 00:06:00,614
+we now need to import this auth routing file
+
+135
+00:06:00,614 --> 00:06:04,827
+or this authRouting router module in the auth module here.
+
+136
+00:06:04,827 --> 00:06:07,693
+So make sure to add this import, auth the router,
+
+137
+00:06:07,693 --> 00:06:10,060
+the router we just created.
+
+138
+00:06:10,060 --> 00:06:13,571
+With that, if we save all that,
+
+139
+00:06:13,571 --> 00:06:16,961
+and we let it recompile, it should work,
+
+140
+00:06:16,961 --> 00:06:19,373
+and if we now reload the application,
+
+141
+00:06:19,373 --> 00:06:21,550
+we see, it works.
+
+142
+00:06:21,550 --> 00:06:23,115
+The interesting part is,
+
+143
+00:06:23,115 --> 00:06:24,909
+if you open up the developer tools
+
+144
+00:06:24,909 --> 00:06:29,384
+and go to the Network tab, disable cache here,
+
+145
+00:06:29,384 --> 00:06:33,117
+and then reload the app on the messages route here.
+
+146
+00:06:33,117 --> 00:06:35,134
+You'll see a couple of files get downloaded
+
+147
+00:06:35,134 --> 00:06:36,435
+among them, the bundle.
+
+148
+00:06:36,435 --> 00:06:37,654
+No worries, it's that large
+
+149
+00:06:37,654 --> 00:06:39,655
+because we're in development mode.
+
+150
+00:06:39,655 --> 00:06:41,432
+If I now click on Authentication,
+
+151
+00:06:41,432 --> 00:06:43,416
+watch this part down here,
+
+152
+00:06:43,416 --> 00:06:47,976
+where we see Network, incoming network responses.
+
+153
+00:06:47,976 --> 00:06:51,683
+You see that, we downloaded this chunk js file,
+
+154
+00:06:51,683 --> 00:06:53,203
+and this is just lazy loading.
+
+155
+00:06:53,203 --> 00:06:55,215
+It only downloaded this file,
+
+156
+00:06:55,215 --> 00:06:59,303
+which keeps the code responsible for what we see here
+
+157
+00:06:59,303 --> 00:07:00,464
+and what we use here.
+
+158
+00:07:00,464 --> 00:07:03,639
+It downloaded this file here
+
+159
+00:07:03,639 --> 00:07:05,192
+right here when we needed it,
+
+160
+00:07:05,192 --> 00:07:06,717
+when I clicked on Authentication
+
+161
+00:07:06,717 --> 00:07:08,271
+and not before doing so.
+
+162
+00:07:08,271 --> 00:07:10,854
+This is lazy loading in action.
+

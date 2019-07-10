@@ -1,0 +1,368 @@
+1
+00:00:01,855 --> 00:00:03,490
+<v Narrator>We learned about string interpolation</v>
+
+2
+00:00:03,490 --> 00:00:06,133
+to out put data with these curly braces,
+
+3
+00:00:06,133 --> 00:00:07,591
+and two-way data data binding with
+
+4
+00:00:07,591 --> 00:00:10,035
+these squared brackets and parentheses.
+
+5
+00:00:10,035 --> 00:00:11,648
+Now, maybe you wondered where these squared
+
+6
+00:00:11,648 --> 00:00:14,594
+brackets and parentheses were coming from.
+
+7
+00:00:14,594 --> 00:00:18,395
+Well, they are coming from property and event binding,
+
+8
+00:00:18,395 --> 00:00:20,039
+which are the last two forms of
+
+9
+00:00:20,039 --> 00:00:22,620
+data binding Angular 2 offers us.
+
+10
+00:00:22,620 --> 00:00:24,778
+Property binding looks like this.
+
+11
+00:00:24,778 --> 00:00:27,400
+We bind to a property, and that could be
+
+12
+00:00:27,400 --> 00:00:30,401
+a property of a default HTML element,
+
+13
+00:00:30,401 --> 00:00:33,153
+like the value property on a input,
+
+14
+00:00:33,153 --> 00:00:35,980
+or it could be the property on our own component,
+
+15
+00:00:35,980 --> 00:00:38,205
+as you will learn in the next videos.
+
+16
+00:00:38,205 --> 00:00:40,643
+So we bind to the property and enclose it
+
+17
+00:00:40,643 --> 00:00:42,455
+in squared brackets to tell Angular 2,
+
+18
+00:00:42,455 --> 00:00:45,266
+"Hey, we want to bind to this property."
+
+19
+00:00:45,266 --> 00:00:46,928
+And then between the quotation marks,
+
+20
+00:00:46,928 --> 00:00:50,229
+we have expression, resolving two a value,
+
+21
+00:00:50,229 --> 00:00:52,980
+which we want to pass to this property.
+
+22
+00:00:52,980 --> 00:00:54,480
+This could be a string, because
+
+23
+00:00:54,480 --> 00:00:56,515
+maybe we want to pass a string.
+
+24
+00:00:56,515 --> 00:00:58,795
+This could be a number, or this could be a method
+
+25
+00:00:58,795 --> 00:01:02,553
+call returning something which we want to pass.
+
+26
+00:01:02,553 --> 00:01:06,726
+So if we want to bind to the value of a property,
+
+27
+00:01:06,726 --> 00:01:09,906
+then we would pass the value or the string
+
+28
+00:01:09,906 --> 00:01:13,023
+which you want to bind in the quotation marks.
+
+29
+00:01:13,023 --> 00:01:14,876
+Event binding is the opposite.
+
+30
+00:01:14,876 --> 00:01:17,657
+Here we use parentheses and we enclose
+
+31
+00:01:17,657 --> 00:01:19,593
+the event to which to which you want to bind.
+
+32
+00:01:19,593 --> 00:01:21,256
+Click, for example.
+
+33
+00:01:21,256 --> 00:01:22,750
+And in the expression, or between
+
+34
+00:01:22,750 --> 00:01:25,302
+the quotation marks, we have the expression,
+
+35
+00:01:25,302 --> 00:01:28,360
+which gets executed whenever this event occurs.
+
+36
+00:01:28,360 --> 00:01:30,988
+This can be a method call, but it could also be
+
+37
+00:01:30,988 --> 00:01:34,201
+a short assignment directly between the quotation marks,
+
+38
+00:01:34,201 --> 00:01:37,697
+something like ="true".
+
+39
+00:01:37,697 --> 00:01:39,684
+So, to what can we bind?
+
+40
+00:01:39,684 --> 00:01:41,735
+As I said, to DOM properties.
+
+41
+00:01:41,735 --> 00:01:45,978
+So, HTML elements, properties of HTML elements,
+
+42
+00:01:45,978 --> 00:01:48,695
+like value, hidden, and much more.
+
+43
+00:01:48,695 --> 00:01:50,608
+To directive properties.
+
+44
+00:01:50,608 --> 00:01:53,344
+We will see directives in action soon,
+
+45
+00:01:53,344 --> 00:01:57,511
+but directives are simply just instructions in the document.
+
+46
+00:01:58,914 --> 00:02:00,228
+They are a feature of Angular 2
+
+47
+00:02:00,228 --> 00:02:02,550
+which allow to manipulate the document,
+
+48
+00:02:02,550 --> 00:02:04,854
+and they may have properties to which you bind.
+
+49
+00:02:04,854 --> 00:02:06,944
+You will see this throughout the course.
+
+50
+00:02:06,944 --> 00:02:10,267
+And to component properties. Components are directives,
+
+51
+00:02:10,267 --> 00:02:12,643
+but with a template, as you learned.
+
+52
+00:02:12,643 --> 00:02:15,077
+And we can also bind to properties of components.
+
+53
+00:02:15,077 --> 00:02:17,554
+This will be shown in the next video.
+
+54
+00:02:17,554 --> 00:02:19,392
+The same is true for event binding.
+
+55
+00:02:19,392 --> 00:02:22,485
+We can bind to native or User/DOM events
+
+56
+00:02:22,485 --> 00:02:25,512
+like click, mouseover, and so on.
+
+57
+00:02:25,512 --> 00:02:28,291
+We can bind to our own events in directives,
+
+58
+00:02:28,291 --> 00:02:30,999
+or our own events in components.
+
+59
+00:02:30,999 --> 00:02:34,547
+And you will see all of that in the next videos.
+
+60
+00:02:34,547 --> 00:02:38,476
+Now, the expressions or the syntax you see up here
+
+61
+00:02:38,476 --> 00:02:43,358
+is how you use the bindings in the parent component.
+
+62
+00:02:43,358 --> 00:02:45,277
+So let's say, in the app component,
+
+63
+00:02:45,277 --> 00:02:48,289
+for the message component we just created.
+
+64
+00:02:48,289 --> 00:02:49,911
+How would that look like in the child
+
+65
+00:02:49,911 --> 00:02:52,444
+component, which is the receiving end?
+
+66
+00:02:52,444 --> 00:02:56,625
+Or in the case of the event binding, the outputting end?
+
+67
+00:02:56,625 --> 00:02:59,666
+Well, there you use, for property binding,
+
+68
+00:02:59,666 --> 00:03:04,020
+this syntax here, with @Input, and then the propertyName.
+
+69
+00:03:04,020 --> 00:03:07,744
+So @Input makes this property bindable from outside.
+
+70
+00:03:07,744 --> 00:03:09,864
+You also got this alternative input,
+
+71
+00:03:09,864 --> 00:03:11,881
+or this alternative syntax, excuse me,
+
+72
+00:03:11,881 --> 00:03:16,097
+where you set it up in the component decorator
+
+73
+00:03:16,097 --> 00:03:18,762
+with inputs and then an array of all inputs
+
+74
+00:03:18,762 --> 00:03:20,764
+which you want to make bindable.
+
+75
+00:03:20,764 --> 00:03:22,484
+You can also pass an alias,
+
+76
+00:03:22,484 --> 00:03:25,267
+as you see as an argument to @Input.
+
+77
+00:03:25,267 --> 00:03:28,656
+And this is a method or a feature which
+
+78
+00:03:28,656 --> 00:03:31,432
+allows you to use a different name
+
+79
+00:03:31,432 --> 00:03:34,034
+outside of this component than inside.
+
+80
+00:03:34,034 --> 00:03:35,633
+So, if you have propertyName inside
+
+81
+00:03:35,633 --> 00:03:38,358
+of the component to which you want to bind,
+
+82
+00:03:38,358 --> 00:03:41,111
+then outside of it, you can use Alias.
+
+83
+00:03:41,111 --> 00:03:42,531
+You won't see this on action,
+
+84
+00:03:42,531 --> 00:03:44,525
+if you were confused right now.
+
+85
+00:03:44,525 --> 00:03:47,132
+So, you could use the above syntax
+
+86
+00:03:47,132 --> 00:03:50,257
+from outside by binding to propertyName.
+
+87
+00:03:50,257 --> 00:03:55,000
+Or, if we use the alias "Alias" between squared brackets.
+
+88
+00:03:55,000 --> 00:03:56,869
+And for event binding, it's pretty much the same
+
+89
+00:03:56,869 --> 00:04:00,327
+but with @Output and then the name of the event.
+
+90
+00:04:00,327 --> 00:04:02,450
+And we use it with the parentheses.
+
+91
+00:04:02,450 --> 00:04:06,165
+Now, that's the theory. If it's not 100% clear,
+
+92
+00:04:06,165 --> 00:04:09,665
+let's see it in action in the next videos.
+

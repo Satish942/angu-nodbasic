@@ -1,0 +1,496 @@
+1
+00:00:01,837 --> 00:00:03,210
+<v Narrator>The fist place where I wanna use</v>
+
+2
+00:00:03,210 --> 00:00:06,499
+this error service is in the error component.
+
+3
+00:00:06,499 --> 00:00:10,174
+Here I want to listen to emitted events
+
+4
+00:00:10,174 --> 00:00:11,630
+and errors, therefore.
+
+5
+00:00:11,630 --> 00:00:16,109
+So, I will implement OnInit to set up this listener.
+
+6
+00:00:16,109 --> 00:00:19,523
+OnInit needs to be imported from @angular/core,
+
+7
+00:00:19,523 --> 00:00:23,437
+and it requires me, of course, to implement ngOnInit.
+
+8
+00:00:23,437 --> 00:00:26,616
+So, in here, what I want to do is I want to listen to this
+
+9
+00:00:26,616 --> 00:00:30,765
+error occurred event emitter in my error service.
+
+10
+00:00:30,765 --> 00:00:34,093
+So, I need to inject the error service for this.
+
+11
+00:00:34,093 --> 00:00:36,749
+I can do this since I provide it application-wide,
+
+12
+00:00:36,749 --> 00:00:38,477
+so this will work fine.
+
+13
+00:00:38,477 --> 00:00:43,309
+And then in here, I can simply call this error service
+
+14
+00:00:43,309 --> 00:00:48,269
+error occurred subscribe to any errors we might get.
+
+15
+00:00:48,269 --> 00:00:49,912
+So, let me just restructure this,
+
+16
+00:00:49,912 --> 00:00:53,688
+and then in here, we could get an error,
+
+17
+00:00:53,688 --> 00:00:58,668
+and we actually know that this will be of type error,
+
+18
+00:00:58,668 --> 00:01:01,875
+like this, and then I wanna do two things here.
+
+19
+00:01:01,875 --> 00:01:05,603
+First, of course, I want to set this error
+
+20
+00:01:05,603 --> 00:01:09,059
+in my component here equal to the error we get passed,
+
+21
+00:01:09,059 --> 00:01:13,741
+and second, I want to set this display equal to block
+
+22
+00:01:13,741 --> 00:01:16,991
+to now show the modal and the backdrop.
+
+23
+00:01:19,245 --> 00:01:21,309
+So, this will do that.
+
+24
+00:01:21,309 --> 00:01:23,491
+Now, of course, that I listen to it
+
+25
+00:01:23,491 --> 00:01:27,982
+I also need to submit the error, or emit it.
+
+26
+00:01:27,982 --> 00:01:31,213
+Now, I wanna do this in the services.
+
+27
+00:01:31,213 --> 00:01:33,133
+So, here in the message service,
+
+28
+00:01:33,133 --> 00:01:34,371
+where I get a couple of places
+
+29
+00:01:34,371 --> 00:01:35,781
+where that error could happen,
+
+30
+00:01:35,781 --> 00:01:38,061
+so basically, in each catch function,
+
+31
+00:01:38,061 --> 00:01:41,464
+I will also inject the error service.
+
+32
+00:01:41,464 --> 00:01:44,877
+I can do this since @Injectable was added.
+
+33
+00:01:44,877 --> 00:01:47,021
+So now, let's add the error service here,
+
+34
+00:01:47,021 --> 00:01:50,697
+and of course, also add the import up here.
+
+35
+00:01:50,697 --> 00:01:52,909
+And then, it's here in the catch functions
+
+36
+00:01:52,909 --> 00:01:55,032
+where I wanna work with that.
+
+37
+00:01:55,032 --> 00:01:58,200
+I want to write more than just one line.
+
+38
+00:01:58,200 --> 00:02:00,291
+I will still throw the observable,
+
+39
+00:02:00,291 --> 00:02:03,053
+because I still need to return an observable here.
+
+40
+00:02:03,053 --> 00:02:05,219
+This needs to have a return statement
+
+41
+00:02:05,219 --> 00:02:06,520
+in front of it, though.
+
+42
+00:02:06,520 --> 00:02:07,864
+I still need this,
+
+43
+00:02:07,864 --> 00:02:10,435
+because this is observable overall here,
+
+44
+00:02:10,435 --> 00:02:12,653
+still expects to return an observable.
+
+45
+00:02:12,653 --> 00:02:15,661
+I can't leave this away just because I handled my error.
+
+46
+00:02:15,661 --> 00:02:17,976
+But now, I not only want to throw those
+
+47
+00:02:17,976 --> 00:02:20,557
+which I can lock to the console or not,
+
+48
+00:02:20,557 --> 00:02:21,869
+depending on my choice,
+
+49
+00:02:21,869 --> 00:02:26,036
+but I also now want to handle it with my error service.
+
+50
+00:02:26,873 --> 00:02:27,928
+This is the main thing.
+
+51
+00:02:27,928 --> 00:02:29,400
+This is why I built this.
+
+52
+00:02:29,400 --> 00:02:32,015
+So, here I call handle error,
+
+53
+00:02:32,015 --> 00:02:34,098
+and I pass my error JSON,
+
+54
+00:02:35,715 --> 00:02:38,929
+so this extracted error data, into it.
+
+55
+00:02:38,929 --> 00:02:41,453
+So, this is the cool thing about this catch function.
+
+56
+00:02:41,453 --> 00:02:44,376
+It allows me to run my own code before then of course
+
+57
+00:02:44,376 --> 00:02:47,858
+continuing with the default error flow here.
+
+58
+00:02:47,858 --> 00:02:51,576
+So, this setup here, I can basically copy it,
+
+59
+00:02:51,576 --> 00:02:54,826
+will be used in every catch block here.
+
+60
+00:02:55,992 --> 00:03:00,710
+This allows me to now handle the errors in a different way
+
+61
+00:03:00,710 --> 00:03:04,043
+to show my own error to display my modal
+
+62
+00:03:05,356 --> 00:03:07,629
+through this error service.
+
+63
+00:03:07,629 --> 00:03:09,817
+The same is true for the auth service.
+
+64
+00:03:09,817 --> 00:03:13,234
+Let's also inject the error service here,
+
+65
+00:03:14,301 --> 00:03:15,827
+like this.
+
+66
+00:03:15,827 --> 00:03:20,109
+Make sure to add the import at the top here, too.
+
+67
+00:03:20,109 --> 00:03:23,464
+And then again, simply replace it with the catch code
+
+68
+00:03:23,464 --> 00:03:26,214
+from before to handle the errors,
+
+69
+00:03:27,693 --> 00:03:28,526
+like this.
+
+70
+00:03:29,560 --> 00:03:31,064
+And, we're done.
+
+71
+00:03:31,064 --> 00:03:33,707
+Now, let it recompile.
+
+72
+00:03:33,707 --> 00:03:36,989
+If it froze in error, basically you restart it.
+
+73
+00:03:36,989 --> 00:03:38,822
+Sometimes it has this,
+
+74
+00:03:39,840 --> 00:03:42,360
+not finding a newly treated file here.
+
+75
+00:03:42,360 --> 00:03:46,527
+So, once this runs, let's reload this application,
+
+76
+00:03:48,205 --> 00:03:50,867
+and let's try to create a new message
+
+77
+00:03:50,867 --> 00:03:53,117
+whilst not being logged in.
+
+78
+00:03:55,027 --> 00:03:58,835
+Well, we do get the backdrop, but the modal is missing.
+
+79
+00:03:58,835 --> 00:04:00,968
+Let's see what went wrong here.
+
+80
+00:04:00,968 --> 00:04:03,741
+Let's have a look at the error component.
+
+81
+00:04:03,741 --> 00:04:05,128
+It's one little issue here.
+
+82
+00:04:05,128 --> 00:04:07,229
+We need to remove this fade clause,
+
+83
+00:04:07,229 --> 00:04:09,128
+otherwise it tries to fade it in,
+
+84
+00:04:09,128 --> 00:04:10,995
+which will work with bootstraps code,
+
+85
+00:04:10,995 --> 00:04:12,307
+but not with mine.
+
+86
+00:04:12,307 --> 00:04:14,525
+So, remove this, and thereafter,
+
+87
+00:04:14,525 --> 00:04:16,552
+after reloading this,
+
+88
+00:04:16,552 --> 00:04:18,856
+and, I can close the console.
+
+89
+00:04:18,856 --> 00:04:20,552
+Let's try it again.
+
+90
+00:04:20,552 --> 00:04:23,810
+Now, we see our error and then the error message,
+
+91
+00:04:23,810 --> 00:04:26,661
+in this case thrown by the jwt package
+
+92
+00:04:26,661 --> 00:04:28,125
+that we must provided.
+
+93
+00:04:28,125 --> 00:04:32,371
+And of course, you can feel free to make these nicer,
+
+94
+00:04:32,371 --> 00:04:33,821
+but you see it works.
+
+95
+00:04:33,821 --> 00:04:35,347
+It can also close it.
+
+96
+00:04:35,347 --> 00:04:38,771
+Now, what happens if I try to sign up a user
+
+97
+00:04:38,771 --> 00:04:42,803
+with a email address which is already taken?
+
+98
+00:04:42,803 --> 00:04:44,104
+User validation failed.
+
+99
+00:04:44,104 --> 00:04:46,568
+Well, of course, you could also improve that.
+
+100
+00:04:46,568 --> 00:04:48,616
+So, it is true, of course, the validation failed,
+
+101
+00:04:48,616 --> 00:04:51,032
+because we have a email address we already use,
+
+102
+00:04:51,032 --> 00:04:55,827
+but you see, the general output is working just fine.
+
+103
+00:04:55,827 --> 00:04:58,769
+And here, if I enter some data which doesn't exist,
+
+104
+00:04:58,769 --> 00:05:00,713
+invalid login credentials.
+
+105
+00:05:00,713 --> 00:05:01,638
+Great.
+
+106
+00:05:01,638 --> 00:05:04,115
+So, this is error handling in place,
+
+107
+00:05:04,115 --> 00:05:06,835
+and it was the final step in this application.
+
+108
+00:05:06,835 --> 00:05:10,941
+We now really have a nice-looking, user-friendly application
+
+109
+00:05:10,941 --> 00:05:14,461
+using Angular 2 on the front end and Node.js and Express
+
+110
+00:05:14,461 --> 00:05:17,171
+and MongoDB on the back end.
+
+111
+00:05:17,171 --> 00:05:19,091
+With that, we achieved a lot.
+
+112
+00:05:19,091 --> 00:05:21,544
+You learned how to set up the front end part,
+
+113
+00:05:21,544 --> 00:05:23,101
+how to connect it to the back end,
+
+114
+00:05:23,101 --> 00:05:24,883
+how to connect it to Node.js,
+
+115
+00:05:24,883 --> 00:05:27,933
+how to add user sign up and sign in,
+
+116
+00:05:27,933 --> 00:05:30,363
+how to protect your routes on the back end,
+
+117
+00:05:30,363 --> 00:05:33,373
+how to show or hide things on the front,
+
+118
+00:05:33,373 --> 00:05:35,351
+and depending on the user login state,
+
+119
+00:05:35,351 --> 00:05:39,518
+and on how to display errors in a user-friendly format.
+
+120
+00:05:40,588 --> 00:05:44,947
+This is a lot, and I hope you thoroughly enjoyed the course.
+
+121
+00:05:44,947 --> 00:05:49,181
+Now, in the next sections I will show you how to set up
+
+122
+00:05:49,181 --> 00:05:53,174
+this seed project we used here on your own
+
+123
+00:05:53,174 --> 00:05:56,584
+and how to deploy this application.
+
+124
+00:05:56,584 --> 00:05:58,834
+So, happy to see you there.
+

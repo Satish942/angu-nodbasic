@@ -1,0 +1,664 @@
+1
+00:00:01,389 --> 00:00:02,821
+<v ->I want to start with Heroku,</v>
+
+2
+00:00:02,821 --> 00:00:05,071
+so I'll head over to Heroku
+
+3
+00:00:07,887 --> 00:00:08,720
+.com,
+
+4
+00:00:10,797 --> 00:00:12,801
+and then either create an account
+
+5
+00:00:12,801 --> 00:00:15,593
+or if you already have one, just log in of course.
+
+6
+00:00:15,593 --> 00:00:18,388
+So I'll quickly do that.
+
+7
+00:00:18,388 --> 00:00:21,758
+On your dashboard, click create new app,
+
+8
+00:00:21,758 --> 00:00:23,656
+and then choose whichever name you want,
+
+9
+00:00:23,656 --> 00:00:27,281
+angular2-deployment in my case here which is available.
+
+10
+00:00:27,281 --> 00:00:29,226
+Runtime, I'll choose Europe here,
+
+11
+00:00:29,226 --> 00:00:31,574
+and then I'll create the application.
+
+12
+00:00:31,574 --> 00:00:34,831
+Now I don't have to specify which kind of app this is,
+
+13
+00:00:34,831 --> 00:00:36,552
+if it's Node.js or PHP,
+
+14
+00:00:36,552 --> 00:00:39,163
+since Heroku will automatically detect this,
+
+15
+00:00:39,163 --> 00:00:42,921
+or I could set it in some kind of off environment variables,
+
+16
+00:00:42,921 --> 00:00:45,271
+but I'll go with the automatic detection.
+
+17
+00:00:45,271 --> 00:00:48,735
+Now as you can see, you got various options of deploying.
+
+18
+00:00:48,735 --> 00:00:51,291
+You could just use Dropbox to sync it,
+
+19
+00:00:51,291 --> 00:00:53,877
+but I'll use Heroku Git, and of course for this,
+
+20
+00:00:53,877 --> 00:00:56,130
+you will need Git on your computer.
+
+21
+00:00:56,130 --> 00:00:59,345
+If you're not aware what Git is or you don't have it,
+
+22
+00:00:59,345 --> 00:01:02,279
+I strongly recommend googling it and looking it up.
+
+23
+00:01:02,279 --> 00:01:05,136
+And basically it's a version control system
+
+24
+00:01:05,136 --> 00:01:07,214
+which basically allows you to keep different versions
+
+25
+00:01:07,214 --> 00:01:08,706
+of your source code.
+
+26
+00:01:08,706 --> 00:01:11,129
+And you want to make sure that this is installed
+
+27
+00:01:11,129 --> 00:01:12,762
+for this to work.
+
+28
+00:01:12,762 --> 00:01:15,327
+So with the Heroku Git approach,
+
+29
+00:01:15,327 --> 00:01:18,416
+you have to instal the Heroku Toolbelt here,
+
+30
+00:01:18,416 --> 00:01:20,534
+so make sure you're doing this,
+
+31
+00:01:20,534 --> 00:01:22,981
+just download it here and follow the instructions
+
+32
+00:01:22,981 --> 00:01:24,064
+you see here.
+
+33
+00:01:25,151 --> 00:01:27,951
+And once this is done, you get a new command
+
+34
+00:01:27,951 --> 00:01:32,919
+you can use in your terminal or command line window.
+
+35
+00:01:32,919 --> 00:01:35,208
+So I'm going to do this.
+
+36
+00:01:35,208 --> 00:01:39,264
+Back in my project, I'll open up my terminal here.
+
+37
+00:01:39,264 --> 00:01:40,530
+Let me clear this.
+
+38
+00:01:40,530 --> 00:01:44,461
+And first I have to log in, so I'm quickly doing that.
+
+39
+00:01:44,461 --> 00:01:46,231
+Once you're successfully logged in,
+
+40
+00:01:46,231 --> 00:01:48,497
+you see on the Heroku page that the next step is
+
+41
+00:01:48,497 --> 00:01:51,237
+to put your project under a Git's version control.
+
+42
+00:01:51,237 --> 00:01:52,787
+I already did this.
+
+43
+00:01:52,787 --> 00:01:54,924
+And then you have to run this command here
+
+44
+00:01:54,924 --> 00:01:58,757
+to basically add Heroku as a remote repository
+
+45
+00:01:59,691 --> 00:02:04,320
+for your project where you can stores your files then.
+
+46
+00:02:04,320 --> 00:02:05,653
+So I'll do that.
+
+47
+00:02:06,661 --> 00:02:09,057
+The next step is to stage all your files
+
+48
+00:02:09,057 --> 00:02:11,347
+which means make them ready to be committed
+
+49
+00:02:11,347 --> 00:02:15,731
+to your Git repository and then actually commit them.
+
+50
+00:02:15,731 --> 00:02:18,259
+But before I do this, I have to make some changes.
+
+51
+00:02:18,259 --> 00:02:21,125
+Remember that in the Angular 2 code,
+
+52
+00:02:21,125 --> 00:02:23,398
+I'm still using these references
+
+53
+00:02:23,398 --> 00:02:25,923
+to my local host server here.
+
+54
+00:02:25,923 --> 00:02:30,601
+I have to exchange this with the link to Heroku.
+
+55
+00:02:30,601 --> 00:02:34,165
+So in order to do this, I'll go to settings here,
+
+56
+00:02:34,165 --> 00:02:36,915
+and here you can find your domain
+
+57
+00:02:37,842 --> 00:02:40,871
+where you'll find your application once it's running.
+
+58
+00:02:40,871 --> 00:02:45,251
+So copy this link and then over in the service,
+
+59
+00:02:45,251 --> 00:02:49,319
+I'm just going to replace all my localhost:3000
+
+60
+00:02:49,319 --> 00:02:52,853
+links here or addresses with this new address.
+
+61
+00:02:52,853 --> 00:02:55,967
+Now would it be better to store this in one central variable
+
+62
+00:02:55,967 --> 00:02:58,671
+which I could just change and have it change everywhere?
+
+63
+00:02:58,671 --> 00:03:02,552
+It definitely would, but I will just go with this
+
+64
+00:03:02,552 --> 00:03:05,291
+as I don't want to make this about refactoring here,
+
+65
+00:03:05,291 --> 00:03:08,997
+but it's certainly a good idea to do that.
+
+66
+00:03:08,997 --> 00:03:11,797
+I'll also do the same in the off service of course
+
+67
+00:03:11,797 --> 00:03:14,134
+so that everywhere we're connecting
+
+68
+00:03:14,134 --> 00:03:18,496
+to the Heroku server and not to local host anymore.
+
+69
+00:03:18,496 --> 00:03:20,523
+Now with that being done, I can head back
+
+70
+00:03:20,523 --> 00:03:23,756
+to the deploy page here and follow along.
+
+71
+00:03:23,756 --> 00:03:27,622
+So the next step is I'll add type git add .
+
+72
+00:03:27,622 --> 00:03:29,496
+to stage all files.
+
+73
+00:03:29,496 --> 00:03:31,476
+And then I can commit them with a message
+
+74
+00:03:31,476 --> 00:03:33,643
+like ready for deployment.
+
+75
+00:03:36,444 --> 00:03:40,546
+This commits my files, however this is not exactly
+
+76
+00:03:40,546 --> 00:03:41,808
+what I need to do.
+
+77
+00:03:41,808 --> 00:03:44,502
+I need to do one extra step.
+
+78
+00:03:44,502 --> 00:03:48,730
+I also have to make the production ready,
+
+79
+00:03:48,730 --> 00:03:51,758
+so I will run npm run build:production
+
+80
+00:03:51,758 --> 00:03:55,758
+which is the script setup in the workflow module
+
+81
+00:03:56,737 --> 00:03:59,645
+which will prepare my app for production
+
+82
+00:03:59,645 --> 00:04:01,629
+which will bundle everything and so on
+
+83
+00:04:01,629 --> 00:04:04,065
+because I don't need to commit my TypeScript files here.
+
+84
+00:04:04,065 --> 00:04:05,073
+Remember that.
+
+85
+00:04:05,073 --> 00:04:08,406
+I need to commit and provide my finished
+
+86
+00:04:10,583 --> 00:04:12,643
+app here in the Chalice script folder
+
+87
+00:04:12,643 --> 00:04:14,535
+so that is what I just did.
+
+88
+00:04:14,535 --> 00:04:16,395
+I bundled everything and prepared it.
+
+89
+00:04:16,395 --> 00:04:18,999
+Now I can again add everything,
+
+90
+00:04:18,999 --> 00:04:22,332
+and now I'm really ready for deployment.
+
+91
+00:04:25,977 --> 00:04:28,791
+So now that this is committed,
+
+92
+00:04:28,791 --> 00:04:32,958
+I can continue with the next step, to push it to Heroku
+
+93
+00:04:34,914 --> 00:04:36,099
+with this command.
+
+94
+00:04:36,099 --> 00:04:38,334
+But since I'm on a different branch here
+
+95
+00:04:38,334 --> 00:04:40,642
+and this might not be the case on your project,
+
+96
+00:04:40,642 --> 00:04:43,062
+but I have different branches for different steps
+
+97
+00:04:43,062 --> 00:04:45,062
+in this overall project.
+
+98
+00:04:46,123 --> 00:04:48,911
+I have to change this a little bit,
+
+99
+00:04:48,911 --> 00:04:51,411
+and I will actually push from,
+
+100
+00:04:53,350 --> 00:04:55,933
+I conveniently named ron-cheer.
+
+101
+00:04:59,603 --> 00:05:01,020
+So I'll run this.
+
+102
+00:05:02,897 --> 00:05:06,480
+And now you can see it's uploading it here,
+
+103
+00:05:07,484 --> 00:05:09,651
+writing all these objects.
+
+104
+00:05:10,748 --> 00:05:13,453
+Now it's uploaded and then you should soon see
+
+105
+00:05:13,453 --> 00:05:14,703
+Heroku kick in.
+
+106
+00:05:16,329 --> 00:05:18,325
+Yeah, here you go.
+
+107
+00:05:18,325 --> 00:05:20,875
+It detected a Node.js application,
+
+108
+00:05:20,875 --> 00:05:23,684
+and now it's installing all the node modules detected
+
+109
+00:05:23,684 --> 00:05:25,920
+in the package.json.
+
+110
+00:05:25,920 --> 00:05:28,914
+And we'll wait for this to finish.
+
+111
+00:05:28,914 --> 00:05:31,257
+I'll be back once it's done.
+
+112
+00:05:31,257 --> 00:05:32,090
+So it's done.
+
+113
+00:05:32,090 --> 00:05:33,884
+It successfully launched and you shouldn't see
+
+114
+00:05:33,884 --> 00:05:34,760
+an error here.
+
+115
+00:05:34,760 --> 00:05:38,425
+Here is the link where you will find your application.
+
+116
+00:05:38,425 --> 00:05:41,350
+So let's see if this works.
+
+117
+00:05:41,350 --> 00:05:42,578
+The title at least works.
+
+118
+00:05:42,578 --> 00:05:44,245
+This looks pretty good.
+
+119
+00:05:44,245 --> 00:05:47,995
+So if we now sign up here, create a new user.
+
+120
+00:05:49,328 --> 00:05:50,995
+Test, test, sign up.
+
+121
+00:05:52,387 --> 00:05:54,006
+You see that it doesn't seem to run,
+
+122
+00:05:54,006 --> 00:05:55,551
+and if we have a look at the console
+
+123
+00:05:55,551 --> 00:05:59,556
+we see that we get this error that we got mixed content.
+
+124
+00:05:59,556 --> 00:06:03,556
+We loaded this page over HTTPS, so as using SSL,
+
+125
+00:06:04,829 --> 00:06:09,145
+but we are requesting now with the Angular 2 services
+
+126
+00:06:09,145 --> 00:06:12,317
+a resource on HHTP without SSL.
+
+127
+00:06:12,317 --> 00:06:16,484
+That won't work, so I'll go back to my application.
+
+128
+00:06:17,468 --> 00:06:19,125
+Shrink this a bit.
+
+129
+00:06:19,125 --> 00:06:22,439
+And in my services here, I have to make
+
+130
+00:06:22,439 --> 00:06:25,939
+all these calls using HTTPS, so using SSL.
+
+131
+00:06:27,391 --> 00:06:32,153
+So we'll just add an S for HHTP here in all these links.
+
+132
+00:06:32,153 --> 00:06:34,399
+Now with this, I'll just repeat the last steps.
+
+133
+00:06:34,399 --> 00:06:36,327
+I'll build it again,
+
+134
+00:06:36,327 --> 00:06:40,324
+then I will add everything or stage everything
+
+135
+00:06:40,324 --> 00:06:41,924
+for committing,
+
+136
+00:06:41,924 --> 00:06:45,936
+then I will commit it, and then I can push it again.
+
+137
+00:06:45,936 --> 00:06:49,046
+And the cool thing about Heroku is now I'm pushing it again
+
+138
+00:06:49,046 --> 00:06:52,916
+and it will automatically restart this app then,
+
+139
+00:06:52,916 --> 00:06:56,673
+or it will detect this and everything will work like this.
+
+140
+00:06:56,673 --> 00:06:59,044
+I don't have to delete the old app first.
+
+141
+00:06:59,044 --> 00:07:00,820
+It will just work like that.
+
+142
+00:07:00,820 --> 00:07:02,694
+As you see it was done pretty fast
+
+143
+00:07:02,694 --> 00:07:04,471
+as it didn't reinstall everything,
+
+144
+00:07:04,471 --> 00:07:06,895
+it just detected your changes.
+
+145
+00:07:06,895 --> 00:07:08,323
+And now it's working again,
+
+146
+00:07:08,323 --> 00:07:12,490
+so let's first navigate back to the root of our application.
+
+147
+00:07:15,542 --> 00:07:19,592
+It might take a couple of seconds here, but now it is done.
+
+148
+00:07:19,592 --> 00:07:23,509
+And now if I click signup and I try this again.
+
+149
+00:07:27,336 --> 00:07:31,003
+Let's see if this worked by logging in here.
+
+150
+00:07:32,096 --> 00:07:32,929
+No thank you.
+
+151
+00:07:32,929 --> 00:07:35,153
+That looks good, and if I add a message,
+
+152
+00:07:35,153 --> 00:07:36,466
+we see it here.
+
+153
+00:07:36,466 --> 00:07:38,048
+Now let's see if this message stays here
+
+154
+00:07:38,048 --> 00:07:39,314
+if I reload the application,
+
+155
+00:07:39,314 --> 00:07:41,420
+if it really was stored on the server.
+
+156
+00:07:41,420 --> 00:07:43,656
+Looks great, so let's edit it.
+
+157
+00:07:43,656 --> 00:07:45,035
+Save this.
+
+158
+00:07:45,035 --> 00:07:47,170
+Go back to authentication, go back here,
+
+159
+00:07:47,170 --> 00:07:49,407
+reload the application.
+
+160
+00:07:49,407 --> 00:07:51,063
+Well that looks all very great,
+
+161
+00:07:51,063 --> 00:07:53,224
+and as you can see with these easy steps,
+
+162
+00:07:53,224 --> 00:07:55,908
+we deployed our application on Heroku.
+
+163
+00:07:55,908 --> 00:07:58,273
+Now of course you can also play around
+
+164
+00:07:58,273 --> 00:08:00,897
+with different settings and so on,
+
+165
+00:08:00,897 --> 00:08:04,356
+but this is how easy it is to get your application
+
+166
+00:08:04,356 --> 00:08:05,773
+to run on Heroku.
+

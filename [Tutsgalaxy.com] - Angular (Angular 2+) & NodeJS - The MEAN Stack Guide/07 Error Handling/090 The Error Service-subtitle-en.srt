@@ -1,0 +1,184 @@
+1
+00:00:01,998 --> 00:00:05,029
+<v Instructor>We created and added our error component.</v>
+
+2
+00:00:05,029 --> 00:00:08,018
+Now it's time to also configure our error service
+
+3
+00:00:08,018 --> 00:00:11,669
+to make this work, and to allow us to actually pass errors,
+
+4
+00:00:11,669 --> 00:00:15,000
+emit them, and show this error model.
+
+5
+00:00:15,000 --> 00:00:17,720
+The error service will be really lean.
+
+6
+00:00:17,720 --> 00:00:21,829
+It's exported class name named error service, of course.
+
+7
+00:00:21,829 --> 00:00:25,331
+And in here, I will have a new property named
+
+8
+00:00:25,331 --> 00:00:27,869
+error occurred, for example.
+
+9
+00:00:27,869 --> 00:00:30,400
+You may choose any name you like, and this will be
+
+10
+00:00:30,400 --> 00:00:33,863
+at event emitter, which of course therefore
+
+11
+00:00:33,863 --> 00:00:35,530
+needs to be imported
+
+12
+00:00:36,762 --> 00:00:38,512
+from at angular core.
+
+13
+00:00:39,613 --> 00:00:42,971
+This will emit an error, which therefore also needs
+
+14
+00:00:42,971 --> 00:00:45,638
+to be imported from error model.
+
+15
+00:00:46,642 --> 00:00:50,281
+And I want to emitted whenever this handle error method
+
+16
+00:00:50,281 --> 00:00:52,448
+in this service is called.
+
+17
+00:00:54,002 --> 00:00:54,835
+So here,
+
+18
+00:00:56,074 --> 00:01:00,133
+I will get an error, I'll type any actually,
+
+19
+00:01:00,133 --> 00:01:02,653
+because it may have different formats.
+
+20
+00:01:02,653 --> 00:01:05,514
+But then I can say that, let's say I will create
+
+21
+00:01:05,514 --> 00:01:08,324
+a new error data constant here.
+
+22
+00:01:08,324 --> 00:01:11,674
+I will create a new error based on my own model
+
+23
+00:01:11,674 --> 00:01:15,193
+on this fronted model, and here, I then know
+
+24
+00:01:15,193 --> 00:01:18,702
+I will be able to extract a title from each error,
+
+25
+00:01:18,702 --> 00:01:21,114
+because this is how my errors are set up in the backend.
+
+26
+00:01:21,114 --> 00:01:23,165
+They always have a title.
+
+27
+00:01:23,165 --> 00:01:27,095
+And they always have an error object, which then in turn,
+
+28
+00:01:27,095 --> 00:01:29,778
+happens to always have a message object.
+
+29
+00:01:29,778 --> 00:01:33,455
+All indicates here of the mongoose error.
+
+30
+00:01:33,455 --> 00:01:37,575
+So therefore, as the message, I can extract error,
+
+31
+00:01:37,575 --> 00:01:40,935
+and then this looks strange, but error, and then message
+
+32
+00:01:40,935 --> 00:01:45,234
+to access this error object in the error object.
+
+33
+00:01:45,234 --> 00:01:49,151
+That allows me then to call this error occurred
+
+34
+00:01:50,245 --> 00:01:53,912
+emit, and pass my error data as an argument.
+
+35
+00:01:55,407 --> 00:01:59,717
+Now this emits this event, now I'm able to subscribe to it
+
+36
+00:01:59,717 --> 00:02:03,395
+in error places and call handle error in some components,
+
+37
+00:02:03,395 --> 00:02:06,386
+when an error appears, to now get this error
+
+38
+00:02:06,386 --> 00:02:09,458
+from the component where it appears to,
+
+39
+00:02:09,458 --> 00:02:13,215
+well, the app component where I want to display my error.
+
+40
+00:02:13,215 --> 00:02:16,503
+To make this work, I will go to app module,
+
+41
+00:02:16,503 --> 00:02:20,343
+and I need to provide the error service application
+
+42
+00:02:20,343 --> 00:02:23,606
+wide because I want to be able to admit and to subscribe
+
+43
+00:02:23,606 --> 00:02:26,474
+to errors from all over my application.
+
+44
+00:02:26,474 --> 00:02:28,764
+So time to add the error service here,
+
+45
+00:02:28,764 --> 00:02:32,323
+also add the import, of course, and with this,
+
+46
+00:02:32,323 --> 00:02:35,323
+I'm able to use it application wide.
+

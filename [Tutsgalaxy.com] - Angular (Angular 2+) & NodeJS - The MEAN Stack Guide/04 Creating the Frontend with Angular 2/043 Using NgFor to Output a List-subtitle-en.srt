@@ -1,0 +1,420 @@
+1
+00:00:01,908 --> 00:00:03,000
+<v Instructor>The last video we saw</v>
+
+2
+00:00:03,000 --> 00:00:04,701
+an attribute directive,
+
+3
+00:00:04,701 --> 00:00:07,382
+which changed the element on which it was placed,
+
+4
+00:00:07,382 --> 00:00:08,876
+style in this case.
+
+5
+00:00:08,876 --> 00:00:10,214
+Now I want to show
+
+6
+00:00:10,214 --> 00:00:12,034
+a structural directive,
+
+7
+00:00:12,034 --> 00:00:14,168
+which changes the structure of the DOM.
+
+8
+00:00:14,168 --> 00:00:15,170
+It's really time to get
+
+9
+00:00:15,170 --> 00:00:17,082
+more than just one message.
+
+10
+00:00:17,082 --> 00:00:19,512
+Now I could get an additional message
+
+11
+00:00:19,512 --> 00:00:21,994
+by simply duplicating this line.
+
+12
+00:00:21,994 --> 00:00:25,284
+If I save this and reload my application,
+
+13
+00:00:25,284 --> 00:00:27,201
+now we get two messages.
+
+14
+00:00:27,201 --> 00:00:29,236
+But that is the worst way to do it
+
+15
+00:00:29,236 --> 00:00:31,212
+because it's not dynamic at all.
+
+16
+00:00:31,212 --> 00:00:32,498
+What if we want
+
+17
+00:00:32,498 --> 00:00:34,474
+to dynamically add new messages?
+
+18
+00:00:34,474 --> 00:00:36,048
+We can't go back and code
+
+19
+00:00:36,048 --> 00:00:37,866
+and add them manually here.
+
+20
+00:00:37,866 --> 00:00:39,945
+So let's quickly remove that.
+
+21
+00:00:39,945 --> 00:00:41,345
+Instead, what I want to do is,
+
+22
+00:00:41,345 --> 00:00:45,186
+here in my message property app component,
+
+23
+00:00:45,186 --> 00:00:47,370
+I want to rename this to Messages
+
+24
+00:00:47,370 --> 00:00:49,658
+and make it of type message array,
+
+25
+00:00:49,658 --> 00:00:50,882
+like this.
+
+26
+00:00:50,882 --> 00:00:54,803
+So, now this should be an array of messages.
+
+27
+00:00:54,803 --> 00:00:56,380
+Like so.
+
+28
+00:00:56,380 --> 00:00:59,226
+And here, let's say I'll add a second message.
+
+29
+00:00:59,226 --> 00:01:01,773
+So, something else, also by Max.
+
+30
+00:01:01,773 --> 00:01:03,164
+Now I've got two messages,
+
+31
+00:01:03,164 --> 00:01:04,245
+and I want to output them
+
+32
+00:01:04,245 --> 00:01:06,193
+with my message component.
+
+33
+00:01:06,193 --> 00:01:09,224
+I don't want to manually pass them.
+
+34
+00:01:09,224 --> 00:01:12,254
+So, like, message with index zero ends on.
+
+35
+00:01:12,254 --> 00:01:13,087
+I could do this,
+
+36
+00:01:13,087 --> 00:01:15,395
+but that's not how I want to do that.
+
+37
+00:01:15,395 --> 00:01:17,386
+Instead, here I want to loop
+
+38
+00:01:17,386 --> 00:01:18,660
+through all my messages,
+
+39
+00:01:18,660 --> 00:01:21,170
+and output my app message component,
+
+40
+00:01:21,170 --> 00:01:22,003
+this one here,
+
+41
+00:01:22,003 --> 00:01:24,460
+as often as I need to.
+
+42
+00:01:24,460 --> 00:01:28,391
+To do so, I will simply add a new directive
+
+43
+00:01:28,391 --> 00:01:31,702
+to my app message selector here.
+
+44
+00:01:31,702 --> 00:01:33,676
+To this component.
+
+45
+00:01:33,676 --> 00:01:36,510
+This new directive is a structural directive.
+
+46
+00:01:36,510 --> 00:01:39,682
+We saw ngIf on the slide to conditionally attach
+
+47
+00:01:39,682 --> 00:01:41,658
+or detach this component.
+
+48
+00:01:41,658 --> 00:01:43,944
+Another one is ngFor,
+
+49
+00:01:43,944 --> 00:01:47,480
+which means loop through a certain condition
+
+50
+00:01:47,480 --> 00:01:48,951
+as often as needed,
+
+51
+00:01:48,951 --> 00:01:52,214
+and duplicate this component or this element
+
+52
+00:01:52,214 --> 00:01:54,256
+on which this ngFor is placed,
+
+53
+00:01:54,256 --> 00:01:56,306
+and all child elements, as a side note,
+
+54
+00:01:56,306 --> 00:01:58,347
+as often as needed.
+
+55
+00:01:58,347 --> 00:02:00,728
+So here, I want to loop through all my messages.
+
+56
+00:02:00,728 --> 00:02:04,061
+I can say let to create a local variable
+
+57
+00:02:04,915 --> 00:02:06,787
+which I can use here in the template.
+
+58
+00:02:06,787 --> 00:02:08,454
+Message of messages.
+
+59
+00:02:10,324 --> 00:02:11,572
+This is the syntax
+
+60
+00:02:11,572 --> 00:02:14,312
+of a normal for-of in Java Script
+
+61
+00:02:14,312 --> 00:02:17,656
+or Type Script, and I use it here in ngFor.
+
+62
+00:02:17,656 --> 00:02:19,854
+This creates this local message variable,
+
+63
+00:02:19,854 --> 00:02:21,632
+which I can use in my template.
+
+64
+00:02:21,632 --> 00:02:24,350
+Like here, when I pass it to message still,
+
+65
+00:02:24,350 --> 00:02:25,723
+to this property by name.
+
+66
+00:02:25,723 --> 00:02:27,963
+This message here now no longer refers
+
+67
+00:02:27,963 --> 00:02:29,952
+to a property in app.component.
+
+68
+00:02:29,952 --> 00:02:31,124
+I don't have message;
+
+69
+00:02:31,124 --> 00:02:33,384
+I only have messages.
+
+70
+00:02:33,384 --> 00:02:35,506
+But instead it refers to this local variable
+
+71
+00:02:35,506 --> 00:02:36,622
+I've created here.
+
+72
+00:02:36,622 --> 00:02:38,782
+And this will be the message
+
+73
+00:02:38,782 --> 00:02:41,080
+of the current iteration I'm at.
+
+74
+00:02:41,080 --> 00:02:42,837
+So, here I'm looping through all my messages,
+
+75
+00:02:42,837 --> 00:02:44,762
+and for each loop iteration,
+
+76
+00:02:44,762 --> 00:02:46,880
+I'm reassigning this message variable
+
+77
+00:02:46,880 --> 00:02:48,775
+and I'm passing it to the component
+
+78
+00:02:48,775 --> 00:02:52,101
+which also gets created per iteration.
+
+79
+00:02:52,101 --> 00:02:53,549
+With this simple change,
+
+80
+00:02:53,549 --> 00:02:55,952
+if I save this and go back to the application
+
+81
+00:02:55,952 --> 00:02:59,426
+and reload, you now also see two messages,
+
+82
+00:02:59,426 --> 00:03:01,218
+but with different content
+
+83
+00:03:01,218 --> 00:03:03,468
+and created dynamically.
+
+84
+00:03:03,468 --> 00:03:05,560
+And if add a third message,
+
+85
+00:03:05,560 --> 00:03:06,393
+like this,
+
+86
+00:03:08,238 --> 00:03:11,216
+simply naming it, "3rd Message,"
+
+87
+00:03:11,216 --> 00:03:14,128
+you will see only one reload away,
+
+88
+00:03:14,128 --> 00:03:16,024
+well, after recompiling at least,
+
+89
+00:03:16,024 --> 00:03:17,650
+you see different message.
+
+90
+00:03:17,650 --> 00:03:19,488
+This is the power of ngFor,
+
+91
+00:03:19,488 --> 00:03:21,861
+which is a built in structural directive,
+
+92
+00:03:21,861 --> 00:03:23,918
+named such because we change
+
+93
+00:03:23,918 --> 00:03:26,558
+the structure of the DOM.
+
+94
+00:03:26,558 --> 00:03:27,647
+As a side note,
+
+95
+00:03:27,647 --> 00:03:29,758
+this is why we have the star at the beginning.
+
+96
+00:03:29,758 --> 00:03:31,965
+This is kind of telling Angular 2
+
+97
+00:03:31,965 --> 00:03:34,088
+that this is a structural directive.
+
+98
+00:03:34,088 --> 00:03:37,752
+So, ngFor and ngIf, together with ngSwitch,
+
+99
+00:03:37,752 --> 00:03:39,662
+are the build-in structural directives
+
+100
+00:03:39,662 --> 00:03:41,565
+which use this star.
+
+101
+00:03:41,565 --> 00:03:43,122
+These are all the build-in structural directive
+
+102
+00:03:43,122 --> 00:03:46,140
+Angular 2 ships with, but as you see,
+
+103
+00:03:46,140 --> 00:03:49,742
+looping through and conditionally showing,
+
+104
+00:03:49,742 --> 00:03:52,459
+really is covering most of the use cases
+
+105
+00:03:52,459 --> 00:03:55,209
+where you need to change the DOM.
+

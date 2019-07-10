@@ -1,0 +1,1276 @@
+1
+00:00:01,987 --> 00:00:04,330
+<v Instructor>Now how do we hook up our</v>
+
+2
+00:00:04,330 --> 00:00:06,426
+Angular 2 front end to this back end?
+
+3
+00:00:06,426 --> 00:00:08,359
+The back end route here is prepared so
+
+4
+00:00:08,359 --> 00:00:11,802
+we have to do some work in our front end.
+
+5
+00:00:11,802 --> 00:00:14,566
+Now for this, make sure that your NPM run build
+
+6
+00:00:14,566 --> 00:00:17,230
+process is running so that any changes you
+
+7
+00:00:17,230 --> 00:00:20,508
+make instantly get re-compiled.
+
+8
+00:00:20,508 --> 00:00:23,650
+Now in my messages folder on the front end,
+
+9
+00:00:23,650 --> 00:00:25,991
+I get this message service and here we get
+
+10
+00:00:25,991 --> 00:00:29,452
+the @message method, now we should change
+
+11
+00:00:29,452 --> 00:00:32,690
+this method to no longer simply push this message
+
+12
+00:00:32,690 --> 00:00:35,591
+on our array of messages, but instead
+
+13
+00:00:35,591 --> 00:00:38,412
+actually send it to the server.
+
+14
+00:00:38,412 --> 00:00:42,114
+I'll leave the push method here for now.
+
+15
+00:00:42,114 --> 00:00:44,829
+But I want to do here is I want to use Angular 2's
+
+16
+00:00:44,829 --> 00:00:48,774
+http service instead of logging in to the console.
+
+17
+00:00:48,774 --> 00:00:51,734
+Now I need to inject this http service
+
+18
+00:00:51,734 --> 00:00:53,933
+into the message service here.
+
+19
+00:00:53,933 --> 00:00:56,215
+We already learned how to inject services
+
+20
+00:00:56,215 --> 00:00:59,212
+but we haven't done this inside of a service.
+
+21
+00:00:59,212 --> 00:01:02,551
+It's really easy though, I can do it the same
+
+22
+00:01:02,551 --> 00:01:04,972
+way I do it in components for example.
+
+23
+00:01:04,972 --> 00:01:07,111
+I set up my constructor and then I simply
+
+24
+00:01:07,111 --> 00:01:10,732
+give it a name or as I do here, immediately
+
+25
+00:01:10,732 --> 00:01:13,612
+bind it to a property in this class here.
+
+26
+00:01:13,612 --> 00:01:16,862
+Let's name it http with a lower case h.
+
+27
+00:01:17,852 --> 00:01:19,652
+And the name of the service I wanna use
+
+28
+00:01:19,652 --> 00:01:23,819
+it Http with an upper case H, imported from @angular http.
+
+29
+00:01:27,964 --> 00:01:30,044
+So this is the constructor which allows me
+
+30
+00:01:30,044 --> 00:01:33,723
+to use http in here, though there is one important
+
+31
+00:01:33,723 --> 00:01:36,898
+thing to memorise here or to be aware of.
+
+32
+00:01:36,898 --> 00:01:40,247
+Like this, this would give us an error.
+
+33
+00:01:40,247 --> 00:01:44,232
+Because here, we need to attach some metadata
+
+34
+00:01:44,232 --> 00:01:46,764
+or a decorator to this class.
+
+35
+00:01:46,764 --> 00:01:50,002
+It turns out that the Angular 2 injector
+
+36
+00:01:50,002 --> 00:01:54,093
+is only able to inject services into classes
+
+37
+00:01:54,093 --> 00:01:58,403
+which have some form of metadata attached to them.
+
+38
+00:01:58,403 --> 00:02:01,863
+Now this plain vanilla class here doesn't have any metadata.
+
+39
+00:02:01,863 --> 00:02:05,563
+A component on the other hand, like the input component, of
+
+40
+00:02:05,563 --> 00:02:08,524
+course does have the @component decorator which is why we
+
+41
+00:02:08,524 --> 00:02:12,120
+can inject a service without any issues.
+
+42
+00:02:12,120 --> 00:02:14,124
+Now which decorator should we attach
+
+43
+00:02:14,124 --> 00:02:16,727
+to this service class here though?
+
+44
+00:02:16,727 --> 00:02:19,058
+Should we attach @component, no that certainly
+
+45
+00:02:19,058 --> 00:02:21,346
+doesn't make any sense, it's no component.
+
+46
+00:02:21,346 --> 00:02:23,620
+We don't want to turn this into a component.
+
+47
+00:02:23,620 --> 00:02:27,127
+Instead for this, we got the @injectable decorator.
+
+48
+00:02:27,127 --> 00:02:30,710
+This has to be imported from @angular core.
+
+49
+00:02:33,207 --> 00:02:36,644
+And what it does behind the scenes is nothing,
+
+50
+00:02:36,644 --> 00:02:39,783
+but it adds some metadata so that the injector
+
+51
+00:02:39,783 --> 00:02:42,983
+is able to give us the service here.
+
+52
+00:02:42,983 --> 00:02:45,780
+So with this were able to inject the http service
+
+53
+00:02:45,780 --> 00:02:48,563
+in the message service class.
+
+54
+00:02:48,563 --> 00:02:50,924
+Another missing thing or another important thing
+
+55
+00:02:50,924 --> 00:02:52,924
+we have to do is, we have to go to the
+
+56
+00:02:52,924 --> 00:02:56,174
+app module and unlock this http module.
+
+57
+00:02:57,106 --> 00:03:00,547
+So the http service is built in, but to unlock
+
+58
+00:03:00,547 --> 00:03:02,705
+it, we have to import a built in
+
+59
+00:03:02,705 --> 00:03:05,038
+module Angular 2 ships with.
+
+60
+00:03:05,884 --> 00:03:09,953
+This module is named http module and this module
+
+61
+00:03:09,953 --> 00:03:13,274
+which also has to be imported of course,
+
+62
+00:03:13,274 --> 00:03:17,441
+from @angularhttp, this module unlocks the http service.
+
+63
+00:03:20,834 --> 00:03:23,374
+Which means if we don't add this module,
+
+64
+00:03:23,374 --> 00:03:25,956
+we're not able to inject http here.
+
+65
+00:03:25,956 --> 00:03:29,476
+But since I just added it, this will work fine.
+
+66
+00:03:29,476 --> 00:03:33,396
+Now with this setup, I can go to the @message method
+
+67
+00:03:33,396 --> 00:03:36,954
+and here I want to setup the request I wanna send.
+
+68
+00:03:36,954 --> 00:03:41,316
+So I access http and then we'll send a post request.
+
+69
+00:03:41,316 --> 00:03:43,914
+So post is the method I'll use.
+
+70
+00:03:43,914 --> 00:03:47,053
+Now here, I have to pass a couple of arguments.
+
+71
+00:03:47,053 --> 00:03:49,671
+The first one is the URL to which
+
+72
+00:03:49,671 --> 00:03:52,154
+I want to send this request and here this
+
+73
+00:03:52,154 --> 00:03:56,775
+will be localhost:3000, my local server of course.
+
+74
+00:03:56,775 --> 00:03:59,556
+This needs to be exchanged for the server
+
+75
+00:03:59,556 --> 00:04:02,298
+for the domain of your real server,
+
+76
+00:04:02,298 --> 00:04:04,858
+once you deploy this application.
+
+77
+00:04:04,858 --> 00:04:09,025
+And then /message, since /message, if you
+
+78
+00:04:10,356 --> 00:04:13,135
+remember this is the path in the @js file in the root folder
+
+79
+00:04:13,135 --> 00:04:16,255
+which sends requests to the message routes
+
+80
+00:04:16,255 --> 00:04:20,314
+which happens to have a reference to our
+
+81
+00:04:20,314 --> 00:04:24,575
+router in the messages file in the routes folder here.
+
+82
+00:04:24,575 --> 00:04:28,036
+So we wanna send it to /message to get our
+
+83
+00:04:28,036 --> 00:04:30,453
+request to the right address.
+
+84
+00:04:31,375 --> 00:04:34,074
+Though we still need to pass more arguments,
+
+85
+00:04:34,074 --> 00:04:37,316
+or one more argument at minimum.
+
+86
+00:04:37,316 --> 00:04:40,394
+The data we want to send, since it is a post request,
+
+87
+00:04:40,394 --> 00:04:44,752
+the data is not encoded in the URL with query
+
+88
+00:04:44,752 --> 00:04:49,236
+parameters, but instead the data is sent in the post body.
+
+89
+00:04:49,236 --> 00:04:51,295
+So we need to set up this post body.
+
+90
+00:04:51,295 --> 00:04:54,378
+I'll create a new constant, I'll name it body.
+
+91
+00:04:54,378 --> 00:04:57,695
+And here all I wanna do is I wanna take the message I'm
+
+92
+00:04:57,695 --> 00:05:01,862
+already passing to @message and turn it into JSON format.
+
+93
+00:05:02,778 --> 00:05:05,695
+For that I can use the JavaScript helper,
+
+94
+00:05:05,695 --> 00:05:10,356
+JSON stringify and pass message as an argument.
+
+95
+00:05:10,356 --> 00:05:13,396
+This will give me a body in JSON format
+
+96
+00:05:13,396 --> 00:05:17,034
+which I can attach to this post request.
+
+97
+00:05:17,034 --> 00:05:20,034
+So here, I'll attach body like this.
+
+98
+00:05:21,615 --> 00:05:25,514
+Now nothing would happen because this line here
+
+99
+00:05:25,514 --> 00:05:29,258
+now sets up a so called observable.
+
+100
+00:05:29,258 --> 00:05:31,894
+It doesn't send the request yet.
+
+101
+00:05:31,894 --> 00:05:34,733
+This is extremely important to understand.
+
+102
+00:05:34,733 --> 00:05:37,316
+This line does not send a request.
+
+103
+00:05:37,316 --> 00:05:41,194
+It only sets up an observable, this object
+
+104
+00:05:41,194 --> 00:05:44,196
+I was explaining on the slides which holds
+
+105
+00:05:44,196 --> 00:05:47,917
+the request which allows us to subscribe
+
+106
+00:05:47,917 --> 00:05:50,916
+to any data this request will give us back.
+
+107
+00:05:50,916 --> 00:05:53,903
+But which doesn't send the request yet.
+
+108
+00:05:53,903 --> 00:05:56,478
+The reason why the request isn't sent yet,
+
+109
+00:05:56,478 --> 00:06:00,756
+is because no one has subscribed to this observable.
+
+110
+00:06:00,756 --> 00:06:04,957
+Well, if no one is listening, why would you send a request?
+
+111
+00:06:04,957 --> 00:06:08,639
+You wouldn't right, and this is why it hasn't been sent.
+
+112
+00:06:08,639 --> 00:06:11,996
+I don't want to subscribe in the service here though.
+
+113
+00:06:11,996 --> 00:06:13,636
+I want to subscribe in the component which
+
+114
+00:06:13,636 --> 00:06:16,858
+calls the @message method, this is a pattern
+
+115
+00:06:16,858 --> 00:06:21,054
+you'll see a lot of the times that the subscription
+
+116
+00:06:21,054 --> 00:06:23,775
+happens in the component, which, well needs
+
+117
+00:06:23,775 --> 00:06:26,756
+the data or which issues the data.
+
+118
+00:06:26,756 --> 00:06:29,898
+So here, I will therefore return the observable
+
+119
+00:06:29,898 --> 00:06:33,279
+which was created by this post method here.
+
+120
+00:06:33,279 --> 00:06:36,895
+Though I will add another method or
+
+121
+00:06:36,895 --> 00:06:39,055
+chain another method here, the map method.
+
+122
+00:06:39,055 --> 00:06:41,039
+Which I also explained or introduced on the slides.
+
+123
+00:06:41,039 --> 00:06:43,789
+To be able to use map, we need to
+
+124
+00:06:44,996 --> 00:06:47,035
+add another import here though.
+
+125
+00:06:47,035 --> 00:06:48,836
+The import may look a bit strange.
+
+126
+00:06:48,836 --> 00:06:53,003
+It's rxjs/rx and rxjs is simply the observable
+
+127
+00:06:55,258 --> 00:06:58,411
+third party library, Angular 2 uses.
+
+128
+00:06:58,411 --> 00:07:01,615
+So it's not from Angular 2, this simply another library.
+
+129
+00:07:01,615 --> 00:07:04,875
+And with this import from this library
+
+130
+00:07:04,875 --> 00:07:08,255
+and then from the rx sub folder so to say,
+
+131
+00:07:08,255 --> 00:07:12,005
+we're basically unlocking all these operators
+
+132
+00:07:12,971 --> 00:07:16,054
+as they are called, like the map function.
+
+133
+00:07:16,054 --> 00:07:18,777
+There are a lot more operators and observables
+
+134
+00:07:18,777 --> 00:07:21,375
+can be a pretty advanced topic.
+
+135
+00:07:21,375 --> 00:07:23,695
+But the map function here is one which you
+
+136
+00:07:23,695 --> 00:07:27,295
+will often times use which is pretty powerful.
+
+137
+00:07:27,295 --> 00:07:29,476
+It allows you to transform the data
+
+138
+00:07:29,476 --> 00:07:32,454
+once it comes back from the server.
+
+139
+00:07:32,454 --> 00:07:34,303
+So I can already set up how data should
+
+140
+00:07:34,303 --> 00:07:36,892
+be transformed here so that later on
+
+141
+00:07:36,892 --> 00:07:39,997
+in another function when I use this data,
+
+142
+00:07:39,997 --> 00:07:43,247
+it already has this transformed format.
+
+143
+00:07:44,875 --> 00:07:46,666
+So in here what I can do is,
+
+144
+00:07:46,666 --> 00:07:50,083
+I can take the response I'm getting back,
+
+145
+00:07:51,082 --> 00:07:53,733
+which is of type response which needs to
+
+146
+00:07:53,733 --> 00:07:57,098
+be imported from @angular http.
+
+147
+00:07:57,098 --> 00:07:59,359
+And then in here I can do whatever I want,
+
+148
+00:07:59,359 --> 00:08:01,615
+I can extract certain fields.
+
+149
+00:08:01,615 --> 00:08:04,773
+Whatever I return in this call back function here
+
+150
+00:08:04,773 --> 00:08:08,023
+will be what, from there on, is treated
+
+151
+00:08:09,818 --> 00:08:13,236
+as the data I returned by this whole observable.
+
+152
+00:08:13,236 --> 00:08:15,813
+So I could return the response as it is
+
+153
+00:08:15,813 --> 00:08:19,471
+in which case this map function is pretty redundant.
+
+154
+00:08:19,471 --> 00:08:23,050
+Or I can call the JSON method on it.
+
+155
+00:08:23,050 --> 00:08:25,690
+The JSON method is simply a method offered
+
+156
+00:08:25,690 --> 00:08:28,809
+by this response object here which allows
+
+157
+00:08:28,809 --> 00:08:33,030
+me to extract data which was attached to the response.
+
+158
+00:08:33,030 --> 00:08:35,194
+So that means it froze away the status
+
+159
+00:08:35,194 --> 00:08:37,770
+code and all the headers and so on.
+
+160
+00:08:37,770 --> 00:08:40,831
+It only gives me the data which was attached
+
+161
+00:08:40,831 --> 00:08:44,351
+to the response and more than that, it automatically
+
+162
+00:08:44,351 --> 00:08:46,851
+kinda words it to a JavaScript
+
+163
+00:08:46,851 --> 00:08:49,770
+object so that I can work with it.
+
+164
+00:08:49,770 --> 00:08:51,893
+So if we have a look at our back end route
+
+165
+00:08:51,893 --> 00:08:54,886
+and the messages follow, we're attaching
+
+166
+00:08:54,886 --> 00:08:57,951
+this object here to a success response.
+
+167
+00:08:57,951 --> 00:09:00,326
+This object does have a message field
+
+168
+00:09:00,326 --> 00:09:03,450
+and then this object field which contains
+
+169
+00:09:03,450 --> 00:09:06,453
+the result of the database operation.
+
+170
+00:09:06,453 --> 00:09:10,533
+So it is this object which we then get in the front end,
+
+171
+00:09:10,533 --> 00:09:13,783
+simply by calling JSON on the response.
+
+172
+00:09:14,730 --> 00:09:18,870
+I know this is a lot, we'll see it in action soon though.
+
+173
+00:09:18,870 --> 00:09:23,193
+First, I wanna add another operator, the catch operator.
+
+174
+00:09:23,193 --> 00:09:25,711
+And like map for the success case,
+
+175
+00:09:25,711 --> 00:09:28,210
+this allows me to handle errors.
+
+176
+00:09:28,210 --> 00:09:31,253
+So an error, which of course, also is a response
+
+177
+00:09:31,253 --> 00:09:33,951
+because we always get back a response.
+
+178
+00:09:33,951 --> 00:09:37,333
+There is no success or error response like this.
+
+179
+00:09:37,333 --> 00:09:38,911
+It's always a response, it just
+
+180
+00:09:38,911 --> 00:09:41,311
+has a different status code.
+
+181
+00:09:41,311 --> 00:09:45,231
+But here, this response, well I could do whatever
+
+182
+00:09:45,231 --> 00:09:49,569
+I want with it, here I'll simply call observable.
+
+183
+00:09:49,569 --> 00:09:53,791
+Which I need to import from rxjs again, this
+
+184
+00:09:53,791 --> 00:09:57,874
+is the observable library and then throw to, well
+
+185
+00:09:59,594 --> 00:10:02,711
+basically return this response.
+
+186
+00:10:02,711 --> 00:10:06,991
+And here I can then also call error JSON to extract only
+
+187
+00:10:06,991 --> 00:10:11,471
+the data object attached to this error response.
+
+188
+00:10:11,471 --> 00:10:14,351
+So why observable throw, because the catch method
+
+189
+00:10:14,351 --> 00:10:18,518
+unlike the map method does not by default turn the
+
+190
+00:10:20,191 --> 00:10:22,928
+return statement of this callback function.
+
+191
+00:10:22,928 --> 00:10:25,754
+So this here if we wouldn't have observable throw,
+
+192
+00:10:25,754 --> 00:10:28,613
+it doesn't turn this into an observable automatically.
+
+193
+00:10:28,613 --> 00:10:33,594
+The map method does this, this data we're converting
+
+194
+00:10:33,594 --> 00:10:37,871
+here, behind the scenes gets converted to a new observable.
+
+195
+00:10:37,871 --> 00:10:41,889
+Because, remember we're returning observable here in
+
+196
+00:10:41,889 --> 00:10:44,191
+the end, so we can't start returning
+
+197
+00:10:44,191 --> 00:10:46,554
+anything else here in our call backs.
+
+198
+00:10:46,554 --> 00:10:49,290
+So for a map function it's automatically converted.
+
+199
+00:10:49,290 --> 00:10:51,594
+For the catch function it's not.
+
+200
+00:10:51,594 --> 00:10:53,192
+Which is why we do it manually by calling
+
+201
+00:10:53,192 --> 00:10:56,349
+observable and then throw will keep the error state.
+
+202
+00:10:56,349 --> 00:10:59,417
+And not all of a sudden turn
+
+203
+00:10:59,417 --> 00:11:02,137
+the error in a success response.
+
+204
+00:11:02,137 --> 00:11:04,079
+Why is this differentiation between
+
+205
+00:11:04,079 --> 00:11:06,559
+error and success important?
+
+206
+00:11:06,559 --> 00:11:09,039
+You'll see this now when I go to the the
+
+207
+00:11:09,039 --> 00:11:12,041
+when I actually call add message and where I will
+
+208
+00:11:12,041 --> 00:11:14,613
+subscribe and where I will handle the
+
+209
+00:11:14,613 --> 00:11:17,039
+actual data we're getting back.
+
+210
+00:11:17,039 --> 00:11:18,820
+Because even though we already talked about
+
+211
+00:11:18,820 --> 00:11:21,736
+this observable, we haven't sent it yet.
+
+212
+00:11:21,736 --> 00:11:24,440
+So time to finally do this in the input
+
+213
+00:11:24,440 --> 00:11:28,133
+component where we call add message.
+
+214
+00:11:28,133 --> 00:11:30,492
+Now this line won't work anymore because
+
+215
+00:11:30,492 --> 00:11:33,335
+calling add message isn't enough.
+
+216
+00:11:33,335 --> 00:11:37,132
+This will give us back an observable and as I said, I need
+
+217
+00:11:37,132 --> 00:11:40,728
+to subscribe to this observable to make anything happen.
+
+218
+00:11:40,728 --> 00:11:44,852
+So let me chain another method, subscribe.
+
+219
+00:11:44,852 --> 00:11:47,292
+Now this, will actually send the request.
+
+220
+00:11:47,292 --> 00:11:50,775
+And it would already send it like this.
+
+221
+00:11:50,775 --> 00:11:55,474
+But I also want to see the response we get back.
+
+222
+00:11:55,474 --> 00:11:57,932
+Now the takes three arguments.
+
+223
+00:11:57,932 --> 00:12:01,708
+And actually that will be three callback
+
+224
+00:12:01,708 --> 00:12:04,588
+functions which get executed in three different cases.
+
+225
+00:12:04,588 --> 00:12:07,203
+The first case is the success case.
+
+226
+00:12:07,203 --> 00:12:09,847
+So let's say we get back some data.
+
+227
+00:12:09,847 --> 00:12:13,868
+And I simply want to lock this data to the console.
+
+228
+00:12:13,868 --> 00:12:17,468
+The second argument, the second callback function.
+
+229
+00:12:17,468 --> 00:12:20,050
+And these are just of course fat arrow functions
+
+230
+00:12:20,050 --> 00:12:23,495
+using ES6 syntax here in case you didn't recognise.
+
+231
+00:12:23,495 --> 00:12:27,627
+So the second function will be the error function.
+
+232
+00:12:27,627 --> 00:12:30,025
+This is why this differentiation is important.
+
+233
+00:12:30,025 --> 00:12:33,358
+So here, I can console error, the error.
+
+234
+00:12:35,255 --> 00:12:39,047
+The third function which I won't pass,
+
+235
+00:12:39,047 --> 00:12:40,930
+would be the complete function.
+
+236
+00:12:40,930 --> 00:12:43,831
+So, this gets executed whenever the observable completes.
+
+237
+00:12:43,831 --> 00:12:48,124
+It differs from the first callback, the data callback.
+
+238
+00:12:48,124 --> 00:12:51,865
+As this callback will be called whenever we
+
+239
+00:12:51,865 --> 00:12:54,448
+receive new data through the observable.
+
+240
+00:12:54,448 --> 00:12:56,988
+So in this case, whenever we receive a response.
+
+241
+00:12:56,988 --> 00:13:00,871
+Where as the last callback here, would get called
+
+242
+00:13:00,871 --> 00:13:04,344
+whenever the observable finishes to exist.
+
+243
+00:13:04,344 --> 00:13:06,807
+So basically when it completed, when it knows
+
+244
+00:13:06,807 --> 00:13:10,768
+there won't be any more data to come in the future.
+
+245
+00:13:10,768 --> 00:13:13,068
+Now while this might be interesting to listen to,
+
+246
+00:13:13,068 --> 00:13:15,890
+I know there will be only one response sent
+
+247
+00:13:15,890 --> 00:13:20,231
+by the server and I'm only interested in this response data.
+
+248
+00:13:20,231 --> 00:13:25,170
+This is why the first two callbacks are enough for me.
+
+249
+00:13:25,170 --> 00:13:28,551
+Well with all that talking, let me save this.
+
+250
+00:13:28,551 --> 00:13:32,290
+Also, make sure to restart your server
+
+251
+00:13:32,290 --> 00:13:34,290
+since we made some changes there.
+
+252
+00:13:34,290 --> 00:13:36,770
+And thereafter, let's head over to the application
+
+253
+00:13:36,770 --> 00:13:39,103
+and actually save a message.
+
+254
+00:13:40,631 --> 00:13:43,887
+Well, we get an error, we get a 500 error.
+
+255
+00:13:43,887 --> 00:13:46,566
+The reason for this error can be a bit
+
+256
+00:13:46,566 --> 00:13:48,627
+hard to track down, because if we did into
+
+257
+00:13:48,627 --> 00:13:51,890
+the error, we get the validation error.
+
+258
+00:13:51,890 --> 00:13:56,057
+And specifically, that the content path here is missing.
+
+259
+00:13:59,127 --> 00:14:01,788
+Now if we have a look at our messages js file here in the
+
+260
+00:14:01,788 --> 00:14:05,955
+routes folder, we clearly are passing the content here.
+
+261
+00:14:06,988 --> 00:14:10,530
+Now, you could guess that the request doesn't send
+
+262
+00:14:10,530 --> 00:14:14,311
+the content though the body correctly.
+
+263
+00:14:14,311 --> 00:14:18,290
+So that in our message service where we attached
+
+264
+00:14:18,290 --> 00:14:21,330
+this body to the request, we got an issue with this body.
+
+265
+00:14:21,330 --> 00:14:24,450
+But the issue actually is another one,
+
+266
+00:14:24,450 --> 00:14:28,268
+we are sending this request as plain text.
+
+267
+00:14:28,268 --> 00:14:30,850
+We can't see this in the network tab.
+
+268
+00:14:30,850 --> 00:14:33,591
+If we click on the red request which
+
+269
+00:14:33,591 --> 00:14:35,831
+is the one throwing the error.
+
+270
+00:14:35,831 --> 00:14:39,351
+And then in here, we can see that in our request
+
+271
+00:14:39,351 --> 00:14:43,268
+headers, our content type is set to text plain.
+
+272
+00:14:44,348 --> 00:14:48,443
+Now as it is set to text plain, it doesn't have properties.
+
+273
+00:14:48,443 --> 00:14:52,292
+It doesn't have key value pairs which means once we try to
+
+274
+00:14:52,292 --> 00:14:56,042
+extract data like we do here, this will fail.
+
+275
+00:14:57,871 --> 00:15:00,335
+Now we have to change the content type for this
+
+276
+00:15:00,335 --> 00:15:02,095
+to work correctly, and for that I will attach
+
+277
+00:15:02,095 --> 00:15:04,895
+some headers to this request.
+
+278
+00:15:04,895 --> 00:15:07,455
+So time to create some new headers with the
+
+279
+00:15:07,455 --> 00:15:10,394
+headers object Angular 2 ships with.
+
+280
+00:15:10,394 --> 00:15:13,994
+Which is important from @angular http.
+
+281
+00:15:13,994 --> 00:15:16,511
+Now I can pass a JavaScript object to the constructor
+
+282
+00:15:16,511 --> 00:15:19,091
+of this object and here I can already
+
+283
+00:15:19,091 --> 00:15:21,631
+set up the headers I want to use.
+
+284
+00:15:21,631 --> 00:15:25,798
+So here, I want to set, content type to application JSON.
+
+285
+00:15:27,871 --> 00:15:31,119
+And with this headers created here, with this headers object
+
+286
+00:15:31,119 --> 00:15:35,972
+I can add a third argument to my post request setup here.
+
+287
+00:15:35,972 --> 00:15:37,891
+Which is a JavaScript object where
+
+288
+00:15:37,891 --> 00:15:40,290
+I can configure this request.
+
+289
+00:15:40,290 --> 00:15:41,812
+And the one thing I want to configure
+
+290
+00:15:41,812 --> 00:15:45,028
+are the headers of this request.
+
+291
+00:15:45,028 --> 00:15:48,729
+By setting headers to my headers constant here,
+
+292
+00:15:48,729 --> 00:15:51,369
+I pass my headers to this request.
+
+293
+00:15:51,369 --> 00:15:53,308
+I add the headers I set up here
+
+294
+00:15:53,308 --> 00:15:56,020
+so the content type in this case.
+
+295
+00:15:56,020 --> 00:15:59,972
+Now with this, if I save this and then I'll
+
+296
+00:15:59,972 --> 00:16:02,532
+let this re-compile, by the way, if this ever
+
+297
+00:16:02,532 --> 00:16:04,852
+should crash, simply restart it.
+
+298
+00:16:04,852 --> 00:16:07,428
+Sometimes it does this, so once it's
+
+299
+00:16:07,428 --> 00:16:10,249
+recompiled, I can reload this page.
+
+300
+00:16:10,249 --> 00:16:12,852
+Of course, the request didn't,
+
+301
+00:16:12,852 --> 00:16:16,189
+excuse me, the message didn't survive.
+
+302
+00:16:16,189 --> 00:16:18,932
+Now if I send another one, now this looks better.
+
+303
+00:16:18,932 --> 00:16:21,791
+No error, instead, the object I get back with
+
+304
+00:16:21,791 --> 00:16:26,788
+the message, safe message which clearly is the message I'm
+
+305
+00:16:26,788 --> 00:16:30,288
+sending in my routes file here in case of a success.
+
+306
+00:16:30,288 --> 00:16:34,608
+And my object which is the object stored in the database.
+
+307
+00:16:34,608 --> 00:16:36,991
+We can also see this if we go to the MongoDB
+
+308
+00:16:36,991 --> 00:16:41,158
+client here in the shell, start it with /Mongo
+
+309
+00:16:42,048 --> 00:16:44,646
+as you'll learn in the MongoDB section.
+
+310
+00:16:44,646 --> 00:16:47,525
+So, if I go to that and I already navigated
+
+311
+00:16:47,525 --> 00:16:51,692
+into my node angular database with use node angular.
+
+312
+00:16:53,593 --> 00:16:57,760
+So in here, I can run db messages to access my messages,
+
+313
+00:16:59,055 --> 00:17:03,892
+find to see all messages currently stored in the database.
+
+314
+00:17:03,892 --> 00:17:06,491
+Now here, we only see one message and this
+
+315
+00:17:06,491 --> 00:17:09,951
+happens to be the one with just saved here.
+
+316
+00:17:09,951 --> 00:17:13,449
+Now of course, once I reload this, it's still gone
+
+317
+00:17:13,449 --> 00:17:16,071
+because once I do save it to the database,
+
+318
+00:17:16,071 --> 00:17:19,433
+we right now have non way of retrieving it.
+
+319
+00:17:19,433 --> 00:17:22,350
+So this is what I'll work on next.
+

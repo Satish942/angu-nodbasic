@@ -1,0 +1,748 @@
+1
+00:00:02,188 --> 00:00:04,282
+<v Narrator>So, I want to start by adding</v>
+
+2
+00:00:04,282 --> 00:00:06,146
+a route to which Angular 2 can connect,
+
+3
+00:00:06,146 --> 00:00:08,359
+which allows me to send a message I create
+
+4
+00:00:08,359 --> 00:00:10,899
+in my frontend, in my Angular 2 application,
+
+5
+00:00:10,899 --> 00:00:14,718
+to the server and store it in my Mongo database.
+
+6
+00:00:14,718 --> 00:00:16,615
+Now, for the rest of this course,
+
+7
+00:00:16,615 --> 00:00:18,104
+I'll create two new files in this
+
+8
+00:00:18,104 --> 00:00:21,011
+routes folder here, so on my backend.
+
+9
+00:00:21,011 --> 00:00:24,235
+A messages.js, which should hold all my
+
+10
+00:00:24,235 --> 00:00:27,734
+message-related routes, and a user.js route,
+
+11
+00:00:27,734 --> 00:00:32,219
+which I'll use later on once I add user-related routes.
+
+12
+00:00:32,219 --> 00:00:34,632
+Because I want to keep my app.js route here,
+
+13
+00:00:34,632 --> 00:00:36,928
+my app.js route's file here, clean,
+
+14
+00:00:36,928 --> 00:00:40,153
+I only want to render my root route here,
+
+15
+00:00:40,153 --> 00:00:42,853
+the one which loads the Angular 2 application.
+
+16
+00:00:42,853 --> 00:00:45,684
+In my messages.js file, I want to have all
+
+17
+00:00:45,684 --> 00:00:48,583
+message-related routes, to which Angular 2 can reach out.
+
+18
+00:00:48,583 --> 00:00:51,694
+And in the user-related file, I'll respectively have all my
+
+19
+00:00:51,694 --> 00:00:54,935
+user-related routes, to which Angular 2 can reach out.
+
+20
+00:00:54,935 --> 00:00:58,375
+So, in the messages.js file, I, of course,
+
+21
+00:00:58,375 --> 00:01:01,586
+want to use express, so I will require this
+
+22
+00:01:01,586 --> 00:01:04,712
+because I want to set up the express router,
+
+23
+00:01:04,712 --> 00:01:07,403
+just like I'm using it here in the app.js file.
+
+24
+00:01:07,403 --> 00:01:11,687
+You may actually make it quicker or use a shortcut here
+
+25
+00:01:11,687 --> 00:01:14,195
+and simply copy and paste all of that here.
+
+26
+00:01:14,195 --> 00:01:16,306
+Though, I will override this route,
+
+27
+00:01:16,306 --> 00:01:18,695
+or I will change this route here.
+
+28
+00:01:18,695 --> 00:01:22,514
+We also need to have access to our messaging model,
+
+29
+00:01:22,514 --> 00:01:24,201
+because I want to interact with it.
+
+30
+00:01:24,201 --> 00:01:28,135
+Remember? In this file, I want to store messages.
+
+31
+00:01:28,135 --> 00:01:32,386
+I will use mongoose or my mongoose models to do that.
+
+32
+00:01:32,386 --> 00:01:35,448
+Therefore, I need to import message from
+
+33
+00:01:35,448 --> 00:01:39,116
+models/message without the file extension.
+
+34
+00:01:39,116 --> 00:01:41,547
+Now, that's my messages routes file.
+
+35
+00:01:41,547 --> 00:01:44,819
+Though, the function here is route,
+
+36
+00:01:44,819 --> 00:01:46,640
+we'll get a well written.
+
+37
+00:01:46,640 --> 00:01:49,553
+Before doing that, I'll do something else, though,
+
+38
+00:01:49,553 --> 00:01:52,399
+in the app.js file in the root folder.
+
+39
+00:01:52,399 --> 00:01:56,107
+So, the file which handles all our requests.
+
+40
+00:01:56,107 --> 00:01:58,128
+I currently only reference my
+
+41
+00:01:58,128 --> 00:02:01,321
+appRoutes file, this one here.
+
+42
+00:02:01,321 --> 00:02:02,934
+Now, I'm going to duplicate this
+
+43
+00:02:02,934 --> 00:02:05,684
+and also create my messageRoutes,
+
+44
+00:02:07,642 --> 00:02:10,211
+just duplicate it once, though,
+
+45
+00:02:10,211 --> 00:02:12,813
+and import my message.js file,
+
+46
+00:02:12,813 --> 00:02:16,651
+which, remember this? Exports the router here.
+
+47
+00:02:16,651 --> 00:02:18,375
+So, I'm importing this router,
+
+48
+00:02:18,375 --> 00:02:20,559
+and down here were I use the routes,
+
+49
+00:02:20,559 --> 00:02:23,338
+I want to use the messageRoutes.
+
+50
+00:02:23,338 --> 00:02:25,411
+And now, this is important.
+
+51
+00:02:25,411 --> 00:02:28,103
+First, I want to use them whenever the user
+
+52
+00:02:28,103 --> 00:02:30,833
+navigates to a URL which contains
+
+53
+00:02:30,833 --> 00:02:34,333
+or which starts with /message,
+
+54
+00:02:34,333 --> 00:02:36,336
+so all the message-related routes
+
+55
+00:02:36,336 --> 00:02:39,243
+should have /message in the URL path.
+
+56
+00:02:39,243 --> 00:02:42,477
+The second important thing is the order here.
+
+57
+00:02:42,477 --> 00:02:45,238
+My messageRoutes need to come first.
+
+58
+00:02:45,238 --> 00:02:49,141
+Because, if I would have this order, then every request
+
+59
+00:02:49,141 --> 00:02:51,721
+would first be handled by the appRoutes.
+
+60
+00:02:51,721 --> 00:02:53,464
+But I don't want to do that.
+
+61
+00:02:53,464 --> 00:02:56,005
+I don't want to handle every request with that.
+
+62
+00:02:56,005 --> 00:02:59,129
+I want to handle requests which have /message
+
+63
+00:02:59,129 --> 00:03:01,614
+with the messageRoutes first, so with the routes
+
+64
+00:03:01,614 --> 00:03:04,080
+I set up in this messages.js folder.
+
+65
+00:03:04,080 --> 00:03:06,616
+So this is important that I have the more specific
+
+66
+00:03:06,616 --> 00:03:09,319
+routes first so that I can handle them before
+
+67
+00:03:09,319 --> 00:03:12,732
+more generic routes try to handle them.
+
+68
+00:03:12,732 --> 00:03:15,355
+With that, I can then head over to the messages.js file
+
+69
+00:03:15,355 --> 00:03:18,824
+to this route, and I will change it to a post route,
+
+70
+00:03:18,824 --> 00:03:21,825
+because I want to store messages on the server.
+
+71
+00:03:21,825 --> 00:03:24,539
+I don't want to get my messages with this function.
+
+72
+00:03:24,539 --> 00:03:27,828
+Here, I simply want to be able to store them.
+
+73
+00:03:27,828 --> 00:03:29,863
+To send them from the Angular 2
+
+74
+00:03:29,863 --> 00:03:31,856
+and store them in my backend.
+
+75
+00:03:31,856 --> 00:03:35,345
+Therefore, this will be a post request which gets sent.
+
+76
+00:03:35,345 --> 00:03:37,926
+Now, the pov will just be '/'
+
+77
+00:03:37,926 --> 00:03:40,780
+and the important thing to recognise here is,
+
+78
+00:03:40,780 --> 00:03:45,623
+in the end, of course, it is messages or message/
+
+79
+00:03:45,623 --> 00:03:48,801
+because I'm only getting to this file
+
+80
+00:03:48,801 --> 00:03:52,706
+if my request has /message as a URL,
+
+81
+00:03:52,706 --> 00:03:56,434
+or /message in front of or at the beginning of the URL.
+
+82
+00:03:56,434 --> 00:03:58,927
+This is when I reach the messages.js file
+
+83
+00:03:58,927 --> 00:04:01,866
+in the routes folder, so every route I set up here
+
+84
+00:04:01,866 --> 00:04:05,783
+invisibly has message in front of the pov here.
+
+85
+00:04:07,112 --> 00:04:11,420
+So, this is the /message post route therefore.
+
+86
+00:04:11,420 --> 00:04:12,479
+And then here, of course, I don't
+
+87
+00:04:12,479 --> 00:04:15,068
+want to render the index page.
+
+88
+00:04:15,068 --> 00:04:17,546
+Instead, here I want to save a message.
+
+89
+00:04:17,546 --> 00:04:19,632
+So let's first create a new one using
+
+90
+00:04:19,632 --> 00:04:22,656
+the mongoose model we created before.
+
+91
+00:04:22,656 --> 00:04:24,597
+So, a new message here.
+
+92
+00:04:24,597 --> 00:04:27,081
+And, as you learned in the MongoDB section,
+
+93
+00:04:27,081 --> 00:04:30,621
+we pass JavaScript object to this message object,
+
+94
+00:04:30,621 --> 00:04:32,494
+to this message model.
+
+95
+00:04:32,494 --> 00:04:36,225
+Here, we want to set up the message we want to store.
+
+96
+00:04:36,225 --> 00:04:39,079
+Now, let's have a look at the message model.
+
+97
+00:04:39,079 --> 00:04:42,564
+We're expecting the content and the user.
+
+98
+00:04:42,564 --> 00:04:44,218
+Now, I'll take care about the user in the
+
+99
+00:04:44,218 --> 00:04:47,203
+next section when we actually create users
+
+100
+00:04:47,203 --> 00:04:49,146
+and are able to work with them.
+
+101
+00:04:49,146 --> 00:04:51,206
+For now, all I wanna do here is
+
+102
+00:04:51,206 --> 00:04:54,325
+I want to store the content.
+
+103
+00:04:54,325 --> 00:04:58,200
+Now, how do I get the content I wanna store there?
+
+104
+00:04:58,200 --> 00:05:02,010
+I simply assume that my request will send me
+
+105
+00:05:02,010 --> 00:05:04,756
+the content in the body of the request.
+
+106
+00:05:04,756 --> 00:05:08,256
+So I can extract it from the request body,
+
+107
+00:05:09,263 --> 00:05:11,410
+this is normal express.js code to
+
+108
+00:05:11,410 --> 00:05:14,143
+access the body attached to a request.
+
+109
+00:05:14,143 --> 00:05:15,936
+And then the content field.
+
+110
+00:05:15,936 --> 00:05:18,208
+And of course, it will be my job to populate
+
+111
+00:05:18,208 --> 00:05:22,197
+this content field in the frontend in my Angular 2 code
+
+112
+00:05:22,197 --> 00:05:25,396
+when I send this request to the backend.
+
+113
+00:05:25,396 --> 00:05:27,654
+But it's an assumption I make here on the backend.
+
+114
+00:05:27,654 --> 00:05:29,950
+This kind of is the interface frontend
+
+115
+00:05:29,950 --> 00:05:33,117
+and backend are communicating with.
+
+116
+00:05:33,117 --> 00:05:34,718
+Now, what this message created,
+
+117
+00:05:34,718 --> 00:05:38,277
+I can take my message here and save it.
+
+118
+00:05:38,277 --> 00:05:41,331
+Now, in here, I wanna provide a callback
+
+119
+00:05:41,331 --> 00:05:43,470
+to check if we got an error
+
+120
+00:05:43,470 --> 00:05:46,137
+or the result of this operation.
+
+121
+00:05:47,172 --> 00:05:50,679
+And first, I'll have a look if error is not null,
+
+122
+00:05:50,679 --> 00:05:52,644
+so if we do have an error.
+
+123
+00:05:52,644 --> 00:05:55,977
+In this case, I want to return a response
+
+124
+00:05:55,977 --> 00:06:00,305
+with a status code of 500 for a server error.
+
+125
+00:06:00,305 --> 00:06:02,194
+And some json, which allows me to
+
+126
+00:06:02,194 --> 00:06:05,066
+handle this error on the frontend.
+
+127
+00:06:05,066 --> 00:06:06,746
+So this will send a JavaScript
+
+128
+00:06:06,746 --> 00:06:10,149
+object then convert it to json.
+
+129
+00:06:10,149 --> 00:06:12,225
+And here I simply wanna set up, let's say
+
+130
+00:06:12,225 --> 00:06:15,892
+a title for this error, 'An error occurred,'
+
+131
+00:06:17,434 --> 00:06:19,492
+and then the error itself.
+
+132
+00:06:19,492 --> 00:06:22,132
+I can simply set the error object here,
+
+133
+00:06:22,132 --> 00:06:25,544
+stored in the error variable the mongoose
+
+134
+00:06:25,544 --> 00:06:29,140
+package creates for me in case of an error.
+
+135
+00:06:29,140 --> 00:06:33,598
+This error object here happens to have a message field,
+
+136
+00:06:33,598 --> 00:06:35,973
+which I later on can access like this.
+
+137
+00:06:35,973 --> 00:06:37,291
+This will come in useful in the
+
+138
+00:06:37,291 --> 00:06:39,642
+error-handling section, of course.
+
+139
+00:06:39,642 --> 00:06:42,136
+So, this is handling the error case
+
+140
+00:06:42,136 --> 00:06:45,251
+and sending the error to the frontend.
+
+141
+00:06:45,251 --> 00:06:49,089
+And the other case, of course, is that we're successful.
+
+142
+00:06:49,089 --> 00:06:51,973
+In this case, so if the error is null,
+
+143
+00:06:51,973 --> 00:06:53,788
+we will reach this code, where
+
+144
+00:06:53,788 --> 00:06:56,271
+I also want to send a response.
+
+145
+00:06:56,271 --> 00:06:58,557
+I don't need the return keyword here, though,
+
+146
+00:06:58,557 --> 00:07:02,242
+because I'm not executing any code after this line.
+
+147
+00:07:02,242 --> 00:07:06,075
+And here, I want to set the status code to 201
+
+148
+00:07:07,475 --> 00:07:11,433
+for everything is okay and your resource was created,
+
+149
+00:07:11,433 --> 00:07:13,581
+and then send some json, too.
+
+150
+00:07:13,581 --> 00:07:15,974
+Now, here in the JavaScript object,
+
+151
+00:07:15,974 --> 00:07:17,641
+I'll send a message.
+
+152
+00:07:18,481 --> 00:07:20,112
+It's, of course, totally up to you
+
+153
+00:07:20,112 --> 00:07:22,362
+what you want to send here.
+
+154
+00:07:23,661 --> 00:07:26,457
+So here I'm just sending a message, 'Saved message,'
+
+155
+00:07:26,457 --> 00:07:28,903
+so the message the frontend sent me.
+
+156
+00:07:28,903 --> 00:07:32,259
+And then, the object will be the result,
+
+157
+00:07:32,259 --> 00:07:34,565
+which actually is the saved message,
+
+158
+00:07:34,565 --> 00:07:36,396
+as it now lives in the database.
+
+159
+00:07:36,396 --> 00:07:40,208
+So this will contain the ID and so on.
+
+160
+00:07:40,208 --> 00:07:42,668
+So, this is my response. And again,
+
+161
+00:07:42,668 --> 00:07:46,320
+just to highlight this, why don't I put
+
+162
+00:07:46,320 --> 00:07:49,118
+return in front of this statement?
+
+163
+00:07:49,118 --> 00:07:50,602
+I'm using it up here in the error
+
+164
+00:07:50,602 --> 00:07:53,930
+if statement, at least in the end.
+
+165
+00:07:53,930 --> 00:07:56,711
+Well, the reason I'm using it here is
+
+166
+00:07:56,711 --> 00:07:59,688
+if error is not null, we're getting
+
+167
+00:07:59,688 --> 00:08:01,813
+inside of this if block here.
+
+168
+00:08:01,813 --> 00:08:06,775
+In which case, if I don't have return, we send a response.
+
+169
+00:08:06,775 --> 00:08:09,555
+But then, we still execute this code.
+
+170
+00:08:09,555 --> 00:08:11,578
+Now, I could, of course, put that in an else block
+
+171
+00:08:11,578 --> 00:08:14,050
+and therefore prevent this from happening,
+
+172
+00:08:14,050 --> 00:08:16,808
+but if I don't want to write an else block,
+
+173
+00:08:16,808 --> 00:08:18,900
+I would execute this code.
+
+174
+00:08:18,900 --> 00:08:20,978
+So, I'm setting return here to
+
+175
+00:08:20,978 --> 00:08:24,797
+let the programme know that, in this case,
+
+176
+00:08:24,797 --> 00:08:27,281
+I not only want to send a response,
+
+177
+00:08:27,281 --> 00:08:30,100
+but I also want to return from this function.
+
+178
+00:08:30,100 --> 00:08:33,316
+So this code then doesn't get executed.
+
+179
+00:08:33,316 --> 00:08:35,846
+This is the reason why I don't use return here.
+
+180
+00:08:35,846 --> 00:08:39,640
+There is simply no code which would get executed after it.
+
+181
+00:08:39,640 --> 00:08:43,807
+The function here ends directly after this response here.
+
+182
+00:08:46,290 --> 00:08:49,810
+So with this, I'm handling error and success case,
+
+183
+00:08:49,810 --> 00:08:52,107
+and I set this up to now be able
+
+184
+00:08:52,107 --> 00:08:55,066
+to store messages in my database.
+
+185
+00:08:55,066 --> 00:08:56,928
+Now, of course, the important question is,
+
+186
+00:08:56,928 --> 00:09:01,095
+how do we get the messages from our Angular 2 frontend to
+
+187
+00:09:01,980 --> 00:09:06,147
+this route to this function here which then saves them?
+

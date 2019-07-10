@@ -1,0 +1,320 @@
+1
+00:00:01,648 --> 00:00:03,930
+<v Instructor>The problem we do have is</v>
+
+2
+00:00:03,930 --> 00:00:07,666
+that we want to use the message.content and message.author
+
+3
+00:00:07,666 --> 00:00:09,586
+here in the MessageComponent,
+
+4
+00:00:09,586 --> 00:00:11,071
+but we don't have that property
+
+5
+00:00:11,071 --> 00:00:13,685
+here in the MessageComponent TypeScript file.
+
+6
+00:00:13,685 --> 00:00:16,288
+We do have it in the AppComponent, instead.
+
+7
+00:00:16,288 --> 00:00:18,666
+So now, we could, of course, copy it,
+
+8
+00:00:18,666 --> 00:00:20,994
+but let me show you how to use property binding
+
+9
+00:00:20,994 --> 00:00:24,239
+to pass it as an argument to this component,
+
+10
+00:00:24,239 --> 00:00:27,599
+which we're using in our AppComponent.
+
+11
+00:00:27,599 --> 00:00:30,087
+We can do this by going back to the MessageComponent
+
+12
+00:00:30,087 --> 00:00:34,805
+TypeScript file and setting up a new property here.
+
+13
+00:00:34,805 --> 00:00:37,434
+Let's also name it message, like it is named
+
+14
+00:00:37,434 --> 00:00:39,770
+in the AppComponent, but that is optional.
+
+15
+00:00:39,770 --> 00:00:42,476
+You can use any name you want.
+
+16
+00:00:42,476 --> 00:00:45,898
+Now, here, let's make it of type Message.
+
+17
+00:00:45,898 --> 00:00:49,000
+If you remember, this is the model we created a while ago.
+
+18
+00:00:49,000 --> 00:00:53,085
+So, assign Message here, and then add the import
+
+19
+00:00:53,085 --> 00:00:57,240
+to Message from ./message.model,
+
+20
+00:00:57,240 --> 00:01:01,290
+which is the file here, which we placed in the same folder.
+
+21
+00:01:01,290 --> 00:01:03,112
+This is a simple type assignment
+
+22
+00:01:03,112 --> 00:01:07,193
+which now makes sure that all messages we use here
+
+23
+00:01:07,193 --> 00:01:11,568
+have to follow the structure laid out in this model.
+
+24
+00:01:11,568 --> 00:01:14,055
+So, they have to have a username and content,
+
+25
+00:01:14,055 --> 00:01:17,237
+and, optionally, also have messageId and userId.
+
+26
+00:01:17,237 --> 00:01:20,275
+Also, these types here have to match.
+
+27
+00:01:20,275 --> 00:01:23,119
+So, with that, Message should be, let's say,
+
+28
+00:01:23,119 --> 00:01:24,240
+undefined at the beginning.
+
+29
+00:01:24,240 --> 00:01:26,610
+So let's not assign a value.
+
+30
+00:01:26,610 --> 00:01:28,471
+What I want to make, though, is,
+
+31
+00:01:28,471 --> 00:01:31,378
+I want to make it assignable from outside.
+
+32
+00:01:31,378 --> 00:01:33,461
+So I will add @Input here
+
+33
+00:01:37,040 --> 00:01:38,769
+from @angular/core.
+
+34
+00:01:38,769 --> 00:01:42,460
+So, make sure to add this import at the top, too.
+
+35
+00:01:42,460 --> 00:01:45,138
+And don't forget the parentheses.
+
+36
+00:01:45,138 --> 00:01:47,920
+Now, what this will do is, it allows me,
+
+37
+00:01:47,920 --> 00:01:49,923
+in my app component HTML file,
+
+38
+00:01:49,923 --> 00:01:53,970
+where I use my component here, the app-message component,
+
+39
+00:01:53,970 --> 00:01:57,735
+to pass an argument by adding square brackets,
+
+40
+00:01:57,735 --> 00:02:02,655
+then message, which is the name of the property set up here,
+
+41
+00:02:02,655 --> 00:02:05,850
+and then, whichever value I want to pass.
+
+42
+00:02:05,850 --> 00:02:08,223
+Now, the value I want to pass is
+
+43
+00:02:08,223 --> 00:02:11,556
+the message property of my AppComponent.
+
+44
+00:02:12,480 --> 00:02:13,816
+This one here.
+
+45
+00:02:13,816 --> 00:02:17,661
+Now, right now, this is not adhering to my message model,
+
+46
+00:02:17,661 --> 00:02:21,147
+so I will also assign my message model here.
+
+47
+00:02:21,147 --> 00:02:26,003
+Also add the import to ./messages/message.model.
+
+48
+00:02:26,003 --> 00:02:30,705
+Now, I will use the constructor of my message model here.
+
+49
+00:02:30,705 --> 00:02:34,872
+And here, I will pass a message, and then my author.
+
+50
+00:02:35,981 --> 00:02:38,392
+Remember, the other arguments are optional.
+
+51
+00:02:38,392 --> 00:02:40,647
+I don't need to set them up.
+
+52
+00:02:40,647 --> 00:02:43,855
+So, with that, this is my new message property
+
+53
+00:02:43,855 --> 00:02:46,228
+in the AppComponent, and I'm passing
+
+54
+00:02:46,228 --> 00:02:49,728
+this message property as an argument here,
+
+55
+00:02:50,665 --> 00:02:53,092
+between the quotation marks, to the message,
+
+56
+00:02:53,092 --> 00:02:56,127
+and these names match, but they don't have to match,
+
+57
+00:02:56,127 --> 00:02:59,076
+to the message property in my MessageComponent.
+
+58
+00:02:59,076 --> 00:03:02,114
+And here, I could use the alias I was talking about
+
+59
+00:03:02,114 --> 00:03:04,835
+to, for example, name this InputMessage,
+
+60
+00:03:04,835 --> 00:03:07,326
+and then I could use this alias here
+
+61
+00:03:07,326 --> 00:03:09,392
+between the square brackets.
+
+62
+00:03:09,392 --> 00:03:12,418
+Not only could, I would now have to use it.
+
+63
+00:03:12,418 --> 00:03:16,596
+But I'll revert this and go back to the non-alias version.
+
+64
+00:03:16,596 --> 00:03:19,097
+So, let me quickly remove it here.
+
+65
+00:03:19,097 --> 00:03:21,242
+Now, with this in place, if I save this
+
+66
+00:03:21,242 --> 00:03:25,329
+and let it recompile, I can reload the application,
+
+67
+00:03:25,329 --> 00:03:27,292
+and now, we see the content again.
+
+68
+00:03:27,292 --> 00:03:29,102
+We don't see the author, because
+
+69
+00:03:29,102 --> 00:03:32,294
+it's now no longer an author, but instead, username.
+
+70
+00:03:32,294 --> 00:03:35,392
+So if I change this here in my message.component.html file
+
+71
+00:03:35,392 --> 00:03:38,409
+and recompile again, and reload again,
+
+72
+00:03:38,409 --> 00:03:40,140
+we now see the same as before,
+
+73
+00:03:40,140 --> 00:03:42,806
+but the key difference is, the message
+
+74
+00:03:42,806 --> 00:03:46,208
+is now passed dynamically from outside.
+
+75
+00:03:46,208 --> 00:03:48,609
+And this is a huge and very important feature
+
+76
+00:03:48,609 --> 00:03:50,649
+Angular 2 offers you, which allows you
+
+77
+00:03:50,649 --> 00:03:53,553
+to really make your application dynamic
+
+78
+00:03:53,553 --> 00:03:56,670
+and communicate between your components,
+
+79
+00:03:56,670 --> 00:03:58,233
+which is, of course, very important,
+
+80
+00:03:58,233 --> 00:04:01,066
+because you often need to do that.
+

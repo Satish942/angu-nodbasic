@@ -1,0 +1,224 @@
+1
+00:00:02,002 --> 00:00:05,154
+<v Instructor>How does authentication in Angular 2</v>
+
+2
+00:00:05,154 --> 00:00:07,722
+and NodeJS application work?
+
+3
+00:00:07,722 --> 00:00:11,362
+In a normal application, which means the front end
+
+4
+00:00:11,362 --> 00:00:15,031
+are basically just views rendered by our back end,
+
+5
+00:00:15,031 --> 00:00:17,693
+while we have this request response flow,
+
+6
+00:00:17,693 --> 00:00:20,884
+and the authentication would be managed by a session,
+
+7
+00:00:20,884 --> 00:00:23,596
+which means we keep a session on the server,
+
+8
+00:00:23,596 --> 00:00:26,346
+and a cookie on the client to know if the client
+
+9
+00:00:26,346 --> 00:00:29,917
+is logged in and delete or invalidate the session
+
+10
+00:00:29,917 --> 00:00:31,930
+once the client logs out.
+
+11
+00:00:31,930 --> 00:00:35,390
+Now for Angular 2 application, we shouldn't use a session
+
+12
+00:00:35,390 --> 00:00:38,066
+since our client, the Angular 2 application,
+
+13
+00:00:38,066 --> 00:00:42,233
+only reaches out behind the scenes to fetch or put data.
+
+14
+00:00:43,146 --> 00:00:45,926
+More than that, we could build a back end which works
+
+15
+00:00:45,926 --> 00:00:49,036
+with multiple devices, or multiple clients,
+
+16
+00:00:49,036 --> 00:00:51,296
+like also mobile phones.
+
+17
+00:00:51,296 --> 00:00:54,634
+In such a case, if we have a native app using our back end,
+
+18
+00:00:54,634 --> 00:00:57,866
+for example, we couldn't use a session.
+
+19
+00:00:57,866 --> 00:01:01,796
+So sessions are not the solution for authenticating
+
+20
+00:01:01,796 --> 00:01:04,774
+users in a single page application,
+
+21
+00:01:04,774 --> 00:01:07,606
+because we only render one page,
+
+22
+00:01:07,606 --> 00:01:10,926
+and we don't continuously re-render pages.
+
+23
+00:01:10,926 --> 00:01:14,176
+So there is a different approach you will commonly see
+
+24
+00:01:14,176 --> 00:01:17,904
+being used in single page applications.
+
+25
+00:01:17,904 --> 00:01:20,166
+We authenticate with the server,
+
+26
+00:01:20,166 --> 00:01:23,976
+which means we log our user in, which we created,
+
+27
+00:01:23,976 --> 00:01:26,535
+and upon logging in, we check on the server
+
+28
+00:01:26,535 --> 00:01:30,175
+if this is a valid data, but then instead of basically
+
+29
+00:01:30,175 --> 00:01:33,357
+saving this in our session, we instead send back
+
+30
+00:01:33,357 --> 00:01:35,335
+a token to the client.
+
+31
+00:01:35,335 --> 00:01:38,429
+This token basically contains the, well,
+
+32
+00:01:38,429 --> 00:01:42,502
+kind of encrypted user information and some other data.
+
+33
+00:01:42,502 --> 00:01:44,992
+Now this token can be stored on the client,
+
+34
+00:01:44,992 --> 00:01:49,597
+so in the browser, and if we want to fetch data
+
+35
+00:01:49,597 --> 00:01:51,631
+which is protected, for example, if we want to
+
+36
+00:01:51,631 --> 00:01:54,691
+create a new message and we only want to allow this
+
+37
+00:01:54,691 --> 00:01:58,407
+for authenticated users, we would attach this token
+
+38
+00:01:58,407 --> 00:02:02,492
+to our request and then on the server, we could validate
+
+39
+00:02:02,492 --> 00:02:05,762
+this token, so see if the token is valid if it matches
+
+40
+00:02:05,762 --> 00:02:08,121
+the data we have on the server.
+
+41
+00:02:08,121 --> 00:02:10,055
+Since the server is the one who created the token,
+
+42
+00:02:10,055 --> 00:02:12,045
+it is able to validate it.
+
+43
+00:02:12,045 --> 00:02:14,902
+We can extract any encrypted data, like, for example,
+
+44
+00:02:14,902 --> 00:02:17,778
+some user data we put into the token,
+
+45
+00:02:17,778 --> 00:02:20,374
+and if all that works, if all that is valid,
+
+46
+00:02:20,374 --> 00:02:23,679
+we send back data to the client, or we create
+
+47
+00:02:23,679 --> 00:02:26,375
+the resource the client wanted to create.
+
+48
+00:02:26,375 --> 00:02:29,554
+So we have this token-focused approach when working
+
+49
+00:02:29,554 --> 00:02:32,158
+with a single page application.
+
+50
+00:02:32,158 --> 00:02:33,323
+Now that's the theory.
+
+51
+00:02:33,323 --> 00:02:37,036
+Throughout this section, you will see how to create a user,
+
+52
+00:02:37,036 --> 00:02:38,623
+how then sign the user in,
+
+53
+00:02:38,623 --> 00:02:40,286
+how to create this token,
+
+54
+00:02:40,286 --> 00:02:41,945
+how to store the token,
+
+55
+00:02:41,945 --> 00:02:45,598
+and how to attach the token to future requests.
+
+56
+00:02:45,598 --> 00:02:47,598
+So let's dive into this.
+

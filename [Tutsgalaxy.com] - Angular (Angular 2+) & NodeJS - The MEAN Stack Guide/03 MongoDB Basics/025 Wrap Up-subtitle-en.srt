@@ -1,0 +1,44 @@
+1
+00:00:01,814 --> 00:00:04,403
+<v ->So with that, we got this basic introduction</v>
+
+2
+00:00:04,403 --> 00:00:08,304
+to MongoDB how to set it up and how to use it with Mongoose,
+
+3
+00:00:08,304 --> 00:00:11,713
+you should confident using it now though of course
+
+4
+00:00:11,713 --> 00:00:15,007
+you're no expert by any means, always have a look
+
+5
+00:00:15,007 --> 00:00:17,882
+at the official Mongoose or MongoDB documentation
+
+6
+00:00:17,882 --> 00:00:20,893
+if you wanna dive into deeper, otherwise
+
+7
+00:00:20,893 --> 00:00:23,866
+you will learn a lot by doing throughout this course,
+
+8
+00:00:23,866 --> 00:00:26,253
+whilst building this course project.
+
+9
+00:00:26,253 --> 00:00:28,890
+And with that I wanna continue to the next module
+
+10
+00:00:28,890 --> 00:00:31,851
+where we will actually dive into creating our front end
+
+11
+00:00:31,851 --> 00:00:33,184
+with Angular 2.
+

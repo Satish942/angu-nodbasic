@@ -1,0 +1,712 @@
+1
+00:00:02,104 --> 00:00:05,364
+<v ->I will use Webpack, Webpack 2 to be precise,</v>
+
+2
+00:00:05,364 --> 00:00:07,412
+to build this project.
+
+3
+00:00:07,412 --> 00:00:09,993
+So the first step is to instal Webpack
+
+4
+00:00:09,993 --> 00:00:11,913
+and all the dependencies we need.
+
+5
+00:00:11,913 --> 00:00:13,833
+Now Webpack 2 is still in beta.
+
+6
+00:00:13,833 --> 00:00:16,026
+So I'm installing a specific version here.
+
+7
+00:00:16,026 --> 00:00:18,347
+You may choose the latest one
+
+8
+00:00:18,347 --> 00:00:20,790
+but of course that may introduce some bugs
+
+9
+00:00:20,790 --> 00:00:23,032
+where I least know that the version I instal here
+
+10
+00:00:23,032 --> 00:00:24,346
+doesn't have.
+
+11
+00:00:24,346 --> 00:00:26,218
+But definitely check out the latest version
+
+12
+00:00:26,218 --> 00:00:28,715
+to know if well maybe it's released
+
+13
+00:00:28,715 --> 00:00:30,409
+until you watch this video.
+
+14
+00:00:30,409 --> 00:00:32,440
+So to instal all these dependencies
+
+15
+00:00:32,440 --> 00:00:34,889
+that will be a bit more.
+
+16
+00:00:34,889 --> 00:00:38,507
+I'll again run npm instal minus minus save dev
+
+17
+00:00:38,507 --> 00:00:41,332
+to instal the mass development dependencies.
+
+18
+00:00:41,332 --> 00:00:43,243
+We need Webpack.
+
+19
+00:00:43,243 --> 00:00:44,826
+And here we need at
+
+20
+00:00:46,811 --> 00:00:47,811
+2.0 beta 21.
+
+21
+00:00:51,317 --> 00:00:53,349
+That's the version I know which works.
+
+22
+00:00:53,349 --> 00:00:55,853
+But of course feel free to just use Webpack at beta
+
+23
+00:00:55,853 --> 00:00:57,640
+to get the latest beta version.
+
+24
+00:00:57,640 --> 00:01:01,297
+Or if Webpack 2 is officially released,
+
+25
+00:01:01,297 --> 00:01:02,615
+until you watch this video,
+
+26
+00:01:02,615 --> 00:01:06,310
+you may try just Webpack without an at anything.
+
+27
+00:01:06,310 --> 00:01:08,183
+But make sure that you're not installing
+
+28
+00:01:08,183 --> 00:01:10,103
+Webpack 1 by accident.
+
+29
+00:01:10,103 --> 00:01:12,151
+So I'm using this version here.
+
+30
+00:01:12,151 --> 00:01:15,240
+Then I will instal Webpack merge.
+
+31
+00:01:15,240 --> 00:01:18,167
+Because this is needed to merge multiple configuration files
+
+32
+00:01:18,167 --> 00:01:20,693
+because we will create a different process for
+
+33
+00:01:20,693 --> 00:01:24,328
+the development and the protection workflow.
+
+34
+00:01:24,328 --> 00:01:28,161
+And then we also need to instal the Angular 2
+
+35
+00:01:29,684 --> 00:01:31,083
+template loader,
+
+36
+00:01:31,083 --> 00:01:34,423
+to be able to outsource our templates in separate files
+
+37
+00:01:34,423 --> 00:01:36,552
+and load them correctly.
+
+38
+00:01:36,552 --> 00:01:38,552
+We also need the awesome
+
+39
+00:01:41,208 --> 00:01:42,708
+TypeScript loader.
+
+40
+00:01:43,867 --> 00:01:47,963
+This is used to compile our TypeScript to JavaScript.
+
+41
+00:01:47,963 --> 00:01:49,737
+We also need to use del cli.
+
+42
+00:01:49,737 --> 00:01:52,105
+That is used to be able to delete some files
+
+43
+00:01:52,105 --> 00:01:55,544
+in the course of this whole process.
+
+44
+00:01:55,544 --> 00:01:57,516
+And we'll need the HTML loader
+
+45
+00:01:57,516 --> 00:01:59,931
+to load our templates correctly.
+
+46
+00:01:59,931 --> 00:02:02,507
+So we do both the Angular 2 template loader
+
+47
+00:02:02,507 --> 00:02:04,521
+to load this connexion correctly
+
+48
+00:02:04,521 --> 00:02:08,024
+and the HTML loader to load the files correctly.
+
+49
+00:02:08,024 --> 00:02:11,403
+We also need to instal TypeScript
+
+50
+00:02:11,403 --> 00:02:13,016
+since the awesome TypeScript loader
+
+51
+00:02:13,016 --> 00:02:14,825
+will need this locally installed
+
+52
+00:02:14,825 --> 00:02:17,211
+even if you should have that globally on your machine.
+
+53
+00:02:17,211 --> 00:02:18,520
+You don't need to as a side note
+
+54
+00:02:18,520 --> 00:02:21,592
+but here we always need to instal it locally
+
+55
+00:02:21,592 --> 00:02:23,500
+in this project.
+
+56
+00:02:23,500 --> 00:02:26,776
+I also need to instal the Angular 2 router loader
+
+57
+00:02:26,776 --> 00:02:29,014
+if we want to use lazy loading.
+
+58
+00:02:29,014 --> 00:02:33,045
+This will make sure that the syntax we use in our code
+
+59
+00:02:33,045 --> 00:02:37,013
+gets transformed correctly so that it actually works.
+
+60
+00:02:37,013 --> 00:02:38,041
+And this is all.
+
+61
+00:02:38,041 --> 00:02:39,689
+These are the packages we need.
+
+62
+00:02:39,689 --> 00:02:43,017
+We can now hit enter to download them and instal them all.
+
+63
+00:02:43,017 --> 00:02:45,211
+Again, ignore any warnings you might get
+
+64
+00:02:45,211 --> 00:02:48,649
+as long as it finishes without an error, that's good.
+
+65
+00:02:48,649 --> 00:02:49,910
+And we're done.
+
+66
+00:02:49,910 --> 00:02:52,917
+So with that the development dependencies list here
+
+67
+00:02:52,917 --> 00:02:54,133
+grew quite a bit.
+
+68
+00:02:54,133 --> 00:02:58,395
+And we can now set up our Webpack workflow.
+
+69
+00:02:58,395 --> 00:02:59,228
+For this,
+
+70
+00:03:01,240 --> 00:03:03,093
+I will first set up something else.
+
+71
+00:03:03,093 --> 00:03:06,010
+I will set up a tsconfig.json file.
+
+72
+00:03:07,061 --> 00:03:09,996
+This is required for the compilation of TypeScript
+
+73
+00:03:09,996 --> 00:03:12,810
+and will be used by this awesome TypeScript loader
+
+74
+00:03:12,810 --> 00:03:16,267
+we use in our Webpack workflow later on.
+
+75
+00:03:16,267 --> 00:03:18,767
+So in this tsconfig.json file,
+
+76
+00:03:21,004 --> 00:03:24,152
+I'm going to copy in this default setup here
+
+77
+00:03:24,152 --> 00:03:26,264
+where we set up some compiler options
+
+78
+00:03:26,264 --> 00:03:30,119
+that we want to compile to commonjs format,
+
+79
+00:03:30,119 --> 00:03:32,123
+that we want to target es5.
+
+80
+00:03:32,123 --> 00:03:35,275
+So the code, that JavaScript code which is created
+
+81
+00:03:35,275 --> 00:03:39,064
+uses es5 and not es6 or something like that.
+
+82
+00:03:39,064 --> 00:03:41,556
+Then we got noImplicitAny source maps.
+
+83
+00:03:41,556 --> 00:03:43,340
+You may switch this to your needs.
+
+84
+00:03:43,340 --> 00:03:45,653
+And very importantly we got these two options
+
+85
+00:03:45,653 --> 00:03:49,019
+which make sure that we are able to use Angular 2's
+
+86
+00:03:49,019 --> 00:03:51,945
+decorator and metadata features
+
+87
+00:03:51,945 --> 00:03:54,313
+or the usage it makes of them.
+
+88
+00:03:54,313 --> 00:03:57,686
+Then I include node modules and the public js folder
+
+89
+00:03:57,686 --> 00:03:58,763
+from compilation
+
+90
+00:03:58,763 --> 00:04:00,906
+because I certainly don't want to recompile
+
+91
+00:04:00,906 --> 00:04:04,469
+my third party packages or any code.
+
+92
+00:04:04,469 --> 00:04:07,211
+There shouldn't be types of code but nonetheless
+
+93
+00:04:07,211 --> 00:04:09,973
+any code in the public js folder.
+
+94
+00:04:09,973 --> 00:04:13,370
+This is the tsconfig.json file.
+
+95
+00:04:13,370 --> 00:04:16,649
+And with this, let's add a Webpack config file.
+
+96
+00:04:16,649 --> 00:04:19,849
+So I'll name it webpack.config
+
+97
+00:04:19,849 --> 00:04:24,683
+and now the name I'm going to choose is .common.js.
+
+98
+00:04:24,683 --> 00:04:27,500
+This will hold a general setup we will use in both
+
+99
+00:04:27,500 --> 00:04:30,635
+the development and the production workflow.
+
+100
+00:04:30,635 --> 00:04:33,142
+I will also create two other files.
+
+101
+00:04:33,142 --> 00:04:35,642
+The webpack.config.dev.js file
+
+102
+00:04:37,686 --> 00:04:40,686
+and the webpack.config.prod.js file.
+
+103
+00:04:43,547 --> 00:04:46,537
+You could probably guess what these files do.
+
+104
+00:04:46,537 --> 00:04:50,360
+Let's start with the general setup in the common file here.
+
+105
+00:04:50,360 --> 00:04:54,235
+We first need to instal or import Webpack here.
+
+106
+00:04:54,235 --> 00:04:56,824
+So let's require Webpack.
+
+107
+00:04:56,824 --> 00:05:00,472
+And then I will export the configuration of Webpack
+
+108
+00:05:00,472 --> 00:05:03,003
+in this file as a module.
+
+109
+00:05:03,003 --> 00:05:06,154
+Now I'm not going to dive super deep into Webpack here.
+
+110
+00:05:06,154 --> 00:05:07,867
+Webpack can be very complex
+
+111
+00:05:07,867 --> 00:05:10,921
+and there are a lot of tutorials on Webpack out there.
+
+112
+00:05:10,921 --> 00:05:13,481
+Here I will simply show how to create a setup
+
+113
+00:05:13,481 --> 00:05:16,075
+working nice with an Angular 2 project,
+
+114
+00:05:16,075 --> 00:05:18,171
+specifically with this setup structure
+
+115
+00:05:18,171 --> 00:05:22,549
+and also how to use Angular 2's ahead of time compilation.
+
+116
+00:05:22,549 --> 00:05:25,257
+So here, I can then set up a entry
+
+117
+00:05:25,257 --> 00:05:28,155
+which is where do I want to start.
+
+118
+00:05:28,155 --> 00:05:31,051
+Which is the first file I want to use?
+
+119
+00:05:31,051 --> 00:05:34,838
+That of course is in my assets folder in the app folder.
+
+120
+00:05:34,838 --> 00:05:36,923
+And then here we haven't created it yet.
+
+121
+00:05:36,923 --> 00:05:38,667
+We haven't even created the assets folder.
+
+122
+00:05:38,667 --> 00:05:41,419
+But here it will be the main.ts file.
+
+123
+00:05:41,419 --> 00:05:44,411
+The file which boostraps my Angular 2 application,
+
+124
+00:05:44,411 --> 00:05:45,848
+which starts it.
+
+125
+00:05:45,848 --> 00:05:48,521
+We will create the application soon.
+
+126
+00:05:48,521 --> 00:05:51,610
+Next, I'll add the resolve node here
+
+127
+00:05:51,610 --> 00:05:56,440
+to tell Webpack which file extensions to resolve.
+
+128
+00:05:56,440 --> 00:06:00,122
+By default, it knows that it can append .js.
+
+129
+00:06:00,122 --> 00:06:01,897
+I'll add it here nonetheless.
+
+130
+00:06:01,897 --> 00:06:05,447
+But I also want to make it aware that it is able .ts.
+
+131
+00:06:05,447 --> 00:06:09,018
+Because in our TypeScript code in our Angular 2 project,
+
+132
+00:06:09,018 --> 00:06:11,497
+we will always import something from something
+
+133
+00:06:11,497 --> 00:06:13,414
+without .ts at the end.
+
+134
+00:06:14,279 --> 00:06:15,512
+So I need to tell Webpack to
+
+135
+00:06:15,512 --> 00:06:19,179
+check if it finds a file if it attaches .ts.
+
+136
+00:06:20,824 --> 00:06:22,983
+Finally, in the module node,
+
+137
+00:06:22,983 --> 00:06:27,207
+I set up what Webpack should do with the files it finds.
+
+138
+00:06:27,207 --> 00:06:28,394
+I'll keep this simple.
+
+139
+00:06:28,394 --> 00:06:32,375
+I won't set up any CSS compilation or anything like that.
+
+140
+00:06:32,375 --> 00:06:36,168
+Instead here I will configure two simple loaders.
+
+141
+00:06:36,168 --> 00:06:38,001
+The first one, testing
+
+142
+00:06:41,557 --> 00:06:42,724
+for .ts files.
+
+143
+00:06:44,746 --> 00:06:46,663
+So for TypeScript code,
+
+144
+00:06:48,232 --> 00:06:49,065
+loaders.
+
+145
+00:06:50,233 --> 00:06:54,218
+And here I will use the awesome TypeScript loader
+
+146
+00:06:54,218 --> 00:06:56,650
+we installed to compile it.
+
+147
+00:06:56,650 --> 00:07:00,025
+I will also use the Angular 2 template loaders
+
+148
+00:07:00,025 --> 00:07:03,195
+since I know this will be temp Angular 2 files.
+
+149
+00:07:03,195 --> 00:07:04,872
+And I will use,
+
+150
+00:07:04,872 --> 00:07:06,661
+maybe let's split up over multiple lines
+
+151
+00:07:06,661 --> 00:07:09,177
+so that it's easier to read.
+
+152
+00:07:09,177 --> 00:07:12,569
+I will also use the Angular 2 router loader
+
+153
+00:07:12,569 --> 00:07:15,304
+to change any lazy loaded routes
+
+154
+00:07:15,304 --> 00:07:17,467
+into a format we can actually use
+
+155
+00:07:17,467 --> 00:07:19,528
+if we do have any.
+
+156
+00:07:19,528 --> 00:07:22,010
+So these are the three loaders I want to use
+
+157
+00:07:22,010 --> 00:07:23,833
+in TypeScript code.
+
+158
+00:07:23,833 --> 00:07:27,166
+Now if we have HTML as a file extension,
+
+159
+00:07:29,248 --> 00:07:31,466
+let's check it like this.
+
+160
+00:07:31,466 --> 00:07:34,966
+HTML dollar sign to also handle HTM files.
+
+161
+00:07:37,819 --> 00:07:41,106
+And we should add a dot at the beginning of course.
+
+162
+00:07:41,106 --> 00:07:45,106
+So here, I will use one loader, the HTML loader.
+
+163
+00:07:47,325 --> 00:07:50,091
+Now finally, one loader I forgot to instal,
+
+164
+00:07:50,091 --> 00:07:51,334
+we also need to add this,
+
+165
+00:07:51,334 --> 00:07:54,084
+is called save dev the raw loader
+
+166
+00:07:54,921 --> 00:07:57,737
+to be able to simply copy a file
+
+167
+00:07:57,737 --> 00:07:59,418
+without doing anything with it
+
+168
+00:07:59,418 --> 00:08:01,756
+but to simply copy it basically.
+
+169
+00:08:01,756 --> 00:08:03,756
+So here I will then test
+
+170
+00:08:04,922 --> 00:08:05,755
+for any
+
+171
+00:08:06,778 --> 00:08:07,611
+CSS files
+
+172
+00:08:08,617 --> 00:08:12,784
+and apply this raw loader to basically copy it over.
+
+173
+00:08:14,714 --> 00:08:17,564
+With that I set up my common workflow
+
+174
+00:08:17,564 --> 00:08:19,083
+or a common config file.
+
+175
+00:08:19,083 --> 00:08:22,202
+Now next, I want to set up the development config file
+
+176
+00:08:22,202 --> 00:08:24,550
+before we then create the Angular 2 application
+
+177
+00:08:24,550 --> 00:08:26,921
+before I then come back to these config files
+
+178
+00:08:26,921 --> 00:08:29,921
+and create the production workflow.
+

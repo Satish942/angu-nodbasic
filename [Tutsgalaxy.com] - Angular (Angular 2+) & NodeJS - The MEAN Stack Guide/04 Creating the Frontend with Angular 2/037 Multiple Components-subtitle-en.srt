@@ -1,0 +1,508 @@
+1
+00:00:01,758 --> 00:00:05,211
+<v Narrator>Now speaking of structuring the application</v>
+
+2
+00:00:05,211 --> 00:00:08,686
+in my app component HTML file in this template
+
+3
+00:00:08,686 --> 00:00:10,931
+I get my message.
+
+4
+00:00:10,931 --> 00:00:13,350
+Right now that's all the content my application has
+
+5
+00:00:13,350 --> 00:00:15,521
+but this will change in the next videos,
+
+6
+00:00:15,521 --> 00:00:17,768
+and I will create multiple features and things
+
+7
+00:00:17,768 --> 00:00:20,302
+and also the message part can be split up
+
+8
+00:00:20,302 --> 00:00:22,969
+into multiple components if you look at it like this.
+
+9
+00:00:22,969 --> 00:00:26,427
+I at least see a message component here.
+
+10
+00:00:26,427 --> 00:00:29,652
+This article, this would be a great component.
+
+11
+00:00:29,652 --> 00:00:32,011
+So let's go to the messages folder
+
+12
+00:00:32,011 --> 00:00:34,624
+and create a new component there.
+
+13
+00:00:34,624 --> 00:00:38,138
+Here I want to create a message component
+
+14
+00:00:38,138 --> 00:00:41,883
+and I will store in a message.component TS file.
+
+15
+00:00:41,883 --> 00:00:44,379
+Now why I do name this file like this?
+
+16
+00:00:44,379 --> 00:00:46,779
+Because in angular two it's a good convention
+
+17
+00:00:46,779 --> 00:00:50,922
+to have the name of what's inside there as the first thing
+
+18
+00:00:50,922 --> 00:00:54,536
+in the name, in the file name, and then the second part
+
+19
+00:00:54,536 --> 00:00:57,396
+in the file name, component in this case here,
+
+20
+00:00:57,396 --> 00:00:59,912
+should describe what's in the file.
+
+21
+00:00:59,912 --> 00:01:01,697
+So the feature is a message
+
+22
+00:01:01,697 --> 00:01:05,076
+but the thing in this file is a component.
+
+23
+00:01:05,076 --> 00:01:08,552
+So with that I save this and now it will go to my app
+
+24
+00:01:08,552 --> 00:01:12,719
+component and copy all that code here including the input,
+
+25
+00:01:14,081 --> 00:01:17,249
+which I'll delete in a second anyways, into my message
+
+26
+00:01:17,249 --> 00:01:20,091
+component, though not in the message component TS file
+
+27
+00:01:20,091 --> 00:01:22,875
+but instead let's create a new html file,
+
+28
+00:01:22,875 --> 00:01:25,256
+message component html.
+
+29
+00:01:25,256 --> 00:01:28,672
+So we get the types group file for the business lodging
+
+30
+00:01:28,672 --> 00:01:31,667
+so to say and the html file for template.
+
+31
+00:01:31,667 --> 00:01:33,089
+I'll get rid of the input
+
+32
+00:01:33,089 --> 00:01:35,547
+and now I have my message in there.
+
+33
+00:01:35,547 --> 00:01:37,716
+Now of course my message component TS
+
+34
+00:01:37,716 --> 00:01:40,574
+file certainly needs to grow a little bit.
+
+35
+00:01:40,574 --> 00:01:42,708
+That's not all I want to have here.
+
+36
+00:01:42,708 --> 00:01:45,435
+Instead here I want to export a class which I'll name
+
+37
+00:01:45,435 --> 00:01:50,194
+message component like that and then make, let's make this
+
+38
+00:01:50,194 --> 00:01:53,729
+a component, and you learned how to make it a component.
+
+39
+00:01:53,729 --> 00:01:57,262
+We add the at component decorator like this.
+
+40
+00:01:57,262 --> 00:02:01,656
+Make sure to import it from at angular core.
+
+41
+00:02:01,656 --> 00:02:04,940
+Here we need to pass a JavaScript object configuring
+
+42
+00:02:04,940 --> 00:02:06,267
+this component.
+
+43
+00:02:06,267 --> 00:02:10,299
+I want to have a selector and now here this is important.
+
+44
+00:02:10,299 --> 00:02:13,793
+How do you choose a good selector name?
+
+45
+00:02:13,793 --> 00:02:16,289
+The selector works like a CSS selector,
+
+46
+00:02:16,289 --> 00:02:20,052
+so it could use hashtag something to select any element
+
+47
+00:02:20,052 --> 00:02:24,219
+which has an ID of something, like you select via CSS.
+
+48
+00:02:25,119 --> 00:02:29,286
+But typically you use the element style, so, but to select
+
+49
+00:02:30,574 --> 00:02:34,376
+the element like this or simply here, looking like that.
+
+50
+00:02:34,376 --> 00:02:37,178
+Something of course isn't a built
+
+51
+00:02:37,178 --> 00:02:40,480
+in element so I created my own one with that.
+
+52
+00:02:40,480 --> 00:02:42,477
+However you wanna make sure that
+
+53
+00:02:42,477 --> 00:02:44,475
+you have a unique selector here.
+
+54
+00:02:44,475 --> 00:02:47,700
+You don't accidentally want to overwrite something.
+
+55
+00:02:47,700 --> 00:02:50,407
+So if I were to choose H1 well I would override
+
+56
+00:02:50,407 --> 00:02:53,649
+all H1 elements, certainly not what I want.
+
+57
+00:02:53,649 --> 00:02:57,012
+Or if I would choose something else which a third party
+
+58
+00:02:57,012 --> 00:03:00,622
+package I use might also use that would also be bad.
+
+59
+00:03:00,622 --> 00:03:03,538
+So prefix it with something which makes it unique.
+
+60
+00:03:03,538 --> 00:03:05,538
+That could be app or my.
+
+61
+00:03:07,284 --> 00:03:10,452
+Now here I will use app and then message
+
+62
+00:03:10,452 --> 00:03:13,962
+and this allows me to use app message to insert
+
+63
+00:03:13,962 --> 00:03:16,635
+this component into my code.
+
+64
+00:03:16,635 --> 00:03:20,436
+Of course, I also need to point to my template URL,
+
+65
+00:03:20,436 --> 00:03:24,216
+and here write dot slash to make this a relative path
+
+66
+00:03:24,216 --> 00:03:27,633
+and then point to message component html.
+
+67
+00:03:29,748 --> 00:03:33,354
+With this set up I get my basic component
+
+68
+00:03:33,354 --> 00:03:36,622
+and now the thing left is to hook it up in my app
+
+69
+00:03:36,622 --> 00:03:39,675
+component which remember is my route component.
+
+70
+00:03:39,675 --> 00:03:43,091
+I will add all other components to my app component,
+
+71
+00:03:43,091 --> 00:03:46,356
+not to the index hps file, in which you won't find them
+
+72
+00:03:46,356 --> 00:03:49,947
+there because it only knows how to start this app component.
+
+73
+00:03:49,947 --> 00:03:52,980
+Remember, we're telling it here in the boot strap array.
+
+74
+00:03:52,980 --> 00:03:56,974
+So instead we need to add it here in the app component now.
+
+75
+00:03:56,974 --> 00:04:00,449
+So here I simply enter app message which is the selector
+
+76
+00:04:00,449 --> 00:04:04,308
+adjusts it up to render this new component in this route
+
+77
+00:04:04,308 --> 00:04:08,225
+component which will hold my entire application.
+
+78
+00:04:08,225 --> 00:04:10,107
+Though there's one thing missing.
+
+79
+00:04:10,107 --> 00:04:12,545
+If I do it like this, it would not work,
+
+80
+00:04:12,545 --> 00:04:14,561
+because angular two would still not
+
+81
+00:04:14,561 --> 00:04:16,558
+be aware of the message component.
+
+82
+00:04:16,558 --> 00:04:20,168
+By default it doesn't scan all your files for selectors
+
+83
+00:04:20,168 --> 00:04:21,874
+which is great because that would
+
+84
+00:04:21,874 --> 00:04:23,737
+really be a performance hit.
+
+85
+00:04:23,737 --> 00:04:27,060
+Instead we have to make it aware of our new component,
+
+86
+00:04:27,060 --> 00:04:29,860
+and we just do so in the app module file.
+
+87
+00:04:29,860 --> 00:04:33,243
+Remember that I told you that here we would register
+
+88
+00:04:33,243 --> 00:04:36,544
+everything which makes up our application?
+
+89
+00:04:36,544 --> 00:04:38,504
+The message component is one of these
+
+90
+00:04:38,504 --> 00:04:40,904
+things which make up our application.
+
+91
+00:04:40,904 --> 00:04:43,611
+So we have to edit here in the declarations array
+
+92
+00:04:43,611 --> 00:04:46,126
+which is the place where you add all new components
+
+93
+00:04:46,126 --> 00:04:48,602
+or directives or pipes you want to use.
+
+94
+00:04:48,602 --> 00:04:51,693
+Here I will add the message component
+
+95
+00:04:51,693 --> 00:04:55,342
+and you also need to add the import to the messages
+
+96
+00:04:55,342 --> 00:04:58,280
+slash message dot component file.
+
+97
+00:04:58,280 --> 00:05:00,737
+Without a file extension, that's important,
+
+98
+00:05:00,737 --> 00:05:04,232
+you always create these imports without a file extension.
+
+99
+00:05:04,232 --> 00:05:06,762
+With this in place let's save this,
+
+100
+00:05:06,762 --> 00:05:11,451
+and this should trigger the rendering of the application,
+
+101
+00:05:11,451 --> 00:05:14,600
+and then if we go over to the application and reload it
+
+102
+00:05:14,600 --> 00:05:18,171
+you now see the message again but the input field is gone,
+
+103
+00:05:18,171 --> 00:05:20,475
+and all the content of course.
+
+104
+00:05:20,475 --> 00:05:23,662
+And all of these buttons are back on the left.
+
+105
+00:05:23,662 --> 00:05:25,177
+I'll work on the contents soon
+
+106
+00:05:25,177 --> 00:05:27,387
+but let's first edit the styling.
+
+107
+00:05:27,387 --> 00:05:29,189
+The styling is missing because
+
+108
+00:05:29,189 --> 00:05:31,188
+it's set up here in the app component here.
+
+109
+00:05:31,188 --> 00:05:34,952
+I explained it belongs to the component where we set it up
+
+110
+00:05:34,952 --> 00:05:38,964
+and even though message component is a child component
+
+111
+00:05:38,964 --> 00:05:42,382
+of app component, that are a lot of components,
+
+112
+00:05:42,382 --> 00:05:46,395
+because we set it up here in the app component template.
+
+113
+00:05:46,395 --> 00:05:49,371
+It still is contained to the app component.
+
+114
+00:05:49,371 --> 00:05:51,310
+It's not working this way that it
+
+115
+00:05:51,310 --> 00:05:53,940
+would travel down the child route.
+
+116
+00:05:53,940 --> 00:05:56,724
+Note, it still only belongs to the app component,
+
+117
+00:05:56,724 --> 00:06:00,161
+so if we want to move this styling over to the message
+
+118
+00:06:00,161 --> 00:06:03,886
+component, I have to cut it here and insert it here,
+
+119
+00:06:03,886 --> 00:06:07,609
+and with this if I reload the application after rendering,
+
+120
+00:06:07,609 --> 00:06:11,777
+after re-rendering you see now that it moved over there.
+
+121
+00:06:11,777 --> 00:06:13,427
+So the styling is back,
+
+122
+00:06:13,427 --> 00:06:16,232
+but of course the content is still missing.
+
+123
+00:06:16,232 --> 00:06:19,707
+Now we could fix this by simply copying this message
+
+124
+00:06:19,707 --> 00:06:22,241
+property over to the message component
+
+125
+00:06:22,241 --> 00:06:24,142
+but I don't want to do this.
+
+126
+00:06:24,142 --> 00:06:27,691
+I'll show you a different way and with that the last forms
+
+127
+00:06:27,691 --> 00:06:30,608
+of data binding in the next videos.
+

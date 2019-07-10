@@ -1,0 +1,44 @@
+1
+00:00:01,518 --> 00:00:03,101
+<v ->Throughout this course and the project,</v>
+
+2
+00:00:03,101 --> 00:00:04,484
+we both, throughout this course,
+
+3
+00:00:04,484 --> 00:00:07,456
+we used a seed project I supplied to you.
+
+4
+00:00:07,456 --> 00:00:10,624
+Now maybe you're interested in how this project was set up,
+
+5
+00:00:10,624 --> 00:00:12,977
+and how you may set up your own project,
+
+6
+00:00:12,977 --> 00:00:15,461
+or built up on this project, and extend it,
+
+7
+00:00:15,461 --> 00:00:17,209
+change it to your needs.
+
+8
+00:00:17,209 --> 00:00:18,982
+Therefore, in this module I will show you
+
+9
+00:00:18,982 --> 00:00:21,761
+how I created the seed project for this course,
+
+10
+00:00:21,761 --> 00:00:24,891
+and how I set up the boat proses we used here.
+
+11
+00:00:24,891 --> 00:00:26,141
+So let's start.
+

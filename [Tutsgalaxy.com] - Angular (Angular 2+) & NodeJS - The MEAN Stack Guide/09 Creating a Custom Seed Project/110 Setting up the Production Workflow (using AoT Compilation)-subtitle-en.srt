@@ -1,0 +1,1080 @@
+1
+00:00:01,731 --> 00:00:03,699
+<v ->So we finished the development workflow.</v>
+
+2
+00:00:03,699 --> 00:00:05,457
+Let's work on the production one now.
+
+3
+00:00:05,457 --> 00:00:08,688
+I will use ahead-of-time, offline, compilation,
+
+4
+00:00:08,688 --> 00:00:11,888
+and for that I will create a new tsconfig file
+
+5
+00:00:11,888 --> 00:00:15,389
+to be able to set up a specific configuration
+
+6
+00:00:15,389 --> 00:00:17,451
+for the typescript compilation for that,
+
+7
+00:00:17,451 --> 00:00:20,339
+because we will use the Angular 2 compiler for that,
+
+8
+00:00:20,339 --> 00:00:23,348
+and this compiler needs some specific options,
+
+9
+00:00:23,348 --> 00:00:26,429
+and the defaults that I wouldn't do for that.
+
+10
+00:00:26,429 --> 00:00:30,899
+The first thing is the module will be changed to "es2015"
+
+11
+00:00:30,899 --> 00:00:33,579
+to use es6 modules here.
+
+12
+00:00:33,579 --> 00:00:36,421
+I'll leave the target at "es5" though.
+
+13
+00:00:36,421 --> 00:00:40,320
+No noImplicitAny and sourceMap, that can stay as it is,
+
+14
+00:00:40,320 --> 00:00:44,400
+the decorator options here should also stay as they are,
+
+15
+00:00:44,400 --> 00:00:47,483
+but now, I want to set up the outDir,
+
+16
+00:00:48,821 --> 00:00:50,611
+which means the directory
+
+17
+00:00:50,611 --> 00:00:53,760
+where we store the files we create.
+
+18
+00:00:53,760 --> 00:00:55,930
+Before, we managed this through Webpack,
+
+19
+00:00:55,930 --> 00:00:58,629
+now we will use the Angular CLI compiler,
+
+20
+00:00:58,629 --> 00:01:03,011
+so here I will need to configure this in the gsconfig file,
+
+21
+00:01:03,011 --> 00:01:07,080
+and I want to store it in the public folder,
+
+22
+00:01:07,080 --> 00:01:09,200
+and there in each Javascript folder.
+
+23
+00:01:09,200 --> 00:01:10,919
+This will only be temporarily,
+
+24
+00:01:10,919 --> 00:01:12,240
+I will clean this up,
+
+25
+00:01:12,240 --> 00:01:16,280
+but the compiler is a two-step process or runs in two steps,
+
+26
+00:01:16,280 --> 00:01:18,738
+and therefore it needs to write some temporary files
+
+27
+00:01:18,738 --> 00:01:21,000
+which I want to store there.
+
+28
+00:01:21,000 --> 00:01:24,320
+Now the exclude folders here are fine,
+
+29
+00:01:24,320 --> 00:01:26,858
+or the exclude files here are fine.
+
+30
+00:01:26,858 --> 00:01:30,968
+I will add one other file, though, or one other folder.
+
+31
+00:01:30,968 --> 00:01:33,389
+In the assets folder, I want
+
+32
+00:01:33,389 --> 00:01:36,056
+to ignore the polyfills.ts file.
+
+33
+00:01:36,920 --> 00:01:39,769
+I don't want to compile this with the Angular 2 compiler,
+
+34
+00:01:39,769 --> 00:01:41,770
+because it's not directly connected
+
+35
+00:01:41,770 --> 00:01:43,141
+to my Angular 2 application.
+
+36
+00:01:43,141 --> 00:01:45,946
+It's not using the Angular 2 framework.
+
+37
+00:01:45,946 --> 00:01:49,363
+Then I'll add the angularCompilerOptions.
+
+38
+00:01:50,469 --> 00:01:53,970
+These are some options specific to the Angular 2 compiler,
+
+39
+00:01:53,970 --> 00:01:57,220
+and here I need to add skipMetadataEmit
+
+40
+00:01:58,107 --> 00:02:00,301
+and set it to true.
+
+41
+00:02:00,301 --> 00:02:03,309
+With this setup, I can use the Angular 2 compiler,
+
+42
+00:02:03,309 --> 00:02:05,580
+we already installed it here,
+
+43
+00:02:05,580 --> 00:02:08,147
+in the package.json, you can see it.
+
+44
+00:02:08,147 --> 00:02:11,061
+So with that, we should set up our webpack.config file,
+
+45
+00:02:11,061 --> 00:02:13,658
+and then set up the bulk process script.
+
+46
+00:02:13,658 --> 00:02:16,661
+So let's go to the webpack.config.prod file now.
+
+47
+00:02:16,661 --> 00:02:20,970
+In here, I will first import Webpack again,
+
+48
+00:02:20,970 --> 00:02:25,069
+because I will need to access some of its plugins later on.
+
+49
+00:02:25,069 --> 00:02:28,490
+I will also need webpackMerge because I still want
+
+50
+00:02:28,490 --> 00:02:30,573
+to use the common config,
+
+51
+00:02:31,981 --> 00:02:36,130
+and therefore I will also copy the import here
+
+52
+00:02:36,130 --> 00:02:40,986
+from my dev config file, where I import the commonConfig.
+
+53
+00:02:40,986 --> 00:02:42,653
+I can then export...
+
+54
+00:02:45,055 --> 00:02:47,817
+the webpackMerge function,
+
+55
+00:02:47,817 --> 00:02:51,897
+but here, I will actually call the smart function,
+
+56
+00:02:51,897 --> 00:02:54,468
+webpackMerge.smart ,
+
+57
+00:02:54,468 --> 00:02:57,188
+which means it will not only merge it
+
+58
+00:02:57,188 --> 00:02:59,687
+and override anything in the commonConfig
+
+59
+00:02:59,687 --> 00:03:02,068
+with the config I set up here,
+
+60
+00:03:02,068 --> 00:03:04,026
+but especially for the loaders
+
+61
+00:03:04,026 --> 00:03:05,788
+which I will adjust a little bit,
+
+62
+00:03:05,788 --> 00:03:07,068
+it will merge them,
+
+63
+00:03:07,068 --> 00:03:08,988
+and not just take the loaders I set up here
+
+64
+00:03:08,988 --> 00:03:11,525
+and override all loaders in the other file,
+
+65
+00:03:11,525 --> 00:03:14,348
+but only override the differences.
+
+66
+00:03:14,348 --> 00:03:17,315
+So we'll pass the commonConfig and then my config here
+
+67
+00:03:17,315 --> 00:03:19,646
+as a Javascript object,
+
+68
+00:03:19,646 --> 00:03:23,835
+and the first thing which changes is the entry file.
+
+69
+00:03:23,835 --> 00:03:27,335
+The entry for my application is no longer,
+
+70
+00:03:29,234 --> 00:03:32,571
+./assets/app/main.ts,
+
+71
+00:03:32,571 --> 00:03:36,414
+it's now main.aot.ts, and I will create this file
+
+72
+00:03:36,414 --> 00:03:37,414
+in a second.
+
+73
+00:03:38,813 --> 00:03:40,925
+This file will import
+
+74
+00:03:40,925 --> 00:03:43,646
+or will bootstrap the Angular 2 application differently,
+
+75
+00:03:43,646 --> 00:03:46,905
+and we need this different bootstrap process.
+
+76
+00:03:46,905 --> 00:03:51,072
+Next, the output, while this is relatively comparable,
+
+77
+00:03:52,806 --> 00:03:56,889
+or relatively the same, I can copy it from there.
+
+78
+00:03:59,835 --> 00:04:03,460
+Only thing is, here, for the chunks, I also want
+
+79
+00:04:03,460 --> 00:04:05,113
+to add a hash value,
+
+80
+00:04:05,113 --> 00:04:07,153
+though it should work without that, too,
+
+81
+00:04:07,153 --> 00:04:08,633
+but that's the difference here.
+
+82
+00:04:08,633 --> 00:04:12,352
+And that now leads to the module and the loaders we use.
+
+83
+00:04:12,352 --> 00:04:14,582
+Now as I said, due to the smart option,
+
+84
+00:04:14,582 --> 00:04:16,371
+I'm not overriding all the loaders,
+
+85
+00:04:16,371 --> 00:04:19,321
+only the changes or the differences.
+
+86
+00:04:19,321 --> 00:04:22,131
+So here, my loaders, which is an array,
+
+87
+00:04:22,131 --> 00:04:24,940
+I only want to override the loader
+
+88
+00:04:24,940 --> 00:04:27,190
+testing my TypeScript code.
+
+89
+00:04:28,409 --> 00:04:31,241
+So my TypeScript files, like this.
+
+90
+00:04:31,241 --> 00:04:35,408
+Here, I want to set up the same loaders as before generally,
+
+91
+00:04:38,281 --> 00:04:40,781
+so I will copy this code here.
+
+92
+00:04:43,679 --> 00:04:45,179
+Oops, delete that.
+
+93
+00:04:46,649 --> 00:04:51,110
+But for the router loader, I need to pass some options,
+
+94
+00:04:51,110 --> 00:04:54,214
+because now we're in the ahead-of-time compilation mode,
+
+95
+00:04:54,214 --> 00:04:56,800
+and I need to tell this loader this.
+
+96
+00:04:56,800 --> 00:04:59,550
+So here I will say aot=true,
+
+97
+00:05:00,938 --> 00:05:03,789
+and the genDir option is set
+
+98
+00:05:03,789 --> 00:05:06,688
+to the temporary place where I store these files
+
+99
+00:05:06,688 --> 00:05:07,888
+during compilation.
+
+100
+00:05:07,888 --> 00:05:12,768
+Remember in my tsconfig.aot file, I set outDir to public/js,
+
+101
+00:05:12,768 --> 00:05:16,935
+so here I will then set genDir to public/js,
+
+102
+00:05:17,978 --> 00:05:19,189
+and now /app.
+
+103
+00:05:19,189 --> 00:05:22,828
+I also wanna adjust the plugins here a little bit,
+
+104
+00:05:22,828 --> 00:05:25,297
+so I will add some plugins.
+
+105
+00:05:25,297 --> 00:05:28,880
+The first one is the webpack.NoErrorsPlugin
+
+106
+00:05:29,887 --> 00:05:32,627
+for some error handling during the bulk process.
+
+107
+00:05:32,627 --> 00:05:35,260
+And the second one, very importantly,
+
+108
+00:05:35,260 --> 00:05:38,239
+is an optimization plugin,
+
+109
+00:05:38,239 --> 00:05:39,822
+the UglifyJsPlugin,
+
+110
+00:05:41,380 --> 00:05:43,297
+used to minify my code.
+
+111
+00:05:44,319 --> 00:05:47,100
+Here I will set sourceMap to false,
+
+112
+00:05:47,100 --> 00:05:50,039
+and you can, if you're familiar with the options,
+
+113
+00:05:50,039 --> 00:05:53,001
+of course, adjust this to your needs.
+
+114
+00:05:53,001 --> 00:05:57,494
+With that, I'm uglifying and minifying my Javascript code.
+
+115
+00:05:57,494 --> 00:06:01,414
+A missing thing, of course, is the main.aot.ts file
+
+116
+00:06:01,414 --> 00:06:03,145
+to which I'm referencing here.
+
+117
+00:06:03,145 --> 00:06:06,345
+So in the app folder, in my assets folder,
+
+118
+00:06:06,345 --> 00:06:08,966
+I will create this file.
+
+119
+00:06:08,966 --> 00:06:12,526
+I will copy the code from my main.ts file
+
+120
+00:06:12,526 --> 00:06:16,086
+into this file here, in the main.aot file,
+
+121
+00:06:16,086 --> 00:06:18,515
+but the bootstrap process now differs.
+
+122
+00:06:18,515 --> 00:06:19,875
+We're no longer importing something
+
+123
+00:06:19,875 --> 00:06:22,406
+from platform-browser-dynamic.
+
+124
+00:06:22,406 --> 00:06:25,953
+Instead, we're importing from @angular/platform-browser,
+
+125
+00:06:25,953 --> 00:06:30,166
+and the thing we're importing is the platformBrowser object
+
+126
+00:06:30,166 --> 00:06:32,235
+or function here.
+
+127
+00:06:32,235 --> 00:06:36,755
+I also want to call "enableProdMode " here,
+
+128
+00:06:36,755 --> 00:06:40,594
+and to be able to do so, I need to import this as well,
+
+129
+00:06:40,594 --> 00:06:44,307
+so I will import { enableProdMode }
+
+130
+00:06:44,307 --> 00:06:47,390
+from @angular, and here, it's "core".
+
+131
+00:06:48,387 --> 00:06:50,947
+This will disable debugging messages,
+
+132
+00:06:50,947 --> 00:06:52,816
+and do some other things we don't want
+
+133
+00:06:52,816 --> 00:06:55,216
+in a production application.
+
+134
+00:06:55,216 --> 00:06:58,437
+Well, down here, I now use platformBrowser ,
+
+135
+00:06:58,437 --> 00:07:01,936
+and call bootstrapModuleFactory ,
+
+136
+00:07:01,936 --> 00:07:04,686
+and I pass AppModuleFactory here.
+
+137
+00:07:05,877 --> 00:07:10,404
+Now that is a file, a module I don't actually have yet,
+
+138
+00:07:10,404 --> 00:07:13,643
+but it will be created during this bulk process.
+
+139
+00:07:13,643 --> 00:07:15,336
+It will be deleted thereafter,
+
+140
+00:07:15,336 --> 00:07:16,885
+because it's a temporary file,
+
+141
+00:07:16,885 --> 00:07:18,765
+which I don't need all the time,
+
+142
+00:07:18,765 --> 00:07:19,965
+but during the process,
+
+143
+00:07:19,965 --> 00:07:22,205
+at the point of time this file comes into play,
+
+144
+00:07:22,205 --> 00:07:23,488
+it will be there.
+
+145
+00:07:23,488 --> 00:07:25,347
+So based on this knowledge,
+
+146
+00:07:25,347 --> 00:07:28,014
+I can import AppModuleNgFactory,
+
+147
+00:07:30,267 --> 00:07:31,648
+as the name actually is,
+
+148
+00:07:31,648 --> 00:07:35,539
+so adjust it down there to AppModuleNgFactory,
+
+149
+00:07:35,539 --> 00:07:39,706
+and it can be imported from the app.module.ngfactory file.
+
+150
+00:07:40,838 --> 00:07:43,059
+Again, this file doesn't exist right now,
+
+151
+00:07:43,059 --> 00:07:45,848
+it doesn't exist before and after the bulk process,
+
+152
+00:07:45,848 --> 00:07:49,358
+but it will be created during the bulk process.
+
+153
+00:07:49,358 --> 00:07:51,387
+With this file being set up,
+
+154
+00:07:51,387 --> 00:07:53,185
+with the webpack.config being set up,
+
+155
+00:07:53,185 --> 00:07:55,958
+and with the tsconfig.aot file being set up,
+
+156
+00:07:55,958 --> 00:07:58,339
+we can now go to the package.json
+
+157
+00:07:58,339 --> 00:08:00,979
+and add the production script,
+
+158
+00:08:00,979 --> 00:08:04,939
+so that we are able to run this workload.
+
+159
+00:08:04,939 --> 00:08:08,446
+I'll name the production script "build:prod"
+
+160
+00:08:08,446 --> 00:08:09,987
+and the first thing is,
+
+161
+00:08:09,987 --> 00:08:13,487
+I will also clean my public.js app folder,
+
+162
+00:08:14,488 --> 00:08:16,387
+so I'm copying this.
+
+163
+00:08:16,387 --> 00:08:18,928
+Thereafter, I will run the Angular 2 compiler,
+
+164
+00:08:18,928 --> 00:08:21,267
+which I do by running ngc.
+
+165
+00:08:21,267 --> 00:08:24,956
+This is available because we installed it in this project.
+
+166
+00:08:24,956 --> 00:08:28,918
+"ngc" and I will point to with the -p option,
+
+167
+00:08:28,918 --> 00:08:32,501
+I will point to the tsconfig.aot.json file,
+
+168
+00:08:33,408 --> 00:08:37,248
+so that it uses this file to get its options.
+
+169
+00:08:37,248 --> 00:08:40,137
+And thereafter, and this might look strange,
+
+170
+00:08:40,137 --> 00:08:42,088
+but this is the setup I currently use,
+
+171
+00:08:42,088 --> 00:08:44,179
+I will run the same thing again.
+
+172
+00:08:44,179 --> 00:08:45,739
+Why do I do that?
+
+173
+00:08:45,739 --> 00:08:48,379
+Because the compiler is a two step,
+
+174
+00:08:48,379 --> 00:08:50,307
+or runs through a two step process.
+
+175
+00:08:50,307 --> 00:08:53,057
+First, it will create these factories,
+
+176
+00:08:53,057 --> 00:08:56,408
+the factory we're importing there, which isn't there yet,
+
+177
+00:08:56,408 --> 00:08:58,145
+and in the second step,
+
+178
+00:08:58,145 --> 00:09:00,547
+it will then take all these factories,
+
+179
+00:09:00,547 --> 00:09:04,387
+and basically strip out all the things we don't need.
+
+180
+00:09:04,387 --> 00:09:06,947
+Strip out the Angular 2 compiler, for example.
+
+181
+00:09:06,947 --> 00:09:10,326
+So give us an application, some Javascript files,
+
+182
+00:09:10,326 --> 00:09:13,328
+which we then can bundle with Webpack into one file,
+
+183
+00:09:13,328 --> 00:09:16,078
+which only has the things in it we need.
+
+184
+00:09:16,078 --> 00:09:18,518
+This is why I need to run this twice here.
+
+185
+00:09:18,518 --> 00:09:20,339
+You might use a different setup,
+
+186
+00:09:20,339 --> 00:09:23,857
+this is the one I chose here, and which works just fine.
+
+187
+00:09:23,857 --> 00:09:26,579
+Next, I will call webpack --config
+
+188
+00:09:26,579 --> 00:09:30,162
+to point to the webpack.config.aot.js file.
+
+189
+00:09:35,438 --> 00:09:39,605
+And then here, I'll again add --progress --profile,
+
+190
+00:09:41,587 --> 00:09:44,567
+and I don't add watch because I don't want to watch,
+
+191
+00:09:44,567 --> 00:09:48,419
+but I will add --bail so that it fails on errors.
+
+192
+00:09:48,419 --> 00:09:50,888
+And thereafter, it's time to do some cleanup.
+
+193
+00:09:50,888 --> 00:09:53,347
+With the del tool here again,
+
+194
+00:09:53,347 --> 00:09:57,746
+I will delete the public/js/ folder,
+
+195
+00:09:57,746 --> 00:09:59,356
+all the Javascript files in there,
+
+196
+00:09:59,356 --> 00:10:02,678
+so all these temporary files which were created.
+
+197
+00:10:02,678 --> 00:10:06,261
+I also want to delete all the .js.map files
+
+198
+00:10:08,738 --> 00:10:11,425
+which were created, all source map files,
+
+199
+00:10:11,425 --> 00:10:14,027
+and both options should be run on the app/ folder,
+
+200
+00:10:14,027 --> 00:10:16,728
+and then any sub-folder therein.
+
+201
+00:10:16,728 --> 00:10:20,939
+So let me add this js/app and then any sub-folder.
+
+202
+00:10:20,939 --> 00:10:22,516
+Now, rightfully, you would ask,
+
+203
+00:10:22,516 --> 00:10:24,659
+"Doesn't this lead our bundle as well?"
+
+204
+00:10:24,659 --> 00:10:26,059
+And yes, it will.
+
+205
+00:10:26,059 --> 00:10:30,048
+So I'll add another argument to this del command,
+
+206
+00:10:30,048 --> 00:10:32,219
+with an exclamation mark at the beginning, where I say,
+
+207
+00:10:32,219 --> 00:10:34,499
+"Don't delete this, though."
+
+208
+00:10:34,499 --> 00:10:39,387
+And here I'm pointing to public/js/app/bundle.js,
+
+209
+00:10:39,387 --> 00:10:42,299
+and also we don't want to delete any of our chunks,
+
+210
+00:10:42,299 --> 00:10:44,466
+if we use lazy loading,
+
+211
+00:10:44,466 --> 00:10:48,633
+so we'll also exclude any public/js/app/,
+
+212
+00:10:50,299 --> 00:10:52,867
+anything .chunk.js file,
+
+213
+00:10:52,867 --> 00:10:56,067
+so that our bundled application doesn't get deleted.
+
+214
+00:10:56,067 --> 00:10:59,208
+Finally, I want to do some cleanup in the assets folder.
+
+215
+00:10:59,208 --> 00:11:03,235
+There, the ngc command will create these factories,
+
+216
+00:11:03,235 --> 00:11:07,318
+so here I will delete all files in any sub-folder
+
+217
+00:11:09,407 --> 00:11:13,074
+which have ngfactory.ts as a file extension,
+
+218
+00:11:14,907 --> 00:11:17,438
+and as a last step, and then we're done,
+
+219
+00:11:17,438 --> 00:11:21,117
+I wanna delete all files in the app folder,
+
+220
+00:11:21,117 --> 00:11:24,488
+in the assets folder, or in any sub-folder therein,
+
+221
+00:11:24,488 --> 00:11:26,288
+which have shim.ts added.
+
+222
+00:11:26,288 --> 00:11:29,608
+All the file which will get created during the compilation.
+
+223
+00:11:29,608 --> 00:11:32,636
+So that's rather long, mostly due to the cleanup process,
+
+224
+00:11:32,636 --> 00:11:35,128
+but with that, we should have a clean process.
+
+225
+00:11:35,128 --> 00:11:38,128
+And if I now run npm run build:Prod,
+
+226
+00:11:40,719 --> 00:11:42,219
+like that,
+
+227
+00:11:42,219 --> 00:11:46,099
+we should hopefully get a successfully built application,
+
+228
+00:11:46,099 --> 00:11:48,270
+and as I say it, it fails.
+
+229
+00:11:48,270 --> 00:11:50,870
+The reason for this failing process can be found here,
+
+230
+00:11:50,870 --> 00:11:53,340
+in a tsconfig.aot file.
+
+231
+00:11:53,340 --> 00:11:56,569
+For one, I need to add /app here at the outDir,
+
+232
+00:11:56,569 --> 00:11:58,942
+and I also need to add one other option,
+
+233
+00:11:58,942 --> 00:12:03,792
+the "moduleResolution", so how modules are resolved,
+
+234
+00:12:03,792 --> 00:12:06,091
+should be set to "node".
+
+235
+00:12:06,091 --> 00:12:08,515
+And additionally, in the package.json file,
+
+236
+00:12:08,515 --> 00:12:10,785
+I recognised that here,
+
+237
+00:12:10,785 --> 00:12:13,035
+I'm trying to call webpack.confic.aot,
+
+238
+00:12:13,035 --> 00:12:15,665
+but it of course is prod.
+
+239
+00:12:15,665 --> 00:12:16,985
+And last but not least,
+
+240
+00:12:16,985 --> 00:12:18,955
+we need to adjust the css loader here
+
+241
+00:12:18,955 --> 00:12:21,122
+to also add a dollar sign.
+
+242
+00:12:21,995 --> 00:12:24,502
+These are the tiny things that add up,
+
+243
+00:12:24,502 --> 00:12:26,497
+once you go through such a workflow setup,
+
+244
+00:12:26,497 --> 00:12:30,748
+not too uncommon to find such tiny errors, though.
+
+245
+00:12:30,748 --> 00:12:34,828
+And with that, if we run np and run bulk prod, a final time,
+
+246
+00:12:34,828 --> 00:12:36,846
+now it should, hopefully,
+
+247
+00:12:36,846 --> 00:12:39,425
+work with all these little errors fixed.
+
+248
+00:12:39,425 --> 00:12:41,412
+So let's see, this will take a couple of seconds.
+
+249
+00:12:41,412 --> 00:12:43,183
+I'll be back once it is finished.
+
+250
+00:12:43,183 --> 00:12:44,145
+That looks good.
+
+251
+00:12:44,145 --> 00:12:45,574
+Set up finished successfully.
+
+252
+00:12:45,574 --> 00:12:49,225
+Let me start up my server with npm start,
+
+253
+00:12:49,225 --> 00:12:51,945
+and then let's head over there and reload.
+
+254
+00:12:51,945 --> 00:12:53,974
+You see the same as before, which is great,
+
+255
+00:12:53,974 --> 00:12:55,865
+because it means now it works too,
+
+256
+00:12:55,865 --> 00:12:59,046
+with our ahead-of-time compiled code,
+
+257
+00:12:59,046 --> 00:13:02,943
+which we can also see if we reload at the bundle size,
+
+258
+00:13:02,943 --> 00:13:04,414
+which is much smaller.
+
+259
+00:13:04,414 --> 00:13:06,774
+Keep in mind, this is not G-sieved,
+
+260
+00:13:06,774 --> 00:13:08,894
+so this is not optimised at all.
+
+261
+00:13:08,894 --> 00:13:12,844
+We can G-sieve this to get it down to even a smaller size.
+
+262
+00:13:12,844 --> 00:13:14,516
+And with that, we got our setup,
+
+263
+00:13:14,516 --> 00:13:17,253
+we got the seed project I use throughout this course,
+
+264
+00:13:17,253 --> 00:13:19,004
+both from scratch, on our own.
+
+265
+00:13:19,004 --> 00:13:20,084
+You also saw some errors,
+
+266
+00:13:20,084 --> 00:13:22,414
+which I think is not that bad to see,
+
+267
+00:13:22,414 --> 00:13:26,025
+because it are these tiny things you forget here and there,
+
+268
+00:13:26,025 --> 00:13:29,265
+and therefore not too bad to see them fixed, too.
+
+269
+00:13:29,265 --> 00:13:31,134
+Wish you fun with the setup,
+
+270
+00:13:31,134 --> 00:13:33,801
+and see you in the other videos.
+

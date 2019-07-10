@@ -1,0 +1,548 @@
+1
+00:00:01,588 --> 00:00:03,291
+<v Instructor>So in the last video, we had a look at this</v>
+
+2
+00:00:03,291 --> 00:00:06,227
+in HBS file, and I explained that this is the single file
+
+3
+00:00:06,227 --> 00:00:08,467
+getting served through our server,
+
+4
+00:00:08,467 --> 00:00:10,219
+and which is responsible for loading
+
+5
+00:00:10,219 --> 00:00:12,360
+our Angular 2 application, and this is true.
+
+6
+00:00:12,360 --> 00:00:15,440
+However, what does this file do, how is the Angular 2
+
+7
+00:00:15,440 --> 00:00:18,531
+application getting started, now that we serve this file
+
+8
+00:00:18,531 --> 00:00:20,189
+to the client?
+
+9
+00:00:20,189 --> 00:00:23,611
+We have this my app loading thing, and below this
+
+10
+00:00:23,611 --> 00:00:26,371
+strange element here, which clearly is not
+
+11
+00:00:26,371 --> 00:00:28,679
+a built-in HTML file element,
+
+12
+00:00:28,679 --> 00:00:32,341
+we import our script, our bundle.js file here,
+
+13
+00:00:32,341 --> 00:00:34,840
+which I told you holds our application.
+
+14
+00:00:34,840 --> 00:00:37,240
+So since this is the only script we're importing,
+
+15
+00:00:37,240 --> 00:00:41,171
+it looks like this script holds everything we need.
+
+16
+00:00:41,171 --> 00:00:44,680
+It holds everything we develop in this assets app folder,
+
+17
+00:00:44,680 --> 00:00:48,301
+plus the Angular 2 framework itself and the one
+
+18
+00:00:48,301 --> 00:00:51,112
+where all the code off the framework we used at least,
+
+19
+00:00:51,112 --> 00:00:52,945
+not code we don't use.
+
+20
+00:00:55,112 --> 00:00:57,931
+In this folder, we see a couple of files,
+
+21
+00:00:57,931 --> 00:01:01,689
+some app component files, app module,
+
+22
+00:01:01,689 --> 00:01:06,680
+two main files, the main.aot file, will ignore that for now.
+
+23
+00:01:06,680 --> 00:01:10,112
+It is related to optimising our application later
+
+24
+00:01:10,112 --> 00:01:12,792
+when we're building it for production,
+
+25
+00:01:12,792 --> 00:01:15,211
+and a polyfills.ts file.
+
+26
+00:01:15,211 --> 00:01:17,400
+Now, let's start with the polyfills.ts file.
+
+27
+00:01:17,400 --> 00:01:20,181
+It simply imports some, well, polyfills we'll need
+
+28
+00:01:20,181 --> 00:01:24,480
+for our application to run, and, well, basically all of this
+
+29
+00:01:24,480 --> 00:01:28,950
+up here is that we do import the polyfills we need
+
+30
+00:01:28,950 --> 00:01:31,891
+so that later when the application runs, it runs fine
+
+31
+00:01:31,891 --> 00:01:33,581
+on multiple browsers.
+
+32
+00:01:33,581 --> 00:01:36,991
+The important file for us, though, is the main.ts file.
+
+33
+00:01:36,991 --> 00:01:40,080
+This is the file where not only import these polyfills,
+
+34
+00:01:40,080 --> 00:01:43,189
+it also is the file where I bootstrap the application,
+
+35
+00:01:43,189 --> 00:01:46,581
+which means where I start the Angular 2 application.
+
+36
+00:01:46,581 --> 00:01:49,101
+You don't see it in the index.hbs file,
+
+37
+00:01:49,101 --> 00:01:52,741
+but the main.ts file, or the code in the main.ts file,
+
+38
+00:01:52,741 --> 00:01:55,189
+is the code which actually gets executed first
+
+39
+00:01:55,189 --> 00:01:59,920
+when we import this bundle here in the index.hbs file.
+
+40
+00:01:59,920 --> 00:02:03,349
+So, in this main.ts file, what are we doing?
+
+41
+00:02:03,349 --> 00:02:06,741
+Well, I'm importing two things: the platform browser dynamic
+
+42
+00:02:06,741 --> 00:02:10,069
+package from Angular 2, and my app module,
+
+43
+00:02:10,069 --> 00:02:11,989
+which lives in this app module file,
+
+44
+00:02:11,989 --> 00:02:13,891
+which I'll come back in a second.
+
+45
+00:02:13,891 --> 00:02:17,573
+And then I bootstrap this application by passing the app
+
+46
+00:02:17,573 --> 00:02:19,440
+module as an argument.
+
+47
+00:02:19,440 --> 00:02:21,640
+This is how you start up an Angular 2 application,
+
+48
+00:02:21,640 --> 00:02:23,091
+you have to bootstrap it.
+
+49
+00:02:23,091 --> 00:02:26,037
+You basically have to tell the framework, "Hey, here you go.
+
+50
+00:02:26,037 --> 00:02:27,989
+"Here's the new application", and I'm doing it
+
+51
+00:02:27,989 --> 00:02:29,489
+with this line.
+
+52
+00:02:29,489 --> 00:02:31,029
+Again, remember this is the first code
+
+53
+00:02:31,029 --> 00:02:32,968
+which will get executed.
+
+54
+00:02:32,968 --> 00:02:36,048
+So we somehow now kickoff our Angular 2 application,
+
+55
+00:02:36,048 --> 00:02:39,348
+but what happens in this app module which we seem to pass
+
+56
+00:02:39,348 --> 00:02:42,287
+as an argument, or which we're passing as an argument,
+
+57
+00:02:42,287 --> 00:02:44,497
+which seems to be important?
+
+58
+00:02:44,497 --> 00:02:48,807
+In this app module, I tell Angular 2 what my application
+
+59
+00:02:48,807 --> 00:02:49,807
+consists of.
+
+60
+00:02:50,741 --> 00:02:54,392
+Angular 2 has this concept of using modules
+
+61
+00:02:54,392 --> 00:02:57,891
+to possibly split other applications,
+
+62
+00:02:57,891 --> 00:02:59,659
+though you don't have to do this, you can also use
+
+63
+00:02:59,659 --> 00:03:02,381
+only one module, and for a lot of smaller to medium
+
+64
+00:03:02,381 --> 00:03:05,643
+sized applications, you will, but no matter if you split
+
+65
+00:03:05,643 --> 00:03:07,781
+it up or not, in this module, I define
+
+66
+00:03:07,781 --> 00:03:11,371
+what am I going to use in my application?
+
+67
+00:03:11,371 --> 00:03:14,179
+Which built-in modules which I might use
+
+68
+00:03:14,179 --> 00:03:17,811
+and/or which I might state in my imports area here?
+
+69
+00:03:17,811 --> 00:03:21,811
+Which custom components or directives or pipes
+
+70
+00:03:21,811 --> 00:03:24,051
+which I build throughout the application?
+
+71
+00:03:24,051 --> 00:03:25,491
+Of course, you will see this in this course.
+
+72
+00:03:25,491 --> 00:03:28,552
+Which of them add to the declarations area here?
+
+73
+00:03:28,552 --> 00:03:30,002
+Right now, we only have one component,
+
+74
+00:03:30,002 --> 00:03:32,310
+but this will grow throughout the course.
+
+75
+00:03:32,310 --> 00:03:35,272
+And then, in the bootstrap area, we tell Angular 2,
+
+76
+00:03:35,272 --> 00:03:39,100
+of all the things my application consists of,
+
+77
+00:03:39,100 --> 00:03:40,901
+and right now, it's only the app component and the
+
+78
+00:03:40,901 --> 00:03:43,931
+browser module here, but of all these things,
+
+79
+00:03:43,931 --> 00:03:47,769
+which component should be my root component,
+
+80
+00:03:47,769 --> 00:03:51,491
+which is responsible for holding my application,
+
+81
+00:03:51,491 --> 00:03:54,931
+what should be my root component which will hold
+
+82
+00:03:54,931 --> 00:03:57,781
+all my other applications, so basically, what should be
+
+83
+00:03:57,781 --> 00:04:01,963
+the component which you are aware of when starting off
+
+84
+00:04:01,963 --> 00:04:05,259
+the application, and you is Angular 2?
+
+85
+00:04:05,259 --> 00:04:07,483
+And here, this is the app component.
+
+86
+00:04:07,483 --> 00:04:10,288
+Now if we have a look at the app.component.ts file
+
+87
+00:04:10,288 --> 00:04:12,643
+which seems to hold this component,
+
+88
+00:04:12,643 --> 00:04:14,482
+then we see it's very lean too.
+
+89
+00:04:14,482 --> 00:04:16,570
+We got a empty class with no content.
+
+90
+00:04:16,570 --> 00:04:21,144
+But this class has the @component selector attached to it.
+
+91
+00:04:21,144 --> 00:04:25,043
+And this creates a component, it makes this normal
+
+92
+00:04:25,043 --> 00:04:27,793
+typescript class a component now.
+
+93
+00:04:28,762 --> 00:04:30,973
+Angular 2 works with components a lot.
+
+94
+00:04:30,973 --> 00:04:34,904
+You create your whole application from multiple components
+
+95
+00:04:34,904 --> 00:04:37,592
+so you put your application together by using
+
+96
+00:04:37,592 --> 00:04:42,002
+multiple components, and here, we create such a component.
+
+97
+00:04:42,002 --> 00:04:46,083
+A component can be set up very easy and lean as you see.
+
+98
+00:04:46,083 --> 00:04:48,763
+Here, we only set it up by passing the object,
+
+99
+00:04:48,763 --> 00:04:51,573
+which holds a selector, my-app,
+
+100
+00:04:51,573 --> 00:04:54,243
+and the URL to the template.
+
+101
+00:04:54,243 --> 00:04:56,333
+Each component needs to have a template
+
+102
+00:04:56,333 --> 00:04:58,453
+because a component will be something which in the end,
+
+103
+00:04:58,453 --> 00:05:01,881
+gets placed on the DOM, which gets rendered to the client
+
+104
+00:05:01,881 --> 00:05:05,413
+in the browser, therefore it needs to have some HTML code.
+
+105
+00:05:05,413 --> 00:05:09,093
+As you might tell, the HTML code lives in this app component
+
+106
+00:05:09,093 --> 00:05:11,260
+HTML file, this file here.
+
+107
+00:05:12,376 --> 00:05:15,064
+But before having a look at this file, let's have a look
+
+108
+00:05:15,064 --> 00:05:17,912
+at the my-app selector first.
+
+109
+00:05:17,912 --> 00:05:20,664
+Do you recognise this selector?
+
+110
+00:05:20,664 --> 00:05:23,963
+We saw it here in the index.hbs file, here.
+
+111
+00:05:23,963 --> 00:05:28,443
+So as we told Angular 2 in the app module, that we want
+
+112
+00:05:28,443 --> 00:05:32,944
+to start our application, with this app component in mind.
+
+113
+00:05:32,944 --> 00:05:36,013
+Angular 2 went to this app component file, had a look
+
+114
+00:05:36,013 --> 00:05:39,624
+at the component declaration here, and saw that the
+
+115
+00:05:39,624 --> 00:05:41,551
+selector of this component is my-app,
+
+116
+00:05:41,551 --> 00:05:45,795
+and it recognised the selector in the index.hbs file.
+
+117
+00:05:45,795 --> 00:05:48,992
+And therefore, it was able to place our content
+
+118
+00:05:48,992 --> 00:05:53,192
+in the place of this my-app element, which leads to us
+
+119
+00:05:53,192 --> 00:05:56,757
+seeing the content of the HTML file here,
+
+120
+00:05:56,757 --> 00:06:00,229
+app.component.html when we visit our page.
+
+121
+00:06:00,229 --> 00:06:04,571
+Well, let's see this in action by running mpm start
+
+122
+00:06:04,571 --> 00:06:08,093
+and also starting our build process, mpm run build,
+
+123
+00:06:08,093 --> 00:06:10,723
+which starts webpeg, bundles everything, and keeps
+
+124
+00:06:10,723 --> 00:06:13,352
+watching for changes so that it recompiles
+
+125
+00:06:13,352 --> 00:06:15,933
+whenever we change something, and if we then head
+
+126
+00:06:15,933 --> 00:06:18,224
+over to the browser, we see Hello World,
+
+127
+00:06:18,224 --> 00:06:21,652
+which is the content of this app component HTML file.
+
+128
+00:06:21,652 --> 00:06:24,273
+So this is how the Angular 2 application gets started
+
+129
+00:06:24,273 --> 00:06:26,835
+using our component to display the content
+
+130
+00:06:26,835 --> 00:06:29,384
+off this component on our page,
+
+131
+00:06:29,384 --> 00:06:33,064
+and we will work with this and add new components
+
+132
+00:06:33,064 --> 00:06:36,689
+add-ons to this application, which then will all get placed
+
+133
+00:06:36,689 --> 00:06:39,811
+in our root component, or nested in other components,
+
+134
+00:06:39,811 --> 00:06:42,243
+but not in the index.hbs file.
+
+135
+00:06:42,243 --> 00:06:44,310
+We're not gonna work on this file anymore.
+
+136
+00:06:44,310 --> 00:06:46,221
+This is how it starts the application,
+
+137
+00:06:46,221 --> 00:06:50,388
+and this is all we do in this file, that's important.
+

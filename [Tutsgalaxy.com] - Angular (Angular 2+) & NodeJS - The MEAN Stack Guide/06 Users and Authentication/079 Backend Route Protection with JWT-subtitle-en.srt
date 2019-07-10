@@ -1,0 +1,480 @@
+1
+00:00:01,741 --> 00:00:04,840
+<v Instructor>Now, with our user login working,</v>
+
+2
+00:00:04,840 --> 00:00:06,528
+it's time to take advantage of it,
+
+3
+00:00:06,528 --> 00:00:09,299
+and protect certain routes on our backend.
+
+4
+00:00:09,299 --> 00:00:12,260
+Specifically, it would make sense to only allow
+
+5
+00:00:12,260 --> 00:00:16,180
+logged in users to create new messages.
+
+6
+00:00:16,180 --> 00:00:19,299
+Basically, all the routes in my messages.js file
+
+7
+00:00:19,299 --> 00:00:22,552
+in the routes folder, except for the first route,
+
+8
+00:00:22,552 --> 00:00:25,899
+the get all messages route, should be protected.
+
+9
+00:00:25,899 --> 00:00:29,261
+I don't want to have unauthenticated users
+
+10
+00:00:29,261 --> 00:00:34,112
+create new messages, edit messages, or delete messages,
+
+11
+00:00:34,112 --> 00:00:38,021
+so since the routes in this file are ordered like this,
+
+12
+00:00:38,021 --> 00:00:39,941
+it would be great if we could add
+
+13
+00:00:39,941 --> 00:00:42,971
+some kind of check here, to make sure
+
+14
+00:00:42,971 --> 00:00:47,190
+you only reach these routes if you are authenticated.
+
+15
+00:00:47,190 --> 00:00:50,150
+If not, we don't even have to continue anywhere.
+
+16
+00:00:50,150 --> 00:00:53,025
+You are not authenticated, go home
+
+17
+00:00:53,025 --> 00:00:55,385
+while getting some kind of error.
+
+18
+00:00:55,385 --> 00:00:57,911
+Turns out, we can do this, thankfully.
+
+19
+00:00:57,911 --> 00:01:00,084
+We can use the express router,
+
+20
+00:01:00,084 --> 00:01:02,153
+and then, the use method,
+
+21
+00:01:02,153 --> 00:01:04,625
+so not get, not post, use.
+
+22
+00:01:04,625 --> 00:01:09,601
+This means, on each request, this method here is reached.
+
+23
+00:01:09,601 --> 00:01:12,683
+Since it is reached on each request,
+
+24
+00:01:12,683 --> 00:01:16,176
+I will use the path of slash to really,
+
+25
+00:01:16,176 --> 00:01:19,958
+well, handle every request reaching this route here,
+
+26
+00:01:19,958 --> 00:01:23,806
+and then, I can execute the normal callback,
+
+27
+00:01:23,806 --> 00:01:26,686
+which will now be called, or executed,
+
+28
+00:01:26,686 --> 00:01:30,518
+really for every request besides this first get request,
+
+29
+00:01:30,518 --> 00:01:32,037
+which of course, is handled before
+
+30
+00:01:32,037 --> 00:01:35,366
+reaching this use function here.
+
+31
+00:01:35,366 --> 00:01:39,278
+So in here, the goal is to check if the user,
+
+32
+00:01:39,278 --> 00:01:43,346
+the client, the browser, is issuing a valid token,
+
+33
+00:01:43,346 --> 00:01:46,587
+so if it sends us a valid token.
+
+34
+00:01:46,587 --> 00:01:49,166
+How do we find out if a token is valid?
+
+35
+00:01:49,166 --> 00:01:51,718
+Well, we're creating this token on the server,
+
+36
+00:01:51,718 --> 00:01:54,166
+so we know the logic behind the token,
+
+37
+00:01:54,166 --> 00:01:56,747
+and especially, if you remember this,
+
+38
+00:01:56,747 --> 00:02:00,914
+we use to store a secret here, when creating a token.
+
+39
+00:02:01,785 --> 00:02:06,523
+We can now use this secret to validate a incoming token.
+
+40
+00:02:06,523 --> 00:02:09,940
+So here, we need to use this jwt package,
+
+41
+00:02:11,525 --> 00:02:16,006
+so let's import it here, require jsonwebtoken,
+
+42
+00:02:16,006 --> 00:02:19,324
+and on this package here, I can simply check,
+
+43
+00:02:19,324 --> 00:02:21,991
+jwt.verify, execute this method,
+
+44
+00:02:23,878 --> 00:02:27,395
+which allows me to check a incoming token
+
+45
+00:02:27,395 --> 00:02:29,638
+to check if it is valid.
+
+46
+00:02:29,638 --> 00:02:31,138
+So here, I need to
+
+47
+00:02:32,486 --> 00:02:34,936
+use the token the user sends me,
+
+48
+00:02:34,936 --> 00:02:36,443
+and I will get this token,
+
+49
+00:02:36,443 --> 00:02:39,643
+not in the parameters of my request,
+
+50
+00:02:39,643 --> 00:02:43,438
+so not encoded in the URL here, like this.
+
+51
+00:02:43,438 --> 00:02:45,505
+This is not how I pass the token.
+
+52
+00:02:45,505 --> 00:02:46,925
+Instead, it will be added to the
+
+53
+00:02:46,925 --> 00:02:49,315
+query parameters of the request.
+
+54
+00:02:49,315 --> 00:02:50,975
+If you're not sure what this is,
+
+55
+00:02:50,975 --> 00:02:53,684
+query parameters are simply the parameters
+
+56
+00:02:53,684 --> 00:02:55,694
+appended at the end of our URL,
+
+57
+00:02:55,694 --> 00:02:57,443
+separated by a question mark,
+
+58
+00:02:57,443 --> 00:03:00,206
+and then, you put of token, substring.
+
+59
+00:03:00,206 --> 00:03:02,925
+Then, token here, would be the key,
+
+60
+00:03:02,925 --> 00:03:06,445
+and this would be the value of this query parameter.
+
+61
+00:03:06,445 --> 00:03:08,907
+So, this is exactly how I will pass it,
+
+62
+00:03:08,907 --> 00:03:12,015
+so I can access it on request,
+
+63
+00:03:12,015 --> 00:03:13,774
+query, which gives me access to all
+
+64
+00:03:13,774 --> 00:03:16,196
+query parameters passed with the request,
+
+65
+00:03:16,196 --> 00:03:17,987
+and then, token.
+
+66
+00:03:17,987 --> 00:03:20,787
+So if no query parameter is passed,
+
+67
+00:03:20,787 --> 00:03:22,086
+this will automatically be null,
+
+68
+00:03:22,086 --> 00:03:24,598
+in which case, this verification will also fail,
+
+69
+00:03:24,598 --> 00:03:27,616
+so we don't have an issue with that case.
+
+70
+00:03:27,616 --> 00:03:30,385
+The next argument is our secret.
+
+71
+00:03:30,385 --> 00:03:32,934
+Now here, secret, of course, has to match
+
+72
+00:03:32,934 --> 00:03:36,486
+the secret used here, when you create the token.
+
+73
+00:03:36,486 --> 00:03:39,478
+With this, we're able to validate it.
+
+74
+00:03:39,478 --> 00:03:43,061
+Next, we can pass the callback of our call.
+
+75
+00:03:44,966 --> 00:03:46,296
+We could also pass some options,
+
+76
+00:03:46,296 --> 00:03:47,904
+but I don't want to do this, so here,
+
+77
+00:03:47,904 --> 00:03:50,107
+I will immediately pass the callback,
+
+78
+00:03:50,107 --> 00:03:52,894
+and see if this was successful.
+
+79
+00:03:52,894 --> 00:03:57,656
+We will either have an error, or our decoded token here.
+
+80
+00:03:57,656 --> 00:04:02,256
+Now, if we do have an error, I know the token is not valid.
+
+81
+00:04:02,256 --> 00:04:03,598
+It may have expired,
+
+82
+00:04:03,598 --> 00:04:06,724
+or it was never correct in the first place.
+
+83
+00:04:06,724 --> 00:04:10,398
+Whatever the case, I want to return a response
+
+84
+00:04:10,398 --> 00:04:14,398
+where the status code is 401 for not authorised,
+
+85
+00:04:15,787 --> 00:04:18,666
+and where I then give some error message.
+
+86
+00:04:18,666 --> 00:04:22,249
+So let's say, a title of Not Authenticated,
+
+87
+00:04:24,198 --> 00:04:27,615
+and then, my error object attached to it.
+
+88
+00:04:29,243 --> 00:04:32,216
+If we do not go inside this if block,
+
+89
+00:04:32,216 --> 00:04:35,629
+so if you don't have an error, if the token is valid,
+
+90
+00:04:35,629 --> 00:04:38,552
+but then, I want to execute this next callback
+
+91
+00:04:38,552 --> 00:04:40,541
+we're passing to our function up here,
+
+92
+00:04:40,541 --> 00:04:43,442
+to let the request continue its journey.
+
+93
+00:04:43,442 --> 00:04:45,333
+I don't want to send a response in this case,
+
+94
+00:04:45,333 --> 00:04:48,642
+because well, this is not the task of this route here.
+
+95
+00:04:48,642 --> 00:04:50,322
+I simply want it to have a check,
+
+96
+00:04:50,322 --> 00:04:52,328
+and now, the request may travel on
+
+97
+00:04:52,328 --> 00:04:54,800
+to whichever URL, or whichever route,
+
+98
+00:04:54,800 --> 00:04:57,541
+it wanted to reach in the first place here.
+
+99
+00:04:57,541 --> 00:04:59,461
+With that, we're making sure
+
+100
+00:04:59,461 --> 00:05:03,501
+that no unauthenticated user can reach our routes down here,
+
+101
+00:05:03,501 --> 00:05:07,181
+and we can actually see this in action already by
+
+102
+00:05:07,181 --> 00:05:09,431
+restarting our node server,
+
+103
+00:05:10,280 --> 00:05:13,000
+and then, going back to the application.
+
+104
+00:05:13,000 --> 00:05:17,970
+I'm not signed in, so let's now try to create a new message.
+
+105
+00:05:17,970 --> 00:05:21,410
+You will see that we indeed get the Not Authenticated error
+
+106
+00:05:21,410 --> 00:05:25,577
+here in the console, but if I do sign in, like this,
+
+107
+00:05:27,360 --> 00:05:30,850
+and I now try this, I still get the error.
+
+108
+00:05:30,850 --> 00:05:31,850
+Why is that?
+
+109
+00:05:33,080 --> 00:05:35,449
+Well, it makes sense, because yes,
+
+110
+00:05:35,449 --> 00:05:39,380
+we setup our backend to use this token,
+
+111
+00:05:39,380 --> 00:05:41,549
+but what we didn't do is,
+
+112
+00:05:41,549 --> 00:05:45,141
+we're not passing the token with our front end request.
+
+113
+00:05:45,141 --> 00:05:47,661
+In our service here, in the message service,
+
+114
+00:05:47,661 --> 00:05:50,117
+where we reach out to our backend,
+
+115
+00:05:50,117 --> 00:05:53,320
+we're not passing the token with each request.
+
+116
+00:05:53,320 --> 00:05:57,240
+Now, I will do so in a second, but before doing so,
+
+117
+00:05:57,240 --> 00:05:59,701
+I want to work on the backend a little bit more,
+
+118
+00:05:59,701 --> 00:06:02,930
+and make sure that we now, that we have users,
+
+119
+00:06:02,930 --> 00:06:06,730
+which are authenticated, that we now map these users
+
+120
+00:06:06,730 --> 00:06:10,230
+to our messages, and the other way around.
+

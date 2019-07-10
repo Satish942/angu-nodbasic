@@ -1,0 +1,252 @@
+1
+00:00:01,612 --> 00:00:03,603
+<v ->Let's add such a script therefore.</v>
+
+2
+00:00:03,603 --> 00:00:05,435
+I'll add a script named "build" here
+
+3
+00:00:05,435 --> 00:00:07,346
+for the development workflow.
+
+4
+00:00:07,346 --> 00:00:09,097
+And first thing I wanna do here
+
+5
+00:00:09,097 --> 00:00:10,807
+is I want to use "del," this is
+
+6
+00:00:10,807 --> 00:00:12,955
+the command we have available due
+
+7
+00:00:12,955 --> 00:00:16,947
+to this 'del cli' to delete some files.
+
+8
+00:00:16,947 --> 00:00:20,079
+I want to delete all files in the public/js/app folder.
+
+9
+00:00:20,079 --> 00:00:21,667
+So basically the old bundle and all
+
+10
+00:00:21,667 --> 00:00:24,271
+the other files related to this.
+
+11
+00:00:24,271 --> 00:00:26,438
+Next, I wanna run webpack.
+
+12
+00:00:27,607 --> 00:00:29,558
+Pass the config option pointing
+
+13
+00:00:29,558 --> 00:00:32,692
+to webpack.config.dev.js file
+
+14
+00:00:32,692 --> 00:00:35,255
+to use this configuration file.
+
+15
+00:00:35,255 --> 00:00:36,557
+And then I'll add some other options
+
+16
+00:00:36,557 --> 00:00:39,568
+for a nicer output, how it should handle errors,
+
+17
+00:00:39,568 --> 00:00:42,701
+that it should file on errors, and so on.
+
+18
+00:00:42,701 --> 00:00:45,998
+Also very important at the end, dash dash watch.
+
+19
+00:00:45,998 --> 00:00:48,115
+We'll make sure that we add the watch mode
+
+20
+00:00:48,115 --> 00:00:49,743
+so that this process keeps running
+
+21
+00:00:49,743 --> 00:00:51,370
+and reboots the project whenever
+
+22
+00:00:51,370 --> 00:00:54,380
+we change something in a file.
+
+23
+00:00:54,380 --> 00:00:56,293
+With this set up, let's now test this
+
+24
+00:00:56,293 --> 00:00:59,099
+npm run build in the console to see if
+
+25
+00:00:59,099 --> 00:01:00,930
+it correctly bundles everything
+
+26
+00:01:00,930 --> 00:01:04,874
+builds everything gives us a running project.
+
+27
+00:01:04,874 --> 00:01:06,462
+While we get this warning.
+
+28
+00:01:06,462 --> 00:01:09,024
+So let's fix this warning.
+
+29
+00:01:09,024 --> 00:01:13,191
+In the common config file, I'll add something after module.
+
+30
+00:01:14,313 --> 00:01:15,982
+Some plugins.
+
+31
+00:01:15,982 --> 00:01:18,503
+Here I'll use a plugin webpack ships with,
+
+32
+00:01:18,503 --> 00:01:20,659
+so it can say "new webpack"
+
+33
+00:01:20,659 --> 00:01:23,742
+and now the ContextReplacementPlugin.
+
+34
+00:01:25,786 --> 00:01:27,736
+Which will fix this error for us.
+
+35
+00:01:27,736 --> 00:01:29,160
+Here I prepared some code.
+
+36
+00:01:29,160 --> 00:01:32,254
+I'll copy in here and of course you can find
+
+37
+00:01:32,254 --> 00:01:35,545
+this attached to this lecture.
+
+38
+00:01:35,545 --> 00:01:37,377
+And with this, let's try it again
+
+39
+00:01:37,377 --> 00:01:40,226
+and let's run npm run build again.
+
+40
+00:01:40,226 --> 00:01:42,866
+Now we don't have the error anymore.
+
+41
+00:01:42,866 --> 00:01:47,337
+If we had npm start now and reload the application,
+
+42
+00:01:47,337 --> 00:01:49,655
+it's still not working though.
+
+43
+00:01:49,655 --> 00:01:52,543
+And I found the reason why it doesn't work.
+
+44
+00:01:52,543 --> 00:01:54,090
+Let's quit both processes;
+
+45
+00:01:54,090 --> 00:01:56,673
+build process answer over here.
+
+46
+00:01:59,501 --> 00:02:01,820
+The problem is here in my app component.
+
+47
+00:02:01,820 --> 00:02:05,517
+I forgot the relative pathway importing the css file.
+
+48
+00:02:05,517 --> 00:02:07,757
+Therefore it doesn't find it on run time.
+
+49
+00:02:07,757 --> 00:02:09,993
+And the error has went out of source
+
+50
+00:02:09,993 --> 00:02:12,189
+in the common config file.
+
+51
+00:02:12,189 --> 00:02:15,645
+Yeah, this is not the right regular expression.
+
+52
+00:02:15,645 --> 00:02:17,273
+Now it's the right expression.
+
+53
+00:02:17,273 --> 00:02:18,737
+So restarting process again
+
+54
+00:02:18,737 --> 00:02:21,219
+now I need to because I changed the config file.
+
+55
+00:02:21,219 --> 00:02:23,050
+And now I'm confident that we're able
+
+56
+00:02:23,050 --> 00:02:26,181
+to load this css file correctly.
+
+57
+00:02:26,181 --> 00:02:28,580
+So if I now head over one final time
+
+58
+00:02:28,580 --> 00:02:29,961
+I reload we see 'Hello World!'
+
+59
+00:02:29,961 --> 00:02:31,997
+in red, so this is for working
+
+60
+00:02:31,997 --> 00:02:36,308
+and this developmental process is therefore finished.
+
+61
+00:02:36,308 --> 00:02:38,506
+Now the next videos, I will take care
+
+62
+00:02:38,506 --> 00:02:40,625
+of our de production workflow using
+
+63
+00:02:40,625 --> 00:02:43,708
+ahead of time so offline compilation.
+

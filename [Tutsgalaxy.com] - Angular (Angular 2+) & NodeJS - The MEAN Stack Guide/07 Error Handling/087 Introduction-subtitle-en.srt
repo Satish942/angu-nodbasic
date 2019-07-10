@@ -1,0 +1,84 @@
+1
+00:00:01,752 --> 00:00:04,322
+<v ->I do like the state of our application</v>
+
+2
+00:00:04,322 --> 00:00:06,570
+but there's one thing I don't like.
+
+3
+00:00:06,570 --> 00:00:09,620
+If I'm not logged in and I try to save a message
+
+4
+00:00:09,620 --> 00:00:11,620
+I do get the error here, which is correct,
+
+5
+00:00:11,620 --> 00:00:12,713
+I am not logged in.
+
+6
+00:00:12,713 --> 00:00:14,587
+I'm not authorised to do this.
+
+7
+00:00:14,587 --> 00:00:16,704
+But it would be nice to get like a model here
+
+8
+00:00:16,704 --> 00:00:18,701
+which basically tells me the same thing
+
+9
+00:00:18,701 --> 00:00:21,854
+but in a nicer way, so that I don't have to check
+
+10
+00:00:21,854 --> 00:00:25,960
+the console which users of the website typically don't do.
+
+11
+00:00:25,960 --> 00:00:27,557
+While the same is true for other parts
+
+12
+00:00:27,557 --> 00:00:29,195
+of this application here,
+
+13
+00:00:29,195 --> 00:00:31,336
+let's say that we wanna sign up here
+
+14
+00:00:31,336 --> 00:00:34,330
+with an e-mail address which was already used.
+
+15
+00:00:34,330 --> 00:00:37,325
+Well, in this case, it would be nice to also get
+
+16
+00:00:37,325 --> 00:00:40,762
+an error in form of a model and not just this error
+
+17
+00:00:40,762 --> 00:00:42,068
+here on the right.
+
+18
+00:00:42,068 --> 00:00:43,987
+So these are just some improvements I want to do.
+
+19
+00:00:43,987 --> 00:00:46,948
+I want to handle these errors in a better way.
+
+20
+00:00:46,948 --> 00:00:49,586
+So in this module, we'll implement a better way
+
+21
+00:00:49,586 --> 00:00:51,669
+of handling these errors.
+

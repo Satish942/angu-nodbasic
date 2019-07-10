@@ -1,0 +1,144 @@
+1
+00:00:01,976 --> 00:00:03,885
+<v Instructor>In this module we achieved a lot.</v>
+
+2
+00:00:03,885 --> 00:00:07,727
+We implemented our User Authentication Workflow.
+
+3
+00:00:07,727 --> 00:00:10,483
+We are now able to create users to sign them in
+
+4
+00:00:10,483 --> 00:00:13,234
+and, more than that, we're able to use them to see if
+
+5
+00:00:13,234 --> 00:00:14,816
+we are authenticated,
+
+6
+00:00:14,816 --> 00:00:17,261
+if we are allowed to create new messages,
+
+7
+00:00:17,261 --> 00:00:20,406
+if we are allowed to edit or delete messages.
+
+8
+00:00:20,406 --> 00:00:23,955
+We implemented these checks both on the front and,
+
+9
+00:00:23,955 --> 00:00:26,159
+very important, on the back end.
+
+10
+00:00:26,159 --> 00:00:28,137
+I want to highlight this again.
+
+11
+00:00:28,137 --> 00:00:31,054
+Checking it on the front end is not a protection.
+
+12
+00:00:31,054 --> 00:00:34,696
+Users are able to read and edit your JavaScript code
+
+13
+00:00:34,696 --> 00:00:35,886
+in the end.
+
+14
+00:00:35,886 --> 00:00:38,637
+You can make it hard but you can't prevent this.
+
+15
+00:00:38,637 --> 00:00:41,553
+So it's important to do the sensible validation,
+
+16
+00:00:41,553 --> 00:00:44,744
+the sensible checks on your back end.
+
+17
+00:00:44,744 --> 00:00:46,291
+And, we do do this.
+
+18
+00:00:46,291 --> 00:00:50,458
+We do check in the messages JS file if the token is valid.
+
+19
+00:00:51,410 --> 00:00:55,565
+We do check here if the user who wants to edit something
+
+20
+00:00:55,565 --> 00:00:58,287
+is the user who created this message.
+
+21
+00:00:58,287 --> 00:01:00,277
+So these checks are key.
+
+22
+00:01:00,277 --> 00:01:04,136
+But then we also added them to the front end, like here,
+
+23
+00:01:04,136 --> 00:01:07,325
+to make sure that we provide a nice user experience,
+
+24
+00:01:07,325 --> 00:01:10,426
+and we don't see buttons which we shouldn't see.
+
+25
+00:01:10,426 --> 00:01:14,540
+With that our application really evolved quite a bit
+
+26
+00:01:14,540 --> 00:01:16,936
+and I really like the state of it.
+
+27
+00:01:16,936 --> 00:01:19,493
+Now I wanna conclude it in the next section
+
+28
+00:01:19,493 --> 00:01:21,502
+by adding error handling.
+
+29
+00:01:21,502 --> 00:01:25,924
+So that in the case I'm not logged in, whoops like this,
+
+30
+00:01:25,924 --> 00:01:28,713
+and then I hit this Save button.
+
+31
+00:01:28,713 --> 00:01:29,880
+I not only see
+
+32
+00:01:31,895 --> 00:01:33,665
+this error message
+
+33
+00:01:33,665 --> 00:01:35,897
+but instead I get a nice popup
+
+34
+00:01:35,897 --> 00:01:38,066
+informing me that I'm not logged in.
+
+35
+00:01:38,066 --> 00:01:39,418
+I need to login.
+
+36
+00:01:39,418 --> 00:01:42,501
+So let's do this in the next module.
+

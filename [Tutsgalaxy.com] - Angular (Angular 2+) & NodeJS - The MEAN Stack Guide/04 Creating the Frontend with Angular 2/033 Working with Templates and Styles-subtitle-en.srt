@@ -1,0 +1,460 @@
+1
+00:00:01,481 --> 00:00:02,801
+<v Instructor>In the end of the course,</v>
+
+2
+00:00:02,801 --> 00:00:04,655
+I wanna have an application of where we are able
+
+3
+00:00:04,655 --> 00:00:07,689
+to login, log out and so on, and create messages
+
+4
+00:00:07,689 --> 00:00:10,522
+as well as edit or delete them.
+
+5
+00:00:10,522 --> 00:00:12,585
+Well, we're not going to write all them
+
+6
+00:00:12,585 --> 00:00:15,807
+this video, but let's start with the messages part.
+
+7
+00:00:15,807 --> 00:00:17,104
+I'll get rid of the hello world
+
+8
+00:00:17,104 --> 00:00:19,518
+and content figures so that the app component
+
+9
+00:00:19,518 --> 00:00:21,760
+HTML file is totally empty.
+
+10
+00:00:21,760 --> 00:00:23,387
+And then in here, I want to set up
+
+11
+00:00:23,387 --> 00:00:25,590
+some bootstrap styling.
+
+12
+00:00:25,590 --> 00:00:28,154
+Now, for this styling to work,
+
+13
+00:00:28,154 --> 00:00:31,486
+I will first create the outermost bootstrap
+
+14
+00:00:31,486 --> 00:00:33,858
+class and container and I use emit here
+
+15
+00:00:33,858 --> 00:00:35,397
+as a plugin which allows me to create
+
+16
+00:00:35,397 --> 00:00:39,046
+classes like this by hitting tab then.
+
+17
+00:00:39,046 --> 00:00:40,636
+And in here I want to have a row,
+
+18
+00:00:40,636 --> 00:00:44,828
+let's saw with col-md-8, and some offsetting
+
+19
+00:00:44,828 --> 00:00:47,821
+so this is all just some bootstrap styling.
+
+20
+00:00:47,821 --> 00:00:50,048
+The bootstrap css framework has nothing to do
+
+21
+00:00:50,048 --> 00:00:52,246
+with Angular 2, just to give this a nice grid
+
+22
+00:00:52,246 --> 00:00:54,163
+and position it nicely.
+
+23
+00:00:55,502 --> 00:00:58,237
+Now in here, I want to create such a message.
+
+24
+00:00:58,237 --> 00:00:59,560
+And of course later on we will fill this
+
+25
+00:00:59,560 --> 00:01:02,216
+with some life and make this more dynamic.
+
+26
+00:01:02,216 --> 00:01:04,138
+For now I'll hard code everything.
+
+27
+00:01:04,138 --> 00:01:05,480
+So here I want to have an article
+
+28
+00:01:05,480 --> 00:01:08,057
+which uses the bootstrap panel class
+
+29
+00:01:08,057 --> 00:01:11,042
+and their panel default, again just to
+
+30
+00:01:11,042 --> 00:01:13,192
+give this a nice bootstrap styling.
+
+31
+00:01:13,192 --> 00:01:14,233
+And if you want to learn more about
+
+32
+00:01:14,233 --> 00:01:18,400
+available bootstrap styles, visit getbootstrap.com
+
+33
+00:01:19,864 --> 00:01:21,343
+and here you can browse all available
+
+34
+00:01:21,343 --> 00:01:23,743
+components and things.
+
+35
+00:01:23,743 --> 00:01:25,914
+So in this article here, I'll now create
+
+36
+00:01:25,914 --> 00:01:28,860
+a panel body like this, where I want to
+
+37
+00:01:28,860 --> 00:01:31,329
+output the content of my message.
+
+38
+00:01:31,329 --> 00:01:35,563
+And below I'll have a footer, of class panel footer.
+
+39
+00:01:35,563 --> 00:01:39,231
+And here I want to output, let's say
+
+40
+00:01:39,231 --> 00:01:41,118
+some info about the author.
+
+41
+00:01:41,118 --> 00:01:42,615
+I'll assign a class author which is
+
+42
+00:01:42,615 --> 00:01:45,084
+a custom class I'll create.
+
+43
+00:01:45,084 --> 00:01:48,003
+And in here, a class config, which is also
+
+44
+00:01:48,003 --> 00:01:49,772
+a custom class.
+
+45
+00:01:49,772 --> 00:01:51,534
+And then I want to have two anchor tags
+
+46
+00:01:51,534 --> 00:01:55,447
+where I say edit and let's say delete.
+
+47
+00:01:55,447 --> 00:01:57,404
+Of course I will hook them up later on.
+
+48
+00:01:57,404 --> 00:01:59,403
+Now to all the output something,
+
+49
+00:01:59,403 --> 00:02:01,130
+let's go back to the app component file
+
+50
+00:02:01,130 --> 00:02:03,545
+and let's create a new message object here,
+
+51
+00:02:03,545 --> 00:02:04,804
+a new property.
+
+52
+00:02:04,804 --> 00:02:06,980
+Message, which is a JavaScript object,
+
+53
+00:02:06,980 --> 00:02:09,360
+and in here let's say we have a content
+
+54
+00:02:09,360 --> 00:02:13,334
+where we say a message and then we might have
+
+55
+00:02:13,334 --> 00:02:15,251
+an author which is Max.
+
+56
+00:02:16,670 --> 00:02:19,733
+Of course choose your favourite name and content.
+
+57
+00:02:19,733 --> 00:02:21,977
+And in the component then using string interpolation
+
+58
+00:02:21,977 --> 00:02:25,526
+as we saw before, we can output content.
+
+59
+00:02:25,526 --> 00:02:28,413
+Oops, the other way around.
+
+60
+00:02:28,413 --> 00:02:30,127
+Name it message and there content
+
+61
+00:02:30,127 --> 00:02:32,355
+and here the author.
+
+62
+00:02:32,355 --> 00:02:33,855
+So message author.
+
+63
+00:02:35,880 --> 00:02:38,852
+If I save this, I didn't do anything else
+
+64
+00:02:38,852 --> 00:02:40,725
+than before, I used string interpolation
+
+65
+00:02:40,725 --> 00:02:43,975
+and I also used some bootstrap classes.
+
+66
+00:02:43,975 --> 00:02:46,063
+In the running application if we reload,
+
+67
+00:02:46,063 --> 00:02:48,405
+you should see something like this.
+
+68
+00:02:48,405 --> 00:02:51,143
+It already looks nice, but I would like to have
+
+69
+00:02:51,143 --> 00:02:53,132
+a different styling.
+
+70
+00:02:53,132 --> 00:02:55,309
+I want to have the author here on the left
+
+71
+00:02:55,309 --> 00:02:57,756
+and the edit and delete button on the right.
+
+72
+00:02:57,756 --> 00:02:59,675
+Now I could achieve this with built-in
+
+73
+00:02:59,675 --> 00:03:02,470
+bootstrap classes, but I also want to show you
+
+74
+00:03:02,470 --> 00:03:06,241
+how we can apply styles to a component
+
+75
+00:03:06,241 --> 00:03:09,809
+in Angular 2 which can only apply to this component
+
+76
+00:03:09,809 --> 00:03:13,137
+and to no other part in the application.
+
+77
+00:03:13,137 --> 00:03:16,258
+We can do this by adding a new property
+
+78
+00:03:16,258 --> 00:03:19,175
+to our at component decorator here.
+
+79
+00:03:20,379 --> 00:03:24,046
+In here, what I can do is, I can add styles.
+
+80
+00:03:25,947 --> 00:03:27,851
+Which is just another view to configure
+
+81
+00:03:27,851 --> 00:03:30,894
+this component, and this takes an array.
+
+82
+00:03:30,894 --> 00:03:33,336
+In here, I can set up all the styles
+
+83
+00:03:33,336 --> 00:03:36,367
+I want to only apply to this component.
+
+84
+00:03:36,367 --> 00:03:38,718
+So if I style H1 tag here, you use
+
+85
+00:03:38,718 --> 00:03:42,247
+normal css styling, then you will only style
+
+86
+00:03:42,247 --> 00:03:44,858
+all H1 tags in this component,
+
+87
+00:03:44,858 --> 00:03:47,408
+and in no other component in the application.
+
+88
+00:03:47,408 --> 00:03:48,923
+Angular 2 will make sure that they
+
+89
+00:03:48,923 --> 00:03:51,561
+only get applied to elements in
+
+90
+00:03:51,561 --> 00:03:53,593
+the template of this component,
+
+91
+00:03:53,593 --> 00:03:55,922
+which is a very powerful feature.
+
+92
+00:03:55,922 --> 00:03:57,862
+Now in this styles array you create
+
+93
+00:03:57,862 --> 00:04:00,069
+a multi-line string because we have to
+
+94
+00:04:00,069 --> 00:04:01,468
+pass a string here.
+
+95
+00:04:01,468 --> 00:04:04,947
+I use back ticks which allows me to do just that.
+
+96
+00:04:04,947 --> 00:04:06,897
+You write over multiple lines here
+
+97
+00:04:06,897 --> 00:04:08,546
+while still having a string and
+
+98
+00:04:08,546 --> 00:04:10,193
+not getting any errors.
+
+99
+00:04:10,193 --> 00:04:12,223
+I will paste in some prepared styles,
+
+100
+00:04:12,223 --> 00:04:14,351
+which basically just turned these elements
+
+101
+00:04:14,351 --> 00:04:16,314
+to block elements, and then will
+
+102
+00:04:16,314 --> 00:04:19,557
+position them as I want them to be positioned.
+
+103
+00:04:19,557 --> 00:04:22,659
+With this styling, if I now save this
+
+104
+00:04:22,659 --> 00:04:24,643
+so that everything recompiles and then
+
+105
+00:04:24,643 --> 00:04:27,380
+I reload my application,
+
+106
+00:04:27,380 --> 00:04:30,605
+well once it finished recompiling here.
+
+107
+00:04:30,605 --> 00:04:33,348
+You see now it is evenly positioned
+
+108
+00:04:33,348 --> 00:04:35,034
+or it is positioned the way I want it
+
+109
+00:04:35,034 --> 00:04:37,285
+to be positioned, and the important takeaway is
+
+110
+00:04:37,285 --> 00:04:40,616
+if we now would use the author class
+
+111
+00:04:40,616 --> 00:04:42,798
+in any other place of the application,
+
+112
+00:04:42,798 --> 00:04:44,008
+and you can try this out,
+
+113
+00:04:44,008 --> 00:04:46,955
+you will see that it won't get these styles
+
+114
+00:04:46,955 --> 00:04:49,187
+because these are now limited to
+
+115
+00:04:49,187 --> 00:04:51,520
+the scope of this component.
+

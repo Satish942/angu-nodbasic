@@ -1,0 +1,260 @@
+1
+00:00:01,618 --> 00:00:03,096
+<v Instructor>Angular 2 ships with a couple of</v>
+
+2
+00:00:03,096 --> 00:00:04,772
+built-in directives,
+
+3
+00:00:04,772 --> 00:00:09,303
+and there we have kind of two kinds of directives,
+
+4
+00:00:09,303 --> 00:00:11,905
+attribute directives which are attached like
+
+5
+00:00:11,905 --> 00:00:14,159
+normal HTML attributes,
+
+6
+00:00:14,159 --> 00:00:17,535
+and structural directives which are also attached
+
+7
+00:00:17,535 --> 00:00:19,947
+like this but change the structure of the DOM
+
+8
+00:00:19,947 --> 00:00:22,331
+and not just the element on which they sit.
+
+9
+00:00:22,331 --> 00:00:24,800
+ngIf would be such a structural directive,
+
+10
+00:00:24,800 --> 00:00:29,179
+because it really adds or removes code to the DOM,
+
+11
+00:00:29,179 --> 00:00:31,967
+and not just change some styling.
+
+12
+00:00:31,967 --> 00:00:33,658
+We saw this on the slide before,
+
+13
+00:00:33,658 --> 00:00:35,568
+and you will see it throughout this course.
+
+14
+00:00:35,568 --> 00:00:38,668
+Let me quickly also show you how a attribute directive
+
+15
+00:00:38,668 --> 00:00:39,949
+would look like.
+
+16
+00:00:39,949 --> 00:00:43,288
+On this article, I could use a built-in attribute
+
+17
+00:00:43,288 --> 00:00:46,205
+directive named ngStyle, like this.
+
+18
+00:00:47,507 --> 00:00:49,877
+Though you need to pass an argument to that,
+
+19
+00:00:49,877 --> 00:00:53,013
+to a property, so I will use square brackets
+
+20
+00:00:53,013 --> 00:00:55,213
+for property binding.
+
+21
+00:00:55,213 --> 00:00:59,297
+Here, I can pass, or I have to pass, a JavaScript object
+
+22
+00:00:59,297 --> 00:01:02,718
+which now describes which styles I want to change
+
+23
+00:01:02,718 --> 00:01:05,312
+on this article, depending on which conditions,
+
+24
+00:01:05,312 --> 00:01:07,455
+or with which values.
+
+25
+00:01:07,455 --> 00:01:09,862
+So here if I want to change the background colour,
+
+26
+00:01:09,862 --> 00:01:12,534
+I can do this by writing backgroundColor,
+
+27
+00:01:12,534 --> 00:01:15,126
+camel case here, no dash in-between.
+
+28
+00:01:15,126 --> 00:01:18,320
+If you want to use the normal CSS name with the dash,
+
+29
+00:01:18,320 --> 00:01:22,873
+you have to enclose it in quotation marks, like this.
+
+30
+00:01:22,873 --> 00:01:24,885
+So both syntaxes work.
+
+31
+00:01:24,885 --> 00:01:28,802
+Here I'll use the camel case syntax, like that.
+
+32
+00:01:29,887 --> 00:01:32,722
+And then divided by a colon, so it has the value
+
+33
+00:01:32,722 --> 00:01:36,630
+for this key value pair, the value for this style.
+
+34
+00:01:36,630 --> 00:01:40,272
+So for the background colour, I could set this to red,
+
+35
+00:01:40,272 --> 00:01:44,439
+and if I now saved this, and then reload the application,
+
+36
+00:01:45,402 --> 00:01:47,771
+you see it has a red background.
+
+37
+00:01:47,771 --> 00:01:49,487
+Now of course, this could have been achieved
+
+38
+00:01:49,487 --> 00:01:52,175
+with normal styles attribute.
+
+39
+00:01:52,175 --> 00:01:55,491
+The cool thing here is, I can also bind to a property
+
+40
+00:01:55,491 --> 00:02:00,130
+named colour, which I then create in my component class here,
+
+41
+00:02:00,130 --> 00:02:03,485
+colour, and I can set this to red.
+
+42
+00:02:03,485 --> 00:02:06,282
+And now you will see the same result,
+
+43
+00:02:06,282 --> 00:02:09,287
+but now it's already a bit more dynamic.
+
+44
+00:02:09,287 --> 00:02:13,246
+I can even improve this by combining it with event binding.
+
+45
+00:02:13,246 --> 00:02:17,805
+So let's say I have my mouseenter listener here,
+
+46
+00:02:17,805 --> 00:02:20,877
+to listen to whenever I hover over this element,
+
+47
+00:02:20,877 --> 00:02:24,322
+and only if I hover over it, or at the point
+
+48
+00:02:24,322 --> 00:02:27,082
+once I hover over it, then I want to set colour
+
+49
+00:02:27,082 --> 00:02:29,249
+equal to green, like that.
+
+50
+00:02:32,385 --> 00:02:35,066
+So colour is this property I'm using here,
+
+51
+00:02:35,066 --> 00:02:37,090
+and which I set up here in the component,
+
+52
+00:02:37,090 --> 00:02:38,456
+keep this in mind.
+
+53
+00:02:38,456 --> 00:02:41,967
+So I'm changing it if I hover over the style.
+
+54
+00:02:41,967 --> 00:02:44,323
+So if I reload this, it's still red,
+
+55
+00:02:44,323 --> 00:02:46,548
+but if I hover over it, it becomes green.
+
+56
+00:02:46,548 --> 00:02:48,554
+It doesn't become red if I leave with the mouse,
+
+57
+00:02:48,554 --> 00:02:51,617
+because I haven't took up a respective event,
+
+58
+00:02:51,617 --> 00:02:54,735
+but this shows you how you can use ngStyle
+
+59
+00:02:54,735 --> 00:02:58,249
+to really, well, make it dynamic,
+
+60
+00:02:58,249 --> 00:03:01,794
+and more than that, it shows you how you use directives
+
+61
+00:03:01,794 --> 00:03:05,818
+to change parts of the DOM, depending on some external
+
+62
+00:03:05,818 --> 00:03:08,754
+conditions like events, or whatever.
+
+63
+00:03:08,754 --> 00:03:10,079
+So I'm removing all that code
+
+64
+00:03:10,079 --> 00:03:11,978
+because I just wanted to show that.
+
+65
+00:03:11,978 --> 00:03:16,145
+We will use more directives in the next videos, though.
+

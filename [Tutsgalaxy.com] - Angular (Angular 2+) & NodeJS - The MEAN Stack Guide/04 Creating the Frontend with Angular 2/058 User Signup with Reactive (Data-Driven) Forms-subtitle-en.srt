@@ -1,0 +1,1024 @@
+1
+00:00:01,539 --> 00:00:04,419
+<v Instructor>Let's start with this Signup component here.</v>
+
+2
+00:00:04,419 --> 00:00:07,880
+Here I will remove this h1 tag and instead add
+
+3
+00:00:07,880 --> 00:00:11,899
+my well-known Bootstrap classes here to centre it
+
+4
+00:00:11,899 --> 00:00:14,109
+and so on, you already know these.
+
+5
+00:00:14,109 --> 00:00:15,848
+And here I want to create a form.
+
+6
+00:00:15,848 --> 00:00:17,059
+Again, remove the action.
+
+7
+00:00:17,059 --> 00:00:18,768
+Angular 2.0 will handle this.
+
+8
+00:00:18,768 --> 00:00:21,208
+Right now Angular 2.0 will automatically again detect
+
+9
+00:00:21,208 --> 00:00:23,914
+this form and create one for me.
+
+10
+00:00:23,914 --> 00:00:25,608
+I could use this approach.
+
+11
+00:00:25,608 --> 00:00:27,809
+There's nothing wrong with that, but I want to show
+
+12
+00:00:27,809 --> 00:00:29,768
+the other approach, the data-driven approach
+
+13
+00:00:29,768 --> 00:00:32,178
+or reactive approach.
+
+14
+00:00:32,178 --> 00:00:35,657
+This approach means that we create the form ourselves
+
+15
+00:00:35,657 --> 00:00:38,800
+so this programmatic form, this JavaScript object,
+
+16
+00:00:38,800 --> 00:00:41,431
+we created ourselves and then we tell Angular
+
+17
+00:00:41,431 --> 00:00:44,010
+to assign it to this form.
+
+18
+00:00:44,010 --> 00:00:45,480
+So we would do it the other way around.
+
+19
+00:00:45,480 --> 00:00:47,539
+We don't let Angular 2.0 do it for us
+
+20
+00:00:47,539 --> 00:00:50,200
+and just auto-detect everything.
+
+21
+00:00:50,200 --> 00:00:53,197
+Instead we create it on our own and then tell Angular 2.0,
+
+22
+00:00:53,197 --> 00:00:55,731
+"Don't detect it, use our form."
+
+23
+00:00:55,731 --> 00:00:58,581
+Well, before doing so, still we have to create it
+
+24
+00:00:58,581 --> 00:01:00,451
+here in HTML because we want it to display
+
+25
+00:01:00,451 --> 00:01:02,141
+something to the user.
+
+26
+00:01:02,141 --> 00:01:05,197
+So we should create a form group here
+
+27
+00:01:05,197 --> 00:01:08,837
+in which we have a label for let's say
+
+28
+00:01:08,837 --> 00:01:11,811
+the first name of the user.
+
+29
+00:01:11,811 --> 00:01:14,399
+First name because when a user registers,
+
+30
+00:01:14,399 --> 00:01:16,845
+remember we have these fields.
+
+31
+00:01:16,845 --> 00:01:19,851
+We have first name, last name, password, and email
+
+32
+00:01:19,851 --> 00:01:22,741
+so we should fetch them in the form.
+
+33
+00:01:22,741 --> 00:01:26,090
+So back in the form let's add the input
+
+34
+00:01:26,090 --> 00:01:30,926
+for the ID firstName with a class of form-control,
+
+35
+00:01:30,926 --> 00:01:34,541
+Bootstrap class again to give it some nice styling.
+
+36
+00:01:34,541 --> 00:01:37,352
+I don't need to add the name attribute
+
+37
+00:01:37,352 --> 00:01:39,141
+because we're going to do this differently
+
+38
+00:01:39,141 --> 00:01:41,381
+with this new approach I'm showing you.
+
+39
+00:01:41,381 --> 00:01:45,548
+And with that I can simply duplicate this three times
+
+40
+00:01:46,461 --> 00:01:50,128
+to also set up the last name here, lastName.
+
+41
+00:01:52,036 --> 00:01:56,171
+And then here we want to have the mail address
+
+42
+00:01:56,171 --> 00:01:58,581
+so let's name this email.
+
+43
+00:01:58,581 --> 00:02:02,636
+Could also be of type email, but that's optional.
+
+44
+00:02:02,636 --> 00:02:06,455
+And then here we want to have the password.
+
+45
+00:02:06,455 --> 00:02:09,901
+Let's also name this password here
+
+46
+00:02:09,901 --> 00:02:13,472
+and it should be of type password of course.
+
+47
+00:02:13,472 --> 00:02:16,032
+This is my Signup form and I also want
+
+48
+00:02:16,032 --> 00:02:19,672
+to be able to submit it so let's add a button,
+
+49
+00:02:19,672 --> 00:02:21,421
+button primary.
+
+50
+00:02:21,421 --> 00:02:24,338
+Whoops, primary with type of submit
+
+51
+00:02:26,301 --> 00:02:28,083
+and then submit as the text.
+
+52
+00:02:28,083 --> 00:02:30,757
+This is the HTML form as before,
+
+53
+00:02:30,757 --> 00:02:33,832
+but now I want to create it programmatically
+
+54
+00:02:33,832 --> 00:02:36,229
+and not let Angular 2.0 detect it here.
+
+55
+00:02:36,229 --> 00:02:38,882
+Creating it programmatically might sound difficult,
+
+56
+00:02:38,882 --> 00:02:39,838
+but it is not.
+
+57
+00:02:39,838 --> 00:02:42,223
+It is really easy actually.
+
+58
+00:02:42,223 --> 00:02:44,183
+First, I will create a property.
+
+59
+00:02:44,183 --> 00:02:47,162
+Let's name it myForm, but you may chose any name you want.
+
+60
+00:02:47,162 --> 00:02:49,583
+This will hold the form we create.
+
+61
+00:02:49,583 --> 00:02:52,554
+It will be of type FormGroup.
+
+62
+00:02:52,554 --> 00:02:56,543
+This needs to be imported from @angular/forms.
+
+63
+00:02:56,543 --> 00:02:59,242
+So a form in Angular 2.0 is simply just a group
+
+64
+00:02:59,242 --> 00:03:01,909
+of basically controls in a form.
+
+65
+00:03:03,691 --> 00:03:06,510
+Next, we could use two different approaches
+
+66
+00:03:06,510 --> 00:03:07,991
+to create the form.
+
+67
+00:03:07,991 --> 00:03:11,991
+We can create it with all the individual elements
+
+68
+00:03:11,991 --> 00:03:15,052
+or we could use a tool named Form Builder.
+
+69
+00:03:15,052 --> 00:03:17,161
+I will use the first approach and create
+
+70
+00:03:17,161 --> 00:03:19,120
+all controls by myself.
+
+71
+00:03:19,120 --> 00:03:22,350
+It's not really that different from Form Builder,
+
+72
+00:03:22,350 --> 00:03:26,160
+just a little bit more explicit and that's why I chose it.
+
+73
+00:03:26,160 --> 00:03:28,271
+You may of course look up some Angular 2.0 courses
+
+74
+00:03:28,271 --> 00:03:31,766
+or tutorials to also learn about the Form Builder.
+
+75
+00:03:31,766 --> 00:03:35,933
+Therefore, I want to implement the OnInit hook here
+
+76
+00:03:37,100 --> 00:03:38,572
+to create this form.
+
+77
+00:03:38,572 --> 00:03:40,730
+Again, this is a great place to do so
+
+78
+00:03:40,730 --> 00:03:43,496
+because it's a bit of a more heavy thing
+
+79
+00:03:43,496 --> 00:03:45,772
+and I don't want to do that in the constructor.
+
+80
+00:03:45,772 --> 00:03:48,431
+Don't forget to import OnInit here at the top
+
+81
+00:03:48,431 --> 00:03:50,852
+and then implement the ngOnInit method
+
+82
+00:03:50,852 --> 00:03:54,264
+such that when this component is created,
+
+83
+00:03:54,264 --> 00:03:56,597
+the form is created as well.
+
+84
+00:03:57,636 --> 00:04:01,636
+So here I will assign this myForm and now I want
+
+85
+00:04:03,395 --> 00:04:05,035
+to create myForm.
+
+86
+00:04:05,035 --> 00:04:07,516
+So myForm is a FormGroup so let's create
+
+87
+00:04:07,516 --> 00:04:09,865
+a new FormGroup like that.
+
+88
+00:04:09,865 --> 00:04:13,056
+This FormGroup takes a JavaScript object,
+
+89
+00:04:13,056 --> 00:04:17,796
+which describes it and here we register our controls.
+
+90
+00:04:17,796 --> 00:04:19,996
+Remember before the template-driven approach
+
+91
+00:04:19,996 --> 00:04:22,503
+when it printed the form to the console?
+
+92
+00:04:22,503 --> 00:04:25,177
+It had tonnes of fields and all these fields
+
+93
+00:04:25,177 --> 00:04:28,596
+are still created and managed by Angular 2.0 automatically.
+
+94
+00:04:28,596 --> 00:04:31,086
+All I have to do myself here is tell it
+
+95
+00:04:31,086 --> 00:04:33,476
+which controls does my form have.
+
+96
+00:04:33,476 --> 00:04:35,987
+So this is exactly what I'm passing here,
+
+97
+00:04:35,987 --> 00:04:39,195
+an object containing my controls where the key
+
+98
+00:04:39,195 --> 00:04:41,945
+is always the name of the control and the value
+
+99
+00:04:41,945 --> 00:04:44,996
+is how I configured the control.
+
+100
+00:04:44,996 --> 00:04:48,425
+So I will have a firstName control for example
+
+101
+00:04:48,425 --> 00:04:52,865
+and the value will be a new FormControl now.
+
+102
+00:04:52,865 --> 00:04:56,566
+This also needs to be imported from @angular/forms.
+
+103
+00:04:56,566 --> 00:05:00,545
+And here, as you can see, we can pass multiple arguments.
+
+104
+00:05:00,545 --> 00:05:03,715
+The first one is the initial state, so basically
+
+105
+00:05:03,715 --> 00:05:06,886
+the value with which this control is initialised.
+
+106
+00:05:06,886 --> 00:05:09,256
+We could display some default value,
+
+107
+00:05:09,256 --> 00:05:11,063
+but I will keep this to an empty string
+
+108
+00:05:11,063 --> 00:05:13,465
+so that the input is empty at the beginning.
+
+109
+00:05:13,465 --> 00:05:16,390
+We could also pass null here.
+
+110
+00:05:16,390 --> 00:05:20,180
+Then, you can attach validators you want to use.
+
+111
+00:05:20,180 --> 00:05:22,268
+Remember in the template-driven approach
+
+112
+00:05:22,268 --> 00:05:24,273
+here in the message input component,
+
+113
+00:05:24,273 --> 00:05:27,588
+I added this required thing to tell Angular 2.0
+
+114
+00:05:27,588 --> 00:05:29,673
+that this should not be empty.
+
+115
+00:05:29,673 --> 00:05:31,649
+We can do the same here.
+
+116
+00:05:31,649 --> 00:05:35,343
+I can add Validators to use the built-in collection
+
+117
+00:05:35,343 --> 00:05:39,662
+of validators and all this is imported from @angular/forms
+
+118
+00:05:39,662 --> 00:05:43,118
+and then required and now this field is required
+
+119
+00:05:43,118 --> 00:05:46,332
+and may not be empty anymore.
+
+120
+00:05:46,332 --> 00:05:48,551
+With that I set up my first control.
+
+121
+00:05:48,551 --> 00:05:52,718
+Now I'm copying this to also set up my lastName here.
+
+122
+00:05:54,388 --> 00:05:56,663
+I'll copy one more time to set up my email
+
+123
+00:05:56,663 --> 00:05:59,972
+and one more time to set up my password.
+
+124
+00:05:59,972 --> 00:06:03,118
+Now of course you could also add additional validators
+
+125
+00:06:03,118 --> 00:06:06,221
+and I will do this for the email.
+
+126
+00:06:06,221 --> 00:06:09,382
+Here I want to validate that it actually
+
+127
+00:06:09,382 --> 00:06:12,338
+is a valid email address, but I also
+
+128
+00:06:12,338 --> 00:06:13,983
+want to make sure it's not empty
+
+129
+00:06:13,983 --> 00:06:16,543
+so I want to add two validators.
+
+130
+00:06:16,543 --> 00:06:20,431
+Now you don't add them as multiple arguments like this.
+
+131
+00:06:20,431 --> 00:06:23,599
+Instead you will simply add an array of validators
+
+132
+00:06:23,599 --> 00:06:25,833
+as the second argument now.
+
+133
+00:06:25,833 --> 00:06:27,764
+So the first validator I want to use
+
+134
+00:06:27,764 --> 00:06:31,598
+is the required validator and that's important
+
+135
+00:06:31,598 --> 00:06:34,239
+again for the other validators up her too.
+
+136
+00:06:34,239 --> 00:06:36,972
+Don't execute it, don't add parenthesis.
+
+137
+00:06:36,972 --> 00:06:39,279
+It should only be a reference to the function,
+
+138
+00:06:39,279 --> 00:06:41,560
+which Angular 2.0 will execute when it checks
+
+139
+00:06:41,560 --> 00:06:44,085
+the validity of this control.
+
+140
+00:06:44,085 --> 00:06:47,835
+And the second validator is also built in one,
+
+141
+00:06:47,835 --> 00:06:50,680
+which is the pattern validator.
+
+142
+00:06:50,680 --> 00:06:53,510
+Here I do execute it and pass an argument
+
+143
+00:06:53,510 --> 00:06:55,430
+and this argument should be a string
+
+144
+00:06:55,430 --> 00:06:59,310
+containing a regular expression describing the pattern
+
+145
+00:06:59,310 --> 00:07:01,131
+this input should match.
+
+146
+00:07:01,131 --> 00:07:04,896
+So here I clearly want to match it to a valid email address
+
+147
+00:07:04,896 --> 00:07:08,021
+and I copied this regular expression.
+
+148
+00:07:08,021 --> 00:07:12,054
+You may chose any regular expression that fits your needs.
+
+149
+00:07:12,054 --> 00:07:14,460
+It's not really a regular expression of course.
+
+150
+00:07:14,460 --> 00:07:15,701
+It looks very complicated.
+
+151
+00:07:15,701 --> 00:07:17,155
+In the end, this should make sure
+
+152
+00:07:17,155 --> 00:07:19,511
+that we enter a valid email address.
+
+153
+00:07:19,511 --> 00:07:23,678
+Though I will say right away, I chose a decently short one.
+
+154
+00:07:25,262 --> 00:07:27,331
+It doesn't cover all cases.
+
+155
+00:07:27,331 --> 00:07:30,000
+There are better email validators out there,
+
+156
+00:07:30,000 --> 00:07:32,049
+which are just very, very long
+
+157
+00:07:32,049 --> 00:07:34,251
+and which I didn't want to use here.
+
+158
+00:07:34,251 --> 00:07:36,835
+So with that I'm now applying these two validators
+
+159
+00:07:36,835 --> 00:07:40,925
+to my email control and both functions will be executed
+
+160
+00:07:40,925 --> 00:07:44,331
+whenever Angular 2.0 checks the validity of this control,
+
+161
+00:07:44,331 --> 00:07:47,427
+which it does upon every keystroke.
+
+162
+00:07:47,427 --> 00:07:51,142
+So this creates my own form and that is all.
+
+163
+00:07:51,142 --> 00:07:53,960
+The remaining step is I need to tell Angular 2.0,
+
+164
+00:07:53,960 --> 00:07:57,150
+"Please use this form in this HTML code
+
+165
+00:07:57,150 --> 00:08:00,719
+"and don't use the one you created automatically."
+
+166
+00:08:00,719 --> 00:08:02,910
+Doing so is also very easy.
+
+167
+00:08:02,910 --> 00:08:05,798
+On the form itself, I pass a directive
+
+168
+00:08:05,798 --> 00:08:09,565
+which uses property defining formGroup.
+
+169
+00:08:09,565 --> 00:08:14,032
+Here I point to the form I want to use, myForm,
+
+170
+00:08:14,032 --> 00:08:17,542
+and this tells Angular 2.0, "Don't use your own form,
+
+171
+00:08:17,542 --> 00:08:21,392
+"use mine and use this one specifically."
+
+172
+00:08:21,392 --> 00:08:24,931
+I also set up ngSubmit now to call onSubmit
+
+173
+00:08:24,931 --> 00:08:27,030
+whenever we submit the form.
+
+174
+00:08:27,030 --> 00:08:30,441
+Note I don't need to pass the form as an argument here.
+
+175
+00:08:30,441 --> 00:08:33,649
+I already do have access in my class here.
+
+176
+00:08:33,649 --> 00:08:36,982
+So here if I enter or if I add onSubmit,
+
+177
+00:08:37,923 --> 00:08:41,351
+I can already console.log
+
+178
+00:08:41,351 --> 00:08:45,409
+because I registered it here as a property in my class.
+
+179
+00:08:45,409 --> 00:08:48,140
+This is one of the advantages of the data-driven approach.
+
+180
+00:08:48,140 --> 00:08:50,283
+I do have very easy access to it.
+
+181
+00:08:50,283 --> 00:08:55,136
+I can fine tune it when I create it and much more.
+
+182
+00:08:55,136 --> 00:08:57,538
+So this sets up the overall form,
+
+183
+00:08:57,538 --> 00:08:59,592
+but I still need to tell Angular 2.0
+
+184
+00:08:59,592 --> 00:09:03,759
+which input here refers to which control in myForm.
+
+185
+00:09:04,990 --> 00:09:07,990
+It doesn't try to match this automatically
+
+186
+00:09:07,990 --> 00:09:10,750
+because you might use different names here
+
+187
+00:09:10,750 --> 00:09:12,990
+than you use here or in my case,
+
+188
+00:09:12,990 --> 00:09:15,859
+I didn't set up the name attribute at all.
+
+189
+00:09:15,859 --> 00:09:19,150
+So in order to tell Angular 2.0 which input
+
+190
+00:09:19,150 --> 00:09:22,733
+belongs to which control here, I simply add
+
+191
+00:09:24,190 --> 00:09:28,009
+another directive here, formControlName,
+
+192
+00:09:28,009 --> 00:09:30,238
+and set this equal to the control name
+
+193
+00:09:30,238 --> 00:09:32,699
+you set up in your object.
+
+194
+00:09:32,699 --> 00:09:35,878
+So here I use firstName as a control name.
+
+195
+00:09:35,878 --> 00:09:38,379
+Therefore, since I want to match this input
+
+196
+00:09:38,379 --> 00:09:41,778
+with this control, I pass firstName here.
+
+197
+00:09:41,778 --> 00:09:44,240
+Notice we don't use property binding here
+
+198
+00:09:44,240 --> 00:09:46,550
+because this is not a directive or a property
+
+199
+00:09:46,550 --> 00:09:48,299
+where we pass a value in.
+
+200
+00:09:48,299 --> 00:09:50,848
+It's a directive which Angular 2.0 analyses
+
+201
+00:09:50,848 --> 00:09:53,988
+when analysing this whole form and then it simply takes
+
+202
+00:09:53,988 --> 00:09:58,155
+the value of this quotation here as a control name to match.
+
+203
+00:10:00,008 --> 00:10:01,179
+This is all.
+
+204
+00:10:01,179 --> 00:10:05,096
+This synchronises this input with this control.
+
+205
+00:10:07,918 --> 00:10:10,339
+Now I'm going to quickly repeat this
+
+206
+00:10:10,339 --> 00:10:15,014
+for all the other inputs here to also match them.
+
+207
+00:10:15,014 --> 00:10:15,847
+Done.
+
+208
+00:10:15,847 --> 00:10:17,918
+So I added the formControlName directive
+
+209
+00:10:17,918 --> 00:10:21,158
+to all inputs and matched them with the controls
+
+210
+00:10:21,158 --> 00:10:24,017
+in my custom created form here.
+
+211
+00:10:24,017 --> 00:10:25,894
+Now in order to make this work, I need to change
+
+212
+00:10:25,894 --> 00:10:28,169
+one thing in my app module.
+
+213
+00:10:28,169 --> 00:10:30,969
+For a template-driven approach, in two-way binding
+
+214
+00:10:30,969 --> 00:10:33,278
+I needed to add FormsModule.
+
+215
+00:10:33,278 --> 00:10:37,299
+For this new approach, the reactive forms approach,
+
+216
+00:10:37,299 --> 00:10:41,299
+I need to add ReactiveFormsModule here.
+
+217
+00:10:41,299 --> 00:10:44,432
+So make sure to add this and to also add the import
+
+218
+00:10:44,432 --> 00:10:47,110
+from @angular/forms.
+
+219
+00:10:47,110 --> 00:10:49,219
+With this, if I now saved this
+
+220
+00:10:49,219 --> 00:10:51,802
+and then reload the application
+
+221
+00:10:53,380 --> 00:10:56,348
+and go to Signup, you see this new form.
+
+222
+00:10:56,348 --> 00:10:59,013
+Now let's see what gets logged to the console
+
+223
+00:10:59,013 --> 00:11:01,978
+if I enter something here.
+
+224
+00:11:01,978 --> 00:11:03,859
+Notice that it is red if I don't fill in
+
+225
+00:11:03,859 --> 00:11:07,950
+a valid email address and now hit Submit.
+
+226
+00:11:07,950 --> 00:11:10,059
+You see I now logged my FormGroup,
+
+227
+00:11:10,059 --> 00:11:13,560
+which has the same fields as before
+
+228
+00:11:13,560 --> 00:11:17,118
+which has a value which now has my key value pairs
+
+229
+00:11:17,118 --> 00:11:19,219
+I set up programmatically.
+
+230
+00:11:19,219 --> 00:11:22,569
+This is how you use the data-driven or reactive approach,
+
+231
+00:11:22,569 --> 00:11:25,158
+which gives you more control over your form
+
+232
+00:11:25,158 --> 00:11:27,948
+and allows you to create it in code.
+
+233
+00:11:27,948 --> 00:11:30,510
+You can now even fine tune this a bit more.
+
+234
+00:11:30,510 --> 00:11:32,967
+Go back to the Signup component here
+
+235
+00:11:32,967 --> 00:11:35,773
+and let's say I want to disable this button
+
+236
+00:11:35,773 --> 00:11:39,023
+as long as the whole form is not valid.
+
+237
+00:11:39,858 --> 00:11:42,409
+So I can simply add a property binding
+
+238
+00:11:42,409 --> 00:11:46,576
+to the disabled on property off this button element
+
+239
+00:11:47,699 --> 00:11:49,864
+and I want to disable it as long
+
+240
+00:11:49,864 --> 00:11:52,197
+as myForm.valid is not true.
+
+241
+00:11:55,505 --> 00:11:58,377
+Valid is one of the fields Angular 2.0 manages for us
+
+242
+00:11:58,377 --> 00:12:01,878
+where it takes the validity of all inputs together
+
+243
+00:12:01,878 --> 00:12:05,944
+and only turns it to true if all inputs are valid.
+
+244
+00:12:05,944 --> 00:12:09,206
+So with this, if I reload this application or this page,
+
+245
+00:12:09,206 --> 00:12:12,219
+you see the button is now not clickable.
+
+246
+00:12:12,219 --> 00:12:16,149
+I have to fill in valid values into all fields
+
+247
+00:12:16,149 --> 00:12:18,670
+and now it becomes clickable again
+
+248
+00:12:18,670 --> 00:12:22,744
+and as soon as I make one field invalid, it isn't.
+
+249
+00:12:22,744 --> 00:12:25,569
+This is how I can set up this form.
+
+250
+00:12:25,569 --> 00:12:29,544
+As a final step, I simply want to add a functionality
+
+251
+00:12:29,544 --> 00:12:33,339
+to reset the form whenever I do submit it.
+
+252
+00:12:33,339 --> 00:12:37,339
+So here I will call this.myForm.reset like this.
+
+253
+00:12:39,049 --> 00:12:41,158
+So to showcase this a last time,
+
+254
+00:12:41,158 --> 00:12:45,716
+if I now enter something here and hit Submit,
+
+255
+00:12:45,716 --> 00:12:48,438
+it is reset thereafter and with that,
+
+256
+00:12:48,438 --> 00:12:51,355
+we've got the Signup form finished.
+

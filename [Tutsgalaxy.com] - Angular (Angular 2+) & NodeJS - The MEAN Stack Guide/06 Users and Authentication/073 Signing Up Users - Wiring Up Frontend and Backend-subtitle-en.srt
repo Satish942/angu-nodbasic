@@ -1,0 +1,904 @@
+1
+00:00:01,829 --> 00:00:04,274
+<v ->In order to connect the backend,</v>
+
+2
+00:00:04,274 --> 00:00:08,223
+the user creation route which has created to the frontend,
+
+3
+00:00:08,223 --> 00:00:10,419
+I'll go to the auth folder.
+
+4
+00:00:10,419 --> 00:00:12,374
+Here we've got a couple of files
+
+5
+00:00:12,374 --> 00:00:15,799
+but what we haven't got right now is a service
+
+6
+00:00:15,799 --> 00:00:18,443
+for our authentication components here
+
+7
+00:00:18,443 --> 00:00:21,334
+for our authentication feature.
+
+8
+00:00:21,334 --> 00:00:23,042
+So I will create a new file
+
+9
+00:00:23,042 --> 00:00:25,542
+and name it "auth_service.ts".
+
+10
+00:00:27,824 --> 00:00:30,675
+Here I will create a new service which I'll use
+
+11
+00:00:30,675 --> 00:00:35,363
+to sign up a user, sign in a user, and do all these things.
+
+12
+00:00:35,363 --> 00:00:36,868
+So here it's time to export
+
+13
+00:00:36,868 --> 00:00:39,618
+a class "AuthService", like this.
+
+14
+00:00:41,009 --> 00:00:43,083
+And in here what I want to do is
+
+15
+00:00:43,083 --> 00:00:46,540
+I want to create a signup method which allows me to,
+
+16
+00:00:46,540 --> 00:00:48,656
+guess what, sign up a user.
+
+17
+00:00:48,656 --> 00:00:52,038
+Therefore here I will pass a user object
+
+18
+00:00:52,038 --> 00:00:54,638
+of type User to this method.
+
+19
+00:00:54,638 --> 00:00:56,348
+Of course you need to import
+
+20
+00:00:56,348 --> 00:00:59,437
+the user from "./user.model"
+
+21
+00:00:59,437 --> 00:01:02,364
+from this file where we define how our user
+
+22
+00:01:02,364 --> 00:01:05,868
+should look like on our frontend.
+
+23
+00:01:05,868 --> 00:01:10,035
+So in here I get this user passed into my AuthService.
+
+24
+00:01:11,408 --> 00:01:14,499
+I want to reach out to my backend thereafter.
+
+25
+00:01:14,499 --> 00:01:17,671
+Therefore I need to inject the Http service.
+
+26
+00:01:17,671 --> 00:01:19,384
+And as you learned in the
+
+27
+00:01:19,384 --> 00:01:21,011
+messages section of this course here
+
+28
+00:01:21,011 --> 00:01:24,186
+for this to work I need to add "Injectable"
+
+29
+00:01:24,186 --> 00:01:26,101
+to this service here.
+
+30
+00:01:26,101 --> 00:01:30,191
+This makes sure I can inject a service into a service.
+
+31
+00:01:30,191 --> 00:01:32,305
+You need to import Injectable
+
+32
+00:01:32,305 --> 00:01:35,883
+from "@angular/core", like this.
+
+33
+00:01:35,883 --> 00:01:38,810
+This now allows me to add a constructor to this service.
+
+34
+00:01:38,810 --> 00:01:40,801
+And in the constructor I want to store
+
+35
+00:01:40,801 --> 00:01:45,317
+the Http service of angular in this http property.
+
+36
+00:01:45,317 --> 00:01:48,576
+So make sure to import Http here
+
+37
+00:01:48,576 --> 00:01:51,667
+from "@angular/http".
+
+38
+00:01:51,667 --> 00:01:54,312
+And with this injected, of course,
+
+39
+00:01:54,312 --> 00:01:57,681
+you also need to add the Http module to the app module
+
+40
+00:01:57,681 --> 00:01:59,352
+but we already did this in the
+
+41
+00:01:59,352 --> 00:02:01,827
+messages section of the course,
+
+42
+00:02:01,827 --> 00:02:03,593
+so no need to do it right now.
+
+43
+00:02:03,593 --> 00:02:06,652
+So with that set up, in my signup method here
+
+44
+00:02:06,652 --> 00:02:10,037
+I can return the observable I create.
+
+45
+00:02:10,037 --> 00:02:12,151
+Remember, we are creating an observable
+
+46
+00:02:12,151 --> 00:02:14,598
+when using Angular 2's Http service.
+
+47
+00:02:14,598 --> 00:02:17,484
+And here I want to send a post request, of course,
+
+48
+00:02:17,484 --> 00:02:19,220
+because I want to create a user
+
+49
+00:02:19,220 --> 00:02:23,387
+and we created a post route here in this user.js file.
+
+50
+00:02:24,308 --> 00:02:26,628
+Now remember the route we created here
+
+51
+00:02:26,628 --> 00:02:28,334
+has a path of "/",
+
+52
+00:02:28,334 --> 00:02:32,644
+but invisibly it has this "/user" in front of it
+
+53
+00:02:32,644 --> 00:02:34,197
+since this is the only way how we can
+
+54
+00:02:34,197 --> 00:02:37,413
+get into this user.js file here.
+
+55
+00:02:37,413 --> 00:02:39,727
+So therefore the path to our URL
+
+56
+00:02:39,727 --> 00:02:43,894
+I want to use here is "localhost:3000/user".
+
+57
+00:02:47,586 --> 00:02:49,334
+Now with that I'm connecting to
+
+58
+00:02:49,334 --> 00:02:51,446
+this post route I just created.
+
+59
+00:02:51,446 --> 00:02:53,441
+Of course, I also need to send some data
+
+60
+00:02:53,441 --> 00:02:55,520
+to this request, or with this request,
+
+61
+00:02:55,520 --> 00:02:58,001
+so I need to add a body to this post request.
+
+62
+00:02:58,001 --> 00:02:59,914
+So let me create a new body
+
+63
+00:02:59,914 --> 00:03:03,698
+and I will use the stringify function to stringify
+
+64
+00:03:03,698 --> 00:03:06,754
+the user we're passing to this function.
+
+65
+00:03:06,754 --> 00:03:09,681
+So then it's time to pass this body.
+
+66
+00:03:09,681 --> 00:03:11,916
+And as before I need to attach some headers
+
+67
+00:03:11,916 --> 00:03:15,481
+to let my backend know that we're getting JSON data.
+
+68
+00:03:15,481 --> 00:03:18,985
+So time to also create new headers here.
+
+69
+00:03:18,985 --> 00:03:20,736
+This is all the same I did in the
+
+70
+00:03:20,736 --> 00:03:22,813
+messages section of this course.
+
+71
+00:03:22,813 --> 00:03:24,595
+Of course Headers needs to be
+
+72
+00:03:24,595 --> 00:03:27,085
+imported from "@angular/http".
+
+73
+00:03:27,085 --> 00:03:29,281
+And here we pass a JavaScript object
+
+74
+00:03:29,281 --> 00:03:32,375
+where we set the content type to
+
+75
+00:03:32,375 --> 00:03:36,559
+"application/json", like this.
+
+76
+00:03:36,559 --> 00:03:40,783
+And then as a third argument set up our headers here
+
+77
+00:03:40,783 --> 00:03:42,247
+by adding the "headers" key
+
+78
+00:03:42,247 --> 00:03:45,841
+and then our headers' constant as a value.
+
+79
+00:03:45,841 --> 00:03:48,976
+So with this we're preparing this observable
+
+80
+00:03:48,976 --> 00:03:51,985
+which holds the request who can send to the backend.
+
+81
+00:03:51,985 --> 00:03:54,268
+But since no one has subscribed yet
+
+82
+00:03:54,268 --> 00:03:56,665
+we aren't sending it yet.
+
+83
+00:03:56,665 --> 00:03:59,920
+So make sure to subscribe to it,
+
+84
+00:03:59,920 --> 00:04:02,887
+though in this AuthService method here
+
+85
+00:04:02,887 --> 00:04:04,800
+I won't subscribe yet.
+
+86
+00:04:04,800 --> 00:04:07,643
+I will first add the "map" operator here
+
+87
+00:04:07,643 --> 00:04:10,123
+to transform the data we get back.
+
+88
+00:04:10,123 --> 00:04:13,539
+Remember to make map work we need to
+
+89
+00:04:13,539 --> 00:04:18,366
+unlock these operators by importing "rxjs/Rx"
+
+90
+00:04:18,366 --> 00:04:20,484
+here at the top.
+
+91
+00:04:20,484 --> 00:04:21,828
+This gives me access to map
+
+92
+00:04:21,828 --> 00:04:23,333
+and all of the other operators.
+
+93
+00:04:23,333 --> 00:04:26,333
+And here I can then use the Response
+
+94
+00:04:27,790 --> 00:04:31,205
+which needs to be imported from "@angular/http".
+
+95
+00:04:31,205 --> 00:04:32,508
+And all I want to do here is
+
+96
+00:04:32,508 --> 00:04:36,591
+I want to call response.json to retrieve the data
+
+97
+00:04:37,757 --> 00:04:41,586
+which is sent with this request or with this response.
+
+98
+00:04:41,586 --> 00:04:42,971
+And then I'll copy something
+
+99
+00:04:42,971 --> 00:04:46,466
+from the message service, this catch block here,
+
+100
+00:04:46,466 --> 00:04:50,207
+which allows me to catch any errors we might have.
+
+101
+00:04:50,207 --> 00:04:52,407
+So just like this.
+
+102
+00:04:52,407 --> 00:04:54,079
+This is the setup I want to use.
+
+103
+00:04:54,079 --> 00:04:55,825
+Of course Observable here then also
+
+104
+00:04:55,825 --> 00:04:59,041
+needs to be imported from "rxjs".
+
+105
+00:04:59,041 --> 00:05:03,208
+With this we set up our signup method in this service.
+
+106
+00:05:04,447 --> 00:05:06,768
+Of course now we also need to use it
+
+107
+00:05:06,768 --> 00:05:11,243
+in our signup component to really trigger this method
+
+108
+00:05:11,243 --> 00:05:14,418
+whenever the user hits the signup button.
+
+109
+00:05:14,418 --> 00:05:17,634
+So let's head over to the signup component here.
+
+110
+00:05:17,634 --> 00:05:20,154
+In the onSubmit method I want to
+
+111
+00:05:20,154 --> 00:05:23,161
+reach out to my AuthService.
+
+112
+00:05:23,161 --> 00:05:27,328
+For this to work I first need to inject my AuthService here.
+
+113
+00:05:28,860 --> 00:05:32,527
+So "private authService" of type AuthService
+
+114
+00:05:33,442 --> 00:05:37,283
+needs to be added here to get access to my AuthService.
+
+115
+00:05:37,283 --> 00:05:40,859
+Now for this injection to work I also need
+
+116
+00:05:40,859 --> 00:05:43,784
+to provide the AuthService though.
+
+117
+00:05:43,784 --> 00:05:46,668
+You learned this in an earlier module in this course.
+
+118
+00:05:46,668 --> 00:05:48,054
+The question of course is
+
+119
+00:05:48,054 --> 00:05:51,190
+where do you want to provide the AuthService?
+
+120
+00:05:51,190 --> 00:05:53,263
+I could provide it in this component
+
+121
+00:05:53,263 --> 00:05:57,529
+but then I would get a separate instance for this component.
+
+122
+00:05:57,529 --> 00:05:59,118
+This might be what I want,
+
+123
+00:05:59,118 --> 00:06:01,269
+but is it what I want in this case?
+
+124
+00:06:01,269 --> 00:06:03,301
+The AuthService will be a service
+
+125
+00:06:03,301 --> 00:06:06,884
+I want to use in other parts of the application too.
+
+126
+00:06:06,884 --> 00:06:09,280
+Now I could create a single instance
+
+127
+00:06:09,280 --> 00:06:11,847
+for this component since signing up
+
+128
+00:06:11,847 --> 00:06:16,203
+is not dependent on some data in the AuthService.
+
+129
+00:06:16,203 --> 00:06:19,496
+But I want to inject a single instance
+
+130
+00:06:19,496 --> 00:06:21,449
+for my whole application.
+
+131
+00:06:21,449 --> 00:06:23,845
+As I will later on also use the AuthService
+
+132
+00:06:23,845 --> 00:06:26,568
+in the messages feature for example.
+
+133
+00:06:26,568 --> 00:06:29,174
+Therefore the place to inject this or provide this
+
+134
+00:06:29,174 --> 00:06:32,630
+AuthService is in the app module.
+
+135
+00:06:32,630 --> 00:06:36,905
+Here I want to provide my service application-wide
+
+136
+00:06:36,905 --> 00:06:39,260
+which means I can use my AuthService,
+
+137
+00:06:39,260 --> 00:06:41,460
+the same instance of this AuthService,
+
+138
+00:06:41,460 --> 00:06:44,188
+in all components and all services
+
+139
+00:06:44,188 --> 00:06:48,018
+everywhere I want in my whole application.
+
+140
+00:06:48,018 --> 00:06:50,944
+To provide a service application-wide
+
+141
+00:06:50,944 --> 00:06:55,111
+I set up the providers area here in my app module.
+
+142
+00:06:57,778 --> 00:07:00,300
+This means whatever I provide here
+
+143
+00:07:00,300 --> 00:07:03,672
+is a available in the whole app module here.
+
+144
+00:07:03,672 --> 00:07:05,664
+And since I only have one app module
+
+145
+00:07:05,664 --> 00:07:08,187
+this means in the whole application.
+
+146
+00:07:08,187 --> 00:07:11,241
+So here I will provide my AuthService.
+
+147
+00:07:11,241 --> 00:07:13,111
+Of course you also need to import
+
+148
+00:07:13,111 --> 00:07:17,773
+the AuthService from "./auth/auth.service".
+
+149
+00:07:17,773 --> 00:07:20,066
+By the way, you also need to import it here
+
+150
+00:07:20,066 --> 00:07:21,863
+in the signup component.
+
+151
+00:07:21,863 --> 00:07:24,424
+So make sure to add these two imports.
+
+152
+00:07:24,424 --> 00:07:26,338
+And with that this injection
+
+153
+00:07:26,338 --> 00:07:29,559
+and the signup component here will now work.
+
+154
+00:07:29,559 --> 00:07:31,596
+And I will be able to inject this AuthService
+
+155
+00:07:31,596 --> 00:07:34,460
+in any other class and any other service
+
+156
+00:07:34,460 --> 00:07:36,220
+or component in my whole application
+
+157
+00:07:36,220 --> 00:07:39,104
+and I will always get the same instance.
+
+158
+00:07:39,104 --> 00:07:41,017
+Now with that injected time to
+
+159
+00:07:41,017 --> 00:07:43,665
+not log what the user submitted,
+
+160
+00:07:43,665 --> 00:07:46,415
+but instead to create a new user.
+
+161
+00:07:47,486 --> 00:07:50,153
+So let's create a new user here.
+
+162
+00:07:51,306 --> 00:07:55,164
+For this we also need to import user from "./user.model"
+
+163
+00:07:55,164 --> 00:07:57,234
+from our own user model.
+
+164
+00:07:57,234 --> 00:07:59,467
+And then we need to pass some data here.
+
+165
+00:07:59,467 --> 00:08:02,773
+Now what data does out user model expect?
+
+166
+00:08:02,773 --> 00:08:06,434
+It expects the email and then of course
+
+167
+00:08:06,434 --> 00:08:10,060
+also password, first name, and so on.
+
+168
+00:08:10,060 --> 00:08:13,316
+So to get the email I can simply
+
+169
+00:08:13,316 --> 00:08:17,869
+access myForm here and then the value of the form
+
+170
+00:08:17,869 --> 00:08:20,230
+and here the email field
+
+171
+00:08:20,230 --> 00:08:23,771
+since we set up an email field in our form value.
+
+172
+00:08:23,771 --> 00:08:26,980
+So there's this neat convenient thing about this.
+
+173
+00:08:26,980 --> 00:08:28,728
+Same is true for the password
+
+174
+00:08:28,728 --> 00:08:31,893
+and basically for all other fields as well.
+
+175
+00:08:31,893 --> 00:08:33,811
+We do have all these fields available.
+
+176
+00:08:33,811 --> 00:08:35,515
+And I'm just restructuring this
+
+177
+00:08:35,515 --> 00:08:36,899
+to make it easier to read,
+
+178
+00:08:36,899 --> 00:08:38,444
+so to have it over multiple lines
+
+179
+00:08:38,444 --> 00:08:40,848
+since we have a couple of fields here.
+
+180
+00:08:40,848 --> 00:08:44,555
+So here we also will have as a third argument
+
+181
+00:08:44,555 --> 00:08:47,055
+this.myForm, value, firstName.
+
+182
+00:08:49,368 --> 00:08:53,898
+And then as a last argument this.myForm, value, lastName.
+
+183
+00:08:53,898 --> 00:08:56,543
+So the names we're accessing here
+
+184
+00:08:56,543 --> 00:08:58,626
+are the names of our controls we set up
+
+185
+00:08:58,626 --> 00:09:01,474
+in the ngOnInit method down here.
+
+186
+00:09:01,474 --> 00:09:03,634
+So this allows us to easily extract the data
+
+187
+00:09:03,634 --> 00:09:06,611
+and create a new user using this data.
+
+188
+00:09:06,611 --> 00:09:11,082
+The next step is to reach out to he AuthService.
+
+189
+00:09:11,082 --> 00:09:13,484
+And here I will call signup
+
+190
+00:09:13,484 --> 00:09:16,657
+and pass my user to the signup method.
+
+191
+00:09:16,657 --> 00:09:19,302
+Now since the signup method returns an observable
+
+192
+00:09:19,302 --> 00:09:21,785
+I also need to subscribe to it
+
+193
+00:09:21,785 --> 00:09:23,898
+which will now send the request
+
+194
+00:09:23,898 --> 00:09:26,708
+and allows me to listen to the data I get back.
+
+195
+00:09:26,708 --> 00:09:29,315
+Now the data I do get back,
+
+196
+00:09:29,315 --> 00:09:32,571
+I only want to log it the console to see if it works.
+
+197
+00:09:32,571 --> 00:09:35,421
+And in case of an error I will also
+
+198
+00:09:35,421 --> 00:09:38,171
+simply error that to the console.
+
+199
+00:09:39,859 --> 00:09:42,218
+With this setup we should have a working setup
+
+200
+00:09:42,218 --> 00:09:45,674
+which allows us to create new users.
+
+201
+00:09:45,674 --> 00:09:48,238
+So let's have a look at the running application
+
+202
+00:09:48,238 --> 00:09:49,940
+and see if this works.
+
+203
+00:09:49,940 --> 00:09:52,014
+I will rebuilt this application by running
+
+204
+00:09:52,014 --> 00:09:53,891
+"npm run build" again.
+
+205
+00:09:53,891 --> 00:09:57,060
+Also, will restart my server, my node.js server,
+
+206
+00:09:57,060 --> 00:09:59,660
+because I made some changes there.
+
+207
+00:09:59,660 --> 00:10:02,753
+And with that setup let's now head over to the application.
+
+208
+00:10:02,753 --> 00:10:05,029
+Reload this page and open up the console
+
+209
+00:10:05,029 --> 00:10:07,712
+to see if this works or if we get any errors.
+
+210
+00:10:07,712 --> 00:10:11,533
+And then I can basically fill this out with any data
+
+211
+00:10:11,533 --> 00:10:15,401
+you'll want to put in there and hit submit.
+
+212
+00:10:15,401 --> 00:10:16,698
+This looks great.
+
+213
+00:10:16,698 --> 00:10:18,567
+A new user was created.
+
+214
+00:10:18,567 --> 00:10:21,459
+And we can check this in the Mongo Shell client.
+
+215
+00:10:21,459 --> 00:10:24,508
+Simply run "db.users.find "
+
+216
+00:10:24,508 --> 00:10:27,069
+and we see this user down here which
+
+217
+00:10:27,069 --> 00:10:29,510
+happens to have data we entered.
+
+218
+00:10:29,510 --> 00:10:31,668
+And also notice the password certainly
+
+219
+00:10:31,668 --> 00:10:33,212
+is not what I entered.
+
+220
+00:10:33,212 --> 00:10:35,691
+Instead it's this encrypted value.
+
+221
+00:10:35,691 --> 00:10:36,524
+Great.
+
+222
+00:10:36,524 --> 00:10:38,252
+So this works as intended.
+
+223
+00:10:38,252 --> 00:10:41,502
+With that we are able to sign up users.
+
+224
+00:10:42,402 --> 00:10:46,103
+Now the next step of course is to use
+
+225
+00:10:46,103 --> 00:10:49,071
+this new user to be able to sign him in
+
+226
+00:10:49,071 --> 00:10:51,071
+in the signin form here.
+

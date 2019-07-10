@@ -1,0 +1,128 @@
+1
+00:00:01,837 --> 00:00:02,918
+<v Instructor>So at this point of time</v>
+
+2
+00:00:02,918 --> 00:00:04,923
+you got a refresher on Node.js.
+
+3
+00:00:04,923 --> 00:00:07,213
+You know how our general application works,
+
+4
+00:00:07,213 --> 00:00:08,951
+how our files are getting served,
+
+5
+00:00:08,951 --> 00:00:11,017
+and how we route in Node.js.
+
+6
+00:00:11,017 --> 00:00:14,177
+You also got a refresher in MongoDB
+
+7
+00:00:14,177 --> 00:00:15,572
+and learned how to store data
+
+8
+00:00:15,572 --> 00:00:17,042
+in the Mongo database.
+
+9
+00:00:17,042 --> 00:00:18,560
+We also, and that is important for
+
+10
+00:00:18,560 --> 00:00:20,453
+the rest of this course and this
+
+11
+00:00:20,453 --> 00:00:22,096
+application we're building here.
+
+12
+00:00:22,096 --> 00:00:25,256
+We also set up our models here in the models folder.
+
+13
+00:00:25,256 --> 00:00:27,098
+We're going to use them in later modules
+
+14
+00:00:27,098 --> 00:00:30,500
+in this course to save our messages and users
+
+15
+00:00:30,500 --> 00:00:35,497
+when we then create them Y Angular 2 to the database.
+
+16
+00:00:35,497 --> 00:00:37,053
+Speaking of Angular 2, we haven't
+
+17
+00:00:37,053 --> 00:00:39,071
+seen much of that, have we?
+
+18
+00:00:39,071 --> 00:00:40,774
+Now in this module it's finally time
+
+19
+00:00:40,774 --> 00:00:44,639
+to get to the point and use Angular 2.
+
+20
+00:00:44,639 --> 00:00:47,099
+Now this module here, we'll set up
+
+21
+00:00:47,099 --> 00:00:49,498
+the whole front end of our application
+
+22
+00:00:49,498 --> 00:00:51,364
+and I will use it to also repeat
+
+23
+00:00:51,364 --> 00:00:53,836
+some of the concepts we're using
+
+24
+00:00:53,836 --> 00:00:55,058
+throughout this module and some of
+
+25
+00:00:55,058 --> 00:00:58,198
+the core concepts of Angular 2, therefore.
+
+26
+00:00:58,198 --> 00:01:00,661
+If you feel like that's not enough
+
+27
+00:01:00,661 --> 00:01:02,518
+and you need more Angular 2 knowledge,
+
+28
+00:01:02,518 --> 00:01:06,125
+I definitely recommend diving in a dedicated course.
+
+29
+00:01:06,125 --> 00:01:08,845
+With that, let's get started and let's learn
+
+30
+00:01:08,845 --> 00:01:12,309
+how we can actually start our Angular 2 application
+
+31
+00:01:12,309 --> 00:01:14,842
+through our Node.js application
+
+32
+00:01:14,842 --> 00:01:17,175
+which you've built thus far.
+

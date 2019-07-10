@@ -1,0 +1,340 @@
+1
+00:00:02,232 --> 00:00:03,731
+<v Instructor>For deleting messages,</v>
+
+2
+00:00:03,731 --> 00:00:05,861
+I'll again start in the backend here
+
+3
+00:00:05,861 --> 00:00:09,352
+in my messages.js file and routes folder.
+
+4
+00:00:09,352 --> 00:00:13,669
+And here, I will add a new route, which is a delete route
+
+5
+00:00:13,669 --> 00:00:16,086
+so it uses the delete method.
+
+6
+00:00:16,920 --> 00:00:19,731
+The path here again is slash and then the id
+
+7
+00:00:19,731 --> 00:00:21,592
+of the message I wanna delete.
+
+8
+00:00:21,592 --> 00:00:24,011
+So like the patch route, the delete route gets
+
+9
+00:00:24,011 --> 00:00:27,761
+some or all of the data it needs in the path.
+
+10
+00:00:29,640 --> 00:00:32,731
+I'll then add the callback function
+
+11
+00:00:32,731 --> 00:00:34,814
+you already are aware of,
+
+12
+00:00:35,864 --> 00:00:39,901
+and then in here, I will pretty much copy the code
+
+13
+00:00:39,901 --> 00:00:44,901
+from the patch function because I still want to get
+
+14
+00:00:44,901 --> 00:00:47,811
+my request or my message here, I still want to find it
+
+15
+00:00:47,811 --> 00:00:49,963
+by id, then I want to check
+
+16
+00:00:49,963 --> 00:00:53,029
+if we got an error, if I didn't find it,
+
+17
+00:00:53,029 --> 00:00:56,842
+and then of course, I won't change the content.
+
+18
+00:00:56,842 --> 00:01:00,259
+Instead here, I want to simply remove it.
+
+19
+00:01:01,672 --> 00:01:04,784
+Then I still have my callback where I either have an error
+
+20
+00:01:04,784 --> 00:01:08,951
+or I am successful, in which case I pass deleted message.
+
+21
+00:01:10,333 --> 00:01:14,712
+So this is basically all, this will remove my message.
+
+22
+00:01:14,712 --> 00:01:18,061
+Now with that, I'll instantly go back to the message service
+
+23
+00:01:18,061 --> 00:01:20,723
+and here in the delete message method,
+
+24
+00:01:20,723 --> 00:01:23,923
+of course, I want to call that, so what I'll do here is,
+
+25
+00:01:23,923 --> 00:01:28,514
+I will copy the code from the update message method here.
+
+26
+00:01:28,514 --> 00:01:31,704
+I will leave the splice method here though, I still want
+
+27
+00:01:31,704 --> 00:01:34,812
+to remove it from the array immediately on the front-end,
+
+28
+00:01:34,812 --> 00:01:37,824
+so that it is gone there too, but then I also want
+
+29
+00:01:37,824 --> 00:01:39,773
+to reach out to the backend, and of course,
+
+30
+00:01:39,773 --> 00:01:42,624
+I do remove it from the front and then right before this
+
+31
+00:01:42,624 --> 00:01:44,813
+backend method comes back to me,
+
+32
+00:01:44,813 --> 00:01:46,824
+before this request was sent,
+
+33
+00:01:46,824 --> 00:01:49,373
+because this is kind of an optimistic updating.
+
+34
+00:01:49,373 --> 00:01:52,433
+Here, I'm removing it before I know that it was deleted
+
+35
+00:01:52,433 --> 00:01:55,601
+on the server, but I'm pretty sure it will be deleted,
+
+36
+00:01:55,601 --> 00:01:58,475
+and otherwise, it will be back on the next Petri load.
+
+37
+00:01:58,475 --> 00:02:02,912
+But I will leave this splice method here, but then I called
+
+38
+00:02:02,912 --> 00:02:07,079
+my delete route on the backend where I pass my message id.
+
+39
+00:02:08,643 --> 00:02:12,313
+I don't pass headers or a body though.
+
+40
+00:02:12,313 --> 00:02:16,043
+I only executed or assess it like a get route.
+
+41
+00:02:16,043 --> 00:02:19,803
+And then here, I also mapped the response
+
+42
+00:02:19,803 --> 00:02:23,232
+and catched any errors, but with that I'm doing everything
+
+43
+00:02:23,232 --> 00:02:27,893
+I want to do, to delete a message in my database.
+
+44
+00:02:27,893 --> 00:02:31,372
+So where do I want to trigger this then?
+
+45
+00:02:31,372 --> 00:02:34,115
+Well, in my message component where I have my,
+
+46
+00:02:34,115 --> 00:02:37,315
+if you have a look in here, my delete button.
+
+47
+00:02:37,315 --> 00:02:40,013
+In the on delete method, I already execute
+
+48
+00:02:40,013 --> 00:02:43,555
+this message service delete message,
+
+49
+00:02:43,555 --> 00:02:46,173
+and if we have a look at the message service, this now
+
+50
+00:02:46,173 --> 00:02:49,224
+returns an observable, so what I'll do here is,
+
+51
+00:02:49,224 --> 00:02:51,641
+I will simply call subscribe,
+
+52
+00:02:52,795 --> 00:02:56,704
+and then here, log the result to the console,
+
+53
+00:02:56,704 --> 00:02:59,651
+just to see if this worked.
+
+54
+00:02:59,651 --> 00:03:04,264
+So, let's recompile this and I'll restart the server
+
+55
+00:03:04,264 --> 00:03:07,112
+a final time since we changed something there.
+
+56
+00:03:07,112 --> 00:03:09,911
+And then if I head over to reload the application,
+
+57
+00:03:09,911 --> 00:03:12,592
+if I click on delete here,
+
+58
+00:03:12,592 --> 00:03:16,032
+looks good, we get the deleted message, message here.
+
+59
+00:03:16,032 --> 00:03:18,761
+If I reload, it's indeed gone.
+
+60
+00:03:18,761 --> 00:03:21,824
+If I delete all messages and reload, well,
+
+61
+00:03:21,824 --> 00:03:25,424
+all messages should be gone, and we can double-check this
+
+62
+00:03:25,424 --> 00:03:27,674
+by running db messages find
+
+63
+00:03:29,363 --> 00:03:31,592
+in the mongo shell client,
+
+64
+00:03:31,592 --> 00:03:33,701
+and we don't find anything here.
+
+65
+00:03:33,701 --> 00:03:37,550
+So indeed, all messages were removed, and with that,
+
+66
+00:03:37,550 --> 00:03:42,061
+we set up our Angular 2 two-node js connexion.
+
+67
+00:03:42,061 --> 00:03:45,043
+We're now able to create messages and store them
+
+68
+00:03:45,043 --> 00:03:48,653
+on the database to fetch messages and display them
+
+69
+00:03:48,653 --> 00:03:51,832
+in our application to added messages and save these
+
+70
+00:03:51,832 --> 00:03:55,280
+changes to the database, and to delete messages,
+
+71
+00:03:55,280 --> 00:03:58,243
+and also delete them from the database.
+
+72
+00:03:58,243 --> 00:04:01,053
+With that, we made a huge step.
+
+73
+00:04:01,053 --> 00:04:05,363
+Our application is now really more than just a front-end
+
+74
+00:04:05,363 --> 00:04:08,941
+I-don't-care-about-your-changes application.
+
+75
+00:04:08,941 --> 00:04:13,330
+And in this module, you learned a key thing.
+
+76
+00:04:13,330 --> 00:04:18,291
+You learned how to connect your node js express backend
+
+77
+00:04:18,291 --> 00:04:21,061
+to your Angular 2 application,
+
+78
+00:04:21,061 --> 00:04:23,592
+how to let both communicate,
+
+79
+00:04:23,592 --> 00:04:26,931
+how to send data from one to the other,
+
+80
+00:04:26,931 --> 00:04:29,893
+and building up on this, in the next section,
+
+81
+00:04:29,893 --> 00:04:32,572
+we'll work on the authentication so that we're able
+
+82
+00:04:32,572 --> 00:04:36,739
+to actually create users and map users to messages,
+
+83
+00:04:37,632 --> 00:04:41,413
+sign users in, make sure that only authorised users
+
+84
+00:04:41,413 --> 00:04:45,403
+are able to create and delete message, and much more.
+
+85
+00:04:45,403 --> 00:04:46,570
+See you there.
+

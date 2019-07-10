@@ -1,0 +1,324 @@
+1
+00:00:01,834 --> 00:00:03,835
+<v ->The first thing I want to do is,</v>
+
+2
+00:00:03,835 --> 00:00:06,351
+I will outsource my MongoDB.
+
+3
+00:00:06,351 --> 00:00:09,813
+Now of course, you can instal your own MongoDB server,
+
+4
+00:00:09,813 --> 00:00:13,446
+on, for example, an EC2 instance on Amazon Web Services,
+
+5
+00:00:13,446 --> 00:00:16,630
+but that really would be beyond the scope of this course.
+
+6
+00:00:16,630 --> 00:00:18,482
+This is no AWS course, right?
+
+7
+00:00:18,482 --> 00:00:21,516
+And the great thing is we have certain providers
+
+8
+00:00:21,516 --> 00:00:23,722
+where we can easily outsource this.
+
+9
+00:00:23,722 --> 00:00:26,125
+Specifically I'm talking about MongoLab.
+
+10
+00:00:26,125 --> 00:00:30,945
+So just search for MongoLab and you'll find mlab.com.
+
+11
+00:00:30,945 --> 00:00:33,876
+This is a provider where you can host your own
+
+12
+00:00:33,876 --> 00:00:37,379
+MongoDB databases or actually, it's hosted on other services
+
+13
+00:00:37,379 --> 00:00:39,956
+but they set it up for you and you can conveniently
+
+14
+00:00:39,956 --> 00:00:42,023
+manage it and access it.
+
+15
+00:00:42,023 --> 00:00:45,843
+Generally, there is a free plan, the sandbox account,
+
+16
+00:00:45,843 --> 00:00:49,850
+but for production usage, it probably will cost something.
+
+17
+00:00:49,850 --> 00:00:51,746
+So check out their plans and features,
+
+18
+00:00:51,746 --> 00:00:54,189
+and make sure you're not paying for something
+
+19
+00:00:54,189 --> 00:00:56,393
+you don't want or you're not paying too much.
+
+20
+00:00:56,393 --> 00:00:58,955
+I'll, for this video, use the sandbox account,
+
+21
+00:00:58,955 --> 00:01:00,116
+which is free.
+
+22
+00:01:00,116 --> 00:01:02,709
+So sign up if you haven't already,
+
+23
+00:01:02,709 --> 00:01:06,501
+and I will just log in since I already have an account.
+
+24
+00:01:06,501 --> 00:01:08,666
+I will see you once I'm done.
+
+25
+00:01:08,666 --> 00:01:11,914
+Once signed up, you should be in this dashboard here,
+
+26
+00:01:11,914 --> 00:01:15,929
+and there you can create a new Mongo database.
+
+27
+00:01:15,929 --> 00:01:18,236
+So click on this, and this might take a couple of seconds
+
+28
+00:01:18,236 --> 00:01:19,345
+to load.
+
+29
+00:01:19,345 --> 00:01:23,726
+Once it has loaded, you can choose which cloud provider
+
+30
+00:01:23,726 --> 00:01:26,076
+should actually host the database,
+
+31
+00:01:26,076 --> 00:01:28,227
+and you may choose whatever you like.
+
+32
+00:01:28,227 --> 00:01:30,068
+I'm going with AWS here.
+
+33
+00:01:30,068 --> 00:01:34,235
+And since I'm in Germany, I'll just pick the EU region here,
+
+34
+00:01:35,315 --> 00:01:38,691
+but choose whatever region suits your needs.
+
+35
+00:01:38,691 --> 00:01:41,503
+And then click on Single-node.
+
+36
+00:01:41,503 --> 00:01:43,271
+And here on Sandbox.
+
+37
+00:01:43,271 --> 00:01:48,240
+Now as I said, this is a free testing environment mainly,
+
+38
+00:01:48,240 --> 00:01:50,957
+but as you can see, there are of course, also paid plans
+
+39
+00:01:50,957 --> 00:01:52,207
+for your needs.
+
+40
+00:01:53,095 --> 00:01:54,969
+So I'll choose the sandbox,
+
+41
+00:01:54,969 --> 00:01:57,896
+and just make sure that here at the bottom you see this
+
+42
+00:01:57,896 --> 00:02:01,576
+zero dollars per month thing, or well,
+
+43
+00:02:01,576 --> 00:02:03,861
+whatever you want to pay, but make sure you're not paying
+
+44
+00:02:03,861 --> 00:02:05,394
+for something you don't want.
+
+45
+00:02:05,394 --> 00:02:07,706
+You should then give this database a name.
+
+46
+00:02:07,706 --> 00:02:10,157
+I'll name mine angular2-deployment.
+
+47
+00:02:10,157 --> 00:02:13,254
+And then you can create this new MongoDB deployment,
+
+48
+00:02:13,254 --> 00:02:15,683
+which will also take a couple of seconds.
+
+49
+00:02:15,683 --> 00:02:17,670
+Now as you can see it's now in progress,
+
+50
+00:02:17,670 --> 00:02:19,641
+and being prepared, and now it's done.
+
+51
+00:02:19,641 --> 00:02:22,478
+Once it's done, click on it.
+
+52
+00:02:22,478 --> 00:02:25,406
+And on this page, click on users.
+
+53
+00:02:25,406 --> 00:02:27,983
+Now here, you wanna create a new database user.
+
+54
+00:02:27,983 --> 00:02:31,040
+Pick whichever name suits your needs.
+
+55
+00:02:31,040 --> 00:02:33,440
+I'll name mine test-user,
+
+56
+00:02:33,440 --> 00:02:36,690
+and just give it a password of test_pw.
+
+57
+00:02:39,117 --> 00:02:40,865
+Of course, maybe you want to pick a more secure one
+
+58
+00:02:40,865 --> 00:02:43,838
+for real production or when you're actually putting
+
+59
+00:02:43,838 --> 00:02:46,782
+a real app into production.
+
+60
+00:02:46,782 --> 00:02:50,847
+So with this user setup, I'm pretty much done.
+
+61
+00:02:50,847 --> 00:02:52,954
+The next step is to copy this link here,
+
+62
+00:02:52,954 --> 00:02:55,161
+without the mongodb at the beginning,
+
+63
+00:02:55,161 --> 00:02:57,591
+and go back to your application.
+
+64
+00:02:57,591 --> 00:02:59,726
+Now that's the link you will have to enter into
+
+65
+00:02:59,726 --> 00:03:03,882
+the app.js file here, when connecting to MongoDB
+
+66
+00:03:03,882 --> 00:03:05,253
+with Mongoose.
+
+67
+00:03:05,253 --> 00:03:07,101
+Currently we're connecting with localhost,
+
+68
+00:03:07,101 --> 00:03:09,402
+and of course, that won't work when we're running this
+
+69
+00:03:09,402 --> 00:03:11,124
+on a real server.
+
+70
+00:03:11,124 --> 00:03:13,981
+So I'm going to replace this with the link I just copied,
+
+71
+00:03:13,981 --> 00:03:17,541
+and here, for dbuser, I enter test-user,
+
+72
+00:03:17,541 --> 00:03:19,258
+which is the user I just created,
+
+73
+00:03:19,258 --> 00:03:23,169
+and then test_pw, which is the password I just created.
+
+74
+00:03:23,169 --> 00:03:27,186
+Now as a side note, hard coding it like this will work,
+
+75
+00:03:27,186 --> 00:03:30,427
+but you probably might choose other methods,
+
+76
+00:03:30,427 --> 00:03:33,655
+like setting an environment variable with these fields,
+
+77
+00:03:33,655 --> 00:03:36,756
+which then are accessed through your code
+
+78
+00:03:36,756 --> 00:03:40,715
+to make this a little bit more secure and also configurable.
+
+79
+00:03:40,715 --> 00:03:43,714
+For here, I'll go with the hard coding approach.
+
+80
+00:03:43,714 --> 00:03:46,441
+So with that, I'm connecting to this database.
+
+81
+00:03:46,441 --> 00:03:50,608
+The next step is to actually deploy the application.
+
